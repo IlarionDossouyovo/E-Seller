@@ -42,6 +42,7 @@ const navItems = [
   { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
   { name: 'Orders', href: '/dashboard/orders', icon: Package },
   { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
+  { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
