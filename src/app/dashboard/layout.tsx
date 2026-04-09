@@ -23,7 +23,11 @@ import {
   Home,
   TrendingUp,
   DollarSign,
-  Users
+  Users,
+  Bell,
+  FileText,
+  Mail,
+  GitBranch
 } from 'lucide-react'
 
 const navItems = [
@@ -35,6 +39,11 @@ const navItems = [
   { name: 'Assistant', href: '/dashboard/assistant', icon: Bot },
   { name: 'Suppliers', href: '/dashboard/suppliers', icon: Truck },
   { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
+  { name: 'Orders', href: '/dashboard/orders', icon: Package },
+  { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
+  { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
+  { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
+  { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
 ]
 
 const stats = [
