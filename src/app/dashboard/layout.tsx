@@ -27,7 +27,8 @@ import {
   Bell,
   FileText,
   Mail,
-  GitBranch
+  GitBranch,
+  CreditCard
 } from 'lucide-react'
 
 const navItems = [
@@ -40,6 +41,7 @@ const navItems = [
   { name: 'Suppliers', href: '/dashboard/suppliers', icon: Truck },
   { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
   { name: 'Orders', href: '/dashboard/orders', icon: Package },
+  { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
