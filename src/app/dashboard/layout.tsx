@@ -42,7 +42,10 @@ import {
   FileText as FileTextIcon,
   Gift,
   Zap as ZapIcon,
-  Globe
+  Globe,
+  Webhook,
+  BookOpen,
+  Link as LinkIcon
 } from 'lucide-react'
 
 const navItems = [
@@ -72,6 +75,9 @@ const navItems = [
   { name: 'Loyalty', href: '/dashboard/loyalty', icon: Gift },
   { name: 'Promotions', href: '/dashboard/promotions', icon: ZapIcon },
   { name: 'Language', href: '/dashboard/language', icon: Globe },
+  { name: 'Affiliate', href: '/dashboard/affiliate', icon: LinkIcon },
+  { name: 'Webhooks', href: '/dashboard/webhooks', icon: Webhook },
+  { name: 'API Docs', href: '/dashboard/api-docs', icon: BookOpen },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
   { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
