@@ -62,6 +62,7 @@ const navItems = [
   { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
   { name: 'Electron-Pay', href: '/dashboard/electron-pay', icon: Wallet },
   { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
+  { name: 'Security Center', href: '/dashboard/security-center', icon: Shield },
   { name: 'Security', href: '/dashboard/security', icon: Shield },
   { name: 'Templates', href: '/dashboard/templates', icon: Layout },
   { name: 'Brand Kit', href: '/dashboard/brandkit', icon: PaletteIcon },
