@@ -45,7 +45,8 @@ import {
   Globe,
   Webhook,
   BookOpen,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Wallet
 } from 'lucide-react'
 
 const navItems = [
@@ -59,6 +60,7 @@ const navItems = [
   { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
   { name: 'Orders', href: '/dashboard/orders', icon: Package },
   { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
+  { name: 'Electron-Pay', href: '/dashboard/electron-pay', icon: Wallet },
   { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
   { name: 'Security', href: '/dashboard/security', icon: Shield },
   { name: 'Templates', href: '/dashboard/templates', icon: Layout },
