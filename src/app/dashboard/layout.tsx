@@ -31,7 +31,18 @@ import {
   CreditCard,
   Shield,
   Layout,
-  Palette as PaletteIcon
+  Palette as PaletteIcon,
+  Warehouse,
+  Users as UsersIcon,
+  Calculator,
+  MessageSquare,
+  Star,
+  RotateCcw,
+  Globe as GlobeIcon,
+  FileText as FileTextIcon,
+  Gift,
+  Zap as ZapIcon,
+  Globe
 } from 'lucide-react'
 
 const navItems = [
@@ -49,8 +60,19 @@ const navItems = [
   { name: 'Security', href: '/dashboard/security', icon: Shield },
   { name: 'Templates', href: '/dashboard/templates', icon: Layout },
   { name: 'Brand Kit', href: '/dashboard/brandkit', icon: PaletteIcon },
+  { name: 'Inventory', href: '/dashboard/inventory', icon: Warehouse },
+  { name: 'CRM', href: '/dashboard/crm', icon: UsersIcon },
+  { name: 'SEO', href: '/dashboard/seo', icon: Search },
+  { name: 'Live Chat', href: '/dashboard/chat', icon: MessageSquare },
+  { name: 'Reviews', href: '/dashboard/reviews', icon: Star },
+  { name: 'Returns', href: '/dashboard/returns', icon: RotateCcw },
+  { name: 'Shipping', href: '/dashboard/shipping', icon: Truck },
+  { name: 'Taxes', href: '/dashboard/taxes', icon: Calculator },
+  { name: 'Blog', href: '/dashboard/blog', icon: FileTextIcon },
+  { name: 'Loyalty', href: '/dashboard/loyalty', icon: Gift },
+  { name: 'Promotions', href: '/dashboard/promotions', icon: ZapIcon },
+  { name: 'Language', href: '/dashboard/language', icon: Globe },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
-  { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
   { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
 ]
