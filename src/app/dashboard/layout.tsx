@@ -29,7 +29,8 @@ import {
   Mail,
   GitBranch,
   CreditCard,
-  Shield
+  Shield,
+  Layout
 } from 'lucide-react'
 
 const navItems = [
@@ -45,6 +46,7 @@ const navItems = [
   { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
   { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
   { name: 'Security', href: '/dashboard/security', icon: Shield },
+  { name: 'Templates', href: '/dashboard/templates', icon: Layout },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
