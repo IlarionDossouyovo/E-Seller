@@ -30,7 +30,8 @@ import {
   GitBranch,
   CreditCard,
   Shield,
-  Layout
+  Layout,
+  Palette as PaletteIcon
 } from 'lucide-react'
 
 const navItems = [
@@ -47,6 +48,7 @@ const navItems = [
   { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
   { name: 'Security', href: '/dashboard/security', icon: Shield },
   { name: 'Templates', href: '/dashboard/templates', icon: Layout },
+  { name: 'Brand Kit', href: '/dashboard/brandkit', icon: PaletteIcon },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { name: 'Landing Pages', href: '/dashboard/landing', icon: FileText },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
