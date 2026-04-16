@@ -93,6 +93,7 @@ const navItems = [
   { name: 'Inventory', href: '/dashboard/inventory', icon: Package },
   { name: 'Shipping', href: '/dashboard/shipping', icon: Truck },
   { name: 'Customers', href: '/dashboard/customers', icon: UsersIcon },
+  { name: 'Loyalty', href: '/dashboard/loyalty', icon: Gift },
 ]
 
 const stats = [
