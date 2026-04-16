@@ -47,7 +47,8 @@ import {
   BookOpen,
   Link as LinkIcon,
   Wallet,
-  Activity
+  Activity,
+  Crown
 } from 'lucide-react'
 
 const navItems = [
@@ -87,6 +88,7 @@ const navItems = [
   { name: 'Advanced Settings', href: '/dashboard/settings-advanced', icon: Settings },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
   { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
+  { name: 'Super Admin', href: '/dashboard/super-admin', icon: Crown },
 ]
 
 const stats = [
