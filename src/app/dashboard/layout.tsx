@@ -23,7 +23,7 @@ import {
   Home,
   TrendingUp,
   DollarSign,
-  Users,
+  Users as UsersIcon,
   Bell,
   Mail,
   GitBranch,
@@ -32,7 +32,6 @@ import {
   Layout,
   Palette as PaletteIcon,
   Warehouse,
-  Users as UsersIcon,
   Calculator,
   MessageSquare,
   Star,
@@ -91,13 +90,16 @@ const navItems = [
   { name: 'Super Admin', href: '/dashboard/super-admin', icon: Crown },
   { name: 'Reports', href: '/dashboard/reports', icon: FileTextIcon },
   { name: 'Environment', href: '/dashboard/environment', icon: Key },
+  { name: 'Inventory', href: '/dashboard/inventory', icon: Package },
+  { name: 'Shipping', href: '/dashboard/shipping', icon: Truck },
+  { name: 'Customers', href: '/dashboard/customers', icon: UsersIcon },
 ]
 
 const stats = [
   { label: 'Revenue', value: '$12,450', change: '+12%', icon: DollarSign },
   { label: 'Products', value: '156', change: '+8%', icon: Package },
   { label: 'ROAS', value: '3.2x', change: '+5%', icon: TrendingUp },
-  { label: 'Users', value: '2,340', change: '+15%', icon: Users },
+  { label: 'Users', value: '2,340', change: '+15%', icon: UsersIcon },
 ]
 
 export default function DashboardLayout({
