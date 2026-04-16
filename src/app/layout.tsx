@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   title: 'E-Seller by ELECTRON | AI-Powered E-Commerce Platform',
   description: 'E-Seller by ELECTRON est une plateforme SaaS IA tout-en-un permettant de trouver des produits gagnants, créer une marque automatiquement, et lancer des campagnes publicitaires performantes.',
   keywords: ['e-commerce', 'AI', 'dropshipping', 'SaaS', 'marketing', 'branding'],
+  robots: 'noindex, nofollow', // Prevent indexing until launch
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({

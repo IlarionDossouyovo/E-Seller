@@ -25,7 +25,6 @@ import {
   DollarSign,
   Users,
   Bell,
-  FileText,
   Mail,
   GitBranch,
   CreditCard,
@@ -48,7 +47,8 @@ import {
   Link as LinkIcon,
   Wallet,
   Activity,
-  Crown
+  Crown,
+  Key
 } from 'lucide-react'
 
 const navItems = [
@@ -89,6 +89,8 @@ const navItems = [
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
   { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
   { name: 'Super Admin', href: '/dashboard/super-admin', icon: Crown },
+  { name: 'Reports', href: '/dashboard/reports', icon: FileTextIcon },
+  { name: 'Environment', href: '/dashboard/environment', icon: Key },
 ]
 
 const stats = [
