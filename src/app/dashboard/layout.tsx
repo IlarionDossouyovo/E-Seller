@@ -46,7 +46,8 @@ import {
   Webhook,
   BookOpen,
   Link as LinkIcon,
-  Wallet
+  Wallet,
+  Activity
 } from 'lucide-react'
 
 const navItems = [
@@ -55,6 +56,7 @@ const navItems = [
   { name: 'Branding', href: '/dashboard/branding', icon: Palette },
   { name: 'Ads Generator', href: '/dashboard/ads', icon: Megaphone },
   { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
+  { name: 'Advanced Analytics', href: '/dashboard/analytics-advanced', icon: Activity },
   { name: 'Assistant', href: '/dashboard/assistant', icon: Bot },
   { name: 'Suppliers', href: '/dashboard/suppliers', icon: Truck },
   { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
@@ -82,6 +84,7 @@ const navItems = [
   { name: 'Webhooks', href: '/dashboard/webhooks', icon: Webhook },
   { name: 'API Docs', href: '/dashboard/api-docs', icon: BookOpen },
   { name: 'Notifications', href: '/dashboard/notifications', icon: Bell },
+  { name: 'Advanced Settings', href: '/dashboard/settings-advanced', icon: Settings },
   { name: 'Email Marketing', href: '/dashboard/emails', icon: Mail },
   { name: 'Funnels', href: '/dashboard/funnels', icon: GitBranch },
 ]
