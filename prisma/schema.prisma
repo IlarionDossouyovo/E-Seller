@@ -1,0 +1,290 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User & Auth
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  phone         String?
+  role          Role      @default(CUSTOMER)
+  avatar        String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  customer   Customer?
+  orders     Order[]
+  sessions   Session[]
+  apiKeys    ApiKey[]
+  activities Activity[]
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  EMPLOYEE
+  CUSTOMER
+}
+
+// Customer Profile
+model Customer {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  segment     String?
+  lifetime    Float    @default(0)
+  ordersCount Int      @default(0)
+  tags        String[]
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Products
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  comparePrice Float?
+  images      String[]
+  category    String?
+  sku         String      @unique
+  stock       Int         @default(0)
+  status      ProductStatus @default(ACTIVE)
+  aiAnalysis  Json?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  orderItems  OrderItem[]
+}
+
+enum ProductStatus {
+  ACTIVE
+  DRAFT
+  ARCHIVED
+}
+
+// Orders
+model Order {
+  id            String        @id @default(cuid())
+  orderNumber   String        @unique
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  status        OrderStatus   @default(PENDING)
+  total         Float
+  subtotal      Float
+  tax           Float
+  shipping      Float
+  currency      String        @default("USD")
+  paymentMethod String?
+  paymentStatus PaymentStatus @default(PENDING)
+  shippingAddress Json?
+  billingAddress Json?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  items         OrderItem[]
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+  total     Float
+  createdAt DateTime @default(now())
+}
+
+// Sessions (Security)
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  device    String
+  ip        String
+  location  String
+  lastActive DateTime @default(now())
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+// API Keys
+model ApiKey {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  key         String   @unique
+  permissions String[]
+  lastUsed    DateTime?
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+}
+
+// Activity Logs
+model Activity {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  ip        String
+  location  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+// Suppliers
+model Supplier {
+  id          String   @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  website     String?
+  country     String?
+  rating      Float    @default(0)
+  products    String[]
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Shipping
+model ShippingRate {
+  id          String   @id @default(cuid())
+  carrier     String
+  service     String
+  price       Float
+  currency    String   @default("USD")
+  estimatedDays Int?
+  countries   String[]
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+// Blog
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  featuredImage String?
+  status      BlogStatus @default(DRAFT)
+  author      String?
+  tags        String[]
+  seoTitle    String?
+  seoDesc     String?
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// Reviews
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  rating    Int
+  title     String?
+  content   String?
+  author    String?
+  verified  Boolean  @default(false)
+  helpful   Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// Loyalty Points
+model LoyaltyAccount {
+  id          String   @id @default(cuid())
+  customerId  String   @unique
+  points      Int      @default(0)
+  lifetime    Int      @default(0)
+  tier        LoyaltyTier @default(BRONZE)
+  redeemed    Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+enum LoyaltyTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+// Coupons/Promotions
+model Coupon {
+  id          String        @id @default(cuid())
+  code        String        @unique
+  type        CouponType
+  value       Float
+  minAmount   Float?
+  maxUses     Int?
+  usedCount   Int           @default(0)
+  startsAt    DateTime
+  expiresAt   DateTime
+  active      Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+}
+
+enum CouponType {
+  PERCENTAGE
+  FIXED
+  SHIPPING
+}
+
+// Webhooks
+model Webhook {
+  id          String   @id @default(cuid())
+  url         String
+  events      String[]
+  secret      String
+  active      Boolean  @default(true)
+  lastTrigger DateTime?
+  failures    Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+// Email Templates
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  subject   String
+  body      String
+  variables String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
