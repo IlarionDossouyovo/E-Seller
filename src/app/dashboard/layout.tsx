@@ -51,7 +51,8 @@ import {
   Handshake,
   AlertTriangle,
   Store,
-  Percent
+  Percent,
+  RefreshCw
 } from 'lucide-react'
 
 const navItems = [
@@ -112,6 +113,8 @@ const navItems = [
   { name: 'Competition', href: '/dashboard/competition-analysis', icon: Target },
   { name: 'Demand Forecast', href: '/dashboard/demand-forecast', icon: TrendingUp },
   { name: 'Sourcing', href: '/dashboard/sourcing-assistant', icon: Truck },
+  { name: 'Subscriptions', href: '/dashboard/subscriptions', icon: RefreshCw },
+  { name: 'Box Subs', href: '/dashboard/subscription-boxes', icon: Package },
 ]
 
 const stats = [
