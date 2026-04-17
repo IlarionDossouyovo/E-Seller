@@ -115,6 +115,7 @@ const navItems = [
   { name: 'Sourcing', href: '/dashboard/sourcing-assistant', icon: Truck },
   { name: 'Subscriptions', href: '/dashboard/subscriptions', icon: RefreshCw },
   { name: 'Box Subs', href: '/dashboard/subscription-boxes', icon: Package },
+  { name: 'Dropship', href: '/dashboard/dropshipping', icon: Truck },
 ]
 
 const stats = [
