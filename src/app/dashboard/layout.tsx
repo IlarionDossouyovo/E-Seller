@@ -57,7 +57,8 @@ import {
   Building2,
   Edit,
   Trash2,
-  Gavel
+  Gavel,
+  ScanBarcode
 } from 'lucide-react'
 
 const navItems = [
@@ -131,6 +132,7 @@ const navItems = [
   { name: 'Auctions', href: '/dashboard/auction-system', icon: Gavel },
   { name: 'BI Reports', href: '/dashboard/bi-reports', icon: BarChart3 },
   { name: 'i18n SEO', href: '/dashboard/multilang-seo', icon: Globe },
+  { name: 'Barcode', href: '/dashboard/barcode-scanner', icon: ScanBarcode },
 ]
 
 const stats = [
