@@ -130,6 +130,7 @@ const navItems = [
   { name: 'Flash Sales', href: '/dashboard/flash-sales', icon: Zap },
   { name: 'Auctions', href: '/dashboard/auction-system', icon: Gavel },
   { name: 'BI Reports', href: '/dashboard/bi-reports', icon: BarChart3 },
+  { name: 'i18n SEO', href: '/dashboard/multilang-seo', icon: Globe },
 ]
 
 const stats = [
