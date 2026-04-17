@@ -47,7 +47,8 @@ import {
   Wallet,
   Activity,
   Crown,
-  Key
+  Key,
+  Handshake
 } from 'lucide-react'
 
 const navItems = [
@@ -94,6 +95,10 @@ const navItems = [
   { name: 'Shipping', href: '/dashboard/shipping', icon: Truck },
   { name: 'Customers', href: '/dashboard/customers', icon: UsersIcon },
   { name: 'Loyalty', href: '/dashboard/loyalty', icon: Gift },
+  { name: 'Affiliate Mgmt', href: '/dashboard/affiliate-management', icon: Handshake },
+  { name: 'Returns Mgmt', href: '/dashboard/returns-management', icon: RotateCcw },
+  { name: 'Suppliers Mgmt', href: '/dashboard/suppliers-management', icon: Truck },
+  { name: 'Taxes Mgmt', href: '/dashboard/taxes-management', icon: Calculator },
 ]
 
 const stats = [
