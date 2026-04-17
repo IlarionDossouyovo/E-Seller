@@ -107,6 +107,11 @@ const navItems = [
   { name: 'Commissions', href: '/dashboard/commissions', icon: DollarSign },
   { name: 'Disputes', href: '/dashboard/disputes', icon: AlertTriangle },
   { name: 'Vendor Ratings', href: '/dashboard/vendor-ratings', icon: StarIcon },
+  { name: 'Product Research', href: '/dashboard/product-research', icon: ZapIcon },
+  { name: 'Profit Calc', href: '/dashboard/profit-calculator', icon: Calculator },
+  { name: 'Competition', href: '/dashboard/competition-analysis', icon: Target },
+  { name: 'Demand Forecast', href: '/dashboard/demand-forecast', icon: TrendingUp },
+  { name: 'Sourcing', href: '/dashboard/sourcing-assistant', icon: Truck },
 ]
 
 const stats = [
