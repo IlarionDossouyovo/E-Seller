@@ -68,7 +68,8 @@ import {
   Download,
   Calendar,
   FileText,
-  Eye
+  Eye,
+  ArrowRight
 } from 'lucide-react'
 
 const navItems = [
@@ -172,6 +173,10 @@ const navItems = [
   { name: 'Quick View', href: '/dashboard/quick-view', icon: Eye },
   { name: 'Popups', href: '/dashboard/popup-notifications', icon: Bell },
   { name: 'Announcement', href: '/dashboard/announcement-bar', icon: Megaphone },
+  { name: 'Variants', href: '/dashboard/product-variants', icon: Package },
+  { name: 'Cross-Sell', href: '/dashboard/cross-sell', icon: ArrowRight },
+  { name: 'Points', href: '/dashboard/loyalty-points', icon: StarIcon },
+  { name: 'Gift Cards', href: '/dashboard/gift-cards', icon: Gift },
 ]
 
 const stats = [
