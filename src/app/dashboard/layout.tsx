@@ -52,7 +52,8 @@ import {
   AlertTriangle,
   Store,
   Percent,
-  RefreshCw
+  RefreshCw,
+  Video
 } from 'lucide-react'
 
 const navItems = [
@@ -117,6 +118,7 @@ const navItems = [
   { name: 'Box Subs', href: '/dashboard/subscription-boxes', icon: Package },
   { name: 'Dropship', href: '/dashboard/dropshipping', icon: Truck },
   { name: 'Social', href: '/dashboard/social-commerce', icon: Globe },
+  { name: 'Video Ads', href: '/dashboard/video-ads', icon: Video },
 ]
 
 const stats = [
