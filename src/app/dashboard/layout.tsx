@@ -128,7 +128,8 @@ const navItems = [
   { name: 'Crypto', href: '/dashboard/crypto-payments', icon: Wallet },
   { name: 'NFT Loyalty', href: '/dashboard/nft-loyalty', icon: Gift },
   { name: 'Flash Sales', href: '/dashboard/flash-sales', icon: Zap },
-  { name: 'Auctions', href: '/dashboard/auction-system', icon: Zap },
+  { name: 'Auctions', href: '/dashboard/auction-system', icon: Gavel },
+  { name: 'BI Reports', href: '/dashboard/bi-reports', icon: BarChart3 },
 ]
 
 const stats = [
