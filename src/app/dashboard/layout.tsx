@@ -60,6 +60,7 @@ import {
   Gavel,
   ScanBarcode,
   Ticket,
+  ShoppingCart,
   TrendingDown
 } from 'lucide-react'
 
@@ -139,6 +140,13 @@ const navItems = [
   { name: 'Bundles', href: '/dashboard/bundle-builder', icon: Package },
   { name: 'BOGO', href: '/dashboard/bogo-deals', icon: Gift },
   { name: 'Tiered', href: '/dashboard/tiered-pricing', icon: TrendingDown },
+  { name: 'Shipping', href: '/dashboard/shipping-labels', icon: Zap },
+  { name: 'Alerts', href: '/dashboard/inventory-alerts', icon: AlertTriangle },
+  { name: 'Segments', href: '/dashboard/customer-segments', icon: UsersIcon },
+  { name: 'Abandoned', href: '/dashboard/abandoned-cart', icon: ShoppingCart },
+  { name: 'Wishlist', href: '/dashboard/wishlist-sharing', icon: StarIcon },
+  { name: 'Live', href: '/dashboard/live-stream', icon: Video },
+  { name: 'Compare', href: '/dashboard/product-comparison', icon: Zap },
 ]
 
 const stats = [
