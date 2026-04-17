@@ -61,7 +61,8 @@ import {
   ScanBarcode,
   Ticket,
   ShoppingCart,
-  TrendingDown
+  TrendingDown,
+  Clock
 } from 'lucide-react'
 
 const navItems = [
@@ -147,6 +148,10 @@ const navItems = [
   { name: 'Wishlist', href: '/dashboard/wishlist-sharing', icon: StarIcon },
   { name: 'Live', href: '/dashboard/live-stream', icon: Video },
   { name: 'Compare', href: '/dashboard/product-comparison', icon: Zap },
+  { name: 'Referral', href: '/dashboard/referral-program', icon: UsersIcon },
+  { name: 'Points', href: '/dashboard/points-store', icon: DollarSign },
+  { name: 'Group Buy', href: '/dashboard/group-buy', icon: UsersIcon },
+  { name: 'Pre-Order', href: '/dashboard/pre-order', icon: Clock },
 ]
 
 const stats = [
