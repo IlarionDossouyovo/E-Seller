@@ -72,7 +72,9 @@ import {
   ArrowRight,
   Trophy,
   PackageX,
-  CheckCircle
+  CheckCircle,
+  Box,
+  ThumbsUp
 } from 'lucide-react'
 
 const navItems = [
@@ -191,6 +193,10 @@ const navItems = [
   { name: 'Reviews', href: '/dashboard/customer-reviews', icon: StarIcon },
   { name: 'Vendors', href: '/dashboard/vendor-approval', icon: CheckCircle },
   { name: 'Warehouse', href: '/dashboard/warehouse', icon: Warehouse },
+  { name: 'Bundles', href: '/dashboard/product-bundles', icon: Box },
+  { name: 'Recommended', href: '/dashboard/recommended-products', icon: ThumbsUp },
+  { name: 'Recently Viewed', href: '/dashboard/recently-viewed', icon: Clock },
+  { name: 'Trending', href: '/dashboard/trending-products', icon: TrendingUp },
 ]
 
 const stats = [
