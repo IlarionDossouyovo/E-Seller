@@ -53,7 +53,8 @@ import {
   Store,
   Percent,
   RefreshCw,
-  Video
+  Video,
+  Building2
 } from 'lucide-react'
 
 const navItems = [
@@ -119,6 +120,7 @@ const navItems = [
   { name: 'Dropship', href: '/dashboard/dropshipping', icon: Truck },
   { name: 'Social', href: '/dashboard/social-commerce', icon: Globe },
   { name: 'Video Ads', href: '/dashboard/video-ads', icon: Video },
+  { name: 'White-Label', href: '/dashboard/whitelabel', icon: Building2 },
 ]
 
 const stats = [
