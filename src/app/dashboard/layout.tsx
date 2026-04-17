@@ -67,7 +67,8 @@ import {
   MapPin,
   Download,
   Calendar,
-  FileText
+  FileText,
+  Eye
 } from 'lucide-react'
 
 const navItems = [
@@ -167,6 +168,10 @@ const navItems = [
   { name: 'Booking', href: '/dashboard/appointment-booking', icon: Calendar },
   { name: 'Forms', href: '/dashboard/custom-forms', icon: FileText },
   { name: 'Newsletter', href: '/dashboard/newsletter', icon: Mail },
+  { name: 'Mega Menu', href: '/dashboard/mega-menu', icon: Menu },
+  { name: 'Quick View', href: '/dashboard/quick-view', icon: Eye },
+  { name: 'Popups', href: '/dashboard/popup-notifications', icon: Bell },
+  { name: 'Announcement', href: '/dashboard/announcement-bar', icon: Megaphone },
 ]
 
 const stats = [
