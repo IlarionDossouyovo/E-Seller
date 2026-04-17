@@ -64,7 +64,10 @@ import {
   TrendingDown,
   Clock,
   Tag,
-  MapPin
+  MapPin,
+  Download,
+  Calendar,
+  FileText
 } from 'lucide-react'
 
 const navItems = [
@@ -160,6 +163,10 @@ const navItems = [
   { name: 'Search', href: '/dashboard/advanced-search', icon: Search },
   { name: 'FBT', href: '/dashboard/frequently-bought-together', icon: ZapIcon },
   { name: 'Locator', href: '/dashboard/store-locator', icon: MapPin },
+  { name: 'Digital', href: '/dashboard/digital-downloads', icon: Download },
+  { name: 'Booking', href: '/dashboard/appointment-booking', icon: Calendar },
+  { name: 'Forms', href: '/dashboard/custom-forms', icon: FileText },
+  { name: 'Newsletter', href: '/dashboard/newsletter', icon: Mail },
 ]
 
 const stats = [
