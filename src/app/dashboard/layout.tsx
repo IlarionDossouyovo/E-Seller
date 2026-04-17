@@ -62,7 +62,8 @@ import {
   Ticket,
   ShoppingCart,
   TrendingDown,
-  Clock
+  Clock,
+  Tag
 } from 'lucide-react'
 
 const navItems = [
@@ -152,6 +153,9 @@ const navItems = [
   { name: 'Points', href: '/dashboard/points-store', icon: DollarSign },
   { name: 'Group Buy', href: '/dashboard/group-buy', icon: UsersIcon },
   { name: 'Pre-Order', href: '/dashboard/pre-order', icon: Clock },
+  { name: 'Currency', href: '/dashboard/multi-currency', icon: DollarSign },
+  { name: 'Reviews', href: '/dashboard/advanced-reviews', icon: StarIcon },
+  { name: 'Badges', href: '/dashboard/product-badge', icon: Tag },
 ]
 
 const stats = [
