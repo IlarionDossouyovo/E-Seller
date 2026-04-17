@@ -58,7 +58,9 @@ import {
   Edit,
   Trash2,
   Gavel,
-  ScanBarcode
+  ScanBarcode,
+  Ticket,
+  TrendingDown
 } from 'lucide-react'
 
 const navItems = [
@@ -133,6 +135,10 @@ const navItems = [
   { name: 'BI Reports', href: '/dashboard/bi-reports', icon: BarChart3 },
   { name: 'i18n SEO', href: '/dashboard/multilang-seo', icon: Globe },
   { name: 'Barcode', href: '/dashboard/barcode-scanner', icon: ScanBarcode },
+  { name: 'Raffle', href: '/dashboard/raffle-waitlist', icon: Ticket },
+  { name: 'Bundles', href: '/dashboard/bundle-builder', icon: Package },
+  { name: 'BOGO', href: '/dashboard/bogo-deals', icon: Gift },
+  { name: 'Tiered', href: '/dashboard/tiered-pricing', icon: TrendingDown },
 ]
 
 const stats = [
