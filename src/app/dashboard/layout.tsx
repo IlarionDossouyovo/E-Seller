@@ -71,7 +71,8 @@ import {
   Eye,
   ArrowRight,
   Trophy,
-  PackageX
+  PackageX,
+  CheckCircle
 } from 'lucide-react'
 
 const navItems = [
@@ -185,6 +186,11 @@ const navItems = [
   { name: 'Low Stock', href: '/dashboard/low-stock', icon: AlertTriangle },
   { name: 'Out of Stock', href: '/dashboard/out-of-stock', icon: PackageX },
   { name: 'Discounts', href: '/dashboard/discount-manager', icon: Percent },
+  { name: 'Price History', href: '/dashboard/price-history', icon: TrendingDown },
+  { name: 'Stock History', href: '/dashboard/stock-history', icon: Package },
+  { name: 'Reviews', href: '/dashboard/customer-reviews', icon: StarIcon },
+  { name: 'Vendors', href: '/dashboard/vendor-approval', icon: CheckCircle },
+  { name: 'Warehouse', href: '/dashboard/warehouse', icon: Warehouse },
 ]
 
 const stats = [
