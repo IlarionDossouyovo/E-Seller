@@ -63,7 +63,8 @@ import {
   ShoppingCart,
   TrendingDown,
   Clock,
-  Tag
+  Tag,
+  MapPin
 } from 'lucide-react'
 
 const navItems = [
@@ -156,6 +157,9 @@ const navItems = [
   { name: 'Currency', href: '/dashboard/multi-currency', icon: DollarSign },
   { name: 'Reviews', href: '/dashboard/advanced-reviews', icon: StarIcon },
   { name: 'Badges', href: '/dashboard/product-badge', icon: Tag },
+  { name: 'Search', href: '/dashboard/advanced-search', icon: Search },
+  { name: 'FBT', href: '/dashboard/frequently-bought-together', icon: ZapIcon },
+  { name: 'Locator', href: '/dashboard/store-locator', icon: MapPin },
 ]
 
 const stats = [
