@@ -54,7 +54,10 @@ import {
   Percent,
   RefreshCw,
   Video,
-  Building2
+  Building2,
+  Edit,
+  Trash2,
+  Gavel
 } from 'lucide-react'
 
 const navItems = [
@@ -121,6 +124,11 @@ const navItems = [
   { name: 'Social', href: '/dashboard/social-commerce', icon: Globe },
   { name: 'Video Ads', href: '/dashboard/video-ads', icon: Video },
   { name: 'White-Label', href: '/dashboard/whitelabel', icon: Building2 },
+  { name: 'AI Chatbot', href: '/dashboard/ai-chatbot', icon: Bot },
+  { name: 'Crypto', href: '/dashboard/crypto-payments', icon: Wallet },
+  { name: 'NFT Loyalty', href: '/dashboard/nft-loyalty', icon: Gift },
+  { name: 'Flash Sales', href: '/dashboard/flash-sales', icon: Zap },
+  { name: 'Auctions', href: '/dashboard/auction-system', icon: Zap },
 ]
 
 const stats = [
