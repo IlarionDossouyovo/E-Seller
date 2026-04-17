@@ -116,6 +116,7 @@ const navItems = [
   { name: 'Subscriptions', href: '/dashboard/subscriptions', icon: RefreshCw },
   { name: 'Box Subs', href: '/dashboard/subscription-boxes', icon: Package },
   { name: 'Dropship', href: '/dashboard/dropshipping', icon: Truck },
+  { name: 'Social', href: '/dashboard/social-commerce', icon: Globe },
 ]
 
 const stats = [
