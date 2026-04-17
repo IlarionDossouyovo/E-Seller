@@ -34,7 +34,7 @@ import {
   Warehouse,
   Calculator,
   MessageSquare,
-  Star,
+  Star as StarIcon,
   RotateCcw,
   Globe as GlobeIcon,
   FileText as FileTextIcon,
@@ -48,7 +48,10 @@ import {
   Activity,
   Crown,
   Key,
-  Handshake
+  Handshake,
+  AlertTriangle,
+  Store,
+  Percent
 } from 'lucide-react'
 
 const navItems = [
@@ -73,7 +76,7 @@ const navItems = [
   { name: 'CRM', href: '/dashboard/crm', icon: UsersIcon },
   { name: 'SEO', href: '/dashboard/seo', icon: Search },
   { name: 'Live Chat', href: '/dashboard/chat', icon: MessageSquare },
-  { name: 'Reviews', href: '/dashboard/reviews', icon: Star },
+  { name: 'Reviews', href: '/dashboard/reviews', icon: StarIcon },
   { name: 'Returns', href: '/dashboard/returns', icon: RotateCcw },
   { name: 'Shipping', href: '/dashboard/shipping', icon: Truck },
   { name: 'Taxes', href: '/dashboard/taxes', icon: Calculator },
@@ -99,6 +102,11 @@ const navItems = [
   { name: 'Returns Mgmt', href: '/dashboard/returns-management', icon: RotateCcw },
   { name: 'Suppliers Mgmt', href: '/dashboard/suppliers-management', icon: Truck },
   { name: 'Taxes Mgmt', href: '/dashboard/taxes-management', icon: Calculator },
+  { name: 'Vendors', href: '/dashboard/vendors', icon: Store },
+  { name: 'Vendor Reg', href: '/dashboard/vendor-registration', icon: Store },
+  { name: 'Commissions', href: '/dashboard/commissions', icon: DollarSign },
+  { name: 'Disputes', href: '/dashboard/disputes', icon: AlertTriangle },
+  { name: 'Vendor Ratings', href: '/dashboard/vendor-ratings', icon: StarIcon },
 ]
 
 const stats = [
