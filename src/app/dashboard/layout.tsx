@@ -69,7 +69,9 @@ import {
   Calendar,
   FileText,
   Eye,
-  ArrowRight
+  ArrowRight,
+  Trophy,
+  PackageX
 } from 'lucide-react'
 
 const navItems = [
@@ -177,6 +179,12 @@ const navItems = [
   { name: 'Cross-Sell', href: '/dashboard/cross-sell', icon: ArrowRight },
   { name: 'Points', href: '/dashboard/loyalty-points', icon: StarIcon },
   { name: 'Gift Cards', href: '/dashboard/gift-cards', icon: Gift },
+  { name: 'Reorder', href: '/dashboard/reorder-items', icon: RotateCcw },
+  { name: 'Bestsellers', href: '/dashboard/bestsellers', icon: Trophy },
+  { name: 'New', href: '/dashboard/new-arrivals', icon: ZapIcon },
+  { name: 'Low Stock', href: '/dashboard/low-stock', icon: AlertTriangle },
+  { name: 'Out of Stock', href: '/dashboard/out-of-stock', icon: PackageX },
+  { name: 'Discounts', href: '/dashboard/discount-manager', icon: Percent },
 ]
 
 const stats = [
