@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { getProducts, createProduct } from '@/lib/supabase-http'
 
-// Mock data for demo
+// Use Supabase via REST API (not Prisma/PostgreSQL)
 let products = [
   { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, category: 'Electronics', stock: 150, status: 'ACTIVE', sku: 'WEP-001', images: ['/product-1.jpg'], description: 'High-quality wireless earbuds' },
   { id: '2', name: 'Smart Watch Series X', price: 299.99, category: 'Electronics', stock: 75, status: 'ACTIVE', sku: 'SWX-002', images: ['/product-2.jpg'], description: 'Advanced smartwatch' },
@@ -10,20 +11,15 @@ let products = [
 ]
 
 export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions)
-  
-  const { searchParams } = new URL(request.url)
-  const category = searchParams.get('category')
-  const status = searchParams.get('status')
-  const search = searchParams.get('search')
-
-  let filtered = [...products]
-
-  if (category) filtered = filtered.filter(p => p.category === category)
-  if (status) filtered = filtered.filter(p => p.status === status)
-  if (search) filtered = filtered.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
-
-  return NextResponse.json({ products: filtered, total: filtered.length })
+  try {
+    // Try to fetch from Supabase via REST API
+    const dbProducts = await getProducts()
+    return NextResponse.json({ products: dbProducts, total: dbProducts.length })
+  } catch (error) {
+    // Fall back to mock data if Supabase unavailable
+    console.log('Using mock data:', error instanceof Error ? error.message : 'Unknown error')
+    return NextResponse.json({ products: products, total: products.length })
+  }
 }
 
 export async function POST(request: NextRequest) {

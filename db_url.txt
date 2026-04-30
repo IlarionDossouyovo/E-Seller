@@ -1,0 +1,1 @@
+postgresql://postgres:E-Seeler%40100%25@db.bauggttibriqdkfnlfhh.supabase.co:5432/postgres

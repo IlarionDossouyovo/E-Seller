@@ -39,8 +39,16 @@ const categories = [
 export default function StorePage() {
   const [cartCount, setCartCount] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
-  const addToCart = () => setCartCount(prev => prev + 1)
+  const addToCart = (productId: string) => {
+    setCartCount(prev => prev + 1)
+    alert('Added to cart!')
+  }
+
+  const filteredProducts = selectedCategory 
+    ? products.filter(p => p.category === selectedCategory)
+    : products
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -110,7 +118,14 @@ export default function StorePage() {
           <h2 className="text-2xl font-bold text-white mb-8">Categories</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((cat, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} className="p-6 bg-white/5 rounded-2xl text-center cursor-pointer hover:bg-white/10">
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, scale: 0.95 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                transition={{ delay: i * 0.05 }} 
+                onClick={() => setSelectedCategory(cat.name)}
+                className="p-6 bg-white/5 rounded-2xl text-center cursor-pointer hover:bg-white/10"
+              >
                 <span className="text-4xl mb-2 block">{cat.icon}</span>
                 <p className="text-white font-medium">{cat.name}</p>
                 <p className="text-gray-400 text-sm">{cat.count} products</p>
@@ -126,7 +141,14 @@ export default function StorePage() {
           <h2 className="text-2xl font-bold text-white mb-8">Featured Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product, i) => (
-              <motion.div key={product.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10">
+              <motion.div 
+                key={product.id} 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: i * 0.1 }} 
+                onClick={() => addToCart(product.id)}
+                className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10 cursor-pointer"
+              >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
                   <span className="text-6xl">{product.image}</span>
                   {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white">{product.tag}</span>}
