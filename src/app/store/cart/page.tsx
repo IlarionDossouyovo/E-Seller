@@ -1,28 +1,17 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ShoppingCart, Trash2, Plus, Minus, ArrowRight, Shield } from 'lucide-react'
-
-const cartItems = [
-  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, quantity: 1, image: '🎧' },
-  { id: '2', name: 'Smart Watch Series X', price: 299.99, quantity: 1, image: '⌚' },
-]
+import { useCart } from '@/lib/cart-context'
 
 export default function CartPage() {
-  const [items, setItems] = useState(cartItems)
-
-  const updateQuantity = (id: string, delta: number) => {
-    setItems(items.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item))
-  }
-
-  const removeItem = (id: string) => setItems(items.filter(item => item.id !== id))
-
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const { items, updateQuantity, removeItem, total } = useCart()
+  
+  const subtotal = total
   const shipping = subtotal > 50 ? 0 : 9.99
   const tax = subtotal * 0.2
-  const total = subtotal + shipping + tax
+  const finalTotal = subtotal + shipping + tax
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -71,7 +60,7 @@ export default function CartPage() {
                 <div className="flex justify-between"><span className="text-gray-400">Tax (20%)</span><span className="text-white">${tax.toFixed(2)}</span></div>
                 <div className="flex justify-between pt-2 border-t border-white/10 font-bold">
                   <span className="text-white">Total</span>
-                  <span className="text-white text-xl">${total.toFixed(2)}</span>
+                  <span className="text-white text-xl">${finalTotal.toFixed(2)}</span>
                 </div>
               </div>
               {shipping > 0 && <p className="text-xs text-green-400 mt-2">Add ${(50 - subtotal).toFixed(2)} more for free shipping!</p>}

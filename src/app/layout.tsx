@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Sora, DM_Sans } from 'next/font/google'
 import './globals.css'
+import { Providers } from './providers'
 
 const sora = Sora({
   subsets: ['latin'],
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${sora.variable} ${dmSans.variable}`}>
       <body className="noise-overlay antialiased">
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )

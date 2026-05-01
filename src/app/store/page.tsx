@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useCart } from '@/lib/cart-context'
 import { 
   Search, 
   ShoppingCart, 
@@ -37,13 +38,18 @@ const categories = [
 ]
 
 export default function StorePage() {
-  const [cartCount, setCartCount] = useState(0)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const { addItem, count } = useCart()
 
-  const addToCart = (productId: string) => {
-    setCartCount(prev => prev + 1)
-    alert('Added to cart!')
+  const addToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    })
+    alert(`${product.name} added to cart!`)
   }
 
   const filteredProducts = selectedCategory 
@@ -74,7 +80,7 @@ export default function StorePage() {
               <button className="relative p-2 text-gray-300"><Heart className="w-6 h-6" /></button>
               <button className="relative p-2 text-gray-300">
                 <ShoppingCart className="w-6 h-6" />
-                {cartCount > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full text-xs flex items-center justify-center text-white">{cartCount}</span>}
+                {count > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full text-xs flex items-center justify-center text-white">{count}</span>}
               </button>
               <Link href="/login" className="hidden md:block px-4 py-2 bg-blue-600 rounded-lg text-white text-sm">Sign In</Link>
             </div>
@@ -146,7 +152,7 @@ export default function StorePage() {
                 initial={{ opacity: 0, y: 20 }} 
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ delay: i * 0.1 }} 
-                onClick={() => addToCart(product.id)}
+                onClick={() => addToCart(product)}
                 className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10 cursor-pointer"
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
