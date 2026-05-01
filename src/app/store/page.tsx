@@ -78,10 +78,10 @@ export default function StorePage() {
 
             <div className="flex items-center gap-4">
               <button className="relative p-2 text-gray-300"><Heart className="w-6 h-6" /></button>
-              <button className="relative p-2 text-gray-300">
+              <Link href="/store/cart" className="relative p-2 text-gray-300">
                 <ShoppingCart className="w-6 h-6" />
                 {count > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full text-xs flex items-center justify-center text-white">{count}</span>}
-              </button>
+              </Link>
               <Link href="/login" className="hidden md:block px-4 py-2 bg-blue-600 rounded-lg text-white text-sm">Sign In</Link>
             </div>
           </div>
@@ -144,7 +144,15 @@ export default function StorePage() {
       {/* Products */}
       <section id="products" className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8">Featured Products</h2>
+          {selectedCategory && (
+            <button 
+              onClick={() => setSelectedCategory(null)}
+              className="mb-4 px-4 py-2 bg-purple-600 rounded-lg text-white text-sm"
+            >
+              ← Show All Products
+            </button>
+          )}
+          <h2 className="text-2xl font-bold text-white mb-8">{selectedCategory ? `${selectedCategory} Products` : 'Featured Products'}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product, i) => (
               <motion.div 
@@ -152,8 +160,7 @@ export default function StorePage() {
                 initial={{ opacity: 0, y: 20 }} 
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ delay: i * 0.1 }} 
-                onClick={() => addToCart(product)}
-                className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10 cursor-pointer"
+                className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10"
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
                   <span className="text-6xl">{product.image}</span>
@@ -166,9 +173,17 @@ export default function StorePage() {
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                     <span className="text-white text-sm">{product.rating}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-white font-bold">${product.price}</span>
-                    <span className="text-gray-500 line-through text-sm">${product.originalPrice}</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-white font-bold">${product.price}</span>
+                      <span className="text-gray-500 line-through text-sm">${product.originalPrice}</span>
+                    </div>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+                      className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-white text-sm"
+                    >
+                      Add
+                    </button>
                   </div>
                 </div>
               </motion.div>
