@@ -124,18 +124,18 @@ export default function StorePage() {
           <h2 className="text-2xl font-bold text-white mb-8">Categories</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((cat, i) => (
+              <Link href={`/store/${cat.name.toLowerCase()}`} key={i} className="block">
               <motion.div 
-                key={i} 
                 initial={{ opacity: 0, scale: 0.95 }} 
                 animate={{ opacity: 1, scale: 1 }} 
                 transition={{ delay: i * 0.05 }} 
-                onClick={() => setSelectedCategory(cat.name)}
-                className="p-6 bg-white/5 rounded-2xl text-center cursor-pointer hover:bg-white/10"
+                className="p-6 bg-white/5 rounded-2xl text-center hover:bg-white/10"
               >
                 <span className="text-4xl mb-2 block">{cat.icon}</span>
                 <p className="text-white font-medium">{cat.name}</p>
                 <p className="text-gray-400 text-sm">{cat.count} products</p>
               </motion.div>
+            </Link>
             ))}
           </div>
         </div>
