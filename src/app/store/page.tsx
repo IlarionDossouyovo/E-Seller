@@ -52,9 +52,11 @@ export default function StorePage() {
     alert(`${product.name} added to cart!`)
   }
 
-  const filteredProducts = selectedCategory 
-    ? products.filter(p => p.category === selectedCategory)
-    : products
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = !selectedCategory || p.category === selectedCategory
+    const matchesSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
