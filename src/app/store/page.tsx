@@ -108,11 +108,11 @@ export default function StorePage() {
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[{ icon: Truck, label: 'Free Shipping' }, { icon: Shield, label: 'Secure Payment' }, { icon: CreditCard, label: 'Easy Returns' }, { icon: Globe, label: 'Global Delivery' }].map((f, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
+            {[{ icon: Truck, label: 'Free Shipping', href: '/shipping' }, { icon: Shield, label: 'Secure Payment', href: '/security' }, { icon: CreditCard, label: 'Easy Returns', href: '/returns' }, { icon: Globe, label: 'Global Delivery', href: '/international' }].map((f, i) => (
+              <Link key={i} href={f.href} className="flex items-center gap-3 p-4 bg-white/5 rounded-xl hover:bg-white/10">
                 <f.icon className="w-5 h-5 text-blue-400" />
                 <span className="text-white font-medium text-sm">{f.label}</span>
-              </motion.div>
+              </Link>
             ))}
           </div>
         </div>
