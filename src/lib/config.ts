@@ -67,9 +67,49 @@ export function getConfiguredServices() {
   if (aiConfig.anthropicKey) {
     services.push('anthropic')
   }
+  if (aiConfig.ai360Key) {
+    services.push('ai360')
+  }
+  if (ollamaConfig.host) {
+    services.push('ollama')
+  }
   if (cloudinaryConfig.cloudName) {
     services.push('cloudinary')
   }
   
   return services
+}
+
+// Get all service configurations for debugging
+export function getAllServiceConfigs() {
+  return {
+    supabase: {
+      url: supabaseConfig.url,
+      hasAnonKey: Boolean(supabaseConfig.anonKey),
+      hasServiceKey: Boolean(supabaseConfig.serviceKey),
+    },
+    stripe: {
+      hasSecretKey: Boolean(stripeConfig.secretKey),
+      hasPublishableKey: Boolean(stripeConfig.publishableKey),
+      hasWebhookSecret: Boolean(stripeConfig.webhookSecret),
+    },
+    openai: {
+      hasKey: Boolean(aiConfig.openAIKey),
+    },
+    anthropic: {
+      hasKey: Boolean(aiConfig.anthropicKey),
+    },
+    ai360: {
+      hasKey: Boolean(aiConfig.ai360Key),
+      baseUrl: aiConfig.ai360BaseUrl,
+    },
+    ollama: {
+      host: ollamaConfig.host,
+      model: ollamaConfig.model,
+    },
+    cloudinary: {
+      hasCloudName: Boolean(cloudinaryConfig.cloudName),
+      hasApiKey: Boolean(cloudinaryConfig.apiKey),
+    },
+  }
 }
