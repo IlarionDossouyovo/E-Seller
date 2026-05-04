@@ -1,0 +1,67 @@
+// E-Seller Service Configuration
+// All API keys and service credentials
+
+// Supabase
+export const supabaseConfig = {
+  url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bauggttibriqdkfnlfhh.supabase.co',
+  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_ZesBx2jVeccDjJB56B2SWA_ZEKzoEWg',
+  serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+}
+
+// Stripe
+export const stripeConfig = {
+  secretKey: process.env.STRIPE_SECRET_KEY,
+  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+}
+
+// OpenAI / Anthropic
+export const aiConfig = {
+  openAIKey: process.env.OPENAI_API_KEY,
+  anthropicKey: process.env.ANTHROPIC_API_KEY,
+}
+
+// Cloudinary
+export const cloudinaryConfig = {
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  apiKey: process.env.CLOUDINARY_API_KEY,
+  apiSecret: process.env.CLOUDINARY_API_SECRET,
+}
+
+// App Config
+export const appConfig = {
+  appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  nodeEnv: process.env.NODE_ENV || 'development',
+}
+
+// Get service headers for Supabase REST API
+export function getSupabaseHeaders() {
+  return {
+    'apikey': supabaseConfig.anonKey,
+    'Authorization': `Bearer ${supabaseConfig.anonKey}`,
+    'Content-Type': 'application/json',
+  }
+}
+
+// Check which services are configured
+export function getConfiguredServices() {
+  const services = []
+  
+  if (supabaseConfig.url && supabaseConfig.anonKey) {
+    services.push('supabase')
+  }
+  if (stripeConfig.publishableKey) {
+    services.push('stripe')
+  }
+  if (aiConfig.openAIKey) {
+    services.push('openai')
+  }
+  if (aiConfig.anthropicKey) {
+    services.push('anthropic')
+  }
+  if (cloudinaryConfig.cloudName) {
+    services.push('cloudinary')
+  }
+  
+  return services
+}
