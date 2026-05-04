@@ -15,10 +15,18 @@ export const stripeConfig = {
   webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
 }
 
-// OpenAI / Anthropic
+// OpenAI / Anthropic / AI 360
 export const aiConfig = {
   openAIKey: process.env.OPENAI_API_KEY,
   anthropicKey: process.env.ANTHROPIC_API_KEY,
+  ai360Key: process.env.AI360_API_KEY,
+  ai360BaseUrl: process.env.AI360_BASE_URL,
+}
+
+// Ollama (local AI)
+export const ollamaConfig = {
+  host: process.env.OLLAMA_HOST || 'http://localhost:11434',
+  model: process.env.OLLAMA_MODEL || 'llama3.2',
 }
 
 // Cloudinary
