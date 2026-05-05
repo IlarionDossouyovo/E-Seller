@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { 
@@ -48,6 +49,18 @@ const float = {
 }
 
 // Feature Card Component
+// Map feature titles to their dashboard paths
+const featurePaths: Record<string, string> = {
+  "AI Product Intelligence": "/dashboard/products",
+  "AI Supplier Engine": "/dashboard/suppliers",
+  "AI Branding Generator": "/dashboard/branding",
+  "AI Ads Generator": "/dashboard/ads",
+  "AI Positioning Engine": "/dashboard/positioning",
+  "AI Market Analytics": "/dashboard/analytics",
+  "AI Business Assistant": "/dashboard/assistant",
+  "Machine Learning": "/dashboard/ai"
+}
+
 function FeatureCard({ 
   icon: Icon, 
   title, 
@@ -59,24 +72,28 @@ function FeatureCard({
   description: string, 
   delay: number 
 }) {
+  const href = featurePaths[title] || "/dashboard"
+  
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ scale: 1.02, y: -5 }}
-      className="glass-card p-6 group cursor-pointer relative overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-electron-blue/5 to-electron-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="relative z-10">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <Icon className="w-6 h-6 text-white" />
+    <Link href={href}>
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay }}
+        whileHover={{ scale: 1.02, y: -5 }}
+        className="glass-card p-6 group cursor-pointer relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-electron-blue/5 to-electron-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="relative z-10">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+            <Icon className="w-6 h-6 text-white" />
+          </div>
+          <h3 className="text-xl font-semibold mb-2 font-[var(--font-sora)]">{title}</h3>
+          <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
         </div>
-        <h3 className="text-xl font-semibold mb-2 font-[var(--font-sora)]">{title}</h3>
-        <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   )
 }
 

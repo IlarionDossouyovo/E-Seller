@@ -3,5 +3,6 @@
     "silent": true
   },
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "name": "e-seller-v2"
 }
