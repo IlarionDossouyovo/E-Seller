@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useDeferredValue, useTransition, memo } from 'react'
 import { motion } from 'framer-motion'
 import {
   Search,
@@ -86,6 +86,9 @@ export default function AIDashboard() {
   const [error, setError] = useState<string | null>(null)
   const [isListening, setIsListening] = useState(false)
   const [speaking, setSpeaking] = useState(false)
+  const [isPending, startTransition] = useTransition()
+  
+  const deferredInput = useDeferredValue(input)
   
   const recognitionRef = useRef<any>(null)
   const synthRef = useRef<any>(null)
@@ -137,10 +140,12 @@ export default function AIDashboard() {
   }
 
   const handleModuleClick = (moduleId: string) => {
-    setSelectedModule(moduleId)
-    setResult(null)
-    setError(null)
-    setInput('')
+    startTransition(() => {
+      setSelectedModule(moduleId)
+      setResult(null)
+      setError(null)
+      setInput('')
+    })
   }
 
   const handleSubmit = async () => {
@@ -176,6 +181,11 @@ export default function AIDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6">
+      {isPending && (
+        <div className="fixed top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm z-50">
+          Chargement...
+        </div>
+      )}
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div 
@@ -194,20 +204,18 @@ export default function AIDashboard() {
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {aiModules.map((module, index) => (
-            <motion.button
+            <button
               key={module.id}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
               onClick={() => handleModuleClick(module.id)}
               className={`p-6 rounded-xl bg-gradient-to-br ${module.color} 
-                hover:scale-105 transition-transform text-left
+                hover:scale-105 transition-all duration-200 ease-out text-left cursor-pointer
                 ${selectedModule === module.id ? 'ring-4 ring-white' : ''}`}
+              style={{ willChange: 'transform' }}
             >
               <module.icon className="w-8 h-8 text-white mb-3" />
               <h3 className="font-semibold text-white mb-1">{module.name}</h3>
               <p className="text-xs text-white/80">{module.description}</p>
-            </motion.button>
+            </button>
           ))}
         </div>
 
@@ -227,7 +235,7 @@ export default function AIDashboard() {
               <input
                 type="text"
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e) => startTransition(() => setInput(e.target.value))}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder={selectedModule === 'product-intelligence' 
                   ? 'Saisissez le nom du produit...'
