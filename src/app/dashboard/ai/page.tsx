@@ -271,7 +271,11 @@ export default function AIDashboard() {
 
             {/* Result */}
             {result && !loading && (
-              <div className="bg-slate-700 rounded-lg p-4">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="bg-slate-700 rounded-lg p-4"
+              >
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-slate-400 text-sm">Résultat:</span>
                   <button
@@ -283,10 +287,10 @@ export default function AIDashboard() {
                     {speaking ? 'En lecture...' : 'Écouter'}
                   </button>
                 </div>
-                <pre className="text-slate-300 whitespace-pre-wrap text-sm">
+                <pre className="text-slate-300 whitespace-pre-wrap text-sm overflow-auto max-h-96">
                   {typeof result === 'string' ? result : JSON.stringify(result, null, 2)}
                 </pre>
-              </div>
+              </motion.div>
             )}
 
             {/* Placeholder */}
