@@ -140,13 +140,13 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      <button className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 ${
+      <a href="/dashboard" className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 text-center block ${
         popular 
           ? 'bg-gradient-to-r from-electron-blue to-electron-purple text-white hover:opacity-90 glow-blue' 
           : 'border border-gray-600 hover:border-electron-blue hover:text-electron-blue'
       }`}>
         Commencer maintenant
-      </button>
+      </a>
     </motion.div>
   )
 }
@@ -281,22 +281,20 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group bg-gradient-to-r from-electron-blue to-electron-purple px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 glow-blue"
+          <a 
+            href="/dashboard"
+            className="group bg-gradient-to-r from-electron-blue to-electron-purple px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 glow-blue cursor-pointer inline-flex hover:scale-105 transition-transform"
           >
             Commencer gratuitement
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="glass-card px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2"
+          </a>
+          <a 
+            href="/store"
+            className="glass-card px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform"
           >
             <Play className="w-5 h-5" />
             Voir la démo
-          </motion.button>
+          </a>
         </motion.div>
 
         <motion.div 
