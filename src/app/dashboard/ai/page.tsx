@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import {
   Search,
@@ -12,64 +12,67 @@ import {
   Bot,
   Sparkles,
   Loader2,
-  Send
+  Send,
+  Mic,
+  MicOff,
+  Volume2
 } from 'lucide-react'
 
 // AI Module definitions
 const aiModules = [
   {
     id: 'product-intelligence',
-    name: 'AI Product Intelligence',
-    description: 'Research trends, score products, detect viral items',
+    name: 'Intelligence artificielle produit',
+    description: 'Analyser les tendances, évaluer les produits, détecter les contenus viraux',
     icon: Search,
     color: 'from-blue-500 to-cyan-500'
   },
   {
     id: 'supplier-engine',
-    name: 'AI Supplier Engine',
-    description: 'Match suppliers, calculate margins, optimize logistics',
+    name: 'Moteur de fournisseur d\'IA',
+    description: 'Sélectionner les fournisseurs, calculer les marges, optimiser la logistique',
     icon: Factory,
     color: 'from-purple-500 to-pink-500'
   },
   {
     id: 'branding-generator',
-    name: 'AI Branding Generator',
-    description: 'Generate names, logos, brand identity',
+    name: 'Générateur de marque IA',
+    description: 'Générer des noms, des logos, une identité de marque',
     icon: Palette,
     color: 'from-yellow-500 to-orange-500'
   },
   {
     id: 'ads-generator',
-    name: 'AI Ads Generator',
-    description: 'Create TikTok ads, UGC scripts, competitor analysis',
+    name: 'Générateur de publicités IA',
+    description: 'Création de publicités TikTok, scripts UGC, analyse de la concurrence',
     icon: Megaphone,
     color: 'from-red-500 to-pink-500'
   },
   {
     id: 'positioning-engine',
-    name: 'AI Positioning Engine',
-    description: 'Target customers, marketing angles, offers',
+    name: 'Moteur de positionnement IA',
+    description: 'Clients cibles, stratégies marketing, offres',
     icon: Target,
     color: 'from-green-500 to-teal-500'
   },
   {
     id: 'market-analytics',
-    name: 'AI Market Analytics',
-    description: 'Real-time ROI, CPA, ROAS dashboard',
+    name: 'Analyses du marché de l\'IA',
+    description: 'Tableau de bord ROI, CPA, ROAS en temps réel',
     icon: BarChart3,
     color: 'from-indigo-500 to-purple-500'
   },
   {
     id: 'business-assistant',
-    name: 'AI Business Assistant',
-    description: 'Chat GPT for strategies and optimization',
+    name: 'Assistant commercial IA',
+    description: 'Discutez de GPT pour des stratégies d\'optimisation',
     icon: Bot,
     color: 'from-cyan-500 to-blue-500'
   },
   {
     id: 'recommendations',
-    name: 'ML Recommendations',
-    description: 'Personalized product suggestions',
+    name: 'Recommandations ML',
+    description: 'Suggestions de produits personnalisées',
     icon: Sparkles,
     color: 'from-pink-500 to-rose-500'
   }
@@ -81,6 +84,57 @@ export default function AIDashboard() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isListening, setIsListening] = useState(false)
+  const [speaking, setSpeaking] = useState(false)
+  
+  const recognitionRef = useRef<any>(null)
+  const synthRef = useRef<any>(null)
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      if (SpeechRecognition) {
+        recognitionRef.current = new SpeechRecognition()
+        recognitionRef.current.continuous = true
+        recognitionRef.current.interimResults = true
+        
+        recognitionRef.current.onresult = (event: any) => {
+          const transcript = Array.from(event.results)
+            .map((result: any) => result[0].transcript)
+            .join('')
+          setInput(transcript)
+        }
+        
+        recognitionRef.current.onend = () => {
+          setIsListening(false)
+        }
+      }
+      
+      synthRef.current = window.speechSynthesis
+    }
+  }, [])
+
+  const toggleVoiceInput = () => {
+    if (isListening) {
+      recognitionRef.current?.stop()
+      setIsListening(false)
+    } else {
+      recognitionRef.current?.start()
+      setIsListening(true)
+    }
+  }
+
+  const speakResult = (text: string) => {
+    if (!synthRef.current) return
+    
+    synthRef.current.cancel()
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'fr-FR'
+    utterance.onstart = () => setSpeaking(true)
+    utterance.onend = () => setSpeaking(false)
+    synthRef.current.speak(utterance)
+  }
 
   const handleModuleClick = (moduleId: string) => {
     setSelectedModule(moduleId)
@@ -133,7 +187,7 @@ export default function AIDashboard() {
             🤖 AI Dashboard
           </h1>
           <p className="text-slate-400">
-            Click any module to start using AI features
+            Cliquez sur un module pour commencer à utiliser les fonctionnalités d'IA
           </p>
         </motion.div>
 
@@ -176,20 +230,27 @@ export default function AIDashboard() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder={selectedModule === 'product-intelligence' 
-                  ? 'Enter product name (e.g., wireless earbuds)'
+                  ? 'Saisissez le nom du produit...'
                   : selectedModule === 'business-assistant'
-                  ? 'Ask a question...'
-                  : 'Enter product name...'
+                  ? 'Posez une question...'
+                  : 'Saisissez un nom de produit...'
                 }
                 className="flex-1 bg-slate-700 text-white px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
+              <button
+                onClick={toggleVoiceInput}
+                className={`p-3 rounded-lg ${isListening ? 'bg-red-600' : 'bg-slate-600'} hover:bg-slate-500`}
+                title=" Voice Input"
+              >
+                {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+              </button>
               <button
                 onClick={handleSubmit}
                 disabled={loading || !input.trim()}
                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                <span>Generate</span>
+                <span>Générer</span>
               </button>
             </div>
 
@@ -197,7 +258,7 @@ export default function AIDashboard() {
             {loading && (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
-                <span className="ml-3 text-slate-400">Generating...</span>
+                <span className="ml-3 text-slate-400">Génération en cours...</span>
               </div>
             )}
 
@@ -211,8 +272,19 @@ export default function AIDashboard() {
             {/* Result */}
             {result && !loading && (
               <div className="bg-slate-700 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-slate-400 text-sm">Résultat:</span>
+                  <button
+                    onClick={() => speakResult(typeof result === 'string' ? result : JSON.stringify(result))}
+                    disabled={speaking}
+                    className="text-blue-400 hover:text-blue-300 flex items-center gap-1 text-sm"
+                  >
+                    <Volume2 className="w-4 h-4" />
+                    {speaking ? 'En lecture...' : 'Écouter'}
+                  </button>
+                </div>
                 <pre className="text-slate-300 whitespace-pre-wrap text-sm">
-                  {JSON.stringify(result, null, 2)}
+                  {typeof result === 'string' ? result : JSON.stringify(result, null, 2)}
                 </pre>
               </div>
             )}
@@ -220,7 +292,7 @@ export default function AIDashboard() {
             {/* Placeholder */}
             {!result && !loading && !error && (
               <div className="text-center py-12 text-slate-500">
-                Enter a product name or question and click Generate
+                Saisissez un nom de produit ou une question, puis cliquez sur Générer
               </div>
             )}
           </motion.div>
