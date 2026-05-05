@@ -151,6 +151,7 @@ const navItems = [
   { name: 'Barcode', href: '/dashboard/barcode-scanner', icon: ScanBarcode },
   { name: 'Barcode Market', href: '/dashboard/barcode-market', icon: ScanBarcode },
   { name: 'AI Automations', href: '/dashboard/ai-automations', icon: Zap },
+  { name: 'Marketplaces', href: '/dashboard/marketplaces', icon: Globe },
   { name: 'Raffle', href: '/dashboard/raffle-waitlist', icon: Ticket },
   { name: 'Bundles', href: '/dashboard/bundle-builder', icon: Package },
   { name: 'BOGO', href: '/dashboard/bogo-deals', icon: Gift },
