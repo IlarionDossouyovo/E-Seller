@@ -20,6 +20,53 @@ const templates = [
 export default function VideoAdsPage() {
   const [activeTab, setActiveTab] = useState('create')
   const [generationStep, setGenerationStep] = useState(0)
+  const [demoMode, setDemoMode] = useState(false)
+  const [demoVideo, setDemoVideo] = useState<string | null>(null)
+  
+  // Demo video descriptions for tutorial
+  const demoVideos = [
+    {
+      id: 'demo1',
+      title: 'Comment créer une publicité vidéo',
+      description: 'Guide pas à pas pour créer votre première publicité vidéo IA',
+      thumbnail: '🎬',
+      duration: '2:30',
+      steps: [
+        '1. Entrez le nom de votre produit',
+        '2. Choisissez un modèle de vidéo',
+        '3. Personnalisez le texte et les images',
+        '4. Ajoutez une voix IA',
+        '5. Générez votre vidéo'
+      ]
+    },
+    {
+      id: 'demo2',
+      title: 'Optimisation des performances',
+      description: 'Comment améliorer le CTR de vos publicités',
+      thumbnail: '📈',
+      duration: '3:15',
+      steps: [
+        '1. Analysez les métriques',
+        '2. Identifiez les points faibles',
+        '3. Modifiez le hook initial',
+        '4. Testez différentes voces',
+        '5. Mesurez les résultats'
+      ]
+    },
+    {
+      id: 'demo3',
+      title: 'Multi-plateforme',
+      description: 'Adaptez vos vidéos pour TikTok, Instagram, YouTube',
+      thumbnail: '🌐',
+      duration: '2:45',
+      steps: [
+        '1. Sélectionnez les plateformes',
+        '2. Ajustez le format',
+        '3. Modifiez les dimensions',
+        '4. Exportez pour chaque plateforme'
+      ]
+    }
+  ]
 
   const stats = {
     totalVideos: videos.length,
@@ -68,10 +115,10 @@ export default function VideoAdsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2">
-        {['create', 'videos', 'templates', 'settings'].map(tab => (
+      <div className="flex gap-2 flex-wrap">
+        {['create', 'videos', 'templates', 'demo', 'settings'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl ${activeTab === tab ? 'bg-purple-500' : 'bg-white/5'}`}>
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab === 'demo' ? '🎬 Demo' : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
@@ -240,6 +287,79 @@ export default function VideoAdsPage() {
               <button className="w-full py-2 bg-purple-500 rounded-lg">Use Template</button>
             </motion.div>
           ))}
+        </div>
+      )}
+
+      {activeTab === 'demo' && (
+        <div className="space-y-6">
+          <div className="glass-card p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">🎬</span>
+              <div>
+                <h3 className="text-xl font-semibold">Vidéos Tutoriels</h3>
+                <p className="text-gray-400">Apprenez à utiliser le générateur de vidéos IA</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Demo Videos Grid */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {demoVideos.map((demo, index) => (
+              <motion.div
+                key={demo.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="glass-card p-4 cursor-pointer hover:ring-2 hover:ring-purple-500"
+                onClick={() => setDemoVideo(demo.id)}
+              >
+                <div className="text-4xl mb-3">{demo.thumbnail}</div>
+                <h4 className="font-semibold mb-1">{demo.title}</h4>
+                <p className="text-sm text-gray-400 mb-2">{demo.description}</p>
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <Play className="w-4 h-4" />
+                  <span>{demo.duration}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Demo Video Player (simulated) */}
+          {demoVideo && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="glass-card p-6"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-lg font-semibold">
+                  {demoVideos.find(d => d.id === demoVideo)?.title}
+                </h4>
+                <button onClick={() => setDemoVideo(null)} className="text-gray-400 hover:text-white">
+                  ✕
+                </button>
+              </div>
+              
+              {/* Simulated video player */}
+              <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl flex items-center justify-center mb-4">
+                <div className="text-center">
+                  <Play className="w-20 h-20 text-white/50 mx-auto mb-4" />
+                  <p className="text-white/70">Lecture de la démo...</p>
+                </div>
+              </div>
+              
+              {/* Steps */}
+              <div className="space-y-3">
+                <h5 className="font-medium mb-2">Étapes du tutoriel:</h5>
+                {demoVideos.find(d => d.id === demoVideo)?.steps.map((step, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
+                    <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">{i + 1}</span>
+                    <span>{step}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
         </div>
       )}
 
