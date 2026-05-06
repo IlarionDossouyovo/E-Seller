@@ -127,7 +127,7 @@ export default function ProductDetailPage() {
               <span className="px-3 py-1 rounded-full bg-electron-blue/20 text-electron-blue text-sm">
                 {product.category}
               </span>
-              {product.platforms.map(plat => (
+              {product.platforms.map((plat: string) => (
                 <span key={plat} className="px-3 py-1 rounded-full bg-white/10 text-gray-400 text-sm">
                   {plat}
                 </span>
@@ -184,7 +184,7 @@ export default function ProductDetailPage() {
       <div className="glass-card p-6">
         <h3 className="text-lg font-semibold mb-4">Platform Performance</h3>
         <div className="space-y-3">
-          {product.platforms.map(plat => (
+          {product.platforms.map((plat: string) => (
             <div key={plat} className="flex items-center justify-between p-3 rounded-lg bg-white/5">
               <span>{plat}</span>
               <div className="flex items-center gap-2">
