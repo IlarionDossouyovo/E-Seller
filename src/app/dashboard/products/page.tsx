@@ -178,9 +178,9 @@ export default function ProductsPage() {
               <label className="block text-sm text-gray-400 mb-2">Category</label>
               <div className="flex flex-wrap gap-2">
                 {categories.map(cat => (
-                  <button
+                  <a
                     key={cat}
-                    onClick={() => setSelectedCategory(cat)}
+                    href={`/dashboard/products?category=${cat === 'All' ? '' : cat}`}
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                       selectedCategory === cat 
                         ? 'bg-electron-blue text-white' 
@@ -188,7 +188,7 @@ export default function ProductsPage() {
                     }`}
                   >
                     {cat}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -196,9 +196,9 @@ export default function ProductsPage() {
               <label className="block text-sm text-gray-400 mb-2">Platform</label>
               <div className="flex flex-wrap gap-2">
                 {platforms.map(plat => (
-                  <button
+                  <a
                     key={plat}
-                    onClick={() => setSelectedPlatform(plat)}
+                    href={`/dashboard/products?platform=${plat === 'All Platforms' ? '' : plat}`}
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                       selectedPlatform === plat 
                         ? 'bg-electron-purple text-white' 
@@ -206,7 +206,7 @@ export default function ProductsPage() {
                     }`}
                   >
                     {plat}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -348,9 +348,9 @@ export default function ProductsPage() {
 
               {/* Actions */}
               <div className="mt-4 flex gap-2">
-                <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm font-medium">
+                <a href={`/dashboard/products/${product.id}`} className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm font-medium text-center">
                   View Details
-                </button>
+                </a>
                 <a href="/store" className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium text-center">
                   Start Selling
                 </a>
