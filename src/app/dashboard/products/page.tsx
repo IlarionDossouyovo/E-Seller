@@ -351,9 +351,9 @@ export default function ProductsPage() {
                 <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm font-medium">
                   View Details
                 </button>
-                <button className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium">
+                <a href="/store" className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium text-center">
                   Start Selling
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
