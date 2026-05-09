@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
 
 async function checkOllama(): Promise<boolean> {
   try {
-    const response = await fetch(`${process.env.OLLAMA_HOST || 'https://ripe-carrots-hug.loca.lt'}/api/tags`, {
+    const response = await fetch(`${process.env.OLLAMA_HOST || 'https://light-spoons-lie.loca.lt'}/api/tags`, {
       signal: AbortSignal.timeout(3000)
     })
     return response.ok
@@ -101,7 +101,7 @@ async function checkOllama(): Promise<boolean> {
 }
 
 async function callOllama(message: string) {
-  const host = process.env.OLLAMA_HOST || 'https://ripe-carrots-hug.loca.lt'
+  const host = process.env.OLLAMA_HOST || 'https://light-spoons-lie.loca.lt'
   const model = process.env.OLLAMA_MODEL || 'llama3.2'
   
   const response = await fetch(`${host}/api/chat`, {
