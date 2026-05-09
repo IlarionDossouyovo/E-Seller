@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // Ollama Local AI API
 // Runs self-hosted AI models locally
 
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://nice-walls-bow.loca.lt'
 
 export async function POST(request: NextRequest) {
   try {

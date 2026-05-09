@@ -25,7 +25,7 @@ export const aiConfig = {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'http://localhost:11434',
+  host: process.env.OLLAMA_HOST || 'https://nice-walls-bow.loca.lt',
   model: process.env.OLLAMA_MODEL || 'llama3.2',
 }
 
