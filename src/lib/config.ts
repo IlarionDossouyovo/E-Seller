@@ -25,7 +25,7 @@ export const aiConfig = {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'https://eager-planes-peel.loca.lt',
+  host: process.env.OLLAMA_HOST || 'https://major-sheep-return.loca.lt',
   model: process.env.OLLAMA_MODEL || 'llama3.2',
 }
 
