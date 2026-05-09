@@ -25,7 +25,7 @@ export const aiConfig = {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'https://nice-banks-rule.loca.lt',
+  host: process.env.OLLAMA_HOST || 'https://afraid-parks-invite.loca.lt',
   model: process.env.OLLAMA_MODEL || 'llama3.2',
 }
 
