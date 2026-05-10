@@ -1,14 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { cloudinaryConfig, getCloudinarySignature } from '@/lib/config'
 
 export async function GET(request: NextRequest) {
-  // Return mock uploaded files
+  // Check for Cloudinary config
+  const hasCloudinary = Boolean(cloudinaryConfig.cloudName && cloudinaryConfig.cloudName !== 'demo')
+  
   return NextResponse.json({ 
-    files: [
-      { id: '1', name: 'product-1.jpg', url: '/uploads/product-1.jpg', size: 245000, uploadedAt: '2024-04-09T10:00:00Z' },
-      { id: '2', name: 'logo.png', url: '/uploads/logo.png', size: 45000, uploadedAt: '2024-04-08T15:30:00Z' },
-    ]
+    service: 'Cloudinary Upload API',
+    configured: hasCloudinary,
+    cloudName: cloudinaryConfig.cloudName,
+    apiKey: cloudinaryConfig.apiKey ? 'configured' : 'missing',
+    usage: 'POST with FormData containing file',
+    maxSize: '10MB',
+    formats: ['jpg', 'png', 'webp', 'gif', 'pdf']
   })
 }
 

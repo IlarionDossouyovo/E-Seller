@@ -31,9 +31,18 @@ export const ollamaConfig = {
 
 // Cloudinary
 export const cloudinaryConfig = {
-  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  apiKey: process.env.CLOUDINARY_API_KEY,
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'demo',
+  apiKey: process.env.CLOUDINARY_API_KEY || 'demo',
   apiSecret: process.env.CLOUDINARY_API_SECRET,
+}
+
+// Get Cloudinary signed URL for uploads
+export function getCloudinarySignature() {
+  const timestamp = Math.round(new Date().getTime() / 1000)
+  const signature = process.env.CLOUDINARY_API_SECRET 
+    ? `timestamp=${timestamp}&api_key=${cloudinaryConfig.apiKey}`
+    : ''
+  return { timestamp, signature }
 }
 
 // App Config
