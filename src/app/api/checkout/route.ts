@@ -47,6 +47,11 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
+    service: 'Stripe Checkout',
+    configured: Boolean(process.env.STRIPE_SECRET_KEY),
+    mode: process.env.STRIPE_SECRET_KEY ? 'live' : 'demo',
+    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_demo',
+    features: ['checkout', 'subscriptions', 'webhooks'],
+    currencies: ['USD', 'EUR', 'GBP'],
   })
 }

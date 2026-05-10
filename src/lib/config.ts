@@ -10,17 +10,33 @@ export const supabaseConfig = {
 
 // Stripe
 export const stripeConfig = {
-  secretKey: process.env.STRIPE_SECRET_KEY,
-  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  secretKey: process.env.STRIPE_SECRET_KEY || 'sk_test_demo',
+  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_demo',
   webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+}
+
+// Check if Stripe is properly configured
+export function isStripeConfigured() {
+  return Boolean(stripeConfig.secretKey && stripeConfig.secretKey !== 'sk_test_demo')
 }
 
 // OpenAI / Anthropic / AI 360
 export const aiConfig = {
-  openAIKey: process.env.OPENAI_API_KEY,
+  openAIKey: process.env.OPENAI_API_KEY || 'sk-demo-key',
   anthropicKey: process.env.ANTHROPIC_API_KEY,
   ai360Key: process.env.AI360_API_KEY,
   ai360BaseUrl: process.env.AI360_BASE_URL,
+}
+
+// Check which AI providers are available
+export function getAvailableAIProviders() {
+  const providers = []
+  if (aiConfig.openAIKey && aiConfig.openAIKey !== 'sk-demo-key') providers.push('openai')
+  if (aiConfig.anthropicKey) providers.push('anthropic')
+  if (aiConfig.ai360Key) providers.push('ai360')
+  // Ollama is always available via local server
+  providers.push('ollama')
+  return providers
 }
 
 // Ollama (local AI)
