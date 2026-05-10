@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // Runs self-hosted AI models locally
 
 // Use hardcoded localtunnel URL (env var has old value)
-const OLLAMA_HOST = 'https://swiftness-heave-smirk'
+const OLLAMA_HOST = 'https://swiftness-heave-smirk.ngrok-free.dev'
 
 export async function POST(request: NextRequest) {
   try {

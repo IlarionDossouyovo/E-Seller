@@ -25,7 +25,7 @@ export const aiConfig = {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk',
+  host: process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev',
   model: process.env.OLLAMA_MODEL || 'llama3.2',
 }
 
