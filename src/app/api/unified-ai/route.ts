@@ -2,6 +2,36 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 
+function generateMockProducts(query: string): string {
+  const products = [
+    { name: 'Premium Wireless Charger Pad', price: 29.99, margin: 65, revenue: 28500, growth: 145 },
+    { name: 'Fast Charging USB-C Cable Kit', price: 19.99, margin: 58, revenue: 18200, growth: 89 },
+    { name: 'Multi-Device Charging Station', price: 49.99, margin: 62, revenue: 32100, growth: 112 },
+    { name: 'Magnetic Phone Mount Charger', price: 24.99, margin: 55, revenue: 15800, growth: 78 }
+  ]
+  
+  const queryLower = query.toLowerCase()
+  
+  let result = `# 🔍 AI Product Research: "${query}"\n\n`
+  result += `Based on your search, here are 4 winning product opportunities:\n\n`
+  
+  products.forEach((p, i) => {
+    result += `## ${i + 1}. ${p.name}\n`
+    result += `- **Price:** $${p.price}\n`
+    result += `- **Profit Margin:** ${p.margin}%\n`
+    result += `- **Est. Revenue:** $${p.revenue.toLocaleString()}/month\n`
+    result += `- **Growth:** +${p.growth}%\n`
+    result += `- **Why It Sells:** High demand, low competition, practical utility\n\n`
+  })
+  
+  result += `---\n`
+  result += `*Configure OPENAI_API_KEY in Vercel for real AI research*\n`
+  
+  return result
+}
+
+import { NextRequest, NextResponse } from 'next/server'
+
 // Unified AI API - Routes to best available AI provider
 // Priority: Ollama (local) → OpenAI → Anthropic → AI360
 
@@ -52,6 +82,17 @@ export async function POST(request: NextRequest) {
     }
 
     let response
+
+    // If no AI provider is available, provide mock product research
+    if (selectedProvider === 'none') {
+      const mockProducts = generateMockProducts(message)
+      return NextResponse.json({
+        success: true,
+        response: mockProducts,
+        provider: 'demo',
+        message: 'Demo mode - Configure AI provider for real results'
+      })
+    }
 
     // Route to appropriate provider
     switch (selectedProvider) {
