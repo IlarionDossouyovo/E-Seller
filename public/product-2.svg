@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-  <defs>
-    <linearGradient id="watchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2d2d44"/>
-      <stop offset="100%" style="stop-color:#1a1a2e"/>
-    </linearGradient>
-    <linearGradient id="glowPurple" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#a855f7"/>
-      <stop offset="100%" style="stop-color:#6366f1"/>
-    </linearGradient>
-  </defs>
-  <rect width="400" height="400" fill="url(#watchGrad)"/>
-  <rect x="100" y="80" width="200" height="240" rx="40" fill="#111122" stroke="url(#glowPurple)" stroke-width="3"/>
-  <circle cx="200" cy="200" r="80" fill="#0a0a15" stroke="url(#glowPurple)" stroke-width="2"/>
-  <circle cx="200" cy="200" r="70" fill="#111122"/>
-  <text x="200" y="190" text-anchor="middle" font-family="Arial" font-size="28" fill="#a855f7" font-weight="bold">12:45</text>
-  <text x="200" y="215" text-anchor="middle" font-family="Arial" font-size="10" fill="#6366f1">SMART WATCH</text>
-  <circle cx="200" cy="50" r="8" fill="#111122" stroke="#a855f7" stroke-width="2"/>
-  <text x="200" y="365" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffffff">SERIES X</text>
-  <text x="200" y="380" text-anchor="middle" font-family="Arial" font-size="10" fill="#a855f7">$299.99</text>
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  
+  <!-- Watch Body -->
+  <rect x="120" y="80" width="160" height="200" rx="30" fill="#2d3748" stroke="#a855f7" stroke-width="4"/>
+  <circle cx="200" cy="180" r="70" fill="#1a1a2e" stroke="#a855f7" stroke-width="3"/>
+  
+  <!-- Screen -->
+  <circle cx="200" cy="180" r="55" fill="#2d3748"/>
+  
+  <!-- Time -->
+  <text x="200" y="170" text-anchor="middle" font-family="Arial" font-size="32" fill="#a855f7" font-weight="bold">12:45</text>
+  <text x="200" y="200" text-anchor="middle" font-family="Arial" font-size="12" fill="#a855f7">SMART</text>
+  
+  <!-- Crown -->
+  <rect x="280" y="160" width="12" height="40" rx="3" fill="#a855f7"/>
+  
+  <!-- Text -->
+  <text x="200" y="320" text-anchor="middle" font-family="Arial" font-size="16" fill="#fff" font-weight="bold">SERIES X</text>
+  <text x="200" y="345" text-anchor="middle" font-family="Arial" font-size="16" fill="#a855f7">$299.99</text>
 </svg>
