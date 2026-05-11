@@ -266,7 +266,7 @@ export default function ProductsPage() {
           >
             {/* Image */}
             <div className="relative h-48 bg-white/5">
-              <Image 
+              <Image priority 
                 src={product.image} width={300} height={200} 
                 alt={product.name}
                 className="w-full h-full object-cover"

@@ -171,7 +171,7 @@ export default function StorePage() {
                 className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10"
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
-                  <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-32 h-32" />
+                  <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-32 h-32" priority />
                   {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white flex items-center gap-1">{product.tagIcon} {product.tag}</span>}
                 </div>
                 <div className="p-4">
