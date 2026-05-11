@@ -101,11 +101,8 @@ export async function POST(request: NextRequest) {
         break
       case 'openai':
         try {
-          response = await callOpenAI(message)
-          // If no valid response, generate mock products
-          if (!response.message || response.message === 'No response') {
-            response = { message: generateMockProducts(message) }
-          }
+          const aiResponse = await callOpenAI(message)
+          response = { message: aiResponse.message || generateMockProducts(message) }
         } catch (e) {
           response = { message: generateMockProducts(message), error: String(e) }
         }
