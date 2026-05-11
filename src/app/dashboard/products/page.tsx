@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { 
   Search, 
@@ -31,7 +32,7 @@ const mockProducts = [
     growth: '+156%',
     saturation: 'Low',
     platforms: ['TikTok', 'Instagram'],
-    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400',
+    image: '/product-1.svg',
     price: 49.99,
     margin: 65,
   },
@@ -45,7 +46,7 @@ const mockProducts = [
     growth: '+89%',
     saturation: 'Medium',
     platforms: ['TikTok', 'Facebook'],
-    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400',
+    image: '/product-3.svg',
     price: 29.99,
     margin: 72,
   },
@@ -59,7 +60,7 @@ const mockProducts = [
     growth: '+34%',
     saturation: 'High',
     platforms: ['Instagram', 'Meta'],
-    image: 'https://images.unsplash.com/photo-1535025183041-0991a977e25b?w=400',
+    image: '/product-1.svg',
     price: 24.99,
     margin: 58,
   },
@@ -73,7 +74,7 @@ const mockProducts = [
     growth: '+67%',
     saturation: 'Low',
     platforms: ['TikTok', 'Google'],
-    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400',
+    image: '/product-2.svg',
     price: 39.99,
     margin: 61,
   },
@@ -87,7 +88,7 @@ const mockProducts = [
     growth: '-12%',
     saturation: 'Very High',
     platforms: ['Instagram'],
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+    image: '/product-3.svg',
     price: 89.99,
     margin: 45,
   },
@@ -101,7 +102,7 @@ const mockProducts = [
     growth: '+52%',
     saturation: 'Medium',
     platforms: ['TikTok', 'Instagram'],
-    image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400',
+    image: '/product-1.svg',
     price: 34.99,
     margin: 68,
   },
@@ -265,8 +266,8 @@ export default function ProductsPage() {
           >
             {/* Image */}
             <div className="relative h-48 bg-white/5">
-              <img 
-                src={product.image} 
+              <Image 
+                src={product.image} width={300} height={200} 
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
