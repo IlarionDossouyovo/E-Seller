@@ -5,9 +5,9 @@ import { getProducts, createProduct } from '@/lib/supabase-http'
 
 // Use Supabase via REST API (not Prisma/PostgreSQL)
 let products = [
-  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, category: 'Electronics', stock: 150, status: 'ACTIVE', sku: 'WEP-001', images: ['/product-1.jpg'], description: 'High-quality wireless earbuds' },
-  { id: '2', name: 'Smart Watch Series X', price: 299.99, category: 'Electronics', stock: 75, status: 'ACTIVE', sku: 'SWX-002', images: ['/product-2.jpg'], description: 'Advanced smartwatch' },
-  { id: '3', name: 'Organic Face Cream', price: 34.99, category: 'Beauty', stock: 200, status: 'ACTIVE', sku: 'OFC-003', images: ['/product-3.jpg'], description: 'Natural skincare product' },
+  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, category: 'Electronics', stock: 150, status: 'ACTIVE', sku: 'WEP-001', image: '/product-1.svg', description: 'High-quality wireless earbuds' },
+  { id: '2', name: 'Smart Watch Series X', price: 299.99, category: 'Electronics', stock: 75, status: 'ACTIVE', sku: 'SWX-002', image: '/product-2.svg', description: 'Advanced smartwatch' },
+  { id: '3', name: 'Organic Face Cream', price: 34.99, category: 'Beauty', stock: 200, status: 'ACTIVE', sku: 'OFC-003', image: '/product-3.svg', description: 'Natural skincare product' },
 ]
 
 export async function GET(request: NextRequest) {
