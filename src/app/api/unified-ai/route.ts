@@ -102,7 +102,8 @@ export async function POST(request: NextRequest) {
       case 'openai':
         try {
           const aiResponse = await callOpenAI(message)
-          response = { message: aiResponse.message || generateMockProducts(message) }
+          const hasContent = aiResponse.message && aiResponse.message !== 'No response'
+          response = { message: hasContent ? aiResponse.message : generateMockProducts(message) }
         } catch (e) {
           response = { message: generateMockProducts(message), error: String(e) }
         }
