@@ -117,9 +117,35 @@ export default function ProductsPage() {
   const [selectedPlatform, setSelectedPlatform] = useState('All Platforms')
   const [isSearching, setIsSearching] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
+  const [searchResults, setSearchResults] = useState('')
+  const [error, setError] = useState('')
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
+    if (!searchQuery) return
     setIsSearching(true)
+    setError(null)
+    
+    try {
+      // Call AI to search for products
+      const response = await fetch('/api/unified-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Find winning products based on: "${searchQuery}". Return product suggestions with names, prices, potential revenue, competition level, and why they would sell.`
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        setSearchResults(data.response || 'No results found')
+      } else {
+        setError(data.error || 'Search failed')
+      }
+    } catch (err) {
+      setError('Failed to search products')
+    }
+    
     setTimeout(() => setIsSearching(false), 2000)
   }
 
@@ -242,6 +268,15 @@ export default function ProductsPage() {
           </motion.div>
         ))}
       </div>
+
+      {/* AI Search Results */}
+      {(searchResults || error) && (
+        <div className={`glass-card p-6 ${error ? 'border-red-500/50' : 'border-green-500/50'}`}>
+          <h3 className="text-lg font-semibold mb-4">AI Research Results</h3>
+          {error && <p className="text-red-400">{error}</p>}
+          {searchResults && <div className="prose prose-invert max-w-none whitespace-pre-wrap">{searchResults}</div>}
+        </div>
+      )}
 
       {/* Results */}
       <div className="flex items-center justify-between">
