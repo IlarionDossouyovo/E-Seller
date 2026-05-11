@@ -22,12 +22,16 @@ import {
 } from 'lucide-react'
 
 const products = [
-  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, originalPrice: 99.99, rating: 4.8, reviews: 234, image: '/product-1.svg', category: 'Electronics', tag: 'Best Seller', tagIcon: '🎧' },
-  { id: '2', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: '/product-2.svg', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
-  { id: '3', name: 'Organic Face Cream', price: 34.99, originalPrice: 49.99, rating: 4.7, reviews: 89, image: '/product-3.svg', category: 'Beauty', tag: null, tagIcon: '🧴' },
-  { id: '4', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: '/product-1.svg', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
-  { id: '5', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: '/product-3.svg', category: 'Sports', tag: null, tagIcon: '🧘' },
-  { id: '6', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: '/product-3.svg', category: 'Home', tag: null, tagIcon: '💡' },
+  { id: '1', name: 'Wireless Earbuds Pro Max', price: 49.99, originalPrice: 79.99, rating: 4.8, reviews: 234, image: '/product-1.svg', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '2', name: 'Smart Water Bottle with Temp Display', price: 29.99, originalPrice: 39.99, rating: 4.7, reviews: 156, image: '/product-3.svg', category: 'Home & Garden', tag: 'Winner', tagIcon: '🏆' },
+  { id: '3', name: 'Portable Ring Light Kit', price: 24.99, originalPrice: 34.99, rating: 4.6, reviews: 312, image: '/product-1.svg', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '4', name: 'Ergonomic Laptop Stand', price: 39.99, originalPrice: 49.99, rating: 4.9, reviews: 89, image: '/product-2.svg', category: 'Office', tag: 'Winner', tagIcon: '🏆' },
+  { id: '5', name: 'Minimalist Watch Collection', price: 89.99, originalPrice: 129.99, rating: 4.5, reviews: 178, image: '/product-2.svg', category: 'Fashion', tag: 'Winner', tagIcon: '🏆' },
+  { id: '6', name: 'Yoga Mat with Alignment Lines', price: 34.99, originalPrice: 44.99, rating: 4.8, reviews: 95, image: '/product-3.svg', category: 'Sports', tag: 'Winner', tagIcon: '🏆' },
+  { id: '7', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: '/product-2.svg', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
+  { id: '8', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: '/product-1.svg', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
+  { id: '9', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: '/product-3.svg', category: 'Sports', tag: null, tagIcon: null },
+  { id: '10', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: '/product-3.svg', category: 'Home', tag: null, tagIcon: null },
 ]
 
 const categories = [
