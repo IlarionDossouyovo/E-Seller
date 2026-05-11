@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useCart } from '@/lib/cart-context'
 import { 
@@ -21,12 +22,12 @@ import {
 } from 'lucide-react'
 
 const products = [
-  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, originalPrice: 99.99, rating: 4.8, reviews: 234, image: '🎧', category: 'Electronics', tag: 'Best Seller' },
-  { id: '2', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: '⌚', category: 'Electronics', tag: 'New' },
-  { id: '3', name: 'Organic Face Cream', price: 34.99, originalPrice: 49.99, rating: 4.7, reviews: 89, image: '🧴', category: 'Beauty', tag: null },
-  { id: '4', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: '🔋', category: 'Electronics', tag: 'Sale' },
-  { id: '5', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: '🧘', category: 'Sports', tag: null },
-  { id: '6', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: '💡', category: 'Home', tag: null },
+  { id: '1', name: 'Wireless Earbuds Pro', price: 79.99, originalPrice: 99.99, rating: 4.8, reviews: 234, image: '/product-1.svg', category: 'Electronics', tag: 'Best Seller', tagIcon: '🎧' },
+  { id: '2', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: '/product-2.svg', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
+  { id: '3', name: 'Organic Face Cream', price: 34.99, originalPrice: 49.99, rating: 4.7, reviews: 89, image: '/product-3.svg', category: 'Beauty', tag: null, tagIcon: '🧴' },
+  { id: '4', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: '/product-1.svg', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
+  { id: '5', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: '/product-3.svg', category: 'Sports', tag: null, tagIcon: '🧘' },
+  { id: '6', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: '/product-3.svg', category: 'Home', tag: null, tagIcon: '💡' },
 ]
 
 const categories = [
@@ -165,8 +166,8 @@ export default function StorePage() {
                 className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10"
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
-                  <span className="text-6xl">{product.image}</span>
-                  {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white">{product.tag}</span>}
+                  <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-32 h-32" />
+                  {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white flex items-center gap-1">{product.tagIcon} {product.tag}</span>}
                 </div>
                 <div className="p-4">
                   <p className="text-gray-400 text-xs">{product.category}</p>

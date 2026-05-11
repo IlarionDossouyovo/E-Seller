@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { 
@@ -174,9 +175,7 @@ function Navbar() {
           whileHover={{ scale: 1.05 }}
           className="flex items-center gap-2"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <Zap className="w-5 h-5 text-white" />
-          </div>
+          <Image src="/logo.svg" alt="E-Seller" width={40} height={40} className="w-10 h-10 rounded-xl" />
           <span className="text-xl font-bold font-[var(--font-sora)]">E-Seller</span>
         </motion.div>
         
