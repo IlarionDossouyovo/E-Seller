@@ -186,6 +186,13 @@ async function callOpenAI(message: string) {
   })
 
   const data = await response.json()
+  
+  // Check for API errors
+  if (!response.ok || data.error) {
+    console.error('OpenAI error:', data.error)
+    return { message: 'No response', error: data.error?.message || data.error }
+  }
+  
   return {
     message: data.choices?.[0]?.message?.content || 'No response',
     model: data.model
