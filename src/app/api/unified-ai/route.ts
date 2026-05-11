@@ -100,7 +100,15 @@ export async function POST(request: NextRequest) {
         response = await callOllama(message)
         break
       case 'openai':
-        response = await callOpenAI(message)
+        try {
+          response = await callOpenAI(message)
+          // If no valid response, generate mock products
+          if (!response.message || response.message === 'No response') {
+            response = { message: generateMockProducts(message) }
+          }
+        } catch (e) {
+          response = { message: generateMockProducts(message), error: String(e) }
+        }
         break
       case 'anthropic':
         response = await callAnthropic(message)
