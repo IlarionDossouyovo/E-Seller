@@ -38,8 +38,9 @@ const categories = [
   { name: 'Electronics', icon: '📱', count: 120 },
   { name: 'Beauty', icon: '💄', count: 85 },
   { name: 'Fashion', icon: '👗', count: 200 },
-  { name: 'Home', icon: '🏠', count: 150 },
+  { name: 'Home & Garden', icon: '🏠', count: 150 },
   { name: 'Sports', icon: '⚽', count: 90 },
+  { name: 'Office', icon: '💼', count: 45 },
 ]
 
 export default function StorePage() {
