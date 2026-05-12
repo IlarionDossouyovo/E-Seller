@@ -130,9 +130,13 @@ export async function POST(request: NextRequest) {
     }
 
     console.log("Returning:", JSON.stringify({ success: true, ...response }));
+    const finalMessage = (response?.message && response.message !== 'No response') 
+      ? response.message 
+      : generateMockProducts(message)
+    
     const result = {
       success: true,
-      message: response?.message || 'Demo mode',
+      message: finalMessage,
       provider: selectedProvider
     }
     return NextResponse.json(result)
