@@ -138,7 +138,7 @@ export default function ProductsPage() {
       const data = await response.json()
       
       if (data.success) {
-        setSearchResults(data.response || 'No results found')
+        setSearchResults(data.message || data.response || 'No results found')
       } else {
         setError(data.error || 'Search failed')
       }
