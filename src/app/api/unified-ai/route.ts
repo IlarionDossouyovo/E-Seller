@@ -109,7 +109,8 @@ export async function POST(request: NextRequest) {
           
           const hasContent = false // Always use mock for demo
           
-          response = { message: hasContent ? aiResponse.message : generateMockProducts(message) }
+          const msg = hasContent ? aiResponse.message : generateMockProducts(message)
+          response = { message: msg === "No response" ? generateMockProducts(message) : msg }
         } catch (e) {
           
           response = { message: generateMockProducts(message), error: String(e) }
