@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         }, { status: 400 })
     }
 
-    const finalMessage = generateMockProducts(message) 
+    const finalMessage = 'TEST-MOCK-PRODUCTS-FIXED' 
     
     const result = {
       success: true,
