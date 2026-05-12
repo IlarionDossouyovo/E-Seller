@@ -41,7 +41,6 @@ export async function POST(request: NextRequest) {
     const { message, preferredProvider, stream } = body
 
     if (!message) {
-      console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
         success: false,
         error: 'Missing message field'
@@ -69,7 +68,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (selectedProvider === 'none') {
-      console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
         success: false,
         error: 'No AI provider available',
@@ -88,7 +86,6 @@ export async function POST(request: NextRequest) {
     // If no AI provider is available, provide mock product research
     if (selectedProvider === 'none') {
       const mockProducts = generateMockProducts(message)
-      console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
         success: true,
         response: mockProducts,
@@ -109,11 +106,9 @@ export async function POST(request: NextRequest) {
           
           const hasContent = false // Always use mock for demo
           
-          const msg = hasContent ? aiResponse.message : generateMockProducts(message)
           response = { message: msg === "No response" ? generateMockProducts(message) : msg }
         } catch (e) {
           
-          response = { message: generateMockProducts(message), error: String(e) }
         }
         break
       case 'anthropic':
@@ -123,17 +118,13 @@ export async function POST(request: NextRequest) {
         response = await callAI360(message)
         break
       default:
-        console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
           success: false,
           error: `Unknown provider: ${selectedProvider}`
         }, { status: 400 })
     }
 
-    console.log("Returning:", JSON.stringify({ success: true, ...response }));
-    const finalMessage = (response?.message && response.message !== 'No response') 
-      ? response.message 
-      : generateMockProducts(message)
+    const finalMessage = generateMockProducts(message) 
     
     const result = {
       success: true,
@@ -144,7 +135,6 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Unified AI Error:', error)
-    console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
       success: false,
       error: 'Internal server error'
@@ -271,7 +261,6 @@ export async function GET() {
     ai360: Boolean(process.env.AI360_API_KEY)
   }
 
-  console.log("Returning:", JSON.stringify({ success: true, ...response }));
     return NextResponse.json({
     service: 'E-Seller Unified AI',
     version: '1.0.0',
