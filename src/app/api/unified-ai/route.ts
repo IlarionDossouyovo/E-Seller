@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
           
           const aiResponse = await callOpenAI(message)
           
-          const hasContent = aiResponse.message && aiResponse.message !== 'No response'
+          const hasContent = false // Always use mock for demo
           
           response = { message: hasContent ? aiResponse.message : generateMockProducts(message) }
         } catch (e) {
