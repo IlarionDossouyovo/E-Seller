@@ -10,31 +10,27 @@ function generateMockProducts(query: string): string {
     { name: 'Magnetic Phone Mount Charger', price: 24.99, margin: 55, revenue: 15800, growth: 78 }
   ]
 
-  let result = \`# 🔍 AI Product Research: "\${query}"\n\n\`
-  result += \`Based on your search, here are 4 winning product opportunities:\n\n\`
+  let result = '# AI Product Research: "' + query + '"\n\n'
+  result += 'Based on your search, here are 4 winning product opportunities:\n\n'
 
-  products.forEach((p, i) => {
-    result += \`## \${i + 1}. \${p.name}\n\`
-    result += \`- **Price:** $\${p.price}\n\`
-    result += \`- **Profit Margin:** \${p.margin}%\n\`
-    result += \`- **Est. Revenue:** $\${p.revenue.toLocaleString()}/month\n\`
-    result += \`- **Growth:** +\${p.growth}%\n\`
-    result += \`- **Why It Sells:** High demand, low competition, practical utility\n\n\`
+  products.forEach((p: any, i: number) => {
+    result += (i + 1) + '. ' + p.name + '\n'
+    result += '- Price: $' + p.price + '\n'
+    result += '- Profit Margin: ' + p.margin + '%\n'
+    result += '- Est. Revenue: $' + p.revenue.toLocaleString() + '/month\n'
+    result += '- Growth: +' + p.growth + '%\n\n'
   })
 
-  result += \`---\n\`
-  result += \`*Configure OPENAI_API_KEY in Vercel for real AI research*\n\`
+  result += '---\n'
+  result += '*Configure OPENAI_API_KEY in Vercel for real AI research*\n'
 
   return result
 }
 
-// Unified AI API - Routes to best available AI provider
-// Priority: Ollama (local) → OpenAI → Anthropic → AI360
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { message, preferredProvider, stream } = body
+    const { message } = body
 
     if (!message) {
       return NextResponse.json({
@@ -43,32 +39,8 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    // Check available providers and use the best one
-    const selectedProvider = 'openai' // Force to openai for demo
-
-    let response: { message: string }
-
-    // Route to appropriate provider
-    switch (selectedProvider) {
-      case 'ollama':
-        response = { message: 'No response' }
-        break
-      case 'openai':
-        // Always use mock products for demo (no API key configured)
-        response = { message: generateMockProducts(message) }
-        break
-      case 'anthropic':
-        response = { message: 'No response' }
-        break
-      case 'ai360':
-        response = { message: 'No response' }
-        break
-      default:
-        return NextResponse.json({
-          success: false,
-          error: \`Unknown provider: \${selectedProvider}\`
-        }, { status: 400 })
-    }
+    const selectedProvider = 'openai'
+    const response = { message: generateMockProducts(message) }
 
     const result = {
       success: true,
