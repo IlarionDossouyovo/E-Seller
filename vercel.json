@@ -4,5 +4,5 @@
   },
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "name": "e-seller-v2"
+  "name": "e-seller-v3"
 }
