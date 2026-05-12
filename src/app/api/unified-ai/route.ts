@@ -30,8 +30,6 @@ function generateMockProducts(query: string): string {
   return result
 }
 
-import { NextRequest, NextResponse } from 'next/server'
-
 // Unified AI API - Routes to best available AI provider
 // Priority: Ollama (local) → OpenAI → Anthropic → AI360
 
