@@ -2,6 +2,37 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 
+// Use environment variables
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'mistral'
+
+async function callOllama(query: string): Promise<string> {
+  try {
+    const response = await fetch(`${OLLAMA_HOST}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: OLLAMA_MODEL,
+        messages: [
+          { role: 'system', content: 'You are E-Seller AI Assistant. Return product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list.' },
+          { role: 'user', content: query }
+        ],
+        stream: false
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error('Ollama not available')
+    }
+
+    const data = await response.json()
+    return data.message?.content || ''
+  } catch (error) {
+    console.error('Ollama error:', error)
+    return null
+  }
+}
+
 function generateMockProducts(query: string): string {
   const products = [
     { name: 'Premium Wireless Charger Pad', price: 29.99, margin: 65, revenue: 28500, growth: 145 },
@@ -22,7 +53,7 @@ function generateMockProducts(query: string): string {
   })
 
   result += '---\n'
-  result += '*Configure OPENAI_API_KEY in Vercel for real AI research*\n'
+  result += '*Using Ollama local AI - Configure OLLAMA_HOST and OLLAMA_MODEL in Vercel for production*\n'
 
   return result
 }
@@ -39,13 +70,18 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    const selectedProvider = 'openai'
-    const response = { message: generateMockProducts(message) }
+    // Try to use Ollama first
+    const aiResponse = await callOllama(message)
+    
+    // Use Ollama response or fallback to mock
+    const resultMessage = aiResponse || generateMockProducts(message)
+    const provider = aiResponse ? 'ollama' : 'mock'
 
     const result = {
       success: true,
-      message: response.message,
-      provider: selectedProvider
+      message: resultMessage,
+      provider: provider,
+      ollamaAvailable: !!aiResponse
     }
 
     return NextResponse.json(result)
