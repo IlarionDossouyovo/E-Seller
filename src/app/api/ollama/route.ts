@@ -5,13 +5,16 @@ import { NextRequest, NextResponse } from 'next/server'
 // Ollama Local AI API
 // Runs self-hosted AI models locally
 
-// Use hardcoded localtunnel URL (env var has old value)
-const OLLAMA_HOST = 'https://swiftness-heave-smirk.ngrok-free.dev'
+// Use environment variable with fallback for local development
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'mistral'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { model, message, stream } = body
+    // Use model from request or fallback to env var
+    const model = body.model || OLLAMA_MODEL
+    const { message, stream } = body
 
     if (!model || !message) {
       return NextResponse.json({
