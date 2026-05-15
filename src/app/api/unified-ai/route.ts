@@ -29,7 +29,7 @@ async function callOllama(query: string): Promise<string> {
     return data.message?.content || ''
   } catch (error) {
     console.error('Ollama error:', error)
-    return null
+    return ''
   }
 }
 
