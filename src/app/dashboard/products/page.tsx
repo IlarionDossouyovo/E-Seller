@@ -123,7 +123,7 @@ export default function ProductsPage() {
   const handleSearch = async () => {
     if (!searchQuery) return
     setIsSearching(true)
-    setError(null)
+    setError('')
     
     try {
       // Call AI to search for products
