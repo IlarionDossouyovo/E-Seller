@@ -1,4 +1,4 @@
-'use strict'
+// Version 2.1 - Forcing fresh deploy for мужчина/femme fix
 
 import { NextRequest, NextResponse } from 'next/server'
 
