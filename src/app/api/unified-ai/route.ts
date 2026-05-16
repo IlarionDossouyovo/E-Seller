@@ -1,4 +1,4 @@
-// Version 2.1 - Forcing fresh deploy for мужчина/femme fix
+// Version 2.2 - DEPLOY THIS NOW - VERYM3
 
 import { NextRequest, NextResponse } from 'next/server'
 
