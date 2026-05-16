@@ -68,58 +68,55 @@ async function callOpenAI(query: string): Promise<string> {
 }
 
 function generateMockProducts(query: string): string {
-  // Dynamic mock products based on search query
-  let searchTerm = query.toLowerCase()
+  const q = query.toLowerCase()
   
-  const allProducts: Record<string, any[]> = {
-    default: [
-      { name: 'Produit Tendance Dropshipping', price: 29.99, margin: 65, revenue: 28500, growth: 145 },
-      { name: 'Accessoire Populaire', price: 19.99, margin: 58, revenue: 18200, growth: 89 },
-      { name: 'Article Viral TikTok', price: 49.99, margin: 62, revenue: 32100, growth: 112 },
-      { name: 'Nouveauté Importante', price: 24.99, margin: 55, revenue: 15800, growth: 78 }
-    ],
-    montre: [
-      { name: 'Montre Connectée Sport', price: 89.99, margin: 55, revenue: 35200, growth: 145 },
+  // Simple matching - always return relevant products based on query
+  let products: any[] = []
+  
+  if (q.includes('montre') || q.includes('watch')) {
+    products = [
+      { name: 'Montre Connectée Sport Femme', price: 89.99, margin: 55, revenue: 35200, growth: 145 },
       { name: 'Montre Minimaliste Cuir', price: 129.99, margin: 45, revenue: 28500, growth: 89 },
-      { name: 'Montre Smart Fitness', price: 149.99, margin: 50, revenue: 42300, growth: 112 },
-      { name: 'Montre Classique Or', price: 199.99, margin: 40, revenue: 15800, growth: 78 }
-    ],
-    electronique: [
+      { name: 'Montre Smart Fitness Dior', price: 149.99, margin: 50, revenue: 42300, growth: 112 },
+      { name: 'Montre Classique Or Rose', price: 199.99, margin: 40, revenue: 15800, growth: 78 }
+    ]
+  } else if (q.includes('electronique') || q.includes('ecouteurs') || q.includes('charger')) {
+    products = [
       { name: 'Ecouteurs Sans Fil Pro', price: 49.99, margin: 65, revenue: 45200, growth: 156 },
-      { name: 'Chargeur Rapide', price: 24.99, margin: 58, revenue: 18500, growth: 89 },
-      { name: 'Webcam HD Pro', price: 79.99, margin: 52, revenue: 27800, growth: 112 },
-      { name: 'Microphone USB', price: 59.99, margin: 48, revenue: 16400, growth: 78 }
-    ],
-    Fitness: [
+      { name: 'Chargeur Rapide 65W', price: 24.99, margin: 58, revenue: 18500, growth: 89 },
+      { name: 'Webcam HD Pro Streaming', price: 79.99, margin: 52, revenue: 27800, growth: 112 },
+      { name: 'Microphone USB Condenser', price: 59.99, margin: 48, revenue: 16400, growth: 78 }
+    ]
+  } else if (q.includes('yoga') || q.includes('fitness') || q.includes('sport')) {
+    products = [
       { name: 'Tapis Yoga Premium', price: 34.99, margin: 68, revenue: 21600, growth: 52 },
       { name: 'Haltères Adjustables', price: 49.99, margin: 62, revenue: 32400, growth: 89 },
-      { name: 'Resistance Bands', price: 19.99, margin: 72, revenue: 18200, growth: 145 },
-      { name: 'Foam Roller', price: 24.99, margin: 55, revenue: 12800, growth: 67 }
+      { name: 'Resistance Bands Pro', price: 19.99, margin: 72, revenue: 18200, growth: 145 },
+      { name: 'Foam Roller_massage', price: 24.99, margin: 55, revenue: 12800, growth: 67 }
     ]
-  }
-  
-  // Find matching category
-  let products = allProducts.default
-  for (const key of Object.keys(allProducts)) {
-    if (searchTerm.includes(key)) {
-      products = allProducts[key]
-      break
-    }
+  } else {
+    // Default products
+    products = [
+      { name: 'Produit Tendance Dropshipping', price: 29.99, margin: 65, revenue: 28500, growth: 145 },
+      { name: 'Accessoire Populaire TikTok', price: 19.99, margin: 58, revenue: 18200, growth: 89 },
+      { name: 'Article Viral Récent', price: 49.99, margin: 62, revenue: 32100, growth: 112 },
+      { name: 'Nouveauté Importante', price: 24.99, margin: 55, revenue: 15800, growth: 78 }
+    ]
   }
 
   let result = '# Recherche IA: "' + query + '"\n\n'
-  result += 'En analysant votre requête, voici 4 opportunités de produits gagnants:\n\n'
+  result += 'En analysant votre requête, voici 4 opportunités:\n\n'
 
   products.forEach((p: any, i: number) => {
     result += (i + 1) + '. ' + p.name + '\n'
     result += '- Prix: ' + p.price + '€\n'
     result += '- Marge: ' + p.margin + '%\n'
-    result += '- Revenu estimé: ' + p.revenue.toLocaleString() + '€/mois\n'
+    result += '- Revenu: ' + p.revenue.toLocaleString() + '€/mois\n'
     result += '- Croissance: +' + p.growth + '%\n\n'
   })
 
   result += '---\n'
-  result += '*Connexion Ollama inactive - Lancez Ollama sur votre PC pour des vraies recommandations IA*\n'
+  result += '*Connexion Ollama inactive sur Vercel*\n'
 
   return result
 }
