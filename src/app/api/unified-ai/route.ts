@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // Use environment variables
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'mistral'
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 
 async function callOllama(query: string): Promise<string> {
   try {
@@ -29,6 +30,39 @@ async function callOllama(query: string): Promise<string> {
     return data.message?.content || ''
   } catch (error) {
     console.error('Ollama error:', error)
+    return ''
+  }
+}
+
+async function callOpenAI(query: string): Promise<string> {
+  if (!OPENAI_API_KEY) {
+    return ''
+  }
+  
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are E-Seller AI Assistant. Return 4 product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list.' },
+          { role: 'user', content: query }
+        ]
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error('OpenAI API error')
+    }
+
+    const data = await response.json()
+    return data.choices?.[0]?.message?.content || ''
+  } catch (error) {
+    console.error('OpenAI error:', error)
     return ''
   }
 }
@@ -70,18 +104,24 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    // Try to use Ollama first
-    const aiResponse = await callOllama(message)
+    // Try to use AI in order: Ollama -> OpenAI -> Mock
+
+    // 1. Try Ollama first
+    const ollamaResponse = await callOllama(message)
     
-    // Use Ollama response or fallback to mock
-    const resultMessage = aiResponse || generateMockProducts(message)
-    const provider = aiResponse ? 'ollama' : 'mock'
+    // 2. Try OpenAI if Ollama failed
+    const openAIResponse = ollamaResponse ? '' : await callOpenAI(message)
+    
+    // Use AI response or fallback to mock
+    const resultMessage = ollamaResponse || openAIResponse || generateMockProducts(message)
+    const provider = ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock')
 
     const result = {
       success: true,
       message: resultMessage,
       provider: provider,
-      ollamaAvailable: !!aiResponse
+      ollamaAvailable: !!ollamaResponse,
+      openaiAvailable: !!openAIResponse
     }
 
     return NextResponse.json(result)
