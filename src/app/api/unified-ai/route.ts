@@ -15,7 +15,7 @@ async function callOllama(query: string): Promise<string> {
       body: JSON.stringify({
         model: OLLAMA_MODEL,
         messages: [
-          { role: 'system', content: 'You are E-Seller AI Assistant. Return product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list.' },
+          { role: 'system', content: 'You are E-Seller AI Assistant. Respond ALWAYS in French (always answer in French). Return 4 product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list. Always respond in French.' },
           { role: 'user', content: query }
         ],
         stream: false
@@ -49,7 +49,7 @@ async function callOpenAI(query: string): Promise<string> {
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'system', content: 'You are E-Seller AI Assistant. Return 4 product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list.' },
+          { role: 'system', content: 'You are E-Seller AI Assistant. Respond ALWAYS in French (always answer in French). Return 4 product suggestions with names, prices, profit margins, estimated monthly revenue, and growth potential. Format as a numbered list. Always respond in French.' },
           { role: 'user', content: query }
         ]
       })
@@ -75,19 +75,19 @@ function generateMockProducts(query: string): string {
     { name: 'Magnetic Phone Mount Charger', price: 24.99, margin: 55, revenue: 15800, growth: 78 }
   ]
 
-  let result = '# AI Product Research: "' + query + '"\n\n'
-  result += 'Based on your search, here are 4 winning product opportunities:\n\n'
+  let result = '# Recherche AI: "' + query + '"\n\n'
+  result += 'Basé sur votre recherche, voici 4 opportunités de produits gagnants:\n\n'
 
   products.forEach((p: any, i: number) => {
     result += (i + 1) + '. ' + p.name + '\n'
-    result += '- Price: $' + p.price + '\n'
-    result += '- Profit Margin: ' + p.margin + '%\n'
-    result += '- Est. Revenue: $' + p.revenue.toLocaleString() + '/month\n'
-    result += '- Growth: +' + p.growth + '%\n\n'
+    result += '- Prix: ' + p.price + '€\n'
+    result += '- Marge: ' + p.margin + '%\n'
+    result += '- Revenu estimé: ' + p.revenue.toLocaleString() + '€/mois\n'
+    result += '- Croissance: +' + p.growth + '%\n\n'
   })
 
   result += '---\n'
-  result += '*Using Ollama local AI - Configure OLLAMA_HOST and OLLAMA_MODEL in Vercel for production*\n'
+  result += '*IA locale Ollama actif - Configurez OLLAMA_HOST dans Vercel*\n'
 
   return result
 }
