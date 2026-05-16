@@ -104,28 +104,7 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    // Try to use AI in order: Ollama -> OpenAI -> Mock
-
-    // 1. Try Ollama first
-    const ollamaResponse = await callOllama(message)
-    
-    // 2. Try OpenAI if Ollama failed
-    const openAIResponse = ollamaResponse ? '' : await callOpenAI(message)
-    
-    // Use AI response or fallback to mock
-    const resultMessage = ollamaResponse || openAIResponse || generateMockProducts(message)
-    const provider = ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock')
-
-    const result = {
-      success: true,
-      message: resultMessage,
-      provider: provider,
-      ollamaAvailable: !!ollamaResponse,
-      openaiAvailable: !!openAIResponse
-    }
-
-    return NextResponse.json(result)
-
+    return handleRequest(message)
   } catch (error) {
     console.error('Unified AI Error:', error)
     return NextResponse.json({
@@ -133,4 +112,35 @@ export async function POST(request: NextRequest) {
       error: 'Internal server error'
     }, { status: 500 })
   }
+}
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const message = searchParams.get('message') || ''
+
+  if (!message) {
+    return NextResponse.json({
+      success: false,
+      error: 'Missing message parameter'
+    }, { status: 400 })
+  }
+
+  return handleRequest(message)
+}
+
+async function handleRequest(message: string) {
+    // Try to use AI in order: Ollama -> OpenAI -> Mock
+    const ollamaResponse = await callOllama(message)
+    const openAIResponse = ollamaResponse ? '' : await callOpenAI(message)
+    
+    const resultMessage = ollamaResponse || openAIResponse || generateMockProducts(message)
+    const provider = ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock')
+
+    return NextResponse.json({
+      success: true,
+      message: resultMessage,
+      provider: provider,
+      ollamaAvailable: !!ollamaResponse,
+      openaiAvailable: !!openAIResponse
+    })
 }
