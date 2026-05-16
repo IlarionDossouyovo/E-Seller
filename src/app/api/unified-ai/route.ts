@@ -70,10 +70,14 @@ async function callOpenAI(query: string): Promise<string> {
 function generateMockProducts(query: string): string {
   const q = query.toLowerCase()
   
+  // Log for debugging
+  console.log('Mock query:', q)
+  
   // Simple matching - always return relevant products based on query
   let products: any[] = []
   
-  if (q.includes('montre') || q.includes('watch')) {
+  // Match "montre" or "femme" or "dior"
+  if (q.includes('montre') || q.includes('watch') || q.includes('femme') || q.includes('dior')) {
     products = [
       { name: 'Montre Connectée Sport Femme', price: 89.99, margin: 55, revenue: 35200, growth: 145 },
       { name: 'Montre Minimaliste Cuir', price: 129.99, margin: 45, revenue: 28500, growth: 89 },
