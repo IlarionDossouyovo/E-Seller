@@ -1,0 +1,84 @@
+{
+  "name": "E-Seller - AI Product Research",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hours": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://e-seller-v3.vercel.app/api/unified-ai",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "Produits tendance dropshipping 2024"
+            }
+          ]
+        }
+      },
+      "id": "ai",
+      "name": "Research Products",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "research",
+        "columns": {
+          "columns": [
+            {
+              "column": "query",
+              "value": "Produits tendance dropshipping 2024"
+            },
+            {
+              "column": "result",
+              "value": "={{ $json.message }}"
+            },
+            {
+              "column": "provider",
+              "value": "={{ $json.provider }}"
+            },
+            {
+              "column": "created_at",
+              "value": "={{ $now }}"
+            }
+          ]
+        }
+      },
+      "id": "supabase",
+      "name": "Save to Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Every Hour": {
+      "main": [[{"node": "Research Products", "type": "main", "index": 0}]]
+    },
+    "Research Products": {
+      "main": [[{"node": "Save to Database", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "id": "eseller-research"
+}
