@@ -76,24 +76,24 @@ function generateMockProducts(query: string): string {
   // Simple matching - always return relevant products based on query
   let products: any[] = []
   
-  // Match "montre" or "femme" or "dior"
+  // Match watches - check HOMME first, then FEMME
   if (q.includes('montre') || q.includes('watch')) {
-    // Check for homme/homme vs femme
-    if (q.includes('femme') || q.includes('dior')) {
-      // Female watches
-      products = [
-        { name: 'Montre Connectée Sport Femme', price: 89.99, margin: 55, revenue: 35200, growth: 145 },
-        { name: 'Montre Minimaliste Cuir', price: 129.99, margin: 45, revenue: 28500, growth: 89 },
-        { name: 'Montre Smart Fitness Dior', price: 149.99, margin: 50, revenue: 42300, growth: 112 },
-        { name: 'Montre Classique Or Rose', price: 199.99, margin: 40, revenue: 15800, growth: 78 }
-      ]
-    } else if (q.includes('homme') || q.includes('man')) {
+    // Check for homme FIRST
+    if (q.includes('homme') || q.includes('man')) {
       // Male watches
       products = [
         { name: 'Montre Chronographe Homme', price: 149.99, margin: 50, revenue: 42500, growth: 156 },
         { name: 'Montre Automatique Or', price: 249.99, margin: 40, revenue: 28500, growth: 89 },
         { name: 'Montre Sport Titanium', price: 199.99, margin: 45, revenue: 35200, growth: 112 },
         { name: 'Montre Classique Cuir Noir', price: 179.99, margin: 42, revenue: 21800, growth: 78 }
+      ]
+    } else if (q.includes('femme') || q.includes('woman') || q.includes('dior')) {
+      // Female watches
+      products = [
+        { name: 'Montre Connectée Sport Femme', price: 89.99, margin: 55, revenue: 35200, growth: 145 },
+        { name: 'Montre Minimaliste Cuir', price: 129.99, margin: 45, revenue: 28500, growth: 89 },
+        { name: 'Montre Smart Fitness Dior', price: 149.99, margin: 50, revenue: 42300, growth: 112 },
+        { name: 'Montre Classique Or Rose', price: 199.99, margin: 40, revenue: 15800, growth: 78 }
       ]
     } else {
       // Default watches
