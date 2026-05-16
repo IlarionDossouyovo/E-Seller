@@ -160,8 +160,15 @@ export default function ProductsPage() {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Describe your product idea... (e.g., 'portable yoga mat for beginners')"
+              onChange={(e) => {
+                setSearchQuery(e.target.value)
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  handleSearch()
+                }
+              }}
+              placeholder="Decrivez votre produit... (ex: 'tapis yoga portable')"
               className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
@@ -305,15 +312,12 @@ export default function ProductsPage() {
                 src={product.image} 
                 alt={product.name}
                 className="w-full h-full object-cover"
+                loading="lazy"
                 onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                  e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                  const target = e.currentTarget
+                  target.style.display = 'none'
                 }}
               />
-              {/* Fallback placeholder */}
-              <div className="hidden absolute inset-0 bg-gradient-to-br from-electron-blue/30 to-electron-purple/30 flex items-center justify-center">
-                <span className="text-4xl">{product.name.charAt(0)}</span>
-              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-electron-black/80 to-transparent" />
               <div className="absolute top-3 right-3 flex gap-2">
                 <button className="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white/20 transition-colors">
