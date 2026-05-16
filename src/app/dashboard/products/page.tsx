@@ -301,11 +301,19 @@ export default function ProductsPage() {
           >
             {/* Image */}
             <div className="relative h-48 bg-white/5">
-              <Image priority 
-                src={product.image} width={300} height={200} 
+              <img 
+                src={product.image} 
                 alt={product.name}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden')
+                }}
               />
+              {/* Fallback placeholder */}
+              <div className="hidden absolute inset-0 bg-gradient-to-br from-electron-blue/30 to-electron-purple/30 flex items-center justify-center">
+                <span className="text-4xl">{product.name.charAt(0)}</span>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-electron-black/80 to-transparent" />
               <div className="absolute top-3 right-3 flex gap-2">
                 <button className="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white/20 transition-colors">
