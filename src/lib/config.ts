@@ -41,7 +41,7 @@ export function getAvailableAIProviders() {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev',
+  host: process.env.OLLAMA_HOST || 'https://api.ollama.com',
   model: process.env.OLLAMA_MODEL || 'tinyllama',
 }
 

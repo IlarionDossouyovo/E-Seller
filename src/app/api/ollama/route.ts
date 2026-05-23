@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 // Runs self-hosted AI models locally
 
 // Use environment variable with fallback for local development
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://api.ollama.com'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 
 export async function POST(request: NextRequest) {

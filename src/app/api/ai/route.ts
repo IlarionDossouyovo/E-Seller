@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Environment variables
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://api.ollama.com'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 const OPENHANDS_API_KEY = process.env.OPENHANDS_API_KEY || ''
