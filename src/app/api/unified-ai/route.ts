@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // Use environment variables
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'mistral'
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 
 async function callOllama(query: string): Promise<string> {

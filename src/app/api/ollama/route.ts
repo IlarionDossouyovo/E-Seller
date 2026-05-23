@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // Use environment variable with fallback for local development
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://swiftness-heave-smirk.ngrok-free.dev'
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'mistral'
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 
 export async function POST(request: NextRequest) {
   try {
