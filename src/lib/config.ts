@@ -41,7 +41,7 @@ export function getAvailableAIProviders() {
 
 // Ollama (local AI)
 export const ollamaConfig = {
-  host: process.env.OLLAMA_HOST || 'https://api.ollama.com',
+  host: process.env.OLLAMA_HOST || 'http://localhost:11434',
   model: process.env.OLLAMA_MODEL || 'tinyllama',
 }
 

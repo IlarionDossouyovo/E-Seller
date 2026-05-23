@@ -3,11 +3,35 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Use environment variables
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://api.ollama.com'
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 
+// Check if Ollama is available
+let ollamaAvailableCache = false
+
+async function checkOllamaAvailability(): Promise<boolean> {
+  if (ollamaAvailableCache) return true
+  
+  try {
+    const response = await fetch(`${OLLAMA_HOST}/api/tags`, {
+      method: 'GET',
+      signal: AbortSignal.timeout(5000)
+    })
+    ollamaAvailableCache = response.ok
+    return response.ok
+  } catch {
+    return false
+  }
+}
+
 async function callOllama(query: string): Promise<string> {
+  // Skip if no valid host configured
+  if (!OLLAMA_HOST || OLLAMA_HOST === 'http://localhost:11434' || OLLAMA_HOST.includes('vercel') || OLLAMA_HOST === 'https://api.ollama.com') {
+    // Don't use localhost or invalid hosts, skip
+    return ''
+  }
+  
   try {
     const response = await fetch(`${OLLAMA_HOST}/api/chat`, {
       method: 'POST',
@@ -140,7 +164,7 @@ function generateMockProducts(query: string): string {
   })
 
   result += '---\n'
-  result += '*Connexion Ollama inactive sur Vercel*\n'
+  result += '*En attente configuration Ollama*\n'
 
   return result
 }

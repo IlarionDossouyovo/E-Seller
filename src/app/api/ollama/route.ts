@@ -6,10 +6,15 @@ import { NextRequest, NextResponse } from 'next/server'
 // Runs self-hosted AI models locally
 
 // Use environment variable with fallback for local development
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'https://api.ollama.com'
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 
 export async function POST(request: NextRequest) {
+  // Skip if localhost (not configured for production)
+  if (!OLLAMA_HOST || OLLAMA_HOST === 'http://localhost:11434' || OLLAMA_HOST.includes('vercel')) {
+    return NextResponse.json({ error: 'Ollama not configured' }, { status: 503 })
+  }
+  
   try {
     const body = await request.json()
     // Use model from request or fallback to env var
