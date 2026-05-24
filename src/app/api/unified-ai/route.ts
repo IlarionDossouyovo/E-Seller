@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
+const HF_TOKEN = process.env.HF_TOKEN || ''
 
 // Check if Ollama is available
 let ollamaAvailableCache = false
@@ -87,6 +88,43 @@ async function callOpenAI(query: string): Promise<string> {
     return data.choices?.[0]?.message?.content || ''
   } catch (error) {
     console.error('OpenAI error:', error)
+    return ''
+  }
+}
+
+// HuggingFace Inference Provider
+async function callHuggingFace(query: string): Promise<string> {
+  if (!HF_TOKEN) {
+    return ''
+  }
+  
+  try {
+    const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${HF_TOKEN}`
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/Llama-3.2-11B-Vision-Instruct',
+        messages: [
+          { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with names, prices, profit margins, monthly revenue, growth. Format as numbered list in French.' },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 512
+      })
+    })
+
+    if (!response.ok) {
+      const err = await response.text()
+      console.error('HF Error:', err)
+      return ''
+    }
+
+    const data = await response.json()
+    return data.choices?.[0]?.message?.content || ''
+  } catch (error) {
+    console.error('HF error:', error)
     return ''
   }
 }
@@ -206,18 +244,19 @@ export async function GET(request: NextRequest) {
 }
 
 async function handleRequest(message: string) {
-    // Try to use AI in order: Ollama -> OpenAI -> Mock
-    const ollamaResponse = await callOllama(message)
+    // Try to use AI in order: HuggingFace -> Ollama -> OpenAI -> Mock
+    const hfResponse = await callHuggingFace(message)
+    const ollamaResponse = hfResponse ? '' : await callOllama(message)
     const openAIResponse = ollamaResponse ? '' : await callOpenAI(message)
     
-    const resultMessage = ollamaResponse || openAIResponse || generateMockProducts(message)
-    const provider = ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock')
+    const resultMessage = hfResponse || ollamaResponse || openAIResponse || generateMockProducts(message)
+    const provider = hfResponse ? 'huggingface' : (ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock'))
 
     return NextResponse.json({
       success: true,
       message: resultMessage,
       provider: provider,
-      ollamaAvailable: !!ollamaResponse,
+      ollamaAvailable: !!hfResponse,
       openaiAvailable: !!openAIResponse
     })
 }
