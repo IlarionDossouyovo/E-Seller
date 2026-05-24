@@ -98,35 +98,44 @@ async function callHuggingFace(query: string): Promise<string> {
     return ''
   }
   
-  try {
-    const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${HF_TOKEN}`
-      },
-      body: JSON.stringify({
-        model: 'meta-llama/Llama-3.2-11B-Vision-Instruct',
-        messages: [
-          { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with names, prices, profit margins, monthly revenue, growth. Format as numbered list in French.' },
-          { role: 'user', content: query }
-        ],
-        max_tokens: 512
+  // Try different models - use a small fast model
+  const models = [
+    'mistralai/Mistral-7B-Instruct-v0.3',
+    'microsoft/Phi-3-mini-4k-instruct', 
+    'Qwen/Qwen2-0.5B-Instruct',
+    'google/gemma-2-2b-it'
+  ]
+  
+  for (const model of models) {
+    try {
+      const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${HF_TOKEN}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with names, prices in euros, profit margins percentage, estimated monthly revenue in euros, growth. Format as numbered list.' },
+            { role: 'user', content: query }
+          ],
+          max_tokens: 256
+        }),
+        signal: AbortSignal.timeout(15000)
       })
-    })
 
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('HF Error:', err)
-      return ''
+      if (!response.ok) continue
+
+      const data = await response.json()
+      const content = data.choices?.[0]?.message?.content
+      if (content) return content
+    } catch (e) {
+      console.log('Model', model, 'failed')
     }
-
-    const data = await response.json()
-    return data.choices?.[0]?.message?.content || ''
-  } catch (error) {
-    console.error('HF error:', error)
-    return ''
   }
+  
+  return ''
 }
 
 function generateMockProducts(query: string): string {
