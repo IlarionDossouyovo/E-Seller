@@ -98,44 +98,39 @@ async function callHuggingFace(query: string): Promise<string> {
     return ''
   }
   
-  // Try different models - use a small fast model
-  const models = [
-    'mistralai/Mistral-7B-Instruct-v0.3',
-    'microsoft/Phi-3-mini-4k-instruct', 
-    'Qwen/Qwen2-0.5B-Instruct',
-    'google/gemma-2-2b-it'
-  ]
+  // Use Llama 3.1 8B - fast and cheap via Novita
+  const model = 'meta-llama/Llama-3.1-8B-Instruct'
   
-  for (const model of models) {
-    try {
-      const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${HF_TOKEN}`
-        },
-        body: JSON.stringify({
-          model: model,
-          messages: [
-            { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with names, prices in euros, profit margins percentage, estimated monthly revenue in euros, growth. Format as numbered list.' },
-            { role: 'user', content: query }
-          ],
-          max_tokens: 256
-        }),
-        signal: AbortSignal.timeout(15000)
-      })
+  try {
+    const response = await fetch('https://router.huggingface.co/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${HF_TOKEN}`
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with product names in french, prices in euros, profit margins percentage, estimated monthly revenue in euros, growth percentage. Format as numbered list.' },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 256
+      }),
+      signal: AbortSignal.timeout(20000)
+    })
 
-      if (!response.ok) continue
-
-      const data = await response.json()
-      const content = data.choices?.[0]?.message?.content
-      if (content) return content
-    } catch (e) {
-      console.log('Model', model, 'failed')
+    if (!response.ok) {
+      const err = await response.text()
+      console.error('HF Error:', err)
+      return ''
     }
+
+    const data = await response.json()
+    return data.choices?.[0]?.message?.content || ''
+  } catch (error) {
+    console.error('HF error:', error)
+    return ''
   }
-  
-  return ''
 }
 
 function generateMockProducts(query: string): string {
