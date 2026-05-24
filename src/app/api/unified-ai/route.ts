@@ -7,6 +7,7 @@ const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 const HF_TOKEN = process.env.HF_TOKEN || ''
+const GROQ_API_KEY = process.env.GROQ_API_KEY || ''
 
 // Check if Ollama is available
 let ollamaAvailableCache = false
@@ -133,6 +134,45 @@ async function callHuggingFace(query: string): Promise<string> {
   }
 }
 
+// Groq API (fast, free tier available)
+async function callGroq(query: string): Promise<string> {
+  if (!GROQ_API_KEY) {
+    return ''
+  }
+  
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [
+          { role: 'system', content: 'You are E-Seller AI Assistant. Respond in French. Return 4 product suggestions with names in French, prices in euros, profit margins percentage, monthly revenue in euros, growth percentage. Format as numbered list in French.' },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 256,
+        temperature: 0.7
+      }),
+      signal: AbortSignal.timeout(15000)
+    })
+
+    if (!response.ok) {
+      const err = await response.text()
+      console.error('Groq error:', err)
+      return ''
+    }
+
+    const data = await response.json()
+    return data.choices?.[0]?.message?.content || ''
+  } catch (error) {
+    console.error('Groq error:', error)
+    return ''
+  }
+}
+
 function generateMockProducts(query: string): string {
   const q = query.toLowerCase()
   
@@ -206,7 +246,7 @@ function generateMockProducts(query: string): string {
   })
 
   result += '---\n'
-  result += '*En attente configuration Ollama*\n'
+  result += '*IA non configuree - Ajoutez GROQ_API_KEY ou HF_TOKEN dans Vercel*\n'
 
   return result
 }
@@ -248,19 +288,20 @@ export async function GET(request: NextRequest) {
 }
 
 async function handleRequest(message: string) {
-    // Try to use AI in order: HuggingFace -> Ollama -> OpenAI -> Mock
-    const hfResponse = await callHuggingFace(message)
+    // Try AI in order: Groq -> HuggingFace -> Ollama -> Mock
+    const groqResponse = await callGroq(message)
+    const hfResponse = groqResponse ? '' : await callHuggingFace(message)
     const ollamaResponse = hfResponse ? '' : await callOllama(message)
     const openAIResponse = ollamaResponse ? '' : await callOpenAI(message)
     
-    const resultMessage = hfResponse || ollamaResponse || openAIResponse || generateMockProducts(message)
-    const provider = hfResponse ? 'huggingface' : (ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock'))
+    const resultMessage = groqResponse || hfResponse || ollamaResponse || openAIResponse || generateMockProducts(message)
+    const provider = groqResponse ? 'groq' : (hfResponse ? 'huggingface' : (ollamaResponse ? 'ollama' : (openAIResponse ? 'openai' : 'mock')))
 
     return NextResponse.json({
       success: true,
       message: resultMessage,
       provider: provider,
-      ollamaAvailable: !!hfResponse,
-      openaiAvailable: !!openAIResponse
+      ollamaAvailable: !!(groqResponse || hfResponse),
+      openaiAvailable: !!(openAIResponse || groqResponse)
     })
 }
