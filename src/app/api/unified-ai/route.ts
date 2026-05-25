@@ -1,4 +1,4 @@
-// Version 2.2 - DEPLOY THIS NOW - VERYM3
+// Version 2.2 - DEPLOY THIS NOW - VERYM3 - GROQ ready
 
 import { NextRequest, NextResponse } from 'next/server'
 
