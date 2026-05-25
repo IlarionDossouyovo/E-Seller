@@ -7,7 +7,7 @@ const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 const HF_TOKEN = process.env.HF_TOKEN || ''
-const GROQ_API_KEY = process.env.GROQ_API_KEY || ''
+const GROQ_API_KEY = process.env.GROQ_API_KEY || ''; console.error('[DEBUG] GROQ_API_KEY:', GROQ_API_KEY ? 'SET' : 'NOT SET')
 
 // Check if Ollama is available
 let ollamaAvailableCache = false
