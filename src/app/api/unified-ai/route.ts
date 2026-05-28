@@ -5,29 +5,36 @@
 ```javascript
 'use strict'
 
+// Version 2.2 - DEPLOY THIS NOW - VERYM3 - GROQ ready
+
 import { NextRequest, NextResponse } from 'next/server'
 
-// Environment variables
+// Use environment variables
 const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
-const OPENHANDS_API_KEY = process.env.OPENHANDS_API_KEY || ''
+const HF_TOKEN = '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'
 const GROQ_API_KEY = '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'
 
-const SYSTEM_PROMPT = `You are E-Seller
+// Check if Ollama is available
+// ... (le reste du fichier ne change pas)// ============== OLLAMA (Local) ==============
 ```
 
-### Fichier 2: `src\app\api\ai-assistant\route.ts` (lignes 1-10)
+### Fichier 2: `src\app\api\unified-ai\route.ts` (lignes 1-10)
 
 ```javascript
-'use strict'
+// Version 2.2 - DEPLOY THIS NOW - VERYM3 - GROQ ready
 
 import { NextRequest, NextResponse } from 'next/server'
+
+// Use environment variables
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'tinyllama'
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
+const HF_TOKEN = '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'
 const GROQ_API_KEY = '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'
 
-// API Assistant IA - Gère les fonctions de chat, de voix et d'IA
-// Nécessite la variable d'environnement OPENAI_API_KEY ou ANTHROPIC_API_KEY
-```
+// Check if Ollama is available```
 
 ---
 
