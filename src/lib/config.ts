@@ -4,8 +4,13 @@
 // Supabase
 export const supabaseConfig = {
   url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://bauggttibriqdkfnlfhh.supabase.co',
-  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_ZesBx2jVeccDjJB56B2SWA_ZEKzoEWg',
+  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kYW5lYSIsInJlZiI6ImJh,dWdndHRpYnJpcWRrZm5sZmhoIiwicm9vbSI6Im9ubHkiLCJpbnQiOjIxLCJzY29wZSI6WyJwdWJsaWMiXSwiaWF0IjoxNjQyODQwODc5fQ.tVOIDM3SokDpqeGRANDANg0vKfW22M3SokDpqeGRA',
   serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+}
+
+// Groq API (primary AI for E-Seller)
+export const groqConfig = {
+  apiKey: process.env.GROQ_API_KEY || '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',
 }
 
 // Stripe
@@ -86,6 +91,9 @@ export function getConfiguredServices() {
   if (stripeConfig.publishableKey) {
     services.push('stripe')
   }
+  if (groqConfig.apiKey) {
+    services.push('groq')
+  }
   if (aiConfig.openAIKey) {
     services.push('openai')
   }
@@ -112,6 +120,9 @@ export function getAllServiceConfigs() {
       url: supabaseConfig.url,
       hasAnonKey: Boolean(supabaseConfig.anonKey),
       hasServiceKey: Boolean(supabaseConfig.serviceKey),
+    },
+    groq: {
+      hasKey: Boolean(groqConfig.apiKey),
     },
     stripe: {
       hasSecretKey: Boolean(stripeConfig.secretKey),
