@@ -22,16 +22,16 @@ import {
 } from 'lucide-react'
 
 const products = [
-  { id: '1', name: 'Wireless Earbuds Pro Max', price: 49.99, originalPrice: 79.99, rating: 4.8, reviews: 234, image: null, imageColor: '#6366f8', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
-  { id: '2', name: 'Smart Water Bottle with Temp Display', price: 29.99, originalPrice: 39.99, rating: 4.7, reviews: 156, image: null, imageColor: '#22c55e', category: 'Home & Garden', tag: 'Winner', tagIcon: '🏆' },
-  { id: '3', name: 'Portable Ring Light Kit', price: 24.99, originalPrice: 34.99, rating: 4.6, reviews: 312, image: null, imageColor: '#f59e0b', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
-  { id: '4', name: 'Ergonomic Laptop Stand', price: 39.99, originalPrice: 49.99, rating: 4.9, reviews: 89, image: null, imageColor: '#a855f7', category: 'Office', tag: 'Winner', tagIcon: '🏆' },
-  { id: '5', name: 'Minimalist Watch Collection', price: 89.99, originalPrice: 129.99, rating: 4.5, reviews: 178, image: null, imageColor: '#ec4899', category: 'Fashion', tag: 'Winner', tagIcon: '🏆' },
-  { id: '6', name: 'Yoga Mat with Alignment Lines', price: 34.99, originalPrice: 44.99, rating: 4.8, reviews: 95, image: null, imageColor: '#14b8a6', category: 'Sports', tag: 'Winner', tagIcon: '🏆' },
-  { id: '7', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: null, imageColor: '#3b82f6', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
-  { id: '8', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: null, imageColor: '#eab308', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
-  { id: '9', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: null, imageColor: '#06b6d4', category: 'Sports', tag: null, tagIcon: null },
-  { id: '10', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: null, imageColor: '#f97316', category: 'Home', tag: null, tagIcon: null },
+  { id: '1', name: 'Wireless Earbuds Pro Max', price: 49.99, originalPrice: 79.99, rating: 4.8, reviews: 234, emoji: '🎧', emojiBg: '#6366f8', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '2', name: 'Smart Water Bottle with Temp Display', price: 29.99, originalPrice: 39.99, rating: 4.7, reviews: 156, emoji: '🍾', emojiBg: '#22c55e', category: 'Home & Garden', tag: 'Winner', tagIcon: '🏆' },
+  { id: '3', name: 'Portable Ring Light Kit', price: 24.99, originalPrice: 34.99, rating: 4.6, reviews: 312, emoji: '💡', emojiBg: '#f59e0b', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '4', name: 'Ergonomic Laptop Stand', price: 39.99, originalPrice: 49.99, rating: 4.9, reviews: 89, emoji: '💻', emojiBg: '#a855f7', category: 'Office', tag: 'Winner', tagIcon: '🏆' },
+  { id: '5', name: 'Minimalist Watch Collection', price: 89.99, originalPrice: 129.99, rating: 4.5, reviews: 178, emoji: '⌚', emojiBg: '#ec4899', category: 'Fashion', tag: 'Winner', tagIcon: '🏆' },
+  { id: '6', name: 'Yoga Mat with Alignment Lines', price: 34.99, originalPrice: 44.99, rating: 4.8, reviews: 95, emoji: '🧘', emojiBg: '#14b8a6', category: 'Sports', tag: 'Winner', tagIcon: '🏆' },
+  { id: '7', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, emoji: '⌚', emojiBg: '#3b82f6', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
+  { id: '8', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, emoji: '🔋', emojiBg: '#eab308', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
+  { id: '9', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, emoji: '🧘', emojiBg: '#06b6d4', category: 'Sports', tag: null, tagIcon: null },
+  { id: '10', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, emoji: '💡', emojiBg: '#f97316', category: 'Home', tag: null, tagIcon: null },
 ]
 
 const categories = [
@@ -171,12 +171,12 @@ export default function StorePage() {
                 className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10"
               >
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
-                  {product.image ? (
-                    <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-32 h-32" priority />
-                  ) : (
-                    <div className="w-32 h-32 rounded-full flex items-center justify-center" style={{ backgroundColor: product.imageColor || '#4b5563' }}>
-                      <span className="text-4xl">🛍️</span>
+                  {product.emoji ? (
+                    <div className="w-24 h-24 rounded-2xl flex items-center justify-center text-5xl shadow-lg" style={{ backgroundColor: product.emojiBg }}>
+                      {product.emoji}
                     </div>
+                  ) : (
+                    <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-32 h-32" priority />
                   )}
                   {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white flex items-center gap-1">{product.tagIcon} {product.tag}</span>}
                 </div>
