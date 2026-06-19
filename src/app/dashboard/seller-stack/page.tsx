@@ -131,9 +131,11 @@ export default function SellerStackPage() {
                 whileHover={{ scale: 1.02 }}
                 className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-purple-500/50 cursor-pointer"
               >
-                <dept.icon className="w-6 h-6 text-purple-400 mb-2" />
-                <p className="text-white font-medium text-sm">{dept.name}</p>
-                <p className="text-slate-400 text-xs">{dept.description}</p>
+                <Link href={`/dashboard/${dept.id}`}>
+                  <dept.icon className="w-6 h-6 text-purple-400 mb-2" />
+                  <p className="text-white font-medium text-sm">{dept.name}</p>
+                  <p className="text-slate-400 text-xs">{dept.description}</p>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -147,22 +149,22 @@ export default function SellerStackPage() {
           Actions Rapides
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <button className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left">
+          <Link href="/dashboard/product-research" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left">
             <Search className="w-5 h-5 text-blue-400 mb-2" />
             <p className="text-white font-medium">Recherche Produit</p>
-          </button>
-          <button className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-purple-500 text-left">
+          </Link>
+          <Link href="/dashboard/brand" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-purple-500 text-left">
             <Bot className="w-5 h-5 text-purple-400 mb-2" />
             <p className="text-white font-medium">Générer Marque</p>
-          </button>
-          <button className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-green-500 text-left">
+          </Link>
+          <Link href="/dashboard/analytics" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-green-500 text-left">
             <Activity className="w-5 h-5 text-green-400 mb-2" />
             <p className="text-white font-medium">Analytique</p>
-          </button>
-          <button className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-yellow-500 text-left">
+          </Link>
+          <Link href="/dashboard/bi-reports" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-yellow-500 text-left">
             <FileText className="w-5 h-5 text-yellow-400 mb-2" />
             <p className="text-white font-medium">Rapport</p>
-          </button>
+          </Link>
           <Link href="/dashboard/seller-stack-workflows" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left block">
             <Workflow className="w-5 h-5 text-blue-400 mb-2" />
             <p className="text-white font-medium">10 Automations</p>
