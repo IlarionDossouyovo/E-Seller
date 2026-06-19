@@ -29,13 +29,13 @@ const services = [
 ]
 
 const departments = [
-  { id: 'product', name: 'Product Director', description: 'Recherche produits gagnants', icon: Search },
-  { id: 'brand', name: 'Brand Director', description: 'Création identité de marque', icon: Bot },
+  { id: 'products', name: 'Product Director', description: 'Recherche produits gagnants', icon: Search },
+  { id: 'branding', name: 'Brand Director', description: 'Création identité de marque', icon: Bot },
   { id: 'ads', name: 'Ads Director', description: 'Génération publicités', icon: TrendingUp },
   { id: 'analytics', name: 'Analytics Director', description: 'Analytique prédictive', icon: Activity },
   { id: 'assistant', name: 'Assistant Director', description: 'Support client AI', icon: Users },
   { id: 'seo', name: 'SEO Director', description: 'Optimisation SEO', icon: Eye },
-  { id: 'content', name: 'Content Director', description: 'Contenu marketing', icon: FileText },
+  { id: 'ai-assistant', name: 'Content Director', description: 'Contenu marketing', icon: FileText },
 ]
 
 const stats = [
@@ -149,11 +149,11 @@ export default function SellerStackPage() {
           Actions Rapides
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Link href="/dashboard/product-research" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left">
+          <Link href="/dashboard/products" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left">
             <Search className="w-5 h-5 text-blue-400 mb-2" />
             <p className="text-white font-medium">Recherche Produit</p>
           </Link>
-          <Link href="/dashboard/brand" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-purple-500 text-left">
+          <Link href="/dashboard/branding" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-purple-500 text-left">
             <Bot className="w-5 h-5 text-purple-400 mb-2" />
             <p className="text-white font-medium">Générer Marque</p>
           </Link>
