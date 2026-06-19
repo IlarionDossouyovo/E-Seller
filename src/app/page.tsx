@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { LanguageSwitcher } from '@/app/i18n/LanguageSwitcher'
 import { 
   Sparkles, 
   Search, 
@@ -199,6 +200,9 @@ function Navbar() {
         >
           Essai gratuit
         </motion.button>
+        <Link href="/a-propos" className="text-gray-300 hover:text-white text-sm">A propos</Link>
+        <Link href="/contact" className="text-gray-300 hover:text-white text-sm">Contact</Link>
+        <LanguageSwitcher />
       </div>
     </motion.nav>
   )
