@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
+import { LanguageSwitcher } from '@/app/i18n/LanguageSwitcher'
 import { 
   Zap, 
   Search, 
@@ -334,9 +335,12 @@ export default function DashboardLayout({
             ))}
           </div>
 
-          {/* User Avatar */}
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <span className="text-sm font-bold">U</span>
+          {/* User Avatar & Language */}
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
+              <span className="text-sm font-bold">U</span>
+            </div>
           </div>
         </header>
 
