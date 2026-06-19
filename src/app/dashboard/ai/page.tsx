@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useDeferredValue, useTransition, memo } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import {
   Search,
   Factory,
@@ -18,63 +19,71 @@ import {
   Volume2
 } from 'lucide-react'
 
-// AI Module definitions
+// AI Module definitions with target pages
 const aiModules = [
   {
     id: 'product-intelligence',
     name: 'Intelligence artificielle produit',
     description: 'Analyser les tendances, évaluer les produits, détecter les contenus viraux',
     icon: Search,
-    color: 'from-blue-500 to-cyan-500'
+    color: 'from-blue-500 to-cyan-500',
+    href: '/dashboard/products'
   },
   {
     id: 'supplier-engine',
     name: 'Moteur de fournisseur d\'IA',
     description: 'Sélectionner les fournisseurs, calculer les marges, optimiser la logistique',
     icon: Factory,
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-purple-500 to-pink-500',
+    href: '/dashboard/suppliers'
   },
   {
     id: 'branding-generator',
     name: 'Générateur de marque IA',
     description: 'Générer des noms, des logos, une identité de marque',
     icon: Palette,
-    color: 'from-yellow-500 to-orange-500'
+    color: 'from-yellow-500 to-orange-500',
+    href: '/dashboard/branding'
   },
   {
     id: 'ads-generator',
     name: 'Générateur de publicités IA',
     description: 'Création de publicités TikTok, scripts UGC, analyse de la concurrence',
     icon: Megaphone,
-    color: 'from-red-500 to-pink-500'
+    color: 'from-red-500 to-pink-500',
+    href: '/dashboard/ads'
   },
   {
     id: 'positioning-engine',
     name: 'Moteur de positionnement IA',
     description: 'Clients cibles, stratégies marketing, offres',
     icon: Target,
-    color: 'from-green-500 to-teal-500'
+    color: 'from-green-500 to-teal-500',
+    href: '/dashboard/positioning'
   },
   {
     id: 'market-analytics',
     name: 'Analyses du marché de l\'IA',
     description: 'Tableau de bord ROI, CPA, ROAS en temps réel',
     icon: BarChart3,
-    color: 'from-indigo-500 to-purple-500'
+    color: 'from-indigo-500 to-purple-500',
+    href: '/dashboard/analytics'
   },
   {
     id: 'business-assistant',
     name: 'Assistant commercial IA',
     description: 'Discutez de GPT pour des stratégies d\'optimisation',
     icon: Bot,
-    color: 'from-cyan-500 to-blue-500'
+    color: 'from-cyan-500 to-blue-500',
+    href: '/dashboard/assistant'
   },
   {
     id: 'recommendations',
     name: 'Recommandations ML',
     description: 'Suggestions de produits personnalisées',
     icon: Sparkles,
-    color: 'from-pink-500 to-rose-500'
+    color: 'from-pink-500 to-rose-500',
+    href: '/dashboard/recommended-products'
   }
 ]
 
@@ -204,18 +213,18 @@ export default function AIDashboard() {
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {aiModules.map((module, index) => (
-            <button
+            <Link
               key={module.id}
-              onClick={() => handleModuleClick(module.id)}
+              href={module.href}
               className={`p-6 rounded-xl bg-gradient-to-br ${module.color} 
-                hover:scale-105 transition-all duration-200 ease-out text-left cursor-pointer
+                hover:scale-105 transition-all duration-200 ease-out text-left block
                 ${selectedModule === module.id ? 'ring-4 ring-white' : ''}`}
               style={{ willChange: 'transform' }}
             >
               <module.icon className="w-8 h-8 text-white mb-3" />
               <h3 className="font-semibold text-white mb-1">{module.name}</h3>
               <p className="text-xs text-white/80">{module.description}</p>
-            </button>
+            </Link>
           ))}
         </div>
 
