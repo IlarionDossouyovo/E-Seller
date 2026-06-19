@@ -12,5 +12,7 @@ export const localeNames: Record<string, string> = {
   ar: 'العربية',
 }
 
-export const defaultLocale = 'en'
+export const defaultLocale = 'fr'
 export const locales = ['en', 'fr', 'es', 'de', 'zh', 'ja', 'pt', 'ar']
+
+export type Locale = typeof locales[number]

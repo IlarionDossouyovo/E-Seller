@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useTranslation } from '@/app/i18n'
 import { 
   Bot, 
   Brain, 
@@ -9,25 +10,19 @@ import {
   Shield, 
   Users,
   ArrowRight,
-  CheckCircle,
   Star,
-  Mail,
-  Phone,
-  MapPin,
-  Globe,
-  Award,
-  Target,
-  Rocket,
-  HeadphonesIcon,
-  MessageCircle
+  Rocket
 } from 'lucide-react'
 
-const features = [
-  {
-    icon: Brain,
-    title: 'Intelligence Artificielle Avancee',
-    description: 'Models IA puissants pour analyse predictive et generation automatique de contenu'
-  },
+export default function AProposPage() {
+  const { t } = useTranslation()
+  
+  const features = [
+    {
+      icon: Brain,
+      title: t.ai.productIntelligence,
+      description: 'Models IA puissants pour analyse predictive et generation automatique de contenu'
+    },
   {
     icon: Zap,
     title: 'Automatisation Complete',
