@@ -1,1 +1,1 @@
-postgresql://postgres:E-Seeler%40100%25@db.bauggttibriqdkfnlfhh.supabase.co:5432/postgres
+postgresql://postgres:E-Seller2024@localhost:5432/eseller

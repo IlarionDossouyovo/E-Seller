@@ -1,0 +1,90 @@
+{
+  "name": "Seller Stack - Health Check",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{"field": "minutes", "minutes": 15}]
+        }
+      },
+      "id": "schedule",
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.10.96:11434/api/tags",
+        "method": "GET"
+      },
+      "id": "check-ollama",
+      "name": "Check Ollama",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 250]
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.10.96:5679/healthz",
+        "method": "GET"
+      },
+      "id": "check-n8n",
+      "name": "Check N8N",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 350]
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.10.96:11434/api/generate",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {"name": "model", "value": "llama3.1:8b"},
+            {"name": "prompt", "value": "Dis simplement 'OK'"},
+            {"name": "stream", "value": false}
+          ]
+        }
+      },
+      "id": "test-ai",
+      "name": "Test AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "webhook": {
+          "body": {
+            "status": "Health Check OK",
+            "ollama": "={{ $json.model }}",
+            "time": "={{ $now }}"
+          }
+        },
+        "method": "POST"
+      },
+      "id": "notify",
+      "name": "Notify",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Every 15 Minutes": {
+      "main": [
+        [{"node": "Check Ollama", "type": "main", "index": 0}],
+        [{"node": "Check N8N", "type": "main", "index": 0}]
+      ]
+    },
+    "Check Ollama": {"main": [[{"node": "Test AI", "type": "main", "index": 0}]]},
+    "Check N8N": {"main": [[{"node": "Test AI", "type": "main", "index": 0}]]},
+    "Test AI": {"main": [[{"node": "Notify", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "id": "seller-stack-health",
+  "name": "Seller Stack - Health Check",
+  "active": false
+}

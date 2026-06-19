@@ -20,8 +20,8 @@ export default function AiTestPage() {
       })
       const data = await res.json()
       setAnswer(data.message || 'Pas de réponse')
-    } catch (err) {
-      setAnswer('Erreur: ' + err.message)
+    } catch (err: any) {
+      setAnswer('Erreur: ' + (err?.message || 'Erreur inconnue'))
     }
     
     setLoading(false)

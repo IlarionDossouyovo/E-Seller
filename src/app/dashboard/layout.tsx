@@ -142,6 +142,7 @@ const navItems = [
   { name: 'Video Ads', href: '/dashboard/video-ads', icon: Video },
   { name: 'White-Label', href: '/dashboard/whitelabel', icon: Building2 },
   { name: 'AI Chatbot', href: '/dashboard/ai-chatbot', icon: Bot },
+  { name: 'Seller Stack', href: '/dashboard/seller-stack', icon: Bot },
   { name: 'Crypto', href: '/dashboard/crypto-payments', icon: Wallet },
   { name: 'NFT Loyalty', href: '/dashboard/nft-loyalty', icon: Gift },
   { name: 'Flash Sales', href: '/dashboard/flash-sales', icon: Zap },

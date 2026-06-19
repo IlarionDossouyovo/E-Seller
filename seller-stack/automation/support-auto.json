@@ -1,0 +1,54 @@
+{
+  "name": "Seller Stack - Customer Support",
+  "nodes": [
+    {
+      "parameters": {
+        "webhook": {"path": "customer-support"},
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.10.96:11434/api/generate",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {"name": "model", "value": "llama3.1:8b"},
+            {"name": "prompt", "value": "Tu es un assistant client e-commerce. Réponds poliment en français à cette question: {{$json.question}}. Format: réponse courte et professionnelle."},
+            {"name": "stream", "value": false}
+          ]
+        }
+      },
+      "id": "ai",
+      "name": "AI Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { response: $json.response } }}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {"main": [[{"node": "AI Response", "type": "main", "index": 0}]]},
+    "AI Response": {"main": [[{"node": "Respond", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "id": "seller-stack-support",
+  "name": "Seller Stack - Customer Support",
+  "active": false
+}
