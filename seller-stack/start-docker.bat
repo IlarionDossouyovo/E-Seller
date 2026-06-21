@@ -1,6 +1,6 @@
 @echo off
 title Seller Stack - Demarrage
-cd /d C:\Users\AUGUSTIN\OneDrive\Documents\E-Seller
+cd /d %~dp0..
 
 echo ========================================
 echo   SELLER STACK - Demarrage
