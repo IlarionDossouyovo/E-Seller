@@ -1,9 +1,9 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { translation as en } from '../locales/en'
-import { translation as fr } from '../locales/fr'
-import type { Translation } from '../locales/en'
+import { translation as en } from './locales/en'
+import { translation as fr } from './locales/fr'
+import type { Translation } from './locales/en'
 
 type Locale = 'en' | 'fr' | 'es' | 'de' | 'zh' | 'ja' | 'pt' | 'ar'
 
@@ -66,8 +66,14 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
 export function useI18n() {
   const context = useContext(I18nContext)
+  // Return default values if not in provider (during SSG/SSR)
   if (!context) {
-    throw new Error('useI18n must be used within I18nProvider')
+    return {
+      locale: 'fr',
+      setLocale: () => {},
+      t: translations.fr,
+      availableLocales: ['en', 'fr', 'es', 'de', 'zh', 'ja', 'pt', 'ar']
+    }
   }
   return context
 }

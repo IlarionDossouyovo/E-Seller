@@ -1,175 +1,103 @@
 'use client'
 
 import Link from 'next/link'
-import { useTranslation } from '@/app/i18n'
-import { 
-  Bot, 
-  Brain, 
-  Zap, 
-  TrendingUp, 
-  Shield, 
-  Users,
-  ArrowRight,
-  Star,
-  Rocket
-} from 'lucide-react'
+import { Bot, Brain, Zap, TrendingUp, Shield, Users, Star, Rocket, ArrowRight } from 'lucide-react'
 
 export default function AProposPage() {
-  const { t } = useTranslation()
-  
   const features = [
-    {
-      icon: Brain,
-      title: t.ai.productIntelligence,
-      description: 'Models IA puissants pour analyse predictive et generation automatique de contenu'
-    },
-  {
-    icon: Zap,
-    title: 'Automatisation Complete',
-    description: '10 workflows N8N + Ollama pour automatiser toutes vos taches recurrentes'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Analytique Temps Reel',
-    description: 'Tableau de bord ROI, CPA, ROAS en direct avec alertes intelligentes'
-  },
-  {
-    icon: Shield,
-    title: 'Securite Enterprise',
-    description: 'Protection de niveau bancaire pour vos donnees et transactions'
-  },
-  {
-    icon: Users,
-    title: 'Collaboration Equipe',
-    description: 'Gestion des acces et permissions pour votre equipe'
-  },
-  {
-    icon: Bot,
-    title: 'Support 24/7',
-    description: 'Assistant IA disponible pour vous aider a tout moment'
-  }
-]
+    { icon: Brain, title: 'AI Product Intelligence', description: 'Models IA puissants pour analyse predictive' },
+    { icon: Zap, title: 'Automatisation Complete', description: '10 workflows N8N + Ollama' },
+    { icon: TrendingUp, title: 'Analytique Temps Reel', description: 'Tableau de bord ROI, CPA, ROAS' },
+    { icon: Shield, title: 'Securite Enterprise', description: 'Protection de niveau bancaire' },
+    { icon: Users, title: 'Collaboration Equipe', description: 'Gestion des acces et permissions' },
+    { icon: Bot, title: 'Support 24/7', description: 'Assistant IA disponible' }
+  ]
 
-const stats = [
-  { value: '10+', label: 'AI Agents' },
-  { value: '100+', label: 'Fonctionnalites' },
-  { value: '24/7', label: 'Support' },
-  { value: '99.9%', label: 'Uptime' }
-]
+  const stats = [
+    { value: '10+', label: 'AI Agents' },
+    { value: '100+', label: 'Fonctionnalites' },
+    { value: '24/7', label: 'Support' },
+    { value: '99.9%', label: 'Uptime' }
+  ]
 
-const testimonials = [
-  {
-    name: 'Marie Dubois',
-    role: 'Fondateur, Shopify Store',
-    content: 'E-Seller a revolu mon business dropshipping. Les AI agents trouvent des produits gagnants en quelques secondes.',
-    rating: 5
-  },
-  {
-    name: 'Jean-Pierre M.',
-    role: 'E-commercant Amazon',
-    content: 'Incroyable! Ma productivity a augmente de 300% depuis que j\'utilise les automations N8N.',
-    rating: 5
-  },
-  {
-    name: 'Sophie Chen',
-    role: 'CEO, Brand Locale',
-    content: 'Le generateur de marque IA m\'a fait economiser des milliers d\'euros en design.',
-    rating: 5
-  }
-]
+  const testimonials = [
+    { name: 'Marie Dubois', role: 'Fondateur', content: 'E-Seller a revolu mon business.', rating: 5 },
+    { name: 'Jean-Pierre M.', role: 'E-commercant', content: 'Ma productivity a augmente.', rating: 5 },
+    { name: 'Sophie Chen', role: 'CEO', content: 'Le generateur de marque IA est incroyable.', rating: 5 }
+  ]
 
-export default function AProposPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-sm mb-6">
-              <Rocket className="w-4 h-4" />
-              Plateforme E-Commerce AI #1 en France
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              A Propos de <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">E-Seller</span>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(to-br, #0f172a, #1e293b, #0f172a)' }}>
+      <header style={{ position: 'relative', padding: '20px 0' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(147, 51, 234, 0.2))' }}></div>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px', position: 'relative' }}>
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)', fontWeight: 'bold', color: 'white', marginBottom: '24px' }}>
+              A Propos de <span style={{ background: 'linear-gradient(to right, #60a5fa, #a78bfa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>E-Seller</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-              E-Seller est la plateforme e-commerce IA tout-en-un qui revolutionne la vente en ligne. 
-              Trouvez des produits gagnants, creez votre marque automatiquement, et lancez des campagnes publicitaires performantes.
+            <p style={{ fontSize: '1.25rem', color: '#9ca3af', maxWidth: '768px', margin: '0 auto 32px' }}>
+              E-Seller est la plateforme e-commerce IA tout-en-un qui revolutionne la vente en ligne.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/demo" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-transform flex items-center gap-2">
-                Voir la Demo
-                <ArrowRight className="w-5 h-5" />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
+              <Link href="/demo" style={{ background: 'linear-gradient(to right, #2563eb, #9333ea)', color: 'white', padding: '16px 32px', borderRadius: '12px', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Voir la Demo <ArrowRight size={20} />
               </Link>
-              <Link href="/contact" className="bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-700 transition-colors border border-slate-700">
+              <Link href="/contact" style={{ background: '#1e293b', color: 'white', padding: '16px 32px', borderRadius: '12px', fontWeight: '600', textDecoration: 'none', border: '1px solid #334155' }}>
                 Nous Contacter
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Stats */}
-      <div className="bg-slate-800/50 border-y border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div style={{ background: 'rgba(30, 41, 59, 0.5)', borderTop: '1px solid #334155', borderBottom: '1px solid #334155' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '48px 16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px' }}>
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-gray-400">{stat.label}</div>
+              <div key={index} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px' }}>{stat.value}</div>
+                <div style={{ color: '#9ca3af' }}>{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Features */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-white mb-4">Pourquoi Choisir E-Seller?</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Une plateforme complete avec tous les outils dont vous avez besoin pour succeed dans l'e-commerce
-          </p>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '80px 16px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '16px' }}>Pourquoi Choisir E-Seller?</h2>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <div key={index} className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-blue-500 transition-colors">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-white" />
+              <div key={index} style={{ background: 'rgba(30, 41, 59, 0.5)', borderRadius: '12px', padding: '24px', border: '1px solid #334155' }}>
+                <div style={{ width: '48px', height: '48px', background: 'linear-gradient(to right, #2563eb, #9333ea)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                  <Icon size={24} color="white" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: 'white', marginBottom: '8px' }}>{feature.title}</h3>
+                <p style={{ color: '#9ca3af' }}>{feature.description}</p>
               </div>
             )
           })}
         </div>
       </div>
 
-      {/* Testimonials */}
-      <div className="bg-slate-800/30 py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Ce que disent nos utilisateurs</h2>
-            <p className="text-gray-400">Des milliers de marchands nous font confiance</p>
+      <div style={{ background: 'rgba(30, 41, 59, 0.3)', padding: '80px 0' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white' }}>Ce que disent nos utilisateurs</h2>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                  ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            {testimonials.map((t, index) => (
+              <div key={index} style={{ background: '#1e293b', borderRadius: '12px', padding: '24px', border: '1px solid #334155' }}>
+                <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
+                  {[...Array(t.rating)].map((_, i) => <Star key={i} size={20} color="#fbbf24" fill="#fbbf24" />)}
                 </div>
-                <p className="text-gray-300 mb-4">&ldquo;{testimonial.content}&rdquo;</p>
-                <div className="border-t border-slate-700 pt-4">
-                  <div className="font-semibold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-gray-400">{testimonial.role}</div>
+                <p style={{ color: '#d1d5db', marginBottom: '16px' }}>"{t.content}"</p>
+                <div style={{ borderTop: '1px solid #334155', paddingTop: '16px' }}>
+                  <div style={{ fontWeight: '600', color: 'white' }}>{t.name}</div>
+                  <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>{t.role}</div>
                 </div>
               </div>
             ))}
@@ -177,28 +105,23 @@ export default function AProposPage() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Pret a revolutionner votre e-commerce?</h2>
-          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Rejoignez des milliers de marchands qui ont deja adopte E-Seller
-          </p>
-          <Link href="/demo" className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
-            <Rocket className="w-5 h-5" />
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '80px 16px' }}>
+        <div style={{ background: 'linear-gradient(to right, #2563eb, #9333ea)', borderRadius: '16px', padding: '48px', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', color: 'white', marginBottom: '16px' }}>Pret a revolutionner votre e-commerce?</h2>
+          <Link href="/demo" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'white', color: '#2563eb', padding: '16px 32px', borderRadius: '12px', fontWeight: '600', textDecoration: 'none', marginTop: '16px' }}>
+            <Rocket size={20} />
             Commencer Gratuitement
           </Link>
         </div>
       </div>
 
-      {/* Footer Links */}
-      <div className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex flex-wrap justify-center gap-8">
-            <Link href="/a-propos" className="text-gray-400 hover:text-white transition-colors">A propos</Link>
-            <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link>
-            <Link href="/demo" className="text-gray-400 hover:text-white transition-colors">Demo</Link>
-            <Link href="/dashboard" className="text-gray-400 hover:text-white transition-colors">Dashboard</Link>
+      <div style={{ borderTop: '1px solid #1e293b' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 16px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '32px' }}>
+            <Link href="/a-propos" style={{ color: '#9ca3af', textDecoration: 'none' }}>A propos</Link>
+            <Link href="/contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact</Link>
+            <Link href="/demo" style={{ color: '#9ca3af', textDecoration: 'none' }}>Demo</Link>
+            <Link href="/dashboard" style={{ color: '#9ca3af', textDecoration: 'none' }}>Dashboard</Link>
           </div>
         </div>
       </div>
