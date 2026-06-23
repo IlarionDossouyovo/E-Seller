@@ -24,12 +24,15 @@ Seller Stack (Directeur AI)
 
 ## Services Connectés
 
-| Service | Statut | URL |
-|---------|-------|-----|
-| Ollama (AI) | ✅ | http://localhost:11434 |
-| N8N (Automation) | ✅ | http://localhost:5678 |
-| PostgreSQL (Docker) | ✅ | localhost:5432/eseller |
-| E-Seller (App) | 🌐 | https://e-seller-v3.vercel.app |
+| Service | Statut | URL | Description |
+|---------|-------|-----|-------------|
+| **Fondateur** | 👑 | Augustin | Propriétaire |
+| PostgreSQL | ✅ | localhost:5432 | Base de données |
+| Ollama | ✅ | localhost:11434 | AI Local |
+| Groq API | ✅ | cloud | AI Cloud |
+| Supabase | ✅ | cloud | Stockage remote |
+| E-Seller | 🏭 | localhost:3000 | Application |
+| N8N | 📋 | localhost:5678 | Automation |
 
 ---
 
