@@ -99,60 +99,6 @@ function FeatureCard({
   )
 }
 
-// Pricing Card Component
-function PricingCard({ 
-  name, 
-  price, 
-  features, 
-  popular = false,
-  delay 
-}: { 
-  name: string, 
-  price: number, 
-  features: string[], 
-  popular?: boolean,
-  delay: number 
-}) {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ scale: 1.02 }}
-      className={`relative glass-card p-8 ${popular ? 'border-electron-blue glow-blue' : ''}`}
-    >
-      {popular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <span className="bg-electron-blue text-white text-xs font-bold px-4 py-1 rounded-full">
-            PLUS POPULAIRE
-          </span>
-        </div>
-      )}
-      <h3 className="text-xl font-semibold mb-2 font-[var(--font-sora)]">{name}</h3>
-      <div className="flex items-baseline gap-1 mb-6">
-        <span className="text-4xl font-bold gradient-text">${price}</span>
-        <span className="text-gray-400">/mois</span>
-      </div>
-      <ul className="space-y-3 mb-8">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-center gap-3 text-sm text-gray-300">
-            <CheckCircle2 className="w-4 h-4 text-electron-blue flex-shrink-0" />
-            {feature}
-          </li>
-        ))}
-      </ul>
-      <a href="/dashboard" className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 text-center block ${
-        popular 
-          ? 'bg-gradient-to-r from-electron-blue to-electron-purple text-white hover:opacity-90 glow-blue' 
-          : 'border border-gray-600 hover:border-electron-blue hover:text-electron-blue'
-      }`}>
-        Commencer maintenant
-      </a>
-    </motion.div>
-  )
-}
-
 // Navigation Component
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -181,7 +127,7 @@ function Navbar() {
         </motion.div>
         
         <div className="hidden md:flex items-center gap-8">
-          {['Fonctionnalités', 'Tarifs', 'À propos', 'Contact'].map((item) => (
+          {['Fonctionnalités'].map((item) => (
             <motion.a 
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -200,8 +146,6 @@ function Navbar() {
         >
           Essai gratuit
         </motion.button>
-        <Link href="/a-propos" className="text-gray-300 hover:text-white text-sm">A propos</Link>
-        <Link href="/contact" className="text-gray-300 hover:text-white text-sm">Contact</Link>
         <LanguageSwitcher />
       </div>
     </motion.nav>
@@ -449,73 +393,6 @@ function Stats() {
 }
 
 // Pricing Section
-function Pricing() {
-  const plans = [
-    {
-      name: 'Starter',
-      price: 29,
-      features: [
-        'Recherche produit IA',
-        'Dashboard basique',
-        '5 analyses par jour',
-        'Support email'
-      ]
-    },
-    {
-      name: 'Pro',
-      price: 99,
-      popular: true,
-      features: [
-        'Tout dans Starter',
-        'Branding IA complet',
-        'Générateur Ads',
-        'Analytics avancé',
-        'API access',
-        'Support prioritaire'
-      ]
-    },
-    {
-      name: 'Elite',
-      price: 299,
-      features: [
-        'Tout dans Pro',
-        'Assistant IA illimité',
-        'Store auto-launch',
-        'Funnel automation',
-        'Account manager',
-        'Formation incluse'
-      ]
-    }
-  ]
-
-  return (
-    <section id="tarifs" className="py-32 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-electron-blue text-sm font-semibold uppercase tracking-wider">Tarifs</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 font-[var(--font-sora)]">
-            Investissez dans votre succès
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Des tarifs adaptés à tous les niveaux de développement
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {plans.map((plan, i) => (
-            <PricingCard key={i} {...plan} delay={i * 0.2} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // CTA Section
 function CTA() {
   return (
@@ -616,7 +493,6 @@ export default function Home() {
       <Hero />
       <Stats />
       <Features />
-      <Pricing />
       <CTA />
       <Footer />
     </main>
