@@ -2,7 +2,7 @@
 
 ## Vue d'Ensemble
 
-**Seller Stack** est le système de direction AI qui gère automatiquement votre entreprise e-commerce E-Seller.
+**Seller Stack** est le système de direction AI qui gère automatiquement votre entreprise e-commerce E-Seller. Avec 9 agents AI autonomes.
 
 ---
 
@@ -11,14 +11,26 @@
 ```
 Seller Stack (Directeur AI)
 ├── 🤖 Product Director      → Recherche produits gagnants
-├── 🎨 Brand Director     → Création de marque
-├── 📺 Ads Director     → Génération publicités
-├── 📊 Analytics Director → Analytique prédictive
-├── 💬 Assistant Director → Support client AI
-├── 🔍 SEO Director    → Optimisation SEO
-├── 📝 Content Director → Contenu produit
-└── 🔄 Automation Hub  → N8N Orchestrator
+├── 🎨 Brand Director        → Création de marque
+├── 📺 Ads Director         → Génération publicités
+├── 📊 Analytics Director    → Analytique prédictive
+├── 💬 Assistant Director    → Support client AI
+├── 📝 Content Director      → Contenu marketing
+├── 🔍 SEO Director         → Optimisation SEO
+├── 🏥 Health Director      → Surveillance système
+└── 🔧 Maintenance Director → Maintenance système
 ```
+
+---
+
+## Modèles Ollama Installés
+
+| Modèle | Taille | Utilisation | Statut |
+|--------|--------|-------------|--------|
+| **llama3.2** | 2.0 GB | Par défaut | ✅ Installé |
+| **llama3.1:8b** | 4.9 GB | Analyse complexe | ✅ Installé |
+| **qwen2.5-coder:7b** | 4.7 GB | Code et données | ✅ Installé |
+| **phi3:mini** | 2.2 GB | Rapide/léger | ✅ Installé |
 
 ---
 
@@ -28,76 +40,35 @@ Seller Stack (Directeur AI)
 |---------|-------|-----|-------------|
 | **Fondateur** | 👑 | Augustin | Propriétaire |
 | PostgreSQL | ✅ | localhost:5432 | Base de données |
-| Ollama | ✅ | localhost:11434 | AI Local |
+| Ollama | ✅ | localhost:11434 | AI Local (4 modèles) |
 | Groq API | ✅ | cloud | AI Cloud |
 | Supabase | ✅ | cloud | Stockage remote |
 | E-Seller | 🏭 | localhost:3000 | Application |
-| N8N | 📋 | localhost:5678 | Automation |
 
 ---
 
-## Départements
+## Départements (9 Agents)
 
-### 1. Product Intelligence
-- Recherche produits tendance
-- Analyse concurrence
-- Prévision tendances
-
-### 2. Brand Generator
-- Création logos
-- Noms de marque
-- Palettes couleurs
-
-### 3. Ads Generator
-- Scripts vidéo TikTok
-- Publicités Facebook
-- Contenu UGC
-
-### 4. Analytics
-- KPIs temps réel
-- Prévisions ventes
-- Rapports automatiques
-
-### 5. AI Assistant
-- Support client 24/7
-- Conseils business
-- Automation
-
-### 6. SEO
-- Optimisation mots-clés
-- Contenu SEO
-- Backlinks
-
-### 7. Content
-- Descriptions produits
-- Blog posts
-- Emails marketing
+| # | Agent | Fonction | Commandes |
+|---|-------|----------|-----------|
+| 1 | **Product Director** | Recherche produits | /recherche, /analyse, /tendances |
+| 2 | **Brand Director** | Création marque | /marque, /logo, /charte |
+| 3 | **Ads Director** | Publicités | /tiktok, /facebook, /ugc |
+| 4 | **Analytics Director** | Analytique | /kpis, /rapport, /previsions |
+| 5 | **Assistant Director** | Support client | /aide, /conseils, /support |
+| 6 | **Content Director** | Contenu | /description, /blog, /email |
+| 7 | **SEO Director** | Optimisation SEO | /keywords, /audit, /optimiser |
+| 8 | **Health Director** | Surveillance | /health, /alertes, /diagnostic |
+| 9 | **Maintenance Director** | Maintenance | /update, /backup, /optimiser |
 
 ---
-
-## Départements (Agents)
-
-| Agent | Fichier | Fonction |
-|-------|---------|---------|
-| Product Director | product/agent.md | Recherche produits |
-| Brand Director | brand/agent.md | Création marque |
-| Ads Director | ads/agent.md | Publicités |
-| Analytics Director | analytics/agent.md | Analytique |
-| Assistant Director | assistant/agent.md | Support client |
-| SEO Director | seo/agent.md | Optimisation SEO |
-| Content Director | content/agent.md | Contenu |
-
-## Automations N8N
-
-| Workflow | Fichier | Fréquence |
-|----------|---------|----------|
-| Product Research | automation/product-research.json | Toutes les heures |
-| Analytics Report | automation/analytics-report.json | Quotidien |
 
 ## Dashboard
 
-Accéder au dashboard: **https://e-seller-v3.vercel.app/dashboard/seller-stack**
+Accéder au dashboard fondateur: **/dashboard/founder/ai-command-center**
+
+Accéder au dashboard admin: **/dashboard/seller-stack**
 
 ## Statut: OPÉRATIONNEL ✅
 
-*Document généré par Seller Stack*
+*Document généré par Seller Stack - E-Seller AI System*
