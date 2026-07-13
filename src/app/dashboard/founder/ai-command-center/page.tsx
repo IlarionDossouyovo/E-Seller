@@ -304,6 +304,12 @@ export default function AICommandCenter() {
   const router = useRouter()
   const [isAuthorized, setIsAuthorized] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
+  const [activeTab, setActiveTab] = useState<'agents' | 'commands' | 'stats' | 'services'>('agents')
+  const [commandInput, setCommandInput] = useState('')
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [response, setResponse] = useState('')
+  const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
   
   // Vérification d'authentification - Réservé au fondateur
   useEffect(() => {
@@ -350,13 +356,6 @@ export default function AICommandCenter() {
       </div>
     )
   }
-
-  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
-  const [activeTab, setActiveTab] = useState<'agents' | 'commands' | 'stats' | 'services'>('agents')
-  const [commandInput, setCommandInput] = useState('')
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [response, setResponse] = useState('')
-  const [copiedCommand, setCopiedCommand] = useState<string | null>(null)
 
   const processCommand = async () => {
     if (!commandInput.trim()) return
