@@ -17,7 +17,9 @@ import {
   AlertTriangle,
   Zap,
   Package,
-  Lock
+  Lock,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -307,6 +309,24 @@ export default function MaintenancePage() {
           <Link href="/dashboard/founder/ai-command-center" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-amber-500 text-left">
             <Zap className="w-5 h-5 text-amber-400 mb-2" />
             <p className="text-white font-medium">Command Center</p>
+          </Link>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard/health" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Health
+        </Link>
+        
+        <div className="flex items-center gap-2">
+          <Link href="/dashboard/seller-stack" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+            Seller Stack
+          </Link>
+          <Link href="/dashboard/founder/ai-command-center" className="flex items-center gap-2 px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 rounded-lg text-amber-400 transition-colors">
+            Command Center
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

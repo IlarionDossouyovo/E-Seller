@@ -31,7 +31,9 @@ import {
   Cpu,
   AlertTriangle,
   Zap,
-  CreditCard
+  CreditCard,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -738,6 +740,29 @@ export default function AICommandCenter() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center pb-8">
+        <Link href="/dashboard/seller-stack" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Seller Stack
+        </Link>
+        
+        <div className="flex items-center gap-2">
+          <Link href="/dashboard/health" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+            <Heart className="w-4 h-4 text-rose-400" />
+            Health
+          </Link>
+          <Link href="/dashboard/maintenance" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+            <Wrench className="w-4 h-4 text-slate-400" />
+            Maintenance
+          </Link>
+          <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg text-blue-400 transition-colors">
+            Dashboard Principal
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </div>
   )

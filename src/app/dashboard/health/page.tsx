@@ -18,7 +18,9 @@ import {
   Cloud,
   Wifi,
   ShoppingCart,
-  CreditCard
+  CreditCard,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -271,6 +273,22 @@ export default function HealthPage() {
           <Link href="/dashboard/maintenance" className="p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-green-500 text-left">
             <Zap className="w-5 h-5 text-green-400 mb-2" />
             <p className="text-white font-medium">Maintenance</p>
+          </Link>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard/seller-stack" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Seller Stack
+        </Link>
+        
+        <div className="flex items-center gap-2">
+          <Link href="/dashboard/maintenance" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+            <Zap className="w-4 h-4 text-green-400" />
+            Maintenance
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
