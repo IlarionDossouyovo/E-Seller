@@ -1,56 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Country to locale mapping
-const countryToLocale: Record<string, string> = {
-  // Europe
-  FR: 'fr',
-  BE: 'fr',
-  CH: 'fr',
-  LU: 'fr',
-  MC: 'fr',
-  CA: 'fr',
-  // English speaking countries
-  US: 'en',
-  GB: 'en',
-  CA: 'en',
-  AU: 'en',
-  NZ: 'en',
-  IE: 'en',
-  ZA: 'en',
-  // Spain
-  ES: 'es',
-  // Germany
-  DE: 'de',
-  AT: 'de',
-  CH: 'de',
-  // China
-  CN: 'zh',
-  HK: 'zh',
-  TW: 'zh',
-  // Japan
-  JP: 'ja',
-  // Portugal
-  PT: 'pt',
-  BR: 'pt',
-  // Arabic countries
-  SA: 'ar',
-  AE: 'ar',
-  EG: 'ar',
-  MA: 'ar',
-  DZ: 'ar',
-  TN: 'ar',
-  LY: 'ar',
-  JO: 'ar',
-  LB: 'ar',
-  KW: 'ar',
-  QA: 'ar',
-  BH: 'ar',
-  OM: 'ar',
-}
-
-// Default locale
-const DEFAULT_LOCALE = 'fr'
+// Supported locales (for dashboard route handling)
 const SUPPORTED_LOCALES = ['en', 'fr', 'es', 'de', 'zh', 'ja', 'pt', 'ar']
 
 export function middleware(request: NextRequest) {
@@ -81,27 +32,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Get country from headers (Vercel, Cloudflare, etc.)
-  const country = request.geo?.country || 
-    request.headers.get('x-vercel-ip-country') ||
-    request.headers.get('cf-ipcountry') ||
-    request.headers.get('cloudfront-viewer-country') ||
-    'FR' // Default to France
-
-  // Get locale from country
-  const locale = countryToLocale[country] || DEFAULT_LOCALE
-
-  // Redirect to locale-prefixed path
-  // Skip for static files, API routes, and dashboard
-  if (
-    !pathname.startsWith('/api') &&
-    !pathname.startsWith('/_next') &&
-    !pathname.startsWith('/dashboard') &&
-    !pathname.includes('.')
-  ) {
-    const newUrl = new URL(`/${locale}${pathname}`, request.url)
-    return NextResponse.redirect(newUrl)
-  }
+  // Note: Locale is handled client-side via I18nProvider
+  // No server-side redirects needed
 
   return NextResponse.next()
 }
