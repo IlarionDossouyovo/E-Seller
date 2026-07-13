@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Disable static export for API routes compatibility
-  // GitHub Pages can host Next.js with SSR via GitHub Actions
+  // Docker standalone output
+  output: 'standalone',
   // Images configuration
   images: {
     unoptimized: true,
