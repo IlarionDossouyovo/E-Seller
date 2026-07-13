@@ -21,7 +21,10 @@ import {
   Brain,
   Globe,
   Rocket,
-  ChevronDown
+  ChevronDown,
+  MapPin,
+  Mail,
+  Phone
 } from 'lucide-react'
 
 // Animation variants
@@ -425,6 +428,101 @@ function CTA() {
   )
 }
 
+// Contact & Map Section
+function ContactSection() {
+  return (
+    <section id="contact" className="py-24 bg-gray-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4">Notre Localisation</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+           Venez nous rendre visite dans nos bureaux
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-8"
+          >
+            <div className="bg-gray-800/50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6">Contactez-nous</h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-electron-blue/20 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-electron-blue" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Adresse</h4>
+                    <p className="text-gray-400 text-sm">123 Avenue des Champs-Élysées<br />75008 Paris, France</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-electron-purple/20 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-electron-purple" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Email</h4>
+                    <p className="text-gray-400 text-sm">contact@e-seller.fr</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-green-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Téléphone</h4>
+                    <p className="text-gray-400 text-sm">+33 1 23 45 67 89</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Map */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="h-[400px] rounded-2xl overflow-hidden bg-gray-800"
+          >
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=2.3050%2C48.8690%2C2.3150%2C48.8730&layer=mapnik&marker=48.8710%2C2.3100"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              title="Notre localisation"
+            />
+          </motion.div>
+        </div>
+
+        <p className="text-center text-gray-500 text-sm mt-8">
+          <a 
+            href="https://www.openstreetmap.org/?mlat=48.8710&mlon=2.3100#map=17/48.8710/2.3100" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-white underline"
+          >
+            Voir sur OpenStreetMap
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
 // Footer
 function Footer() {
   return (
@@ -493,6 +591,7 @@ export default function Home() {
       <Stats />
       <Features />
       <CTA />
+      <ContactSection />
       <Footer />
     </main>
   )
