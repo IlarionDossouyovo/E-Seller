@@ -33,11 +33,29 @@ import {
   Zap,
   CreditCard,
   ArrowLeft,
-  ArrowRight
+  ArrowRight,
+  Mail,
+  Factory,
+  Package,
+  HardDrive
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { agentModelConfig, availableModels } from '@/lib/agents-config'
+
+// Model selection helpers
+const getModelInfo = (modelName: string) => {
+  const models = Object.values(availableModels)
+  return models.find(m => m.name === modelName) || models[0]
+}
+
+const getModelBadge = (agentId: string) => {
+  const config = (agentModelConfig as Record<string, any>)[agentId]
+  if (!config) return { model: 'llama3.2:latest', size: '2.0 GB' }
+  const info = getModelInfo(config.model)
+  return { model: config.model, size: info?.size || '2.0 GB' }
+}
 
 interface Agent {
   id: string
@@ -282,6 +300,181 @@ const agents: Agent[] = [
       { command: '/optimiser', description: 'Optimiser système', example: '/optimiser' },
       { command: '/rapport-maintenance', description: 'Rapport maintenance', example: '/rapport-maintenance' }
     ]
+  },
+  {
+    id: 'automation-director',
+    name: 'Automation Director',
+    description: 'Orchestre des chaînes automatisées pour optimiser les workflows',
+    icon: Zap,
+    color: 'text-amber-400',
+    bgGradient: 'from-amber-500/20 to-orange-500/20',
+    dashboardUrl: '/dashboard/ai-automations',
+    capabilities: [
+      'Chaînes automatisées multi-étapes',
+      'Déclencheurs conditionnels',
+      'Intégration API externe',
+      'Planification tâches cron',
+      'Gestion des webhooks',
+      'Monitoring des flux'
+    ],
+    commands: [
+      { command: '/automation-create [nom]', description: 'Créer une nouvelle automation', example: '/automation-create email-welcome' },
+      { command: '/automation-run [id]', description: 'Exécuter une automation', example: '/automation-run product-research' },
+      { command: '/automation-list', description: 'Lister toutes les automations', example: '/automation-list' },
+      { command: '/automation-stop [id]', description: 'Arrêter une automation', example: '/automation-stop ad-campaign' },
+      { command: '/trigger [evenement]', description: 'Déclencher un événement', example: '/trigger new-order' },
+      { command: '/schedule [cron]', description: 'Planifier une tâche', example: '/schedule 0 9 * * 1' }
+    ]
+  },
+  {
+    id: 'chatbot-director',
+    name: 'Chatbot Director',
+    description: 'Gère le chatbot IA pour support client et ventes',
+    icon: MessageSquare,
+    color: 'text-emerald-400',
+    bgGradient: 'from-emerald-500/20 to-teal-500/20',
+    dashboardUrl: '/dashboard/ai-chatbot',
+    capabilities: [
+      'Support client automatique 24/7',
+      'Gestion des conversations multi-langues',
+      'Intégration CRM et_helpdesk',
+      'Analyse sentiment client',
+      'Escalade intelligente',
+      'Rapports analytics chatbot'
+    ],
+    commands: [
+      { command: '/chatbot-status', description: 'Statut du chatbot', example: '/chatbot-status' },
+      { command: '/chatbot-enable', description: 'Activer le chatbot', example: '/chatbot-enable' },
+      { command: '/chatbot-disable', description: 'Désactiver le chatbot', example: '/chatbot-disable' },
+      { command: '/chatbot-response [trigger]', description: 'Ajouter une réponse', example: '/chatbot-response shipping' },
+      { command: '/chatbot-analytics', description: 'Voir les analytics', example: '/chatbot-analytics' },
+      { command: '/chatbot-train [donnees]', description: 'Entraîner le chatbot', example: '/chatbot-train nouveau-produit' }
+    ]
+  },
+  {
+    id: 'email-director',
+    name: 'Email Marketing Director',
+    description: 'Gère les campagnes email et automatisations',
+    icon: Mail,
+    color: 'text-pink-400',
+    bgGradient: 'from-pink-500/20 to-rose-500/20',
+    dashboardUrl: '/dashboard/emails',
+    capabilities: [
+      'Campagnes email automatisées',
+      'Séquences de nurturing',
+      'Segmentation clients',
+      'A/B testing emails',
+      'Templates responsives',
+      'Analytics email marketing'
+    ],
+    commands: [
+      { command: '/email-campaign [nom]', description: 'Créer campagne email', example: '/email-campaign black-friday' },
+      { command: '/email-sequence [nom]', description: 'Créer une séquence', example: '/email-sequence welcome' },
+      { command: '/email-template [type]', description: 'Générer un template', example: '/email-template newsletter' },
+      { command: '/email-send [campagne]', description: 'Envoyer une campagne', example: '/email-send promo-weekend' },
+      { command: '/email-analytics', description: 'Voir les analytics', example: '/email-analytics' },
+      { command: '/email-segment [critere]', description: 'Créer un segment', example: '/email-segmentachats-recents' }
+    ]
+  },
+  {
+    id: 'supplier-director',
+    name: 'Supplier Director',
+    description: 'Gère les fournisseurs et la chaîne d\'approvisionnement',
+    icon: Factory,
+    color: 'text-indigo-400',
+    bgGradient: 'from-indigo-500/20 to-violet-500/20',
+    dashboardUrl: '/dashboard/suppliers',
+    capabilities: [
+      'Recherche fournisseurs qualifiés',
+      'Comparaison prix FOB/EXW',
+      'Suivi des commandes',
+      'Gestion des délais',
+      'Évaluation fournisseurs',
+      'Négociation automatique'
+    ],
+    commands: [
+      { command: '/supplier-search [produit]', description: 'Rechercher fournisseurs', example: '/supplier-search textile' },
+      { command: '/supplier-compare', description: 'Comparer fournisseurs', example: '/supplier-compare' },
+      { command: '/supplier-order [id]', description: 'Passer commande', example: '/supplier-order SUP-001' },
+      { command: '/supplier-track [commande]', description: 'Suivre commande', example: '/supplier-track CMD-123' },
+      { command: '/supplier-rating', description: 'Évaluer fournisseurs', example: '/supplier-rating' },
+      { command: '/supplier-negotiate [produit]', description: 'Négocier prix', example: '/supplier-negotiate electronics' }
+    ]
+  },
+  {
+    id: 'financial-director',
+    name: 'Financial Director',
+    description: 'Gère la finance, la comptabilité et les rapports',
+    icon: CreditCard,
+    color: 'text-green-400',
+    bgGradient: 'from-green-500/20 to-lime-500/20',
+    dashboardUrl: '/dashboard/finances',
+    capabilities: [
+      'Suivi des revenus/dépenses',
+      'Prévisions financières',
+      'Gestion de la trésorerie',
+      'Rapports comptables',
+      'Gestion des factures',
+      'Analyse profitability'
+    ],
+    commands: [
+      { command: '/finance-report', description: 'Rapport financier', example: '/finance-report' },
+      { command: '/finance-cashflow', description: 'Trésorerie', example: '/finance-cashflow' },
+      { command: '/finance-invoice [montant]', description: 'Créer facture', example: '/finance-invoice 1500' },
+      { command: '/finance-forecast', description: 'Prévisions', example: '/finance-forecast' },
+      { command: '/finance-expenses', description: 'Dépenses', example: '/finance-expenses' },
+      { command: '/finance-profit', description: 'Analyse profit', example: '/finance-profit' }
+    ]
+  },
+  {
+    id: 'security-director',
+    name: 'Security Director',
+    description: 'Surveille la sécurité et la protection des données',
+    icon: Shield,
+    color: 'text-red-400',
+    bgGradient: 'from-red-500/20 to-orange-500/20',
+    dashboardUrl: '/dashboard/security',
+    capabilities: [
+      'Monitoring sécurité 24/7',
+      'Détection des menaces',
+      'Gestion des accès',
+      'Audit sécurité',
+      'Protection données GDPR',
+      'Gestion des incidents'
+    ],
+    commands: [
+      { command: '/security-audit', description: 'Audit sécurité', example: '/security-audit' },
+      { command: '/security-scan', description: 'Scanner vulnérabilités', example: '/security-scan' },
+      { command: '/security-alerts', description: 'Voir les alertes', example: '/security-alerts' },
+      { command: '/security-users', description: 'Gérer utilisateurs', example: '/security-users' },
+      { command: '/security-backups', description: 'Vérifier backups', example: '/security-backups' },
+      { command: '/security-incident', description: 'Signaler incident', example: '/security-incident' }
+    ]
+  },
+  {
+    id: 'inventory-director',
+    name: 'Inventory Director',
+    description: 'Gère le stock et les inventaires produits',
+    icon: Package,
+    color: 'text-cyan-400',
+    bgGradient: 'from-cyan-500/20 to-sky-500/20',
+    dashboardUrl: '/dashboard/inventory',
+    capabilities: [
+      'Suivi stock en temps réel',
+      'Alertes rupture de stock',
+      'Prévision demande',
+      'Gestion entrepôts',
+      'Optimisation stocks',
+      'Traçabilité produits'
+    ],
+    commands: [
+      { command: '/inventory-status', description: 'Statut inventaire', example: '/inventory-status' },
+      { command: '/inventory-low', description: 'Produits en rupture', example: '/inventory-low' },
+      { command: '/inventory-add [produit]', description: 'Ajouter au stock', example: '/inventory-add SKU-001' },
+      { command: '/inventory-forecast', description: 'Prévoir besoins', example: '/inventory-forecast' },
+      { command: '/inventory-transfer', description: 'Transfert entrepôt', example: '/inventory-transfer' },
+      { command: '/inventory-audit', description: 'Audit inventaire', example: '/inventory-audit' }
+    ]
   }
 ]
 
@@ -291,9 +484,18 @@ const founder = {
   avatar: '👑',
 }
 
+// Modèles Ollama installés
+const installedModels = [
+  { name: 'llama3.2:latest', size: '2.0 GB', status: 'installed', description: 'General purpose - Default model' },
+  { name: 'llama3.1:8b', size: '4.9 GB', status: 'installed', description: 'Advanced reasoning - Complex analysis' },
+  { name: 'qwen2.5-coder:7b', size: '4.7 GB', status: 'installed', description: 'Code & technical - Code generation' },
+  { name: 'phi3:mini', size: '2.2 GB', status: 'installed', description: 'Fast & lightweight - Quick responses' },
+  { name: 'nomic-embed-text:latest', size: '274 MB', status: 'installed', description: 'Embeddings - Text embeddings' },
+]
+
 // Services connectés pour le monitoring
 const connectedServices = [
-  { name: 'Ollama AI', url: 'http://localhost:11434', icon: Cpu, status: 'online', description: 'IA Locale - Modèles Language' },
+  { name: 'Ollama AI', url: 'http://localhost:11434', icon: Cpu, status: 'online', description: 'IA Locale - 5 modèles installés', models: installedModels },
   { name: 'PostgreSQL', url: 'localhost:5432', icon: Database, status: 'online', description: 'Base de données principale' },
   { name: 'Groq API', url: 'api.groq.com', icon: Zap, status: 'online', description: 'IA Cloud - Traitement language' },
   { name: 'Next.js App', url: 'http://localhost:3000', icon: Shield, status: 'online', description: 'Application principale' },

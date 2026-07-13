@@ -28,14 +28,14 @@ const contactMethods = [
     icon: Mail, 
     title: 'Email', 
     description: 'Contactez-nous par email',
-    value: 'support@eseller.com',
+    value: 'electronbusiness07@gmail.com',
     color: 'text-blue-400 bg-blue-500/20'
   },
   { 
     icon: Phone, 
     title: 'Téléphone', 
-    description: 'Lun-Ven 9h-18h',
-    value: '+33 1 23 45 67 89',
+    description: 'Lun-Dim 8h-20h',
+    value: '+229 01 97700347',
     color: 'text-green-400 bg-green-500/20'
   },
   { 
@@ -49,7 +49,7 @@ const contactMethods = [
     icon: MapPin, 
     title: 'Adresse', 
     description: 'Notre siège',
-    value: 'Paris, France',
+    value: 'Cotonou, Bénin',
     color: 'text-orange-400 bg-orange-500/20'
   },
 ]
@@ -120,6 +120,34 @@ export default function ContactPage() {
           </motion.div>
         ))}
       </div>
+
+      {/* Map Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-8"
+      >
+        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <MapPin className="w-5 h-5 text-orange-400" />
+          Notre Localisation
+        </h2>
+        <div className="w-full h-80 rounded-xl overflow-hidden">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=2.40%2C6.32%2C2.45%2C6.40&amp;layer=mapnik&amp;marker=6.36%2C2.42"
+            width="100%"
+            height="100%"
+            style={{ border: 0, filter: 'grayscale(50%) contrast(1.1)' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Carte de Cotonou, Bénin"
+          />
+        </div>
+        <p className="text-slate-400 text-sm mt-3 text-center">
+          📍 Cotonou, Littoral, République du Bénin
+        </p>
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Contact Form */}
