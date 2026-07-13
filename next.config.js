@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // GitHub Pages configuration
-  output: 'export',
-  trailingSlash: true,
+  // Disable static export for API routes compatibility
+  // GitHub Pages can host Next.js with SSR via GitHub Actions
   // Images configuration
   images: {
     unoptimized: true,
@@ -20,9 +19,9 @@ const nextConfig = {
       },
     ],
   },
-  // GitHub Pages assetPrefix
-  basePath: process.env.GITHUB_PAGES === 'true' ? '/E-Seller' : '',
-  assetPrefix: process.env.GITHUB_PAGES === 'true' ? '/E-Seller' : '',
+  // GitHub Pages configuration
+  basePath: '',
+  assetPrefix: '',
 }
 
 module.exports = nextConfig
