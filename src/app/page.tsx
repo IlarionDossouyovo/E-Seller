@@ -463,7 +463,7 @@ function ContactSection() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Adresse</h4>
-                    <p className="text-gray-400 text-sm">123 Avenue des Champs-Élysées<br />75008 Paris, France</p>
+                    <p className="text-gray-400 text-sm">Cotonou<br />Bénin</p>
                   </div>
                 </div>
 
@@ -473,7 +473,7 @@ function ContactSection() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-gray-400 text-sm">contact@e-seller.fr</p>
+                    <p className="text-gray-400 text-sm">electronbusiness07@gmail.com</p>
                   </div>
                 </div>
 
@@ -483,7 +483,7 @@ function ContactSection() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Téléphone</h4>
-                    <p className="text-gray-400 text-sm">+33 1 23 45 67 89</p>
+                    <p className="text-gray-400 text-sm">+229 01 97700347</p>
                   </div>
                 </div>
               </div>
@@ -498,7 +498,7 @@ function ContactSection() {
             className="h-[400px] rounded-2xl overflow-hidden bg-gray-800"
           >
             <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=2.3050%2C48.8690%2C2.3150%2C48.8730&layer=mapnik&marker=48.8710%2C2.3100"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=2.4200%2C6.3500%2C2.4400%2C6.3700&layer=mapnik&marker=6.3600%2C2.4300"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -510,7 +510,7 @@ function ContactSection() {
 
         <p className="text-center text-gray-500 text-sm mt-8">
           <a 
-            href="https://www.openstreetmap.org/?mlat=48.8710&mlon=2.3100#map=17/48.8710/2.3100" 
+            href="https://www.openstreetmap.org/?mlat=6.3600&mlon=2.4300#map=17/6.3600/2.4300" 
             target="_blank" 
             rel="noopener noreferrer"
             className="hover:text-white underline"
