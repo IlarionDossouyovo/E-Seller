@@ -6,3 +6,10 @@ node_modules
 .DS_Store
 .vercel
 .env*.local
+
+# Keep these template files
+!.env.docker
+!.env.example
+!.env.production
+!.env.vercel
+!.env.database
