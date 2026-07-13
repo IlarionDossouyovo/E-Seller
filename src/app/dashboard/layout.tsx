@@ -82,16 +82,16 @@ const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'AI Products', href: '/dashboard/products', icon: Search },
   { name: 'Branding', href: '/dashboard/branding', icon: Palette },
-  { name: 'Ads Generator', href: '/dashboard/ads', icon: Megaphone },
-  { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
-  { name: 'Advanced Analytics', href: '/dashboard/analytics-advanced', icon: Activity },
-  { name: 'Assistant', href: '/dashboard/assistant', icon: Bot },
-  { name: 'Suppliers', href: '/dashboard/suppliers', icon: Truck },
-  { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
   { name: 'Orders', href: '/dashboard/orders', icon: Package },
   { name: 'Payments', href: '/dashboard/payments', icon: CreditCard },
   { name: 'Electron-Pay', href: '/dashboard/electron-pay', icon: Wallet },
   { name: 'Stripe', href: '/dashboard/stripe', icon: CreditCard },
+  { name: 'Suppliers', href: '/dashboard/suppliers', icon: Truck },
+  { name: 'Positioning', href: '/dashboard/positioning', icon: Crosshair },
+  { name: 'Ads Generator', href: '/dashboard/ads', icon: Megaphone },
+  { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
+  { name: 'Advanced Analytics', href: '/dashboard/analytics-advanced', icon: Activity },
+  { name: 'Assistant', href: '/dashboard/assistant', icon: Bot },
   { name: 'Security Center', href: '/dashboard/security-center', icon: Shield },
   { name: 'Security', href: '/dashboard/security', icon: Shield },
   { name: 'Templates', href: '/dashboard/templates', icon: Layout },
@@ -264,7 +264,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 overflow-y-auto pb-32" style={{ maxHeight: 'calc(100vh - 180px)' }}>
           {navItems.map((item) => {
             const isActive = pathname === item.href
             return (
@@ -272,7 +272,7 @@ export default function DashboardLayout({
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
                   isActive 
                     ? 'bg-gradient-to-r from-electron-blue/20 to-electron-purple/20 text-electron-blue border border-electron-blue/30' 
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -283,7 +283,7 @@ export default function DashboardLayout({
                   <motion.span 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="font-medium"
+                    className="font-medium text-sm"
                   >
                     {item.name}
                   </motion.span>
