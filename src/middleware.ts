@@ -73,6 +73,11 @@ export function middleware(request: NextRequest) {
   )
 
   if (pathnameHasLocale) {
+    // Remove locale prefix for dashboard routes
+    const withoutLocale = pathname.replace(/^\/(en|fr|es|de|zh|ja|pt|ar)/, '')
+    if (withoutLocale.startsWith('/dashboard')) {
+      return NextResponse.redirect(new URL(withoutLocale, request.url))
+    }
     return NextResponse.next()
   }
 
