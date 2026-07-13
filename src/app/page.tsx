@@ -127,10 +127,10 @@ function Navbar() {
         </motion.div>
         
         <div className="hidden md:flex items-center gap-8">
-          {['Fonctionnalités'].map((item) => (
+          {['Fonctionnalités', 'À propos', 'Blog', 'FAQ'].map((item) => (
             <motion.a 
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={item === 'Fonctionnalités' ? `#${item.toLowerCase()}` : `/${item.toLowerCase()}`}
               whileHover={{ color: '#0066FF' }}
               className="text-gray-300 hover:text-white transition-colors"
             >
@@ -455,9 +455,9 @@ function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Entreprise</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">À propos</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Carrières</a></li>
+              <li><a href="/a-propos" className="hover:text-white transition-colors">À propos</a></li>
+              <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/faq" className="hover:text-white transition-colors">FAQ</a></li>
             </ul>
           </div>
           
