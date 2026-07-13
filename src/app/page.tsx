@@ -139,13 +139,12 @@ function Navbar() {
           ))}
         </div>
 
-        <motion.button 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-gradient-to-r from-electron-blue to-electron-purple px-6 py-2 rounded-xl font-semibold text-sm"
+        <a 
+          href="/dashboard"
+          className="bg-gradient-to-r from-electron-blue to-electron-purple px-6 py-2 rounded-xl font-semibold text-sm hover:scale-105 transition-transform inline-block"
         >
           Essai gratuit
-        </motion.button>
+        </a>
         <LanguageSwitcher />
       </div>
     </motion.nav>
