@@ -51,32 +51,6 @@ services:
     environment:
       OLLAMA_HOST: 0.0.0.0
 
-  # N8n (Automation)
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: e-seller-n8n
-    restart: unless-stopped
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=eseller_n8n
-      - N8N_HOST=0.0.0.0
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=http
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=eseller
-      - DB_POSTGRESDB_USER=eseller
-      - DB_POSTGRESDB_PASSWORD=eseller_password
-    volumes:
-      - n8n_data_prod:/home/node/.n8n
-    depends_on:
-      postgres:
-        condition: service_healthy
-
   # Nginx Reverse Proxy
   nginx:
     image: nginx:alpine
@@ -93,4 +67,3 @@ services:
 volumes:
   postgres_data_prod:
   ollama_data_prod:
-  n8n_data_prod:
