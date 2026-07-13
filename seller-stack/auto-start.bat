@@ -21,8 +21,6 @@ echo    OK: Docker est demarre
 
 echo.
 echo [2/4] Arret des anciens conteneurs...
-docker stop eseller-n8n postgres-eseller ollama-eseller 2>nul
-docker rm eseller-n8n postgres-eseller ollama-eseller 2>nul
 
 echo.
 echo [3/4] Demarrage PostgreSQL...

@@ -24,7 +24,6 @@ Invoke-WebRequest -Uri http://localhost:3000 -Method Get
 | **E-Seller App** | http://localhost:3000 | ✅ En cours |
 | **Ollama IA** | http://localhost:11434 | À vérifier |
 | **PostgreSQL** | localhost:5432 | À vérifier |
-| **N8N** | http://localhost:5678 | Optionnel |
 
 ---
 

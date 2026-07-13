@@ -11,7 +11,6 @@
     ┌───────────────┼───────────────┐
     ▼               ▼               ▼
 ┌─────────┐   ┌─────────┐   ┌─────────┐
-│PostgreSQL│   │ Ollama  │   │   N8n   │
 │ :5432   │   │:11434  │   │ :5678  │
 └─────────┘   └─────────┘   └─────────┘
 ```
@@ -39,7 +38,6 @@ docker ps
 # Test connections
 # PostgreSQL: localhost:5432
 # Ollama: http://localhost:11434
-# N8n: http://localhost:5678
 ```
 
 ### Step 3: Configure .env.local
@@ -87,7 +85,6 @@ npm run dev
 |----------|-----------------------------|------------------|
 | PostgreSQL | localhost:5432              | eseller / eseller_password |
 | Ollama    | http://localhost:11434     | -                |
-| N8n       | http://localhost:5678       | admin / eseller_n8n |
 | E-Seller | http://localhost:3000      | -                |
 
 ---
@@ -112,14 +109,12 @@ docker-compose logs -f
 # Specific service
 docker-compose logs -f postgres
 docker-compose logs -f ollama
-docker-compose logs -f n8n
 ```
 
 ### Restart Service
 ```powershell
 docker-compose restart postgres
 docker-compose restart ollama
-docker-compose restart n8n
 ```
 
 ### Reset Database
@@ -222,14 +217,9 @@ curl http://localhost:11434/api/tags
 docker-compose restart ollama
 ```
 
-### N8n Connection Error
 
 ```powershell
-# Check N8n logs
-docker-compose logs n8n
 
-# Restart N8n
-docker-compose restart n8n
 ```
 
 ### Prisma Schema Error
@@ -272,16 +262,10 @@ services:
     volumes:
       - ollama_data:/root/.ollama
 
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: e-seller-n8n
     restart: unless-stopped
     ports:
       - "5678:5678"
     environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=eseller_n8n
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
@@ -294,7 +278,6 @@ services:
 volumes:
   postgres_data:
   ollama_data:
-  n8n_data:
 ```
 
 ---

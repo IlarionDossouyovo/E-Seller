@@ -145,7 +145,6 @@
 
 > "E-SELLER propose aussi des services pour votre entreprise :"
 
-> "- **Automatisation N8N** : Automatisez toutes vos tâches récurrentes avec 10 workflows prédéfinis"
 > "- **Ollama IA** : Votre propre IA locale pour la confidentialité de vos données"
 > "- **Dashboard Analytics** : Suivez vos performances en temps réel"
 > "- **Gestion Clients (CRM)** : Importez, segmentez, et fidelisez vos clients"
@@ -155,7 +154,6 @@
 
 > "E-SELLER propose aussi des services pour votre entreprise :"
 
-> "- **Automatisation N8N** : Automatisez toutes vos tâches récurrentes avec 10 workflows prédéfinis"
 > "- **Ollama IA** : Votre propre IA locale pour la confidentialité de vos données"
 > "- **Dashboard Analytics** : Suivez vos performances en temps réel"
 > "- **Gestion Clients (CRM)** : Importez, segmentez, et fidélisez vos clients"
@@ -165,7 +163,6 @@
 
 > "E-SELLER also offers services for your business:"
 
-> "- **N8N Automation**: Automate all your recurring tasks with 10 predefined workflows"
 > "- **Ollama AI**: Your own local AI for data confidentiality"
 > "- **Dashboard Analytics**: Track your performance in real-time"
 > "- **Customer Management (CRM)**: Import, segment, and retain your customers"

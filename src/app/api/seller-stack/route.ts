@@ -43,7 +43,6 @@ export async function GET() {
       status: 'online',
       services: {
         ollama: ollamaStatus ? 'online' : 'offline',
-        n8n: 'online',
         postgresql: 'online',
       },
       timestamp: new Date().toISOString(),

@@ -25,17 +25,18 @@ import Link from 'next/link'
 const services = [
   { name: 'Ollama AI', status: 'online', icon: Cpu, url: 'http://localhost:11434' },
   { name: 'PostgreSQL', status: 'online', icon: Database, url: 'localhost:5432' },
-  { name: 'N8N', status: 'online', icon: Zap, url: 'http://localhost:5678' },
 ]
 
 const departments = [
-  { id: 'products', name: 'Product Director', description: 'Recherche produits gagnants', icon: Search },
+  { id: 'products', name: 'Product Director', description: 'Recherche produits IA', icon: Search },
   { id: 'branding', name: 'Brand Director', description: 'Création identité de marque', icon: Bot },
-  { id: 'ads', name: 'Ads Director', description: 'Génération publicités', icon: TrendingUp },
-  { id: 'analytics', name: 'Analytics Director', description: 'Analytique prédictive', icon: Activity },
-  { id: 'assistant', name: 'Assistant Director', description: 'Support client AI', icon: Users },
-  { id: 'seo', name: 'SEO Director', description: 'Optimisation SEO', icon: Eye },
+  { id: 'ads', name: 'Ads Director', description: 'Publicités & UGC', icon: TrendingUp },
+  { id: 'analytics', name: 'Analytics Director', description: 'Métriques & rapports', icon: Activity },
+  { id: 'assistant', name: 'Assistant Director', description: 'Support client 24/7', icon: Users },
+  { id: 'seo', name: 'SEO Director', description: 'Référencement naturel', icon: Eye },
   { id: 'ai-assistant', name: 'Content Director', description: 'Contenu marketing', icon: FileText },
+  { id: 'health', name: 'Health Director', description: 'Surveillance système', icon: Server },
+  { id: 'maintenance', name: 'Maintenance Director', description: 'Maintenance & sécurité', icon: Settings },
 ]
 
 const stats = [

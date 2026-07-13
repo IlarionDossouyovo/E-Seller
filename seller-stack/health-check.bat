@@ -16,7 +16,6 @@ if %errorlevel%==0 (
 )
 
 echo.
-echo N8N:
 curl -s --max-time 5 http://localhost:5678 >nul 2>&1
 if %errorlevel%==0 (
     echo   [OK] OpERATIONNEL

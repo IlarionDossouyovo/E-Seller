@@ -146,7 +146,6 @@ export default function SellerStackWorkflows() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Seller Stack Automations</h1>
-          <p className="text-gray-400">10 AI workflows configures avec N8N + Ollama</p>
           <p className="text-sm text-yellow-400 mt-1">Reserve aux fondateurs uniquement</p>
         </div>
         <Link href="/dashboard/seller-stack" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:scale-105 transition-transform">
@@ -161,7 +160,6 @@ export default function SellerStackWorkflows() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium">N8N</span>
               <span className="text-green-400 text-sm">localhost:5679</span>
             </div>
             <div className="flex items-center gap-3">
@@ -245,7 +243,6 @@ export default function SellerStackWorkflows() {
             <RefreshCw className="w-8 h-8 text-blue-400" />
             <div>
               <h3 className="font-bold text-white">Recharger Config</h3>
-              <p className="text-sm text-gray-400">Recharger la configuration N8N</p>
             </div>
           </div>
         </Link>

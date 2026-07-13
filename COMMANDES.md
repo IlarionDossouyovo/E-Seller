@@ -9,7 +9,6 @@ docker ps
 # Ollama
 curl http://localhost:11434/api/tags
 
-# N8N
 curl http://localhost:5678
 
 # Ngrok
@@ -27,8 +26,6 @@ ollama serve
 # Terminal 2: Ngrok
 ngrok http 11434
 
-# Terminal 3: N8N (siDocker)
-docker run -d -p 5678:5678 n8nio/n8n
 
 # Terminal 4: OpenHands local
 docker run -d -p 3000:3000 ghcr.io/openhandsai/openhands:latest

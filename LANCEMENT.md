@@ -32,7 +32,6 @@ Terminal 4: Test
 |---------|------|
 | Ollama | `curl localhost:11434/api/tags` |
 | Ngrok | `curl localhost:4040/api/status` |
-| N8n | Ouvre http://localhost:5678 |
 | E-Seller | https://e-seller-v3.vercel.app |
 
 ---
@@ -49,7 +48,6 @@ Verifie que ca retourne des produits (pas juste mock data)
 
 ## 4️⃣ AUTOMATISATIONS ACTIVES
 
-### N8n Workflow:
 - Schedule: Every Hour
 - Action: API Request vers E-Seller
 - Resultat: Sauvegarde automatique
@@ -73,7 +71,6 @@ Verifie que ca retourne des produits (pas juste mock data)
 |---------|-----|
 | Site E-Seller | https://e-seller-v3.vercel.app |
 | Dashboard | /dashboard/products |
-| N8n | http://localhost:5678 |
 | Ollama | http://localhost:11434 |
 | Ngrok | https://swiftness-heave-smirk.ngrok-free.dev |
 

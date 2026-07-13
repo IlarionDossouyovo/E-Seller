@@ -22,13 +22,9 @@ if %errorlevel% neq 0 (
     echo [OK] Ollama is running
 )
 
-REM === N8N ===
-echo [3/5] Checking N8N...
 curl -s http://localhost:5678 >nul 2>&1
 if %errorlevel% neq 0 (
-    echo [WARNING] N8N not running on port 5678
 ) else (
-    echo [OK] N8N is running
 )
 
 REM === NGROK ===
@@ -52,7 +48,6 @@ echo ========================================
 echo.
 echo URLs:
 echo - Ollama: http://localhost:11434
-echo - N8N: http://localhost:5678
 echo - Ngrok: http://localhost:4040
 echo.
 pause

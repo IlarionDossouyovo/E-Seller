@@ -88,7 +88,6 @@ const demoSections = [
   {
     id: 'workflows',
     title: 'Automations',
-    description: '10 workflows N8N + Ollama pour automatiser vos taches',
     icon: Zap,
     color: 'from-yellow-500 to-amber-500',
     href: '/dashboard/seller-stack-workflows'

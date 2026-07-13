@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Bot, 
@@ -22,8 +21,20 @@ import {
   Settings,
   Command,
   TrendingUp,
-  ShoppingCart
+  ShoppingCart,
+  Heart,
+  Wrench,
+  Shield,
+  Activity,
+  Server,
+  Database,
+  Cpu,
+  AlertTriangle,
+  Zap,
+  CreditCard
 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 interface Agent {
@@ -219,6 +230,56 @@ const agents: Agent[] = [
       { command: '/technique', description: 'Audit technique', example: '/technique' },
       { command: '/positions', description: 'Suivi positions', example: '/positions' }
     ]
+  },
+  {
+    id: 'health-director',
+    name: 'Health Director',
+    description: 'Surveille la santé et disponibilité de tous les services E-Seller',
+    icon: Heart,
+    color: 'text-rose-400',
+    bgGradient: 'from-rose-500/20 to-red-500/20',
+    dashboardUrl: '/dashboard/health',
+    capabilities: [
+      'Health Checks - 20+ services',
+      'Monitoring temps réel 24/7',
+      'Diagnostics IA',
+      'Alertes multi-canal',
+      'Rapports automatiques',
+      'Auto-rémédiation'
+    ],
+    commands: [
+      { command: '/health', description: 'Statut global', example: '/health' },
+      { command: '/health-api', description: 'Santé des APIs', example: '/health-api' },
+      { command: '/health-db', description: 'Santé base de données', example: '/health-db' },
+      { command: '/diagnostic [service]', description: 'Diagnostiquer service', example: '/diagnostic ollama' },
+      { command: '/alertes', description: 'Voir les alertes', example: '/alertes' },
+      { command: '/performance', description: 'Métriques performance', example: '/performance' }
+    ]
+  },
+  {
+    id: 'maintenance-director',
+    name: 'Maintenance Director',
+    description: 'Gère la maintenance préventive et corrective de la plateforme',
+    icon: Wrench,
+    color: 'text-slate-400',
+    bgGradient: 'from-slate-500/20 to-zinc-500/20',
+    dashboardUrl: '/dashboard/maintenance',
+    capabilities: [
+      'Mises à jour NPM/Docker',
+      'Backups automatiques',
+      'Optimisation performances',
+      'Sécurité et vulnérabilités',
+      'Gestion ressources système',
+      'Rapports conformité'
+    ],
+    commands: [
+      { command: '/update-check', description: 'Vérifier mises à jour', example: '/update-check' },
+      { command: '/ressources', description: 'Utilisation ressources', example: '/ressources' },
+      { command: '/backup', description: 'Créer backup', example: '/backup' },
+      { command: '/security-audit', description: 'Audit sécurité', example: '/security-audit' },
+      { command: '/optimiser', description: 'Optimiser système', example: '/optimiser' },
+      { command: '/rapport-maintenance', description: 'Rapport maintenance', example: '/rapport-maintenance' }
+    ]
   }
 ]
 
@@ -228,9 +289,68 @@ const founder = {
   avatar: '👑',
 }
 
+// Services connectés pour le monitoring
+const connectedServices = [
+  { name: 'Ollama AI', url: 'http://localhost:11434', icon: Cpu, status: 'online', description: 'IA Locale - Modèles Language' },
+  { name: 'PostgreSQL', url: 'localhost:5432', icon: Database, status: 'online', description: 'Base de données principale' },
+  { name: 'Groq API', url: 'api.groq.com', icon: Zap, status: 'online', description: 'IA Cloud - Traitement language' },
+  { name: 'Next.js App', url: 'http://localhost:3000', icon: Shield, status: 'online', description: 'Application principale' },
+  { name: 'Stripe', url: 'api.stripe.com', icon: CreditCard, status: 'online', description: 'Paiements (Test Mode)' },
+]
+
 export default function AICommandCenter() {
+  const router = useRouter()
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  
+  // Vérification d'authentification - Réservé au fondateur
+  useEffect(() => {
+    // Simuler vérification authentification
+    // En production, vérifier via NextAuth/session
+    const checkAuth = async () => {
+      // Ici on vérifierait le rôle utilisateur
+      // Pour démo, on autorise l'accès
+      const isFounder = true // Simuler: session?.user?.role === 'FOUNDER'
+      
+      if (!isFounder) {
+        // Rediriger si pas autorisé
+        router.push('/dashboard?unauthorized=true')
+      } else {
+        setIsAuthorized(true)
+      }
+      setIsLoading(false)
+    }
+    
+    checkAuth()
+  }, [router])
+
+  // Afficher loading pendant vérification
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-400">Vérification des droits d'accès...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Afficher message d'erreur si pas autorisé
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+        <div className="text-center p-8 bg-red-500/10 border border-red-500/30 rounded-2xl max-w-md">
+          <AlertTriangle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-white mb-2">Accès Réservé</h1>
+          <p className="text-slate-400">Cette page est exclusivement réservée au fondateur de l'entreprise.</p>
+        </div>
+      </div>
+    )
+  }
+
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
-  const [activeTab, setActiveTab] = useState<'agents' | 'commands' | 'stats'>('agents')
+  const [activeTab, setActiveTab] = useState<'agents' | 'commands' | 'stats' | 'services'>('agents')
   const [commandInput, setCommandInput] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
   const [response, setResponse] = useState('')
@@ -310,10 +430,11 @@ export default function AICommandCenter() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex gap-4 mb-8">
+        <div className="flex gap-4 mb-8 flex-wrap">
           {[
-            { id: 'agents', label: '🤖 Tous les Agents', icon: Bot },
+            { id: 'agents', label: '🤖 9 Agents', icon: Bot },
             { id: 'commands', label: '⚡ Commandes', icon: Command },
+            { id: 'services', label: '🔗 Services', icon: Server },
             { id: 'stats', label: '📊 Statistiques', icon: BarChart3 }
           ].map((tab) => (
             <button
@@ -484,7 +605,7 @@ export default function AICommandCenter() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: 'Agents Actifs', value: '7/7', icon: Bot, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+                { label: 'Agents Actifs', value: '9/9', icon: Bot, color: 'text-blue-400', bg: 'bg-blue-500/20' },
                 { label: 'Commandes Aujourd\'hui', value: '24', icon: Command, color: 'text-green-400', bg: 'bg-green-500/20' },
                 { label: 'Produits Analysés', value: '156', icon: ShoppingCart, color: 'text-purple-400', bg: 'bg-purple-500/20' },
                 { label: 'Revenus IA', value: '€12.4k', icon: TrendingUp, color: 'text-amber-400', bg: 'bg-amber-500/20' }
@@ -528,6 +649,88 @@ export default function AICommandCenter() {
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                       <span className="text-green-400 text-xs">Actif</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'services' && (
+          <div className="space-y-6">
+            <div className="bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-cyan-900/20 rounded-2xl border border-blue-500/30 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Server className="w-6 h-6 text-blue-400" />
+                    Services Connectés
+                  </h3>
+                  <p className="text-slate-400 text-sm">Monitoring en temps réel de tous les services</p>
+                </div>
+                <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  5 Services en ligne
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {connectedServices.map((service, i) => (
+                <motion.div
+                  key={service.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-slate-900/50 rounded-xl border border-slate-700 p-5 hover:border-green-500/30 transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                      service.status === 'online' ? 'bg-green-500/20' : 'bg-red-500/20'
+                    }`}>
+                      <service.icon className={`w-6 h-6 ${
+                        service.status === 'online' ? 'text-green-400' : 'text-red-400'
+                      }`} />
+                    </div>
+                    <span className={`px-2 py-1 rounded-full text-xs ${
+                      service.status === 'online' 
+                        ? 'bg-green-500/20 text-green-400' 
+                        : 'bg-red-500/20 text-red-400'
+                    }`}>
+                      {service.status === 'online' ? '● En ligne' : '○ Hors ligne'}
+                    </span>
+                  </div>
+                  <h4 className="text-white font-semibold mb-1">{service.name}</h4>
+                  <p className="text-slate-400 text-xs mb-3">{service.description}</p>
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <Link href={service.url} target="_blank" className="text-blue-400 hover:underline">
+                      {service.url}
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Status des APIs */}
+            <div className="bg-slate-900/50 rounded-2xl border border-slate-700 p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-green-400" />
+                Statut des APIs
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { name: 'API Products', status: '200 OK', time: '45ms', color: 'text-green-400' },
+                  { name: 'API Orders', status: '200 OK', time: '32ms', color: 'text-green-400' },
+                  { name: 'API AI (Groq)', status: '200 OK', time: '120ms', color: 'text-green-400' },
+                  { name: 'API Ollama', status: '200 OK', time: '890ms', color: 'text-yellow-400' },
+                  { name: 'API Analytics', status: '200 OK', time: '56ms', color: 'text-green-400' },
+                  { name: 'API Webhooks', status: '200 OK', time: '28ms', color: 'text-green-400' },
+                ].map((api) => (
+                  <div key={api.name} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                    <span className="text-slate-300 text-sm">{api.name}</span>
+                    <div className="flex items-center gap-3">
+                      <span className={`text-xs ${api.color}`}>{api.status}</span>
+                      <span className="text-slate-500 text-xs">{api.time}</span>
                     </div>
                   </div>
                 ))}

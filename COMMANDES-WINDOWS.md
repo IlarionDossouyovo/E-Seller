@@ -22,8 +22,6 @@ start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 # Terminal 2: Ollama
 ollama serve
 
-# Terminal 3: N8N
-docker run -d --name eseller-n8n -p 5678:5678 n8nio/n8n
 ```
 
 ---
@@ -37,7 +35,6 @@ docker ps
 # Ollama
 curl http://localhost:11434/api/tags
 
-# N8N
 curl http://localhost:5678
 
 # PostgreSQL
@@ -65,15 +62,12 @@ C:\Users\AUGUSTIN\OneDrive\Documents\E-Seller\seller-stack\start-docker.bat
 | Service | URL |
 |---------|-----|
 | **Dashboard** | http://localhost:3000/dashboard/seller-stack |
-| **N8N** | http://localhost:5678 |
 | **Ollama** | http://localhost:11434 |
 | **PostgreSQL** | localhost:5432 |
 
 ---
 
-## 5️⃣ DÉMO N8N
 
-Importer workflow N8N:
 1. Aller sur http://localhost:5678
 2. Workflows → Import from File
 3. Choisir: `seller-stack\automation\product-research.json`
@@ -91,11 +85,9 @@ cd C:\Users\AUGUSTIN\OneDrive\Documents\E-Seller
 echo Demarrage des services...
 start "" ollama serve
 timeout /t 3
-docker run -d --name eseller-n8n -p 5678:5678 n8nio/n8n
 
 echo.
 echo === Seller Stack Demarre ===
-echo N8N: http://localhost:5678
 echo Ollama: http://localhost:11434
 echo.
 pause

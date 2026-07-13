@@ -13,7 +13,6 @@
 | 5 | 💬 | **Assistant Director** | Support 24/7 | ✅ |
 | 6 | 📝 | **Content Director** | Contenu produits/blog | ✅ |
 | 7 | 🔍 | **SEO Director** | Optimisation Google | ✅ |
-| 8 | ⚙️ | **Automation** | N8N workflows | ✅ |
 
 ---
 
@@ -110,14 +109,12 @@ Fichier: agent.md
 
 ---
 
-### 8. ⚙️ Automation (N8N)
 ```
 Dossier: seller-stack/automation/
 Fichiers: README.md, analytics-report.json
 ```
 **Mission:** Automatiser les tâches récurrentes
 **Capacités:**
-- 10+ workflows N8N
 - Alerts automatiques
 - Rapports scheduler
 
@@ -167,8 +164,6 @@ start-docker.bat
 # Vérifier santé
 ./seller-stack/health-check.sh
 
-# Configurer N8N + PostgreSQL
-./seller-stack/config-n8n-postgres.bat
 ```
 
 ---
@@ -177,7 +172,6 @@ start-docker.bat
 
 | Service | Usage | Statut |
 |---------|-------|--------|
-| **N8N** | Automation workflows | ✅ |
 | **PostgreSQL** | Base de données | ✅ |
 | **Ollama** | IA locale | ✅ |
 | **Supabase** | Backend | ✅ |

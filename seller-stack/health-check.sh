@@ -12,9 +12,7 @@ else
     echo "   ❌ Non démarré"
 fi
 
-# Check N8N
 echo ""
-echo "🔄 N8N (Automation):"
 if curl -s --max-time 5 http://localhost:5678 > /dev/null 2>&1; then
     echo "   ✅ Opérationnel"
 else

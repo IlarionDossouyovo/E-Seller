@@ -19,8 +19,6 @@ echo "OK: Docker est demarre"
 
 echo ""
 echo "[2/4] Arret des anciens conteneurs..."
-docker stop eseller-n8n postgres-eseller ollama-eseller 2>/dev/null
-docker rm eseller-n8n postgres-eseller ollama-eseller 2>/dev/null
 
 echo ""
 echo "[3/4] Demarrage PostgreSQL..."
@@ -66,6 +64,5 @@ echo ""
 echo "Vous pouvez acceder a:"
 echo "   - E-Seller: http://localhost:3000"
 echo "   - Ollama:  http://localhost:11434"
-echo "   - N8N:    http://localhost:5678 (si installe)"
 echo ""
 read -p "Appuyez sur Entree pour continuer..."
