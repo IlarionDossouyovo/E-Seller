@@ -87,10 +87,11 @@ export function middleware(request: NextRequest) {
   const locale = countryToLocale[country] || DEFAULT_LOCALE
 
   // Redirect to locale-prefixed path
-  // Skip for static files and API routes
+  // Skip for static files, API routes, and dashboard
   if (
     !pathname.startsWith('/api') &&
     !pathname.startsWith('/_next') &&
+    !pathname.startsWith('/dashboard') &&
     !pathname.includes('.')
   ) {
     const newUrl = new URL(`/${locale}${pathname}`, request.url)
