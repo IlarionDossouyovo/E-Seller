@@ -29,11 +29,22 @@ export default function StripeIntegrationPage() {
   const [stripeKey, setStripeKey] = useState('')
   const [isConnected, setIsConnected] = useState(false)
   const [activeTab, setActiveTab] = useState<'test' | 'live' | 'identity'>('test')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const handleConnect = () => {
     if (stripeKey.includes('sk_test_')) {
       setIsConnected(true)
+      setNotification('Mode test connecte avec succes!')
+    } else {
+      setNotification('Cle invalide. Utilisez une cle sk_test_...')
     }
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleCopyCard = (number: string) => {
+    navigator.clipboard.writeText(number.replace(/\s/g, ''))
+    setNotification('Numero de carte copie!')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   return (
@@ -122,7 +133,7 @@ export default function StripeIntegrationPage() {
 
             <div className="space-y-3">
               {testCards.map((card, i) => (
-                <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
+                <div key={i} onClick={() => handleCopyCard(card.number)} className="flex items-center justify-between p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
                       <CreditCard className="w-5 h-5" />
@@ -355,6 +366,13 @@ export default function StripeIntegrationPage() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
         </div>
       )}
     </div>
