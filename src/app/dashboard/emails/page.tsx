@@ -101,10 +101,57 @@ const mockTemplates = [
 ]
 
 export default function EmailsPage() {
-  const [campaigns] = useState(mockCampaigns)
+  const [campaigns, setCampaigns] = useState<Campaign[]>(mockCampaigns)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<CampaignStatus | 'all'>('all')
   const [activeTab, setActiveTab] = useState<'campaigns' | 'templates' | 'automation'>('campaigns')
+  const [showNewCampaignModal, setShowNewCampaignModal] = useState(false)
+  const [editingCampaign, setEditingCampaign] = useState<Campaign | null>(null)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+  const [sendingId, setSendingId] = useState<number | null>(null)
+
+  // Handlers
+  const handleNewCampaign = () => {
+    setShowNewCampaignModal(true)
+  }
+
+  const handleEdit = (campaign: Campaign) => {
+    setEditingCampaign(campaign)
+    setShowNewCampaignModal(true)
+  }
+
+  const handleDelete = (id: number) => {
+    if (confirm('Are you sure you want to delete this campaign?')) {
+      setCampaigns(prev => prev.filter(c => c.id !== id))
+    }
+  }
+
+  const handleSend = (id: number) => {
+    setSendingId(id)
+    setTimeout(() => {
+      setCampaigns(prev => prev.map(c => {
+        if (c.id === id) {
+          return { ...c, status: 'sending' as CampaignStatus, sent: 100, opened: 45, clicked: 15, date: new Date().toISOString().split('T')[0] }
+        }
+        return c
+      }))
+      setSendingId(null)
+    }, 2000)
+  }
+
+  const handleDuplicate = (campaign: Campaign) => {
+    const newCampaign: Campaign = {
+      ...campaign,
+      id: Date.now(),
+      name: `${campaign.name} (Copy)`,
+      status: 'draft',
+      sent: 0,
+      opened: 0,
+      clicked: 0,
+      date: '',
+    }
+    setCampaigns(prev => [newCampaign, ...prev])
+  }
 
   const filteredCampaigns = campaigns.filter(c => {
     if (statusFilter !== 'all' && c.status !== statusFilter) return false
@@ -135,7 +182,10 @@ export default function EmailsPage() {
           <h1 className="text-2xl font-bold font-[var(--font-sora)]">Email Marketing</h1>
           <p className="text-gray-400">Create and manage email campaigns</p>
         </div>
-        <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+        <button 
+          onClick={handleNewCampaign}
+          className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer"
+        >
           <Plus className="w-5 h-5" />
           New Campaign
         </button>
@@ -271,27 +321,49 @@ export default function EmailsPage() {
 
                     <div className="flex gap-2">
                       {campaign.status === 'draft' && (
-                        <button className="px-4 py-2 rounded-lg bg-electron-blue hover:opacity-90 transition-opacity text-sm">
-                          Send
+                        <button 
+                          onClick={() => handleSend(campaign.id)}
+                          disabled={sendingId === campaign.id}
+                          className="px-4 py-2 rounded-lg bg-electron-blue hover:opacity-90 transition-opacity text-sm cursor-pointer disabled:opacity-50"
+                        >
+                          {sendingId === campaign.id ? 'Sending...' : 'Send'}
                         </button>
                       )}
                       {campaign.status === 'scheduled' && (
-                        <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors text-sm">
+                        <button 
+                          onClick={() => handleEdit(campaign)}
+                          className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors text-sm cursor-pointer"
+                        >
                           Edit
                         </button>
                       )}
                       {campaign.status === 'sent' && (
-                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
                           <BarChart3 className="w-5 h-5" />
                         </button>
                       )}
-                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title="View">
                         <Eye className="w-5 h-5" />
                       </button>
-                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                      <button 
+                        onClick={() => handleEdit(campaign)}
+                        className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" 
+                        title="Edit"
+                      >
                         <Edit className="w-5 h-5" />
                       </button>
-                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors text-red-400">
+                      <button 
+                        onClick={() => handleDuplicate(campaign)}
+                        className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" 
+                        title="Duplicate"
+                      >
+                        <Copy className="w-5 h-5" />
+                      </button>
+                      <button 
+                        onClick={() => handleDelete(campaign.id)}
+                        className="p-2 rounded-lg hover:bg-red-500/20 transition-colors text-red-400 cursor-pointer" 
+                        title="Delete"
+                      >
                         <Trash2 className="w-5 h-5" />
                       </button>
                     </div>
@@ -354,16 +426,102 @@ export default function EmailsPage() {
               <div className="flex items-center justify-between">
                 <p className="text-sm text-gray-400">{automation.emails} emails</p>
                 <div className="flex gap-2">
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
                     <Zap className="w-5 h-5" />
                   </button>
                 </div>
               </div>
             </motion.div>
           ))}
+        </div>
+      )}
+
+      {/* Modal for New/Edit Campaign */}
+      {showNewCampaignModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="glass-card p-6 w-full max-w-lg"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold">{editingCampaign ? 'Edit Campaign' : 'New Campaign'}</h2>
+              <button 
+                onClick={() => { setShowNewCampaignModal(false); setEditingCampaign(null); }}
+                className="p-2 rounded-lg hover:bg-white/10 cursor-pointer"
+              >
+                <XCircle className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Campaign Name</label>
+                <input 
+                  type="text" 
+                  defaultValue={editingCampaign?.name || ''}
+                  placeholder="e.g., Summer Sale"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Subject Line</label>
+                <input 
+                  type="text" 
+                  defaultValue={editingCampaign?.subject || ''}
+                  placeholder="e.g., 🎉 Big Sale Inside!"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Status</label>
+                <select 
+                  defaultValue={editingCampaign?.status || 'draft'}
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="scheduled">Scheduled</option>
+                </select>
+              </div>
+              
+              <div className="flex gap-3 pt-4">
+                <button 
+                  onClick={() => { setShowNewCampaignModal(false); setEditingCampaign(null); }}
+                  className="flex-1 px-4 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={() => {
+                    if (editingCampaign) {
+                      setCampaigns(prev => prev.map(c => c.id === editingCampaign.id ? { ...c, name: editingCampaign.name } : c))
+                    } else {
+                      const newCampaign: Campaign = {
+                        id: Date.now(),
+                        name: 'New Campaign',
+                        subject: 'New email subject',
+                        status: 'draft',
+                        sent: 0,
+                        opened: 0,
+                        clicked: 0,
+                        date: '',
+                        type: 'newsletter',
+                      }
+                      setCampaigns(prev => [newCampaign, ...prev])
+                    }
+                    setShowNewCampaignModal(false)
+                    setEditingCampaign(null)
+                  }}
+                  className="flex-1 px-4 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity"
+                >
+                  {editingCampaign ? 'Save Changes' : 'Create Campaign'}
+                </button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       )}
     </div>
