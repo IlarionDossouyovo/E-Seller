@@ -269,11 +269,11 @@ export default function SuppliersPage() {
             </div>
 
             <div className="flex gap-2">
-              <button onClick={() => handleContact(supplier.name)} className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm flex items-center justify-center gap-2">
+              <button onClick={() => handleContact(supplier.name)} className="flex-1 py-2.5 rounded-lg bg-electron-blue/20 hover:bg-electron-blue/30 text-electron-blue font-medium transition-all text-sm flex items-center justify-center gap-2 border border-electron-blue/30">
                 <MessageSquare className="w-4 h-4" />
                 Contacter
               </button>
-              <button onClick={() => handleViewDetails(supplier.name)} className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
+              <button onClick={() => handleViewDetails(supplier.name)} className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium text-white">
                 Voir Details
               </button>
             </div>
@@ -285,7 +285,7 @@ export default function SuppliersPage() {
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold font-[var(--font-sora)]">Tous les fournisseurs</h2>
-          <button onClick={handleFilter} className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
+          <button onClick={handleFilter} className="px-4 py-2 rounded-lg bg-electron-blue/20 hover:bg-electron-blue/30 text-electron-blue border border-electron-blue/30 transition-colors flex items-center gap-2 text-sm font-medium">
             <Filter className="w-4 h-4" />
             Filtres
           </button>
@@ -333,10 +333,10 @@ export default function SuppliersPage() {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => handleViewDetails(supplier.name)} className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm">
+                <button onClick={() => handleViewDetails(supplier.name)} className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors text-sm font-medium">
                   Voir
                 </button>
-                <button onClick={() => handleContact(supplier.name)} className="px-4 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
+                <button onClick={() => handleContact(supplier.name)} className="px-4 py-2 rounded-lg bg-electron-blue/30 hover:bg-electron-blue/50 text-electron-blue border border-electron-blue/40 transition-colors text-sm font-medium">
                   Contacter
                 </button>
               </div>
