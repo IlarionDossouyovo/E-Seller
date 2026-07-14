@@ -58,7 +58,7 @@ const mockProducts = [
     score: 76,
     revenue: '18 900€',
     growth: '+34%',
-    saturation: 'Eleve',
+    saturation: 'Elevee',
     platforms: ['Instagram', 'Meta'],
     image: 'https://picsum.photos/seed/light3/400/400',
     price: 24.99,
@@ -66,7 +66,7 @@ const mockProducts = [
   },
   {
     id: 4,
-    name: 'Support Laptop Ergonimique',
+    name: 'Support pour Ordinateur Portable',
     category: 'Bureau',
     trend: 'up',
     score: 84,
@@ -86,7 +86,7 @@ const mockProducts = [
     score: 68,
     revenue: '12 300€',
     growth: '-12%',
-    saturation: 'Tres Eleve',
+    saturation: 'Tres Elevee',
     platforms: ['Instagram'],
     image: 'https://picsum.photos/seed/watch5/400/400',
     price: 89.99,
@@ -95,7 +95,7 @@ const mockProducts = [
   {
     id: 6,
     name: 'Tapis de Yoga avec Lignes d\'Alignement',
-    category: 'Sports',
+    category: 'Sportif',
     trend: 'up',
     score: 81,
     revenue: '21 600€',
@@ -108,7 +108,7 @@ const mockProducts = [
   },
 ]
 
-  const categories = ['Tous', 'Electronique', 'Mode', 'Maison & Jardin', 'Sports', 'Bureau', 'Beauté']
+  const categories = ['Tous', 'Electronique', 'Mode', 'Maison & Jardin', 'Sportif', 'Bureau', 'Beauté']
 const platforms = ['Toutes les plateformes', 'TikTok', 'Instagram', 'Facebook', 'Meta', 'Google']
 
 export default function ProductsPage() {
@@ -386,7 +386,7 @@ export default function ProductsPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Prix</p>
-                  <p className="font-bold">{product.price}€</p>
+                  <p className="font-bold">{product.price.toFixed(2).replace('.', ',')} €</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Marge</p>
