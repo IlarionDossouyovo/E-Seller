@@ -33,7 +33,7 @@ const mockSuppliers = [
     categories: ['Electronique', 'Appareils Connectes'],
     featured: true,
     moq: 100,
-    priceRange: '$5-50',
+    priceRange: '5 à 50 $',
     reliability: 98,
   },
   {
@@ -48,12 +48,12 @@ const mockSuppliers = [
     categories: ['Maison et Jardin', 'Mode'],
     featured: false,
     moq: 50,
-    priceRange: '$2-20',
+    priceRange: '2 à 20 $',
     reliability: 95,
   },
   {
     id: 3,
-    name: 'Premium Goods Manufacturing',
+    name: 'Fabrication de produits haut de gamme',
     location: 'Guangzhou, Chine',
     rating: 4.9,
     reviews: 567,
@@ -63,13 +63,13 @@ const mockSuppliers = [
     categories: ['Electronique', 'Produits Premium'],
     featured: true,
     moq: 200,
-    priceRange: '$15-100',
+    priceRange: '15 à 100 $',
     reliability: 99,
   },
   {
     id: 4,
     name: 'Vietnam Sourcing Ltd',
-    location: 'Ho Chi Minh Ville, Vietnam',
+    location: 'Ho Chi Minh-Ville, Vietnam',
     rating: 4.5,
     reviews: 340,
     minOrder: 100,
@@ -78,7 +78,7 @@ const mockSuppliers = [
     categories: ['Textiles', 'Vetements'],
     featured: false,
     moq: 100,
-    priceRange: '$3-15',
+    priceRange: '3 à 15 $',
     reliability: 92,
   },
 ]
@@ -191,7 +191,7 @@ export default function SuppliersPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Fournisseurs Verifies', value: '2,450', icon: Shield },
+          { label: 'Fournisseurs verifies', value: '2 450', icon: Shield },
           { label: 'Pays', value: '12', icon: MapPin },
           { label: 'Reponse Moy.', value: '< 24h', icon: Clock },
           { label: 'Taux de Succes', value: '97%', icon: TrendingUp },
@@ -251,7 +251,7 @@ export default function SuppliersPage() {
                 <p className="font-bold">{supplier.moq} unites</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-white/5">
-                <p className="text-xs text-gray-400">Gamme Prix</p>
+                <p className="text-xs text-gray-400">Prix</p>
                 <p className="font-bold">{supplier.priceRange}</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-white/5">
@@ -274,7 +274,7 @@ export default function SuppliersPage() {
                 Contacter
               </button>
               <button onClick={() => handleViewDetails(supplier.name)} className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium text-white">
-                Voir Details
+                Voir les details
               </button>
             </div>
           </motion.div>
