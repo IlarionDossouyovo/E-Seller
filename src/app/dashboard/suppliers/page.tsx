@@ -24,13 +24,13 @@ const mockSuppliers = [
   {
     id: 1,
     name: 'Shenzhen Tech Co., Ltd',
-    location: 'Shenzhen, China',
+    location: 'Shenzhen, Chine',
     rating: 4.8,
     reviews: 1250,
     minOrder: 100,
     responseTime: '< 24h',
     certifications: ['ISO 9001', 'CE', 'FCC'],
-    categories: ['Electronics', 'Smart Devices'],
+    categories: ['Electronique', 'Appareils Connectes'],
     featured: true,
     moq: 100,
     priceRange: '$5-50',
@@ -39,13 +39,13 @@ const mockSuppliers = [
   {
     id: 2,
     name: 'Yiwu Trading Co.',
-    location: 'Yiwu, China',
+    location: 'Yiwu, Chine',
     rating: 4.6,
     reviews: 890,
     minOrder: 50,
     responseTime: '< 12h',
     certifications: ['ISO 9001', 'GMP'],
-    categories: ['Home & Garden', 'Fashion'],
+    categories: ['Maison et Jardin', 'Mode'],
     featured: false,
     moq: 50,
     priceRange: '$2-20',
@@ -54,13 +54,13 @@ const mockSuppliers = [
   {
     id: 3,
     name: 'Premium Goods Manufacturing',
-    location: 'Guangzhou, China',
+    location: 'Guangzhou, Chine',
     rating: 4.9,
     reviews: 567,
     minOrder: 200,
     responseTime: '< 8h',
     certifications: ['ISO 9001', 'CE', 'RoHS', 'UL'],
-    categories: ['Electronics', 'Premium Products'],
+    categories: ['Electronique', 'Produits Premium'],
     featured: true,
     moq: 200,
     priceRange: '$15-100',
@@ -69,13 +69,13 @@ const mockSuppliers = [
   {
     id: 4,
     name: 'Vietnam Sourcing Ltd',
-    location: 'Ho Chi Minh City, Vietnam',
+    location: 'Ho Chi Minh Ville, Vietnam',
     rating: 4.5,
     reviews: 340,
     minOrder: 100,
     responseTime: '< 24h',
     certifications: ['ISO 9001'],
-    categories: ['Textiles', 'Garments'],
+    categories: ['Textiles', 'Vetements'],
     featured: false,
     moq: 100,
     priceRange: '$3-15',
@@ -88,13 +88,34 @@ export default function SuppliersPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedLocation, setSelectedLocation] = useState('All')
   const [isSearching, setIsSearching] = useState(false)
+  const [notification, setNotification] = useState<string | null>(null)
 
-  const categories = ['All', 'Electronics', 'Home & Garden', 'Fashion', 'Sports', 'Beauty']
-  const locations = ['All', 'China', 'Vietnam', 'Turkey', 'USA', 'India']
+  const categories = ['All', 'Electronique', 'Maison et Jardin', 'Mode', 'Sports', 'Beaute']
+  const locations = ['All', 'Chine', 'Vietnam', 'Turquie', 'USA', 'Inde']
 
   const handleSearch = () => {
     setIsSearching(true)
-    setTimeout(() => setIsSearching(false), 2000)
+    setNotification('Recherche de fournisseurs...')
+    setTimeout(() => {
+      setIsSearching(false)
+      setNotification('4 fournisseurs trouves!')
+      setTimeout(() => setNotification(null), 3000)
+    }, 2000)
+  }
+
+  const handleContact = (name: string) => {
+    setNotification(`Contact initiate avec ${name}`)
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleViewDetails = (name: string) => {
+    setNotification(`Details de ${name} charges`)
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleFilter = () => {
+    setNotification('Filtres ouverture...')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   return (
@@ -106,24 +127,24 @@ export default function SuppliersPage() {
             <Truck className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Supplier Engine</h1>
-            <p className="text-gray-400">Find and connect with verified suppliers</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Moteur de Fournisseurs IA</h1>
+            <p className="text-gray-400">Trouvez et connectez-vous avec des fournisseurs verifies</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Product / Category</label>
+            <label className="block text-sm text-gray-400 mb-2">Produit / Categorie</label>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="e.g., Wireless Earbuds, Electronics..."
+              placeholder="Ex: Ecouteurs Sans Fil, Electronique..."
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Category</label>
+            <label className="block text-sm text-gray-400 mb-2">Categorie</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -135,7 +156,7 @@ export default function SuppliersPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Location</label>
+            <label className="block text-sm text-gray-400 mb-2">Localisation</label>
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
@@ -156,12 +177,12 @@ export default function SuppliersPage() {
           {isSearching ? (
             <>
               <Search className="w-5 h-5 animate-pulse" />
-              Searching suppliers...
+              Recherche en cours...
             </>
           ) : (
             <>
               <Truck className="w-5 h-5" />
-              Find Suppliers
+              Trouver des fournisseurs
             </>
           )}
         </button>
@@ -170,10 +191,10 @@ export default function SuppliersPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Verified Suppliers', value: '2,450', icon: Shield },
-          { label: 'Countries', value: '12', icon: MapPin },
-          { label: 'Avg Response', value: '< 24h', icon: Clock },
-          { label: 'Success Rate', value: '97%', icon: TrendingUp },
+          { label: 'Fournisseurs Verifies', value: '2,450', icon: Shield },
+          { label: 'Pays', value: '12', icon: MapPin },
+          { label: 'Reponse Moy.', value: '< 24h', icon: Clock },
+          { label: 'Taux de Succes', value: '97%', icon: TrendingUp },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -226,15 +247,15 @@ export default function SuppliersPage() {
 
             <div className="grid grid-cols-3 gap-4 mb-4">
               <div className="text-center p-3 rounded-xl bg-white/5">
-                <p className="text-xs text-gray-400">Min Order</p>
-                <p className="font-bold">{supplier.moq} units</p>
+                <p className="text-xs text-gray-400">Commande Min</p>
+                <p className="font-bold">{supplier.moq} unites</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-white/5">
-                <p className="text-xs text-gray-400">Price Range</p>
+                <p className="text-xs text-gray-400">Gamme Prix</p>
                 <p className="font-bold">{supplier.priceRange}</p>
               </div>
               <div className="text-center p-3 rounded-xl bg-white/5">
-                <p className="text-xs text-gray-400">Reliability</p>
+                <p className="text-xs text-gray-400">Fiabilite</p>
                 <p className="font-bold text-green-400">{supplier.reliability}%</p>
               </div>
             </div>
@@ -248,12 +269,12 @@ export default function SuppliersPage() {
             </div>
 
             <div className="flex gap-2">
-              <button className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm flex items-center justify-center gap-2">
+              <button onClick={() => handleContact(supplier.name)} className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm flex items-center justify-center gap-2">
                 <MessageSquare className="w-4 h-4" />
-                Contact
+                Contacter
               </button>
-              <button className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
-                View Details
+              <button onClick={() => handleViewDetails(supplier.name)} className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
+                Voir Details
               </button>
             </div>
           </motion.div>
@@ -263,10 +284,10 @@ export default function SuppliersPage() {
       {/* All Suppliers */}
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold font-[var(--font-sora)]">All Suppliers</h2>
-          <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
+          <h2 className="text-xl font-semibold font-[var(--font-sora)]">Tous les fournisseurs</h2>
+          <button onClick={handleFilter} className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
             <Filter className="w-4 h-4" />
-            Filters
+            Filtres
           </button>
         </div>
 
@@ -299,30 +320,37 @@ export default function SuppliersPage() {
               </div>
               <div className="hidden md:flex items-center gap-6 text-sm">
                 <div className="text-center">
-                  <p className="text-gray-400">Min Order</p>
+                  <p className="text-gray-400">Cmd Min</p>
                   <p className="font-medium">{supplier.moq}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-gray-400">Price</p>
+                  <p className="text-gray-400">Prix</p>
                   <p className="font-medium">{supplier.priceRange}</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-gray-400">Response</p>
+                  <p className="text-gray-400">Reponse</p>
                   <p className="font-medium">{supplier.responseTime}</p>
                 </div>
               </div>
               <div className="flex gap-2">
-                <button className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm">
-                  View
+                <button onClick={() => handleViewDetails(supplier.name)} className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm">
+                  Voir
                 </button>
-                <button className="px-4 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                  Contact
+                <button onClick={() => handleContact(supplier.name)} className="px-4 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
+                  Contacter
                 </button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
