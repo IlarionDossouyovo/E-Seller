@@ -16,10 +16,10 @@ import {
 const productDetails: Record<number, any> = {
   1: {
     id: 1,
-    name: 'Wireless Earbuds Pro Max',
-    category: 'Electronics',
+    name: 'Ecouteurs Sans Fil Pro Max',
+    category: 'Electronique',
     score: 92,
-    revenue: '$45,200',
+    revenue: '45 200€',
     growth: '+156%',
     price: 49.99,
     margin: 65,
@@ -28,10 +28,10 @@ const productDetails: Record<number, any> = {
   },
   2: {
     id: 2,
-    name: 'Smart Water Bottle with Temp Display',
-    category: 'Home & Garden',
+    name: 'Gourde Connectee Temperature',
+    category: 'Maison & Jardin',
     score: 88,
-    revenue: '$32,500',
+    revenue: '32 500€',
     growth: '+89%',
     price: 29.99,
     margin: 72,
@@ -40,10 +40,10 @@ const productDetails: Record<number, any> = {
   },
   3: {
     id: 3,
-    name: 'Portable Ring Light Kit',
-    category: 'Electronics',
+    name: 'Kit Anneau Lumineux Portable',
+    category: 'Electronique',
     score: 76,
-    revenue: '$18,900',
+    revenue: '18 900€',
     growth: '+34%',
     price: 24.99,
     margin: 58,
@@ -52,10 +52,10 @@ const productDetails: Record<number, any> = {
   },
   4: {
     id: 4,
-    name: 'Ergonomic Laptop Stand',
-    category: 'Office',
+    name: 'Support Laptop Ergonimique',
+    category: 'Bureau',
     score: 84,
-    revenue: '$28,400',
+    revenue: '28 400€',
     growth: '+67%',
     price: 39.99,
     margin: 61,
@@ -64,10 +64,10 @@ const productDetails: Record<number, any> = {
   },
   5: {
     id: 5,
-    name: 'Minimalist Watch Collection',
-    category: 'Fashion',
+    name: 'Collection Montre Minimaliste',
+    category: 'Mode',
     score: 68,
-    revenue: '$12,300',
+    revenue: '12 300€',
     growth: '-12%',
     price: 89.99,
     margin: 45,
@@ -76,10 +76,10 @@ const productDetails: Record<number, any> = {
   },
   6: {
     id: 6,
-    name: 'Portable Yoga Mat',
+    name: 'Tapis de Yoga Portable',
     category: 'Sports',
     score: 81,
-    revenue: '$15,200',
+    revenue: '15 200€',
     growth: '+42%',
     price: 34.99,
     margin: 55,
@@ -97,9 +97,9 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="glass-card p-8 text-center">
-        <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+        <h1 className="text-2xl font-bold mb-4">Produit non trouve</h1>
         <a href="/dashboard/products" className="text-electron-blue hover:underline">
-          Back to Products
+          Retour aux produits
         </a>
       </div>
     )
@@ -118,7 +118,7 @@ export default function ProductDetailPage() {
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Products
+          Retour aux produits
         </a>
         
         <div className="flex items-start justify-between">
@@ -137,7 +137,7 @@ export default function ProductDetailPage() {
           </div>
           <div className="text-right">
             <div className="text-4xl font-bold text-electron-blue">{product.score}/100</div>
-            <p className="text-gray-400">AI Score</p>
+            <p className="text-gray-400">Score IA</p>
           </div>
         </div>
       </motion.div>
@@ -145,10 +145,10 @@ export default function ProductDetailPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Revenue', value: product.revenue, icon: DollarSign, color: 'text-green-400' },
-          { label: 'Growth', value: product.growth, icon: TrendingUp, color: product.trend === 'up' ? 'text-green-400' : 'text-red-400' },
-          { label: 'Price', value: `$${product.price}`, icon: ShoppingCart, color: 'text-electron-blue' },
-          { label: 'Margin', value: `${product.margin}%`, icon: Package, color: 'text-purple-400' },
+          { label: 'Revenu', value: product.revenue, icon: DollarSign, color: 'text-green-400' },
+          { label: 'Croissance', value: product.growth, icon: TrendingUp, color: product.trend === 'up' ? 'text-green-400' : 'text-red-400' },
+          { label: 'Prix', value: `${product.price}€`, icon: ShoppingCart, color: 'text-electron-blue' },
+          { label: 'Marge', value: `${product.margin}%`, icon: Package, color: 'text-purple-400' },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -166,30 +166,30 @@ export default function ProductDetailPage() {
 
       {/* Actions */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+        <h3 className="text-lg font-semibold mb-4">Actions rapides</h3>
         <div className="flex gap-4">
           <a 
             href="/store" 
             className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-center font-medium"
           >
-            Start Selling
+            Commencer a vendre
           </a>
           <button className="flex-1 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors font-medium">
-            Analyze Competitors
+            Analyser les concurrents
           </button>
         </div>
       </div>
 
       {/* Platform Performance */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4">Platform Performance</h3>
+        <h3 className="text-lg font-semibold mb-4">Performances de la plateforme</h3>
         <div className="space-y-3">
           {product.platforms.map((plat: string) => (
             <div key={plat} className="flex items-center justify-between p-3 rounded-lg bg-white/5">
               <span>{plat}</span>
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-yellow-400" />
-                <span className="text-green-400">High Performance</span>
+                <span className="text-green-400">Haute performance</span>
               </div>
             </div>
           ))}
