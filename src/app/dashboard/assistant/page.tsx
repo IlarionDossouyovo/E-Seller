@@ -30,12 +30,12 @@ type Message = {
 }
 
 const quickActions = [
-  { icon: Target, label: 'Analyze Products', prompt: 'Analyze my top 5 products and suggest improvements' },
-  { icon: TrendingUp, label: 'Optimize Ads', prompt: 'Review my ad campaigns and suggest optimizations' },
-  { icon: DollarSign, label: 'Pricing Strategy', prompt: 'Help me set optimal pricing for new products' },
-  { icon: Package, label: 'Find Suppliers', prompt: 'Find reliable suppliers for my product niche' },
-  { icon: BarChart3, label: 'Analytics', prompt: 'Explain my recent analytics trends' },
-  { icon: Lightbulb, label: 'Business Tips', prompt: 'Give me tips to increase conversions' },
+  { icon: Target, label: 'Analyser Produits', prompt: 'Analyse mes 5 meilleurs produits et suggere des ameliorations' },
+  { icon: TrendingUp, label: 'Optimiser Publicites', prompt: 'Examine mes campagnes publicitaires et suggere des optimisations' },
+  { icon: DollarSign, label: 'Strategie Prix', prompt: 'Aide-moi a definir le prix optimal pour mes nouveaux produits' },
+  { icon: Package, label: 'Trouver Fournisseurs', prompt: 'Trouve des fournisseurs fiables pour ma niche de produits' },
+  { icon: BarChart3, label: 'Analytique', prompt: 'Explique-moi les tendances analytiques recentes' },
+  { icon: Lightbulb, label: 'Conseils Business', prompt: 'Donne-moi des conseils pour augmenter les conversions' },
 ]
 
 export default function AssistantPage() {
@@ -43,14 +43,15 @@ export default function AssistantPage() {
     {
       id: 0,
       role: 'assistant',
-      content: "Hello! I'm your AI Business Assistant. I'm here to help you with:\n\n• Product analysis and trends\n• Ad campaign optimization\n• Pricing strategies\n• Supplier recommendations\n• Business growth tips\n\nHow can I help you today?",
+      content: "Bonjour! Je suis votre Assistant Business IA. Je suis la pour vous aider avec:\n\n• Analyse et tendances des produits\n• Optimisation des campagnes publicitaires\n• Strategies de tarification\n• Recommandations de fournisseurs\n• Conseils pour la croissance de votre entreprise\n\nComment puis-je vous aider aujourd'hui?",
       timestamp: new Date(),
-      suggestions: ['Find winning products', 'Optimize my ads', 'Pricing strategy'],
+      suggestions: ['Trouver produits gagnants', 'Optimiser mes publicites', 'Strategie de prix'],
     },
   ])
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [copiedId, setCopiedId] = useState<number | null>(null)
+  const [notification, setNotification] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -88,38 +89,40 @@ export default function AssistantPage() {
 
     setMessages(prev => [...prev, aiResponse])
     setIsTyping(false)
+    setNotification('Reponse generatee!')
+    setTimeout(() => setNotification(null), 2000)
   }
 
   const getAIResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase()
     
-    if (lowerQuery.includes('product') || lowerQuery.includes('winning')) {
-      return "Based on my analysis of your store, here are the top 3 winning products:\n\n1. **Wireless Earbuds Pro** - ROAS: 4.2x, 312 orders\n2. **Smart Watch Ultra** - ROAS: 3.8x, 245 orders\n3. **LED Desk Lamp** - ROAS: 3.2x, 189 orders\n\nRecommendations:\n• Focus ad budget on Earbuds (highest ROAS)\n• Consider raising price by $5-10 for Earbuds (high demand)\n• Test new variants for Smart Watch"
+    if (lowerQuery.includes('produit') || lowerQuery.includes('gagnant')) {
+      return "D'apres mon analyse de votre boutique, voici les 3 produits gagnants:\n\n1. **Ecouteurs Sans Fil Pro** - ROAS: 4.2x, 312 commandes\n2. **Montre Connectee Ultra** - ROAS: 3.8x, 245 commandes\n3. **Lampe de Bureau LED** - ROAS: 3.2x, 189 commandes\n\nRecommandations:\n• Concentrez le budget publicitaire sur les Ecouteurs (ROAS le plus eleve)\n• Considerez une augmentation de prix de 5-10 EUR pour les Ecouteurs (forte demande)\n• Testez de nouvelles variantes pour la Montre Connectee"
     }
     
-    if (lowerQuery.includes('ad') || lowerQuery.includes('campaign')) {
-      return "I've analyzed your ad campaigns. Here are the key findings:\n\n**Underperforming:**\n• Summer Sale Ads - ROAS: 0.8 (pause or revise)\n• Brand Awareness - ROAS: 1.2 (repurpose)\n\n**Top Performers:**\n• Product Demo TikTok - ROAS: 4.5x\n• UGC Testimonial - ROAS: 4.1x\n\n**Suggested Actions:**\n1. Increase budget on top performers by 30%\n2. A/B test new hooks on underperformers\n3. Update creative for brand awareness campaign"
+    if (lowerQuery.includes('publicite') || lowerQuery.includes('campagne')) {
+      return "J'ai analyse vos campagnes publicitaires. Voici les resultats cls:\n\n**Sous-performantes:**\n• Publicites Soldes d'Ete - ROAS: 0.8 (pauser ou reviser)\n• Notoriete de Marque - ROAS: 1.2 (recycler)\n\n**Meilleures Performances:**\n• Demonstration Produit TikTok - ROAS: 4.5x\n• Temoignage UGC - ROAS: 4.1x\n\n**Actions Suggerees:**\n1. Augmentez le budget des meilleures performances de 30%\n2. Testez A/B de nouvelles accroches sur les sous-performantes\n3. Mettez a jour le creatif pour la campagne de notorieté"
     }
     
-    if (lowerQuery.includes('price') || lowerQuery.includes('pricing')) {
-      return "For optimal pricing strategy, I recommend:\n\n**Premium Tier:**\n• Price point: $79-99\n• Target: Quality-focused buyers\n• Bundle with accessories\n\n**Mid-Range:**\n• Price point: $49-59\n• Best seller potential\n• Include premium packaging\n\n**Entry:**\n• Price point: $29-35\n• Lead generation\n• Upsell to premium later\n\n**Current recommendation:** Test $54.99 with 15% discount for first buyers."
+    if (lowerQuery.includes('prix') || lowerQuery.includes('tarif')) {
+      return "Pour une strategie de tarification optimale, je recommande:\n\n**Tier Premium:**\n• Point de prix: 79-99 EUR\n• Cible: Acheteurs focalises sur la qualite\n• Bundle avec accessoires\n\n**Milieu de Gamme:**\n• Point de prix: 49-59 EUR\n• Potentiel meilleur vendeur\n• Emballage premium inclus\n\n**Entree de Gamme:**\n• Point de prix: 29-35 EUR\n• Generation de leads\n• Upsell vers premium plus tard\n\n**Recommandation actuelle:** Testez 54.99 EUR avec 15% de reduction pour les premiers acheteurs."
     }
 
-    return "I'm here to help you grow your e-commerce business. You can ask me about:\n\n• Product research and winning products\n• Ad campaign optimization\n• Pricing strategies\n• Supplier finding\n• Analytics insights\n• Marketing tips\n\nWhat would you like to explore?"
+    return "Je suis la pour vous aider a developper votre entreprise e-commerce. Vous pouvez me demander:\n\n• Recherche de produits et produits gagnants\n• Optimisation des campagnes publicitaires\n• Strategies de tarification\n• Recherche de fournisseurs\n• Insights analytiques\n• Conseils marketing\n\nQu'aimeriez-vous explorer?"
   }
 
   const getSuggestions = (query: string): string[] => {
     const lowerQuery = query.toLowerCase()
     
-    if (lowerQuery.includes('product')) {
-      return ['Show more products', 'Get supplier info', 'Analyze competition']
+    if (lowerQuery.includes('produit')) {
+      return ['Afficher plus de produits', 'Info fournisseurs', 'Analyser la concurrence']
     }
     
-    if (lowerQuery.includes('ad')) {
-      return ['Generate new ads', 'View campaign details', 'Budget recommendations']
+    if (lowerQuery.includes('publicite')) {
+      return ['Generer nouvelles publicites', 'Voir details campagne', 'Recommandations budget']
     }
 
-    return ['Tell me more', 'Show details', 'Give me actionable steps']
+    return ['Dis-moi en plus', 'Montre les details', 'Donne-moi des actions concretes']
   }
 
   const handleQuickAction = (prompt: string) => {
@@ -129,7 +132,11 @@ export default function AssistantPage() {
   const copyMessage = (content: string, id: number) => {
     navigator.clipboard.writeText(content)
     setCopiedId(id)
-    setTimeout(() => setCopiedId(null), 2000)
+    setNotification('Message copie!')
+    setTimeout(() => {
+      setCopiedId(null)
+      setNotification(null)
+    }, 2000)
   }
 
   return (
@@ -138,14 +145,18 @@ export default function AssistantPage() {
       <div className="glass-card p-4 mb-4">
         <div className="flex items-center gap-2 mb-3">
           <Zap className="w-4 h-4 text-electron-blue" />
-          <span className="text-sm text-gray-400">Quick Actions</span>
+          <span className="text-sm text-gray-400">Actions Rapides</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {quickActions.map((action, i) => (
             <button
               key={i}
-              onClick={() => handleQuickAction(action.prompt)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm"
+              onClick={() => {
+                handleQuickAction(action.prompt)
+                setNotification('Action selectionnee: ' + action.label)
+                setTimeout(() => setNotification(null), 2000)
+              }}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-electron-blue/20 transition-colors text-sm border border-white/10 hover:border-electron-blue/30"
             >
               <action.icon className="w-4 h-4 text-electron-blue" />
               {action.label}
@@ -188,9 +199,13 @@ export default function AssistantPage() {
                     {message.role === 'assistant' && (
                       <div className="flex gap-2 mt-4">
                         <button 
-                          onClick={() => copyMessage(message.content, message.id)}
+                          onClick={() => {
+                            copyMessage(message.content, message.id)
+                            setNotification('Message copie!')
+                            setTimeout(() => setNotification(null), 2000)
+                          }}
                           className="p-2 rounded-lg hover:bg-white/10 transition-colors"
-                          title="Copy"
+                          title="Copier"
                         >
                           {copiedId === message.id ? (
                             <Check className="w-4 h-4 text-green-400" />
@@ -198,10 +213,10 @@ export default function AssistantPage() {
                             <Copy className="w-4 h-4" />
                           )}
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors" title="Good response">
+                        <button onClick={() => { setNotification('Reponse notee comme positive!'); setTimeout(() => setNotification(null), 2000) }} className="p-2 rounded-lg hover:bg-white/10 transition-colors" title="Bonne reponse">
                           <ThumbsUp className="w-4 h-4" />
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors" title="Bad response">
+                        <button onClick={() => { setNotification('Reponse notee comme negative'); setTimeout(() => setNotification(null), 2000) }} className="p-2 rounded-lg hover:bg-white/10 transition-colors" title="Mauvaise reponse">
                           <ThumbsDown className="w-4 h-4" />
                         </button>
                       </div>
@@ -261,8 +276,8 @@ export default function AssistantPage() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Ask me anything about your business..."
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Posez-moi une question sur votre entreprise..."
+              className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-colors backdrop-blur-sm"
             />
             <button
               onClick={handleSend}
@@ -274,6 +289,13 @@ export default function AssistantPage() {
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
