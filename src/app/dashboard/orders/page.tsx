@@ -127,10 +127,40 @@ const statusConfig = {
 }
 
 export default function OrdersPage() {
-  const [orders] = useState(mockOrders)
+  const [orders, setOrders] = useState(mockOrders)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+
+  // Export orders to CSV
+  const handleExport = () => {
+    const headers = ['ID', 'Client', 'Email', 'Produits', 'Total', 'Statut', 'Date']
+    const rows = orders.map(order => [
+      order.id,
+      order.customer.name,
+      order.customer.email,
+      order.products.map(p => `${p.quantity}x ${p.name}`).join(', '),
+      `${order.total.toFixed(2)}€`,
+      statusConfig[order.status as OrderStatus].label,
+      order.date
+    ])
+    
+    const csv = [headers, ...rows].map(row => row.join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `commandes_${new Date().toISOString().split('T')[0]}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  // Add new order
+  const handleCreateOrder = (newOrder: Order) => {
+    setOrders([newOrder, ...orders])
+    setShowCreateModal(false)
+  }
 
   const filteredOrders = orders.filter(order => {
     if (statusFilter !== 'all' && order.status !== statusFilter) return false
@@ -155,11 +185,11 @@ export default function OrdersPage() {
           <p className="text-gray-400">Suivez et gestionnez toutes vos commandes</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
+          <button onClick={handleExport} className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
             <Download className="w-4 h-4" />
             Exporter
           </button>
-          <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
+          <button onClick={() => setShowCreateModal(true)} className="px-4 py-2 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
             Creer une commande
           </button>
         </div>
@@ -383,6 +413,103 @@ export default function OrdersPage() {
           </motion.div>
         </div>
       )}
+
+      {/* Create Order Modal */}
+      {showCreateModal && (
+        <CreateOrderModal 
+          onClose={() => setShowCreateModal(false)} 
+          onSubmit={handleCreateOrder} 
+        />
+      )}
+    </div>
+  )
+}
+
+// Create Order Modal Component
+function CreateOrderModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (order: Order) => void }) {
+  const [customerName, setCustomerName] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
+  const [customerAddress, setCustomerAddress] = useState('')
+  const [productName, setProductName] = useState('')
+  const [productPrice, setProductPrice] = useState('')
+  const [productQty, setProductQty] = useState('1')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const newOrder: Order = {
+      id: `ORD-${String(Math.floor(Math.random() * 9000) + 1000)}`,
+      customer: {
+        name: customerName,
+        email: customerEmail,
+        phone: customerPhone,
+        address: customerAddress
+      },
+      products: [{
+        name: productName,
+        quantity: parseInt(productQty),
+        price: parseFloat(productPrice)
+      }],
+      total: parseFloat(productPrice) * parseInt(productQty),
+      status: 'pending',
+      date: new Date().toISOString().split('T')[0]
+    }
+    onSubmit(newOrder)
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="glass-card w-full max-w-lg"
+      >
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          <h2 className="text-xl font-bold">Creer une commande</h2>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/10">
+            <XCircle className="w-5 h-5" />
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Nom du client</label>
+            <input required type="text" value={customerName} onChange={e => setCustomerName(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="Jean Dupont" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Email</label>
+            <input required type="email" value={customerEmail} onChange={e => setCustomerEmail(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="jean@exemple.com" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Telephone</label>
+            <input required type="tel" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="+33 6 12 34 56 78" />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Adresse</label>
+            <input required type="text" value={customerAddress} onChange={e => setCustomerAddress(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="123 Rue de Paris, 75001 Paris" />
+          </div>
+          <div className="border-t border-white/10 pt-4">
+            <h3 className="font-semibold mb-3">Produit</h3>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="col-span-2">
+                <label className="block text-sm text-gray-400 mb-2">Nom du produit</label>
+                <input required type="text" value={productName} onChange={e => setProductName(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="Ecouteurs Sans Fil" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Quantite</label>
+                <input required type="number" min="1" value={productQty} onChange={e => setProductQty(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" />
+              </div>
+            </div>
+            <div className="mt-3">
+              <label className="block text-sm text-gray-400 mb-2">Prix unitaire (€)</label>
+              <input required type="number" step="0.01" min="0" value={productPrice} onChange={e => setProductPrice(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="49.99" />
+            </div>
+          </div>
+          <div className="flex gap-3 pt-4">
+            <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl border border-white/10 hover:bg-white/5">Annuler</button>
+            <button type="submit" className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple">Creer la commande</button>
+          </div>
+        </form>
+      </motion.div>
     </div>
   )
 }
