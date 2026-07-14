@@ -28,18 +28,43 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!agreed) return
+    if (!agreed) {
+      alert('Veuillez accepter les conditions générales')
+      return
+    }
     
     setIsLoading(true)
     await new Promise(resolve => setTimeout(resolve, 1500))
+    localStorage.setItem('eseller_logged_in', 'true')
+    localStorage.setItem('eseller_user', name || 'Nouvel utilisateur')
     router.push('/dashboard')
     setIsLoading(false)
   }
 
+  // Inscription Google
+  const handleGoogleSignup = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      localStorage.setItem('eseller_logged_in', 'true')
+      localStorage.setItem('eseller_user', 'Utilisateur Google')
+      router.push('/dashboard')
+    }, 1500)
+  }
+
+  // Inscription Facebook
+  const handleFacebookSignup = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      localStorage.setItem('eseller_logged_in', 'true')
+      localStorage.setItem('eseller_user', 'Utilisateur Facebook')
+      router.push('/dashboard')
+    }, 1500)
+  }
+
   const benefits = [
-    '14-day free trial',
-    'No credit card required',
-    'Cancel anytime',
+    'Essai gratuit de 14 jours',
+    'Pas de carte bancaire requise',
+    'Annulation à tout moment',
   ]
 
   return (
@@ -61,8 +86,8 @@ export default function SignupPage() {
             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-electron-purple to-electron-blue mx-auto mb-6 flex items-center justify-center">
               <Zap className="w-16 h-16 text-white" />
             </div>
-            <h2 className="text-3xl font-bold font-[var(--font-sora)]">Start Your Journey</h2>
-            <p className="text-gray-400 mt-2">Join thousands of entrepreneurs</p>
+            <h2 className="text-3xl font-bold font-[var(--font-sora)]">Commencez Votre Aventure</h2>
+            <p className="text-gray-400 mt-2">Rejoignez des milliers d'entrepreneurs</p>
           </motion.div>
         </div>
       </div>
@@ -83,10 +108,10 @@ export default function SignupPage() {
           </Link>
 
           <h1 className="text-3xl font-bold mb-2 font-[var(--font-sora)]">
-            Create your account 🚀
+            Créez votre compte 🚀
           </h1>
           <p className="text-gray-400 mb-8">
-            Start your 14-day free trial
+            Commencez votre essai gratuit de 14 jours
           </p>
 
           <div className="flex flex-wrap gap-3 mb-8">
@@ -100,42 +125,42 @@ export default function SignupPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Full Name</label>
+              <label className="block text-sm text-gray-400 mb-2">Nom complet</label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="John Doe"
+                  placeholder="Votre nom"
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Email</label>
+              <label className="block text-sm text-gray-400 mb-2">E-mail</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder="vous@exemple.com"
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Password</label>
+              <label className="block text-sm text-gray-400 mb-2">Mot de passe</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="••••••••••••"
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-12 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
                 />
                 <button
@@ -160,10 +185,10 @@ export default function SignupPage() {
                 className="w-5 h-5 mt-0.5 rounded bg-white/5 border-white/10" 
               />
               <span className="text-sm text-gray-400">
-                I agree to the{' '}
-                <a href="#" className="text-electron-blue hover:underline">Terms of Service</a>
-                {' '}and{' '}
-                <a href="#" className="text-electron-blue hover:underline">Privacy Policy</a>
+                J'accepte les{' '}
+                <a href="#" className="text-electron-blue hover:underline">Conditions d'utilisation</a>
+                {' '}et la{' '}
+                <a href="#" className="text-electron-blue hover:underline">Politique de confidentialité</a>
               </span>
             </label>
 
@@ -176,7 +201,7 @@ export default function SignupPage() {
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
-                  Get Started Free
+                  Commencer gratuitement
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}
@@ -188,25 +213,33 @@ export default function SignupPage() {
               <div className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-electron-black text-gray-500">Or sign up with</span>
+              <span className="px-4 bg-electron-black text-gray-500">Ou inscrivez-vous avec</span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <button className="py-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+            <button 
+              onClick={handleGoogleSignup}
+              disabled={isLoading}
+              className="py-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+            >
               <Chrome className="w-5 h-5" />
               Google
             </button>
-            <button className="py-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+            <button 
+              onClick={handleFacebookSignup}
+              disabled={isLoading}
+              className="py-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+            >
               <Facebook className="w-5 h-5" />
               Facebook
             </button>
           </div>
 
           <p className="mt-8 text-center text-gray-400">
-            Already have an account?{' '}
+            Vous avez déjà un compte ?{' '}
             <Link href="/login" className="text-electron-blue hover:underline font-medium">
-              Sign in
+              Se connecter
             </Link>
           </p>
         </motion.div>
