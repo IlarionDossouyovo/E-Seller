@@ -121,34 +121,34 @@ export default function SuppliersPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-electron-purple/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <Truck className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electron-blue via-electron-purple to-blue-600 flex items-center justify-center shadow-lg shadow-electron-blue/30">
+            <Truck className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Moteur de Fournisseurs IA</h1>
-            <p className="text-gray-400">Trouvez et connectez-vous avec des fournisseurs verifies</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Moteur de Fournisseurs IA</h1>
+            <p className="text-gray-300">Trouvez et connectez-vous avec des fournisseurs verifies</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Produit / Categorie</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Produit / Categorie</label>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Ex: Ecouteurs Sans Fil, Electronique..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Categorie</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Categorie</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 transition-colors"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
@@ -156,11 +156,11 @@ export default function SuppliersPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Localisation</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Localisation</label>
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 transition-colors"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             >
               {locations.map(loc => (
                 <option key={loc} value={loc}>{loc}</option>
