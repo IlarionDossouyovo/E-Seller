@@ -27,10 +27,10 @@ const mockAdScripts = [
   {
     id: 1,
     platform: 'TikTok',
-    type: 'Video Script',
-    hook: "You won't believe what happened when I tried this product...",
-    body: "I've been struggling with [PAIN POINT] for years. Then I discovered [PRODUCT]. Within just [TIME], I noticed incredible results. Here's my real experience...",
-    cta: "Click the link to try it yourself!",
+    type: 'Script Video',
+    hook: "Vous ne croirez pas ce qui s'est passe quand j'ai essaye ce produit...",
+    body: "Je lutte avec [POINT DOULEUR] depuis des annees. Ensuite, j'ai decouvert [PRODUIT]. En juste [TEMPS], j'ai notice des resultats incredibles. Voici mon experience reelle...",
+    cta: "Cliquez sur le lien pour essayer vous-meme!",
     duration: '15-30 sec',
     views: '2.4M',
     engagement: '4.8%',
@@ -38,10 +38,10 @@ const mockAdScripts = [
   {
     id: 2,
     platform: 'Facebook',
-    type: 'UGC Script',
-    hook: "My friends couldn't believe what I achieved in just 30 days!",
-    body: "Like most of you, I was skeptical at first. But after trying [PRODUCT], I had to share my results. This isn't a sponsored post - it's my genuine experience.",
-    cta: "Get your own copy - link in bio!",
+    type: 'Script UGC',
+    hook: "Mes amis n'ont pas cru ce que j'ai accompli en seulement 30 jours!",
+    body: "Comme la plupart d'entre vous, j'etais sceptique au debut. Mais apres avoir essaye [PRODUIT], j'ai du partager mes resultats. Ce n'est pas un poste奉 - c'est mon experience authentique.",
+    cta: "Obtenez le votre - lien dans la bio!",
     duration: '30-60 sec',
     views: '1.8M',
     engagement: '3.2%',
@@ -55,7 +55,7 @@ const mockCreatives = [
     thumbnail: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=400',
     duration: '0:28',
     platform: 'TikTok',
-    status: 'Ready',
+    status: 'Pret',
   },
   {
     id: 2,
@@ -63,7 +63,7 @@ const mockCreatives = [
     thumbnail: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400',
     size: '1080x1080',
     platform: 'Instagram',
-    status: 'Ready',
+    status: 'Pret',
   },
   {
     id: 3,
@@ -71,7 +71,7 @@ const mockCreatives = [
     thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400',
     slides: 5,
     platform: 'Facebook',
-    status: 'Processing',
+    status: 'En cours',
   },
 ]
 
@@ -83,6 +83,7 @@ export default function AdsPage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [activeTab, setActiveTab] = useState<'scripts' | 'creatives' | 'analysis'>('scripts')
   const [copied, setCopied] = useState<number | null>(null)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const platforms = ['TikTok', 'Facebook', 'Instagram', 'Meta']
 
@@ -95,67 +96,73 @@ export default function AdsPage() {
   }
 
   const handleGenerate = async () => {
-    if (!productName || !productBenefits) return
     setIsGenerating(true)
+    setNotification('Generation des publicites en cours...')
     await new Promise(resolve => setTimeout(resolve, 3000))
     setIsGenerating(false)
+    setNotification('Publicites generees avec succes!')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   const copyScript = (text: string, id: number) => {
     navigator.clipboard.writeText(text)
     setCopied(id)
-    setTimeout(() => setCopied(null), 2000)
+    setNotification('Script copie dans le presse-papiers!')
+    setTimeout(() => {
+      setCopied(null)
+      setNotification(null)
+    }, 2000)
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-electron-purple/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <Megaphone className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electron-blue via-electron-purple to-blue-600 flex items-center justify-center shadow-lg shadow-electron-blue/30">
+            <Megaphone className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Ads Generator</h1>
-            <p className="text-gray-400">Create high-converting ad scripts and creatives</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Generateur de Publicites IA</h1>
+            <p className="text-gray-300">Creez des scripts et creatifs publicitaires a forte conversion</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Product Name</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Nom du Produit</label>
             <input
               type="text"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
-              placeholder="e.g., Smart Watch Pro"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Ex: Montre Connectee Pro"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Key Benefits</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Benefices Cles</label>
             <input
               type="text"
               value={productBenefits}
               onChange={(e) => setProductBenefits(e.target.value)}
-              placeholder="e.g., 7-day battery, heart rate monitor"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Ex: Batterie 7 jours, moniteur cardiaque"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Target Audience</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Audience Cible</label>
             <input
               type="text"
               value={targetAudience}
               onChange={(e) => setTargetAudience(e.target.value)}
-              placeholder="e.g., Fitness enthusiasts"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Ex: Passionnes de fitness"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
         </div>
 
         <div className="mt-4">
-          <label className="block text-sm text-gray-400 mb-2">Platforms</label>
+          <label className="block text-sm text-gray-300 mb-2 font-medium">Plateformes</label>
           <div className="flex gap-2">
             {platforms.map(platform => (
               <button
@@ -175,18 +182,18 @@ export default function AdsPage() {
 
         <button
           onClick={handleGenerate}
-          disabled={isGenerating || !productName || !productBenefits}
-          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+          disabled={isGenerating}
+          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue via-electron-purple to-blue-600 font-semibold text-white flex items-center justify-center gap-2 hover:opacity-90 hover:shadow-lg hover:shadow-electron-blue/30 transition-all disabled:opacity-70 cursor-pointer shadow-lg"
         >
           {isGenerating ? (
             <>
               <Sparkles className="w-5 h-5 animate-pulse" />
-              Generating ads...
+              Generation des publicites...
             </>
           ) : (
             <>
               <Megaphone className="w-5 h-5" />
-              Generate Ad Scripts
+              Generer les Scripts Publicitaires
             </>
           )}
         </button>
@@ -197,8 +204,8 @@ export default function AdsPage() {
         <div className="flex gap-2">
           {[
             { key: 'scripts', label: 'Scripts', icon: FileText },
-            { key: 'creatives', label: 'Creatives', icon: Image },
-            { key: 'analysis', label: 'Analysis', icon: TrendingUp },
+            { key: 'creatives', label: 'Creatifs', icon: Image },
+            { key: 'analysis', label: 'Analyse', icon: TrendingUp },
           ].map(tab => (
             <button
               key={tab.key}
@@ -252,15 +259,15 @@ export default function AdsPage() {
 
                 <div className="space-y-4">
                   <div>
-                    <label className="text-xs text-electron-blue uppercase tracking-wider">Hook</label>
+                    <label className="text-xs text-electron-blue uppercase tracking-wider">Accroche</label>
                     <p className="text-lg font-medium mt-1">{script.hook}</p>
                   </div>
                   <div>
-                    <label className="text-xs text-electron-purple uppercase tracking-wider">Body</label>
+                    <label className="text-xs text-electron-purple uppercase tracking-wider">Corps</label>
                     <p className="text-gray-300 mt-1">{script.body}</p>
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 uppercase tracking-wider">CTA</label>
+                    <label className="text-xs text-gray-500 uppercase tracking-wider">Appel a l'Action</label>
                     <p className="text-white mt-1">{script.cta}</p>
                   </div>
                 </div>
@@ -268,16 +275,16 @@ export default function AdsPage() {
                 <div className="flex gap-2 mt-6">
                   <button 
                     onClick={() => copyScript(script.hook, script.id)}
-                    className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm"
+                    className="flex-1 py-2.5 rounded-lg bg-electron-blue/20 hover:bg-electron-blue/30 text-electron-blue font-medium transition-colors flex items-center justify-center gap-2 text-sm border border-electron-blue/30"
                   >
                     {copied === script.id ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                    Copy Script
+                    Copier le Script
                   </button>
-                  <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                    Edit Script
+                  <button onClick={() => setNotification('Edition du script...')} className="flex-1 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium transition-colors text-sm border border-white/20">
+                    Editer le Script
                   </button>
-                  <button className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
-                    Generate Video
+                  <button onClick={() => setNotification('Generation de la video...')} className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 text-white font-medium transition-opacity text-sm">
+                    Generer Video
                   </button>
                 </div>
               </motion.div>
@@ -374,17 +381,17 @@ export default function AdsPage() {
             </div>
 
             <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold mb-4">Top Performing Ads</h3>
+              <h3 className="text-lg font-semibold mb-4">Publicites les Plus Performantes</h3>
               <div className="space-y-4">
                 {[
-                  { name: 'TikTok - UGC Style 1', clicks: 12500, conversions: 480, roas: '4.2x' },
+                  { name: 'TikTok - Style UGC 1', clicks: 12500, conversions: 480, roas: '4.2x' },
                   { name: 'Facebook - Carousel', clicks: 8200, conversions: 320, roas: '3.8x' },
                   { name: 'Instagram - Story', clicks: 5600, conversions: 180, roas: '2.9x' },
                 ].map((ad, i) => (
                   <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
                     <div>
                       <h4 className="font-medium">{ad.name}</h4>
-                      <p className="text-xs text-gray-400">{ad.clicks.toLocaleString()} clicks • {ad.conversions} conversions</p>
+                      <p className="text-xs text-gray-400">{ad.clicks.toLocaleString()} clics • {ad.conversions} conversions</p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-green-400">{ad.roas}</p>
@@ -397,6 +404,13 @@ export default function AdsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
