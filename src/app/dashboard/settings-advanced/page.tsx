@@ -49,6 +49,14 @@ export default function SettingsAdvancedPage() {
   })
   
   const [selectedTheme, setSelectedTheme] = useState(0)
+  
+  // General settings
+  const [generalSettings, setGeneralSettings] = useState({
+    storeName: 'E-SELLER Store',
+    storeEmail: 'contact@e-seller.com',
+    timezone: 'UTC',
+    language: 'English',
+  })
 
   const handleSave = () => {
     setSaved(true)
@@ -105,29 +113,63 @@ export default function SettingsAdvancedPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Store Name</label>
-                  <input type="text" defaultValue="E-SELLER Store" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" />
+                  <input 
+                    type="text" 
+                    value={generalSettings.storeName}
+                    onChange={(e) => setGeneralSettings(prev => ({ ...prev, storeName: e.target.value }))}
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 hover:bg-white/15 transition-colors" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Store Email</label>
-                  <input type="email" defaultValue="contact@e-seller.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" />
+                  <input 
+                    type="email" 
+                    value={generalSettings.storeEmail}
+                    onChange={(e) => setGeneralSettings(prev => ({ ...prev, storeEmail: e.target.value }))}
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 hover:bg-white/15 transition-colors" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Timezone</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                    <option>UTC (Coordinated Universal Time)</option>
-                    <option>Europe/Paris</option>
-                    <option>America/New_York</option>
-                    <option>Asia/Tokyo</option>
-                  </select>
+                  <div className="relative">
+                    <select 
+                      value={generalSettings.timezone}
+                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, timezone: e.target.value }))}
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white appearance-none cursor-pointer hover:bg-white/15 transition-colors"
+                      style={{ colorScheme: 'dark' }}
+                    >
+                      <option value="UTC" className="bg-gray-800">UTC (Coordinated Universal Time)</option>
+                      <option value="Europe/Paris" className="bg-gray-800">Europe/Paris</option>
+                      <option value="America/New_York" className="bg-gray-800">America/New_York</option>
+                      <option value="Asia/Tokyo" className="bg-gray-800">Asia/Tokyo</option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Default Language</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                    <option>English</option>
-                    <option>French</option>
-                    <option>Spanish</option>
-                    <option>German</option>
-                  </select>
+                  <div className="relative">
+                    <select 
+                      value={generalSettings.language}
+                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, language: e.target.value }))}
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white appearance-none cursor-pointer hover:bg-white/15 transition-colors"
+                      style={{ colorScheme: 'dark' }}
+                    >
+                      <option value="English" className="bg-gray-800">English</option>
+                      <option value="French" className="bg-gray-800">French</option>
+                      <option value="Spanish" className="bg-gray-800">Spanish</option>
+                      <option value="German" className="bg-gray-800">German</option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -165,15 +207,23 @@ export default function SettingsAdvancedPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Currency</label>
-                  <select 
-                    value={paymentSettings.currency}
-                    onChange={(e) => setPaymentSettings(prev => ({ ...prev, currency: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3"
-                  >
-                    <option value="USD">USD - US Dollar</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="GBP">GBP - British Pound</option>
-                  </select>
+                  <div className="relative">
+                    <select 
+                      value={paymentSettings.currency}
+                      onChange={(e) => setPaymentSettings(prev => ({ ...prev, currency: e.target.value }))}
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white appearance-none cursor-pointer hover:bg-white/15 transition-colors"
+                      style={{ colorScheme: 'dark' }}
+                    >
+                      <option value="USD" className="bg-gray-800">USD - US Dollar</option>
+                      <option value="EUR" className="bg-gray-800">EUR - Euro</option>
+                      <option value="GBP" className="bg-gray-800">GBP - British Pound</option>
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Tax Rate (%)</label>
@@ -181,7 +231,7 @@ export default function SettingsAdvancedPage() {
                     type="number" 
                     value={paymentSettings.taxRate}
                     onChange={(e) => setPaymentSettings(prev => ({ ...prev, taxRate: Number(e.target.value) }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" 
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 hover:bg-white/15 transition-colors cursor-text"
                   />
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
