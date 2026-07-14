@@ -1,59 +1,116 @@
-export interface Translation {
+export const translation = {
   // Navigation
-  dashboard: string
-  products: string
-  orders: string
-  customers: string
-  analytics: string
-  settings: string
+  nav: {
+    dashboard: 'Painel',
+    products: 'Produtos',
+    branding: 'Marca',
+    ads: 'Anúncios',
+    analytics: 'Análises',
+    assistant: 'Assistente',
+    suppliers: 'Fornecedores',
+    orders: 'Pedidos',
+    payments: 'Pagamentos',
+    settings: 'Configurações',
+    logout: 'Sair',
+  },
+  
+  // Dashboard
+  dashboard: {
+    title: 'Painel',
+    revenue: 'Receita',
+    products: 'Produtos',
+    roas: 'ROAS',
+    users: 'Usuários',
+    welcome: 'Bem-vindo',
+  },
   
   // Common
-  search: string
-  save: string
-  cancel: string
-  delete: string
-  edit: string
-  add: string
-  view: string
-  loading: string
+  common: {
+    save: 'Salvar',
+    cancel: 'Cancelar',
+    delete: 'Excluir',
+    edit: 'Editar',
+    add: 'Adicionar',
+    search: 'Pesquisar',
+    filter: 'Filtrar',
+    export: 'Exportar',
+    import: 'Importar',
+    loading: 'Carregando...',
+    noResults: 'Sem resultados',
+    confirm: 'Confirmar',
+    back: 'Voltar',
+    next: 'Próximo',
+    previous: 'Anterior',
+    submit: 'Enviar',
+    close: 'Fechar',
+  },
   
-  // Home
-  welcome: string
-  welcomeMessage: string
+  // AI Agents
+  ai: {
+    title: 'Painel IA',
+    productIntelligence: 'Inteligência de produto',
+    supplierEngine: 'Motor de fornecedores',
+    brandingGenerator: 'Gerador de marca',
+    adsGenerator: 'Gerador de anúncios',
+    positioningEngine: 'Motor de posicionamento',
+    marketAnalytics: 'Análise de mercado',
+    businessAssistant: 'Assistente comercial',
+    recommendations: 'Recomendações',
+  },
   
-  // Actions
-  export: string
-  import: string
-  filter: string
-  sort: string
+  // Status
+  status: {
+    active: 'Ativo',
+    inactive: 'Inativo',
+    pending: 'Pendente',
+    error: 'Erro',
+    success: 'Sucesso',
+    online: 'Online',
+    offline: 'Offline',
+  },
+  
+  // Footer
+  footer: {
+    allRightsReserved: 'Todos os direitos reservados',
+    privacyPolicy: 'Política de privacidade',
+    termsOfService: 'Termos de serviço',
+    contact: 'Contato',
+  },
+  
+  // Auth
+  auth: {
+    login: 'Entrar',
+    register: 'Cadastrar',
+    logout: 'Sair',
+    email: 'E-mail',
+    password: 'Senha',
+    forgotPassword: 'Esqueceu a senha?',
+    rememberMe: 'Lembrar-me',
+  },
+  
+  // Settings
+  settings: {
+    title: 'Configurações',
+    language: 'Idioma',
+    currency: 'Moeda',
+    timezone: 'Fuso horário',
+    notifications: 'Notificações',
+    security: 'Segurança',
+    profile: 'Perfil',
+    account: 'Conta',
+  },
+  
+  // Languages
+  languages: {
+    en: 'Inglês',
+    fr: 'Francês',
+    es: 'Espanhol',
+    de: 'Alemão',
+    zh: 'Chinês',
+    ja: 'Japonês',
+    pt: 'Português',
+    ar: 'Árabe',
+  },
 }
 
-export const translation: Translation = {
-  // Navigation
-  dashboard: 'Painel',
-  products: 'Produtos',
-  orders: 'Pedidos',
-  customers: 'Clientes',
-  analytics: 'Análises',
-  settings: 'Configurações',
-  
-  // Common
-  search: 'Pesquisar',
-  save: 'Salvar',
-  cancel: 'Cancelar',
-  delete: 'Excluir',
-  edit: 'Editar',
-  add: 'Adicionar',
-  view: 'Ver',
-  loading: 'Carregando...',
-  
-  // Home
-  welcome: 'Bem-vindo',
-  welcomeMessage: 'Bem-vindo ao E-Seller',
-  
-  // Actions
-  export: 'Exportar',
-  import: 'Importar',
-  filter: 'Filtrar',
-  sort: 'Ordenar',
-}
+export type Translation = typeof translation
