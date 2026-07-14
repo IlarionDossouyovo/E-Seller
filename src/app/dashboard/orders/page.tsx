@@ -119,11 +119,11 @@ const mockOrders: Order[] = [
 ]
 
 const statusConfig = {
-  pending: { label: 'Pending', color: 'text-yellow-400', bg: 'bg-yellow-500/20', icon: Clock },
-  processing: { label: 'Processing', color: 'text-blue-400', bg: 'bg-blue-500/20', icon: Package },
-  shipped: { label: 'Shipped', color: 'text-purple-400', bg: 'bg-purple-500/20', icon: Truck },
-  delivered: { label: 'Delivered', color: 'text-green-400', bg: 'bg-green-500/20', icon: CheckCircle },
-  cancelled: { label: 'Cancelled', color: 'text-red-400', bg: 'bg-red-500/20', icon: XCircle },
+  pending: { label: 'En attente', color: 'text-yellow-400', bg: 'bg-yellow-500/20', icon: Clock },
+  processing: { label: 'En cours', color: 'text-blue-400', bg: 'bg-blue-500/20', icon: Package },
+  shipped: { label: 'Expedie', color: 'text-purple-400', bg: 'bg-purple-500/20', icon: Truck },
+  delivered: { label: 'Livre', color: 'text-green-400', bg: 'bg-green-500/20', icon: CheckCircle },
+  cancelled: { label: 'Annule', color: 'text-red-400', bg: 'bg-red-500/20', icon: XCircle },
 }
 
 export default function OrdersPage() {
@@ -140,10 +140,10 @@ export default function OrdersPage() {
   })
 
   const stats = [
-    { label: 'Total Orders', value: orders.length, icon: Package },
-    { label: 'Pending', value: orders.filter(o => o.status === 'pending').length, icon: Clock },
-    { label: 'Revenue', value: `$${orders.reduce((sum, o) => sum + o.total, 0).toFixed(2)}`, icon: DollarSign },
-    { label: 'Delivered', value: orders.filter(o => o.status === 'delivered').length, icon: CheckCircle },
+    { label: 'Total commandes', value: orders.length, icon: Package },
+    { label: 'En attente', value: orders.filter(o => o.status === 'pending').length, icon: Clock },
+    { label: 'Revenu', value: `${orders.reduce((sum, o) => sum + o.total, 0).toFixed(2).replace('.', ',')}€`, icon: DollarSign },
+    { label: 'Livre', value: orders.filter(o => o.status === 'delivered').length, icon: CheckCircle },
   ]
 
   return (
@@ -151,16 +151,16 @@ export default function OrdersPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-[var(--font-sora)]">Orders Management</h1>
-          <p className="text-gray-400">Track and manage all your orders</p>
+          <h1 className="text-2xl font-bold font-[var(--font-sora)]">Gestion des commandes</h1>
+          <p className="text-gray-400">Suivez et gestionnez toutes vos commandes</p>
         </div>
         <div className="flex items-center gap-3">
           <button className="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
             <Download className="w-4 h-4" />
-            Export
+            Exporter
           </button>
           <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm">
-            Create Order
+            Creer une commande
           </button>
         </div>
       </div>
@@ -197,7 +197,7 @@ export default function OrdersPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search orders..."
+              placeholder="Rechercher des commandes..."
               className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
@@ -212,7 +212,7 @@ export default function OrdersPage() {
                     : 'bg-white/5 text-gray-400 hover:bg-white/10'
                 }`}
               >
-                {status === 'all' ? 'All' : statusConfig[status as OrderStatus].label}
+                {status === 'all' ? 'Tous' : statusConfig[status as OrderStatus].label}
               </button>
             ))}
           </div>
@@ -225,11 +225,11 @@ export default function OrdersPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Order ID</th>
-                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Customer</th>
-                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Products</th>
+                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">N-commande</th>
+                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Client</th>
+                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Produits</th>
                 <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Total</th>
-                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Status</th>
+                <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Statut</th>
                 <th className="text-left py-4 px-6 text-sm text-gray-400 font-medium">Date</th>
                 <th className="text-right py-4 px-6 text-sm text-gray-400 font-medium">Actions</th>
               </tr>
@@ -261,7 +261,7 @@ export default function OrdersPage() {
                         ))}
                       </div>
                     </td>
-                    <td className="py-4 px-6 font-semibold">${order.total.toFixed(2)}</td>
+                    <td className="py-4 px-6 font-semibold">{order.total.toFixed(2).replace('.', ',')}€</td>
                     <td className="py-4 px-6">
                       <span className={`px-3 py-1 rounded-full text-sm ${status.bg} ${status.color}`}>
                         {status.label}
@@ -293,7 +293,7 @@ export default function OrdersPage() {
             className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto"
           >
             <div className="p-6 border-b border-white/10 flex items-center justify-between">
-              <h2 className="text-xl font-bold">Order {selectedOrder.id}</h2>
+              <h2 className="text-xl font-bold">Commande {selectedOrder.id}</h2>
               <button 
                 onClick={() => setSelectedOrder(null)}
                 className="p-2 rounded-lg hover:bg-white/10"
@@ -314,7 +314,7 @@ export default function OrdersPage() {
 
               {/* Customer Info */}
               <div>
-                <h3 className="text-sm text-gray-400 mb-3">Customer Information</h3>
+                <h3 className="text-sm text-gray-400 mb-3">Informations client</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="p-4 rounded-xl bg-white/5">
                     <div className="flex items-center gap-2 mb-2">
@@ -327,7 +327,7 @@ export default function OrdersPage() {
                   <div className="p-4 rounded-xl bg-white/5">
                     <div className="flex items-center gap-2 mb-2">
                       <MapPin className="w-4 h-4 text-electron-blue" />
-                      <span className="font-medium">Shipping Address</span>
+                      <span className="font-medium">Adresse de livraison</span>
                     </div>
                     <p className="text-sm text-gray-400">{selectedOrder.customer.address}</p>
                   </div>
@@ -336,22 +336,22 @@ export default function OrdersPage() {
 
               {/* Products */}
               <div>
-                <h3 className="text-sm text-gray-400 mb-3">Products</h3>
+                <h3 className="text-sm text-gray-400 mb-3">Produits</h3>
                 <div className="space-y-3">
                   {selectedOrder.products.map((product, i) => (
                     <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
                       <div>
                         <p className="font-medium">{product.name}</p>
-                        <p className="text-sm text-gray-400">Qty: {product.quantity}</p>
+                        <p className="text-sm text-gray-400">Qte: {product.quantity}</p>
                       </div>
-                      <p className="font-semibold">${(product.price * product.quantity).toFixed(2)}</p>
+                      <p className="font-semibold">{(product.price * product.quantity).toFixed(2).replace('.', ',')}€</p>
                     </div>
                   ))}
                 </div>
                 <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-electron-blue/20 to-electron-purple/20 border border-electron-blue/20">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold">Total</span>
-                    <span className="text-2xl font-bold">${selectedOrder.total.toFixed(2)}</span>
+                    <span className="text-2xl font-bold">{selectedOrder.total.toFixed(2).replace('.', ',')}€</span>
                   </div>
                 </div>
               </div>
@@ -360,22 +360,22 @@ export default function OrdersPage() {
               <div className="flex gap-3">
                 {selectedOrder.status === 'pending' && (
                   <button className="flex-1 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity">
-                    Start Processing
+                    Commencer le traitement
                   </button>
                 )}
                 {selectedOrder.status === 'processing' && (
                   <button className="flex-1 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity">
-                    Mark as Shipped
+                    Marquer comme expedie
                   </button>
                 )}
                 {selectedOrder.status === 'shipped' && (
                   <button className="flex-1 py-3 rounded-xl bg-green-500 hover:opacity-90 transition-opacity">
-                    Mark as Delivered
+                    Marquer comme livre
                   </button>
                 )}
                 {selectedOrder.status !== 'cancelled' && selectedOrder.status !== 'delivered' && (
                   <button className="py-3 px-6 rounded-xl border border-red-500 text-red-400 hover:bg-red-500/10 transition-colors">
-                    Cancel Order
+                    Annuler la commande
                   </button>
                 )}
               </div>
