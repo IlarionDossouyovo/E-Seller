@@ -24,13 +24,13 @@ import {
 const mockProducts = [
   {
     id: 1,
-    name: 'Wireless Earbuds Pro Max',
-    category: 'Electronics',
+    name: 'Ecouteurs Sans Fil Pro Max',
+    category: 'Electronique',
     trend: 'up',
     score: 92,
-    revenue: '$45,200',
+    revenue: '45 200€',
     growth: '+156%',
-    saturation: 'Low',
+    saturation: 'Faible',
     platforms: ['TikTok', 'Instagram'],
     image: 'https://picsum.photos/seed/earbuds1/400/400',
     price: 49.99,
@@ -38,13 +38,13 @@ const mockProducts = [
   },
   {
     id: 2,
-    name: 'Smart Water Bottle with Temp Display',
-    category: 'Home & Garden',
+    name: 'Gourde Connectee avec Affichage Temperature',
+    category: 'Maison & Jardin',
     trend: 'up',
     score: 88,
-    revenue: '$32,500',
+    revenue: '32 500€',
     growth: '+89%',
-    saturation: 'Medium',
+    saturation: 'Moyen',
     platforms: ['TikTok', 'Facebook'],
     image: 'https://picsum.photos/seed/bottle2/400/400',
     price: 29.99,
@@ -52,13 +52,13 @@ const mockProducts = [
   },
   {
     id: 3,
-    name: 'Portable Ring Light Kit',
-    category: 'Electronics',
+    name: 'Kit Anneau Lumineux Portable',
+    category: 'Electronique',
     trend: 'stable',
     score: 76,
-    revenue: '$18,900',
+    revenue: '18 900€',
     growth: '+34%',
-    saturation: 'High',
+    saturation: 'Eleve',
     platforms: ['Instagram', 'Meta'],
     image: 'https://picsum.photos/seed/light3/400/400',
     price: 24.99,
@@ -66,13 +66,13 @@ const mockProducts = [
   },
   {
     id: 4,
-    name: 'Ergonomic Laptop Stand',
-    category: 'Office',
+    name: 'Support Laptop Ergonimique',
+    category: 'Bureau',
     trend: 'up',
     score: 84,
-    revenue: '$28,400',
+    revenue: '28 400€',
     growth: '+67%',
-    saturation: 'Low',
+    saturation: 'Faible',
     platforms: ['TikTok', 'Google'],
     image: 'https://picsum.photos/seed/laptop4/400/400',
     price: 39.99,
@@ -80,13 +80,13 @@ const mockProducts = [
   },
   {
     id: 5,
-    name: 'Minimalist Watch Collection',
-    category: 'Fashion',
+    name: 'Collection Montre Minimaliste',
+    category: 'Mode',
     trend: 'down',
     score: 68,
-    revenue: '$12,300',
+    revenue: '12 300€',
     growth: '-12%',
-    saturation: 'Very High',
+    saturation: 'Tres Eleve',
     platforms: ['Instagram'],
     image: 'https://picsum.photos/seed/watch5/400/400',
     price: 89.99,
@@ -94,13 +94,13 @@ const mockProducts = [
   },
   {
     id: 6,
-    name: 'Yoga Mat with Alignment Lines',
+    name: 'Tapis de Yoga avec Lignes d\'Alignement',
     category: 'Sports',
     trend: 'up',
     score: 81,
-    revenue: '$21,600',
+    revenue: '21 600€',
     growth: '+52%',
-    saturation: 'Medium',
+    saturation: 'Moyen',
     platforms: ['TikTok', 'Instagram'],
     image: 'https://picsum.photos/seed/yoga6/400/400',
     price: 34.99,
@@ -108,13 +108,13 @@ const mockProducts = [
   },
 ]
 
-const categories = ['All', 'Electronics', 'Fashion', 'Home & Garden', 'Sports', 'Office', 'Beauty']
-const platforms = ['All Platforms', 'TikTok', 'Instagram', 'Facebook', 'Meta', 'Google']
+  const categories = ['Tous', 'Electronique', 'Mode', 'Maison & Jardin', 'Sports', 'Bureau', 'Beauté']
+const platforms = ['Toutes les plateformes', 'TikTok', 'Instagram', 'Facebook', 'Meta', 'Google']
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [selectedPlatform, setSelectedPlatform] = useState('All Platforms')
+  const [selectedCategory, setSelectedCategory] = useState('Tous')
+  const [selectedPlatform, setSelectedPlatform] = useState('Toutes les plateformes')
   const [isSearching, setIsSearching] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
   const [searchResults, setSearchResults] = useState('')
@@ -178,7 +178,7 @@ export default function ProductsPage() {
               className="px-6 py-4 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2"
             >
               <Filter className="w-5 h-5" />
-              Filters
+              Filtres
             </button>
             <button 
               onClick={handleSearch}
@@ -188,12 +188,12 @@ export default function ProductsPage() {
               {isSearching ? (
                 <>
                   <Sparkles className="w-5 h-5 animate-pulse" />
-                  Analyzing...
+                  Analyse en cours...
                 </>
               ) : (
                 <>
                   <Zap className="w-5 h-5" />
-                  AI Search
+                  Recherche IA
                 </>
               )}
             </button>
@@ -209,7 +209,7 @@ export default function ProductsPage() {
             className="mt-4 pt-4 border-t border-white/10 flex flex-wrap gap-4"
           >
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Category</label>
+              <label className="block text-sm text-gray-400 mb-2">Catégorie</label>
               <div className="flex flex-wrap gap-2">
                 {categories.map(cat => (
                   <a
@@ -227,7 +227,7 @@ export default function ProductsPage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Platform</label>
+              <label className="block text-sm text-gray-400 mb-2">Plateforme</label>
               <div className="flex flex-wrap gap-2">
                 {platforms.map(plat => (
                   <a
@@ -251,10 +251,10 @@ export default function ProductsPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Products Found', value: '2,456', icon: ShoppingCart },
-          { label: 'Avg Score', value: '78/100', icon: Star },
-          { label: 'Total Revenue', value: '$485K', icon: TrendingUp },
-          { label: 'Active Searches', value: '124', icon: Search },
+          { label: 'Produits trouvés', value: '2,456', icon: ShoppingCart },
+          { label: 'Score moyen', value: '78/100', icon: Star },
+          { label: 'Revenu total', value: '485K€', icon: TrendingUp },
+          { label: 'Recherches actives', value: '124', icon: Search },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -279,7 +279,7 @@ export default function ProductsPage() {
       {/* AI Search Results */}
       {(searchResults || error) && (
         <div className={`glass-card p-6 ${error ? 'border-red-500/50' : 'border-green-500/50'}`}>
-          <h3 className="text-lg font-semibold mb-4">AI Research Results</h3>
+          <h3 className="text-lg font-semibold mb-4">Résultats de recherche IA</h3>
           {error && <p className="text-red-400">{error}</p>}
           {searchResults && <div className="prose prose-invert max-w-none whitespace-pre-wrap">{searchResults}</div>}
         </div>
@@ -288,11 +288,11 @@ export default function ProductsPage() {
       {/* Results */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold font-[var(--font-sora)]">
-          Winning Products ({mockProducts.length})
+          Produits Gagnants ({mockProducts.length})
         </h2>
         <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
           <Download className="w-4 h-4" />
-          Export
+          Exporter
         </button>
       </div>
 
@@ -355,7 +355,7 @@ export default function ProductsPage() {
               {/* Score Bar */}
               <div className="mb-4">
                 <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="text-gray-400">AI Score</span>
+                  <span className="text-gray-400">Score IA</span>
                   <span className={`font-bold ${product.score >= 85 ? 'text-green-400' : product.score >= 70 ? 'text-yellow-400' : 'text-red-400'}`}>
                     {product.score}/100
                   </span>
@@ -375,21 +375,21 @@ export default function ProductsPage() {
               {/* Stats */}
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
                 <div>
-                  <p className="text-xs text-gray-400">Revenue</p>
+                  <p className="text-xs text-gray-400">Revenu</p>
                   <p className="font-bold">{product.revenue}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400">Growth</p>
+                  <p className="text-xs text-gray-400">Croissance</p>
                   <p className={`font-bold ${product.growth.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
                     {product.growth}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400">Price</p>
-                  <p className="font-bold">${product.price}</p>
+                  <p className="text-xs text-gray-400">Prix</p>
+                  <p className="font-bold">{product.price}€</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400">Margin</p>
+                  <p className="text-xs text-gray-400">Marge</p>
                   <p className="font-bold">{product.margin}%</p>
                 </div>
               </div>
@@ -397,10 +397,10 @@ export default function ProductsPage() {
               {/* Actions */}
               <div className="mt-4 flex gap-2">
                 <a href={`/dashboard/products/${product.id}`} className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm font-medium text-center">
-                  View Details
+                  Voir détails
                 </a>
                 <a href="/store" className="flex-1 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity text-sm font-medium text-center">
-                  Start Selling
+                  Commencer à vendre
                 </a>
               </div>
             </div>
