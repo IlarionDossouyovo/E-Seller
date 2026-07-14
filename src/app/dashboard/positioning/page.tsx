@@ -147,7 +147,7 @@ export default function PositioningPage() {
         <button
           onClick={handleAnalyze}
           disabled={isAnalyzing}
-          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue via-electron-purple to-blue-600 font-semibold flex items-center justify-center gap-2 hover:opacity-90 hover:shadow-lg hover:shadow-electron-blue/30 transition-all disabled:opacity-70 cursor-pointer"
+          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue via-electron-purple to-blue-600 font-semibold text-white flex items-center justify-center gap-2 hover:opacity-90 hover:shadow-lg hover:shadow-electron-blue/30 transition-all disabled:opacity-70 cursor-pointer shadow-lg"
         >
           {isAnalyzing ? (
             <>
