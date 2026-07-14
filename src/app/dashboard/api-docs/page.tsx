@@ -17,7 +17,15 @@ import {
   Globe,
   Shield,
   Clock,
-  Zap
+  Zap,
+  Brain,
+  BarChart3,
+  MessageSquare,
+  Search,
+  TrendingUp,
+  Settings,
+  Upload,
+  Mail
 } from 'lucide-react'
 
 const endpoints = [
@@ -29,6 +37,7 @@ const endpoints = [
       { method: 'POST', path: '/api/auth/register', description: 'User registration', status: 'active' },
       { method: 'POST', path: '/api/auth/refresh', description: 'Refresh token', status: 'active' },
       { method: 'POST', path: '/api/auth/logout', description: 'User logout', status: 'active' },
+      { method: 'GET', path: '/api/auth/session', description: 'Get current session', status: 'active' },
     ]
   },
   { 
@@ -40,6 +49,7 @@ const endpoints = [
       { method: 'POST', path: '/api/products', description: 'Create product', status: 'active' },
       { method: 'PUT', path: '/api/products/:id', description: 'Update product', status: 'active' },
       { method: 'DELETE', path: '/api/products/:id', description: 'Delete product', status: 'active' },
+      { method: 'GET', path: '/api/products/search', description: 'Search products', status: 'active' },
     ]
   },
   { 
@@ -50,6 +60,7 @@ const endpoints = [
       { method: 'GET', path: '/api/orders/:id', description: 'Get order details', status: 'active' },
       { method: 'POST', path: '/api/orders', description: 'Create order', status: 'active' },
       { method: 'PATCH', path: '/api/orders/:id/status', description: 'Update order status', status: 'active' },
+      { method: 'POST', path: '/api/orders/:id/cancel', description: 'Cancel order', status: 'active' },
     ]
   },
   { 
@@ -60,6 +71,111 @@ const endpoints = [
       { method: 'GET', path: '/api/customers/:id', description: 'Get customer details', status: 'active' },
       { method: 'POST', path: '/api/customers', description: 'Create customer', status: 'active' },
       { method: 'PUT', path: '/api/customers/:id', description: 'Update customer', status: 'active' },
+      { method: 'DELETE', path: '/api/customers/:id', description: 'Delete customer', status: 'active' },
+    ]
+  },
+  { 
+    category: 'AI - Product Intelligence', 
+    icon: Brain,
+    endpoints: [
+      { method: 'POST', path: '/api/ai/product-intelligence', description: 'AI product research', status: 'active' },
+      { method: 'POST', path: '/api/ai/product-analysis', description: 'Analyze product potential', status: 'active' },
+      { method: 'GET', path: '/api/ai/trends', description: 'Get trending products', status: 'active' },
+    ]
+  },
+  { 
+    category: 'AI - Assistant', 
+    icon: MessageSquare,
+    endpoints: [
+      { method: 'POST', path: '/api/ai-assistant', description: 'AI business assistant', status: 'active' },
+      { method: 'POST', path: '/api/ai/business-assistant', description: 'Business advice chatbot', status: 'active' },
+    ]
+  },
+  { 
+    category: 'AI - Unified', 
+    icon: Zap,
+    endpoints: [
+      { method: 'POST', path: '/api/unified-ai', description: 'Unified AI endpoint', status: 'active' },
+      { method: 'GET', path: '/api/unified-ai/status', description: 'AI service status', status: 'active' },
+    ]
+  },
+  { 
+    category: 'AI - Ollama', 
+    icon: Brain,
+    endpoints: [
+      { method: 'POST', path: '/api/ollama/chat', description: 'Chat with Ollama AI', status: 'active' },
+      { method: 'POST', path: '/api/ollama/generate', description: 'Generate with Ollama', status: 'active' },
+      { method: 'GET', path: '/api/ollama/models', description: 'List available models', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Analytics', 
+    icon: BarChart3,
+    endpoints: [
+      { method: 'GET', path: '/api/analytics/overview', description: 'Get analytics overview', status: 'active' },
+      { method: 'GET', path: '/api/analytics/realtime', description: 'Real-time analytics', status: 'active' },
+      { method: 'GET', path: '/api/analytics/sales', description: 'Sales analytics', status: 'active' },
+      { method: 'GET', path: '/api/analytics/traffic', description: 'Traffic analytics', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Search & SEO', 
+    icon: Search,
+    endpoints: [
+      { method: 'GET', path: '/api/analytics/search', description: 'Search analytics', status: 'active' },
+      { method: 'POST', path: '/api/ai/seo-optimize', description: 'SEO optimization', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Reports', 
+    icon: TrendingUp,
+    endpoints: [
+      { method: 'GET', path: '/api/reports', description: 'List reports', status: 'active' },
+      { method: 'POST', path: '/api/reports/generate', description: 'Generate report', status: 'active' },
+      { method: 'GET', path: '/api/reports/:id', description: 'Get report details', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Settings', 
+    icon: Settings,
+    endpoints: [
+      { method: 'GET', path: '/api/settings', description: 'Get all settings', status: 'active' },
+      { method: 'PUT', path: '/api/settings', description: 'Update settings', status: 'active' },
+      { method: 'GET', path: '/api/settings/:key', description: 'Get setting by key', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Uploads', 
+    icon: Upload,
+    endpoints: [
+      { method: 'POST', path: '/api/upload', description: 'Upload file', status: 'active' },
+      { method: 'DELETE', path: '/api/upload/:id', description: 'Delete uploaded file', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Email', 
+    icon: Mail,
+    endpoints: [
+      { method: 'GET', path: '/api/email/templates', description: 'List email templates', status: 'active' },
+      { method: 'POST', path: '/api/email/send', description: 'Send email', status: 'active' },
+      { method: 'POST', path: '/api/email/webhook', description: 'Email webhook handler', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Webhooks', 
+    icon: Zap,
+    endpoints: [
+      { method: 'GET', path: '/api/webhooks', description: 'List webhooks', status: 'active' },
+      { method: 'POST', path: '/api/webhooks', description: 'Create webhook', status: 'active' },
+      { method: 'DELETE', path: '/api/webhooks/:id', description: 'Delete webhook', status: 'active' },
+    ]
+  },
+  { 
+    category: 'Status', 
+    icon: Shield,
+    endpoints: [
+      { method: 'GET', path: '/api/status', description: 'API status check', status: 'active' },
+      { method: 'GET', path: '/api/debug-env', description: 'Debug environment', status: 'active' },
     ]
   },
   { 
@@ -141,7 +257,7 @@ export default function APIDocsPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'API Version', value: 'v1', icon: Zap },
-          { label: 'Total Endpoints', value: '24', icon: BookOpen },
+          { label: 'Total Endpoints', value: String(endpoints.reduce((acc, cat) => acc + cat.endpoints.length, 0)), icon: BookOpen },
           { label: 'Rate Limit', value: '100/min', icon: Clock },
           { label: 'Uptime', value: '99.9%', icon: Shield },
         ].map((stat, i) => (
