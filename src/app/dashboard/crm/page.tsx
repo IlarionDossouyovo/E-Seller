@@ -41,27 +41,27 @@ type Customer = {
 }
 
 const mockCustomers: Customer[] = [
-  { id: 1, name: 'Sarah Johnson', email: 'sarah.j@email.com', phone: '+1 234 567 8901', location: 'New York, USA', avatar: '👩', totalOrders: 12, totalSpent: 2450, lastOrder: '2024-04-08', segment: 'vip', status: 'active', tags: ['Frequent Buyer', 'Electronics'] },
-  { id: 2, name: 'Mike Chen', email: 'mike.chen@email.com', phone: '+1 234 567 8902', location: 'Los Angeles, USA', avatar: '👨', totalOrders: 5, totalSpent: 890, lastOrder: '2024-04-07', segment: 'regular', status: 'active', tags: ['Sports'] },
-  { id: 3, name: 'Emma Wilson', email: 'emma.w@email.com', phone: '+1 234 567 8903', location: 'London, UK', avatar: '👩‍🦰', totalOrders: 1, totalSpent: 149, lastOrder: '2024-04-09', segment: 'new', status: 'active', tags: ['New Customer'] },
-  { id: 4, name: 'James Brown', email: 'james.b@email.com', phone: '+1 234 567 8904', location: 'Paris, France', avatar: '👨‍🦱', totalOrders: 8, totalSpent: 1200, lastOrder: '2024-03-15', segment: 'at_risk', status: 'inactive', tags: ['At Risk'] },
-  { id: 5, name: 'Lisa Anderson', email: 'lisa.a@email.com', phone: '+1 234 567 8905', location: 'Tokyo, Japan', avatar: '👩', totalOrders: 15, totalSpent: 3800, lastOrder: '2024-04-09', segment: 'vip', status: 'active', tags: ['VIP', 'Electronics'] },
-  { id: 6, name: 'David Lee', email: 'david.l@email.com', phone: '+1 234 567 8906', location: 'Sydney, Australia', avatar: '👨', totalOrders: 3, totalSpent: 450, lastOrder: '2024-04-05', segment: 'regular', status: 'active', tags: ['Fashion'] },
+  { id: 1, name: 'Sophie Martin', email: 'sophie.m@email.com', phone: '+33 1 23 45 67 89', location: 'Paris, France', avatar: '👩', totalOrders: 12, totalSpent: 2450, lastOrder: '2024-04-08', segment: 'vip', status: 'active', tags: ['Acheteur Fidele', 'Electronique'] },
+  { id: 2, name: 'Marc Dubois', email: 'marc.d@email.com', phone: '+33 1 23 45 67 90', location: 'Lyon, France', avatar: '👨', totalOrders: 5, totalSpent: 890, lastOrder: '2024-04-07', segment: 'regular', status: 'active', tags: ['Sports'] },
+  { id: 3, name: 'Emma Bernard', email: 'emma.b@email.com', phone: '+33 1 23 45 67 91', location: 'Marseille, France', avatar: '👩‍🦰', totalOrders: 1, totalSpent: 149, lastOrder: '2024-04-09', segment: 'new', status: 'active', tags: ['Nouveau Client'] },
+  { id: 4, name: 'Jacques Petit', email: 'jacques.p@email.com', phone: '+33 1 23 45 67 92', location: 'Toulouse, France', avatar: '👨‍🦱', totalOrders: 8, totalSpent: 1200, lastOrder: '2024-03-15', segment: 'at_risk', status: 'inactive', tags: ['A Risque'] },
+  { id: 5, name: 'Claire Moreau', email: 'claire.m@email.com', phone: '+33 1 23 45 67 93', location: 'Nice, France', avatar: '👩', totalOrders: 15, totalSpent: 3800, lastOrder: '2024-04-09', segment: 'vip', status: 'active', tags: ['VIP', 'Electronique'] },
+  { id: 6, name: 'Lucas Girard', email: 'lucas.g@email.com', phone: '+33 1 23 45 67 94', location: 'Bordeaux, France', avatar: '👨', totalOrders: 3, totalSpent: 450, lastOrder: '2024-04-05', segment: 'regular', status: 'active', tags: ['Mode'] },
 ]
 
 const segments = [
-  { key: 'all', label: 'All Customers', count: 156, color: 'bg-gray-500' },
+  { key: 'all', label: 'Tous les Clients', count: 156, color: 'bg-gray-500' },
   { key: 'vip', label: 'VIP', count: 23, color: 'bg-yellow-500' },
   { key: 'regular', label: 'Regular', count: 89, color: 'bg-blue-500' },
-  { key: 'new', label: 'New', count: 28, color: 'bg-green-500' },
-  { key: 'at_risk', label: 'At Risk', count: 16, color: 'bg-red-500' },
+  { key: 'new', label: 'Nouveau', count: 28, color: 'bg-green-500' },
+  { key: 'at_risk', label: 'A Risque', count: 16, color: 'bg-red-500' },
 ]
 
 const stats = [
-  { label: 'Total Customers', value: '156', change: '+12%', icon: Users },
-  { label: 'New This Month', value: '28', change: '+18%', icon: UserPlus },
-  { label: 'Total Revenue', value: '$45,230', change: '+8.5%', icon: DollarSign },
-  { label: 'Avg. Order Value', value: '$189', change: '+5.2%', icon: ShoppingCart },
+  { label: 'Total Clients', value: '156', change: '+12%', icon: Users },
+  { label: 'Nouveaux ce Mois', value: '28', change: '+18%', icon: UserPlus },
+  { label: 'Revenu Total', value: '45 230 EUR', change: '+8.5%', icon: DollarSign },
+  { label: 'Panier Moyen', value: '189 EUR', change: '+5.2%', icon: ShoppingCart },
 ]
 
 export default function CRMPage() {
@@ -69,6 +69,7 @@ export default function CRMPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [segmentFilter, setSegmentFilter] = useState('all')
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const filteredCustomers = customers.filter(customer => {
     const matchesSearch = customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -84,34 +85,34 @@ export default function CRMPage() {
       case 'regular':
         return <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm">Regular</span>
       case 'new':
-        return <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">New</span>
+        return <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Nouveau</span>
       case 'at_risk':
-        return <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm flex items-center gap-1"><TrendingUp className="w-3 h-3" /> At Risk</span>
+        return <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm flex items-center gap-1"><TrendingUp className="w-3 h-3" /> A Risque</span>
     }
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-pink-500/20 via-rose-500/10 to-transparent border border-pink-500/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
-              <Users className="w-6 h-6 text-white" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg shadow-pink-500/30">
+              <Users className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Customer CRM</h1>
-              <p className="text-gray-400">Manage customers, segments, and relationships</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">CRM Clients</h1>
+              <p className="text-gray-300">Gerez les clients, segments et relations</p>
             </div>
           </div>
           <div className="flex gap-3">
-            <button className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-2">
+            <button onClick={() => { setNotification('Export en cours...'); setTimeout(() => { setNotification('Export termine!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-2 border border-white/20 font-medium">
               <Download className="w-4 h-4" />
               Export
             </button>
-            <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+            <button onClick={() => { setNotification('Ajout client...'); setTimeout(() => { setNotification('Client ajoute!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
               <UserPlus className="w-5 h-5" />
-              Add Customer
+              Ajouter Client
             </button>
           </div>
         </div>
@@ -128,12 +129,12 @@ export default function CRMPage() {
             className="glass-card p-4"
           >
             <div className="flex items-center justify-between mb-2">
-              <stat.icon className="w-5 h-5 text-electron-blue" />
-              <span className={`text-sm ${stat.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+              <stat.icon className="w-5 h-5 text-pink-500" />
+              <span className={`text-sm font-medium ${stat.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
                 {stat.change}
               </span>
             </div>
-            <p className="text-2xl font-bold">{stat.value}</p>
+            <p className="text-2xl font-bold text-white">{stat.value}</p>
             <p className="text-sm text-gray-400">{stat.label}</p>
           </motion.div>
         ))}
@@ -145,11 +146,11 @@ export default function CRMPage() {
           {segments.map(segment => (
             <button
               key={segment.key}
-              onClick={() => setSegmentFilter(segment.key)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl whitespace-nowrap transition-all ${
+              onClick={() => { setSegmentFilter(segment.key); setNotification(segment.label + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap transition-all font-medium ${
                 segmentFilter === segment.key
                   ? 'bg-electron-blue text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
               }`}
             >
               <div className={`w-2 h-2 rounded-full ${segment.color}`} />
@@ -168,10 +169,10 @@ export default function CRMPage() {
           <Search className="w-5 h-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Search customers by name or email..."
+            placeholder="Rechercher clients par nom ou email..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"
+            onChange={(e) => { setSearchTerm(e.target.value); setNotification('Recherche: ' + e.target.value); setTimeout(() => setNotification(null), 1000) }}
+            className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 flex-1 outline-none focus:border-electron-blue"
           />
         </div>
       </div>
@@ -182,12 +183,12 @@ export default function CRMPage() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr>
-                <th className="text-left p-4 text-gray-400 font-medium">Customer</th>
-                <th className="text-left p-4 text-gray-400 font-medium">Location</th>
-                <th className="text-right p-4 text-gray-400 font-medium">Orders</th>
-                <th className="text-right p-4 text-gray-400 font-medium">Total Spent</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Client</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Localisation</th>
+                <th className="text-right p-4 text-gray-400 font-medium">Commandes</th>
+                <th className="text-right p-4 text-gray-400 font-medium">Total Depense</th>
                 <th className="text-left p-4 text-gray-400 font-medium">Segment</th>
-                <th className="text-left p-4 text-gray-400 font-medium">Last Order</th>
+                <th className="text-left p-4 text-gray-400 font-medium">Derniere Commande</th>
                 <th className="text-left p-4 text-gray-400 font-medium">Actions</th>
               </tr>
             </thead>
@@ -215,7 +216,7 @@ export default function CRMPage() {
                     {customer.location}
                   </td>
                   <td className="p-4 text-right font-medium">{customer.totalOrders}</td>
-                  <td className="p-4 text-right font-mono">${customer.totalSpent.toLocaleString()}</td>
+                  <td className="p-4 text-right font-mono">{customer.totalSpent.toLocaleString()} EUR</td>
                   <td className="p-4">{getSegmentBadge(customer.segment)}</td>
                   <td className="p-4 text-gray-400 text-sm">{customer.lastOrder}</td>
                   <td className="p-4">
@@ -322,17 +323,24 @@ export default function CRMPage() {
 
               {/* Actions */}
               <div className="flex gap-3">
-                <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                <button onClick={() => { setNotification('Email envoye a ' + selectedCustomer.name); setTimeout(() => setNotification(null), 2000) }} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
                   <MessageSquare className="w-4 h-4" />
-                  Send Email
+                  Envoyer Email
                 </button>
-                <button className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
-                  View Orders
+                <button onClick={() => { setNotification('Commandes de ' + selectedCustomer.name); setTimeout(() => setNotification(null), 2000) }} className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
+                  Voir Commandes
                 </button>
               </div>
             </div>
           </motion.div>
         </motion.div>
+      )}
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
       )}
     </div>
   )
