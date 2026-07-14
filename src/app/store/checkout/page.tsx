@@ -91,15 +91,72 @@ export default function CheckoutPage() {
               </div>
               <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})}>
                 <option value="">Selectionner un pays</option>
-                <option value="FR">France</option>
-                <option value="BE">Belgique</option>
-                <option value="CH">Suisse</option>
-                <option value="CA">Canada</option>
-                <option value="US">Etats-Unis</option>
-                <option value="GB">Royaume-Uni</option>
-                <option value="DE">Allemagne</option>
-                <option value="ES">Espagne</option>
-                <option value="IT">Italie</option>
+                <optgroup label="Europe">
+                  <option value="FR">France</option>
+                  <option value="BE">Belgique</option>
+                  <option value="CH">Suisse</option>
+                  <option value="DE">Allemagne</option>
+                  <option value="ES">Espagne</option>
+                  <option value="IT">Italie</option>
+                  <option value="PT">Portugal</option>
+                  <option value="NL">Pays-Bas</option>
+                  <option value="AT">Autriche</option>
+                  <option value="PL">Pologne</option>
+                  <option value="SE">Suede</option>
+                  <option value="NO">Norvege</option>
+                  <option value="DK">Danemark</option>
+                  <option value="FI">Finlande</option>
+                  <option value="IE">Irlande</option>
+                  <option value="GR">Grece</option>
+                  <option value="CZ">Republique tcheque</option>
+                  <option value="RO">Roumanie</option>
+                  <option value="HU">Hongrie</option>
+                  <option value="GB">Royaume-Uni</option>
+                </optgroup>
+                <optgroup label="Ameriques">
+                  <option value="US">Etats-Unis</option>
+                  <option value="CA">Canada</option>
+                  <option value="MX">Mexique</option>
+                  <option value="BR">Bresil</option>
+                  <option value="AR">Argentine</option>
+                  <option value="CL">Chili</option>
+                  <option value="CO">Colombie</option>
+                  <option value="PE">Perou</option>
+                </optgroup>
+                <optgroup label="Afrique">
+                  <option value="BJ">Benin</option>
+                  <option value="SN">Senegal</option>
+                  <option value="CI">Cote d'Ivoire</option>
+                  <option value="CM">Cameroun</option>
+                  <option value="MA">Maroc</option>
+                  <option value="TN">Tunisie</option>
+                  <option value="ZA">Afrique du Sud</option>
+                  <option value="NG">Nigeria</option>
+                  <option value="GH">Ghana</option>
+                  <option value="KE">Kenya</option>
+                  <option value="EG">Egypte</option>
+                </optgroup>
+                <optgroup label="Asie">
+                  <option value="JP">Japon</option>
+                  <option value="CN">Chine</option>
+                  <option value="KR">Coree du Sud</option>
+                  <option value="IN">Inde</option>
+                  <option value="TH">Thailande</option>
+                  <option value="VN">Vietnam</option>
+                  <option value="SG">Singapour</option>
+                  <option value="MY">Malaisie</option>
+                  <option value="PH">Philippines</option>
+                  <option value="ID">Indonesie</option>
+                  <option value="AE">Emirats arabes unis</option>
+                  <option value="SA">Arabie Saoudite</option>
+                  <option value="IL">Israel</option>
+                  <option value="TR">Turquie</option>
+                  <option value="RU">Russie</option>
+                </optgroup>
+                <optgroup label="Oceanie">
+                  <option value="AU">Australie</option>
+                  <option value="NZ">Nouvelle-Zelande</option>
+                </optgroup>
               </select>
               <button type="submit" className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white font-semibold">
                 Passer au paiement
