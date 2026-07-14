@@ -21,10 +21,56 @@ const tabs = [
 export default function SettingsAdvancedPage() {
   const [activeTab, setActiveTab] = useState('general')
   const [saved, setSaved] = useState(false)
+  
+  // Settings state
+  const [storeSettings, setStoreSettings] = useState({
+    maintenanceMode: false,
+    guestCheckout: true,
+    currencySelector: true,
+  })
+  
+  const [paymentSettings, setPaymentSettings] = useState({
+    currency: 'USD',
+    taxRate: 20,
+    taxIncluded: true,
+  })
+  
+  const [notificationSettings, setNotificationSettings] = useState({
+    newOrder: true,
+    lowStock: true,
+    customerRegistration: true,
+    paymentReceived: true,
+  })
+  
+  const [securitySettings, setSecuritySettings] = useState({
+    twoFactorAuth: true,
+    ipWhitelist: false,
+    sessionTimeout: true,
+  })
+  
+  const [selectedTheme, setSelectedTheme] = useState(0)
 
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
+  }
+
+  const toggleStore = (key: keyof typeof storeSettings) => {
+    setStoreSettings(prev => ({ ...prev, [key]: !prev[key] }))
+  }
+  
+  const togglePayment = (key: keyof typeof paymentSettings) => {
+    if (key !== 'currency' && key !== 'taxRate') {
+      setPaymentSettings(prev => ({ ...prev, [key]: !prev[key] }))
+    }
+  }
+  
+  const toggleNotification = (key: keyof typeof notificationSettings) => {
+    setNotificationSettings(prev => ({ ...prev, [key]: !prev[key] }))
+  }
+  
+  const toggleSecurity = (key: keyof typeof securitySettings) => {
+    setSecuritySettings(prev => ({ ...prev, [key]: !prev[key] }))
   }
 
   return (
@@ -93,15 +139,21 @@ export default function SettingsAdvancedPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Maintenance Mode</p><p className="text-sm text-gray-400">Disable store temporarily</p></div>
-                  <button className="w-12 h-6 rounded-full bg-gray-500"><div className="w-5 h-5 rounded-full bg-white translate-x-0.5" /></button>
+                  <button onClick={() => toggleStore('maintenanceMode')} className={`w-14 h-7 rounded-full transition-colors relative ${storeSettings.maintenanceMode ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${storeSettings.maintenanceMode ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Guest Checkout</p><p className="text-sm text-gray-400">Allow checkout without account</p></div>
-                  <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                  <button onClick={() => toggleStore('guestCheckout')} className={`w-14 h-7 rounded-full transition-colors relative ${storeSettings.guestCheckout ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${storeSettings.guestCheckout ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Currency Selector</p><p className="text-sm text-gray-400">Show currency switcher</p></div>
-                  <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                  <button onClick={() => toggleStore('currencySelector')} className={`w-14 h-7 rounded-full transition-colors relative ${storeSettings.currencySelector ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${storeSettings.currencySelector ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -113,19 +165,30 @@ export default function SettingsAdvancedPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Currency</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                    <option>USD - US Dollar</option>
-                    <option>EUR - Euro</option>
-                    <option>GBP - British Pound</option>
+                  <select 
+                    value={paymentSettings.currency}
+                    onChange={(e) => setPaymentSettings(prev => ({ ...prev, currency: e.target.value }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3"
+                  >
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-400 mb-2">Tax Rate (%)</label>
-                  <input type="number" defaultValue="20" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" />
+                  <input 
+                    type="number" 
+                    value={paymentSettings.taxRate}
+                    onChange={(e) => setPaymentSettings(prev => ({ ...prev, taxRate: Number(e.target.value) }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" 
+                  />
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Tax Included</p><p className="text-sm text-gray-400">Prices include tax</p></div>
-                  <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                  <button onClick={() => togglePayment('taxIncluded')} className={`w-14 h-7 rounded-full transition-colors relative ${paymentSettings.taxIncluded ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${paymentSettings.taxIncluded ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -135,10 +198,17 @@ export default function SettingsAdvancedPage() {
             <div className="glass-card p-6">
               <h3 className="text-lg font-semibold mb-4">Notifications</h3>
               <div className="space-y-3">
-                {[{ label: 'New Order', desc: 'Email when order placed' }, { label: 'Low Stock', desc: 'Alert when product low' }, { label: 'Customer Registration', desc: 'Notify new customer' }, { label: 'Payment Received', desc: 'Confirm payment' }].map((n, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+                {[
+                  { key: 'newOrder', label: 'New Order', desc: 'Email when order placed' },
+                  { key: 'lowStock', label: 'Low Stock', desc: 'Alert when product low' },
+                  { key: 'customerRegistration', label: 'Customer Registration', desc: 'Notify new customer' },
+                  { key: 'paymentReceived', label: 'Payment Received', desc: 'Confirm payment' }
+                ].map((n) => (
+                  <div key={n.key} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                     <div><p className="font-medium">{n.label}</p><p className="text-sm text-gray-400">{n.desc}</p></div>
-                    <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                    <button onClick={() => toggleNotification(n.key as keyof typeof notificationSettings)} className={`w-14 h-7 rounded-full transition-colors relative ${notificationSettings[n.key as keyof typeof notificationSettings] ? 'bg-green-500' : 'bg-gray-500'}`}>
+                      <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${notificationSettings[n.key as keyof typeof notificationSettings] ? 'left-8' : 'left-1'}`} />
+                    </button>
                   </div>
                 ))}
               </div>
@@ -151,15 +221,21 @@ export default function SettingsAdvancedPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Two-Factor Auth</p><p className="text-sm text-gray-400">Require 2FA for admin</p></div>
-                  <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                  <button onClick={() => toggleSecurity('twoFactorAuth')} className={`w-14 h-7 rounded-full transition-colors relative ${securitySettings.twoFactorAuth ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${securitySettings.twoFactorAuth ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">IP Whitelist</p><p className="text-sm text-gray-400">Restrict access by IP</p></div>
-                  <button className="w-12 h-6 rounded-full bg-gray-500"><div className="w-5 h-5 rounded-full bg-white translate-x-0.5" /></button>
+                  <button onClick={() => toggleSecurity('ipWhitelist')} className={`w-14 h-7 rounded-full transition-colors relative ${securitySettings.ipWhitelist ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${securitySettings.ipWhitelist ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                   <div><p className="font-medium">Session Timeout</p><p className="text-sm text-gray-400">Auto logout after 30min</p></div>
-                  <button className="w-12 h-6 rounded-full bg-electron-blue"><div className="w-5 h-5 rounded-full bg-white translate-x-6" /></button>
+                  <button onClick={() => toggleSecurity('sessionTimeout')} className={`w-14 h-7 rounded-full transition-colors relative ${securitySettings.sessionTimeout ? 'bg-green-500' : 'bg-gray-500'}`}>
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${securitySettings.sessionTimeout ? 'left-8' : 'left-1'}`} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -170,7 +246,11 @@ export default function SettingsAdvancedPage() {
               <h3 className="text-lg font-semibold mb-4">Appearance</h3>
               <div className="grid grid-cols-3 gap-4">
                 {['Default Dark', 'Light Mode', 'Custom'].map((theme, i) => (
-                  <div key={i} className={`p-4 rounded-xl border-2 cursor-pointer ${i === 0 ? 'border-electron-blue bg-electron-blue/10' : 'border-white/10'}`}>
+                  <div 
+                    key={i} 
+                    onClick={() => setSelectedTheme(i)}
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all hover:scale-105 ${selectedTheme === i ? 'border-electron-blue bg-electron-blue/10' : 'border-white/10 hover:border-white/30'}`}
+                  >
                     <p className="text-center font-medium">{theme}</p>
                   </div>
                 ))}
