@@ -21,59 +21,59 @@ import {
 const mockPersonas = [
   {
     id: 1,
-    name: 'The Busy Professional',
+    name: 'Le Professionnel Occupe',
     age: '25-35',
-    income: '$50K-80K',
-    painPoints: ['Time-constrained', 'Values quality over price', 'Wants convenience'],
+    income: '50K-80K€',
+    painPoints: ['Contraint par le temps', 'Prefere la qualite au prix', 'Veut de la commodite'],
     channels: ['LinkedIn', 'Instagram', 'Email'],
-    messaging: 'Premium, time-saving solutions for busy lifestyles',
+    messaging: 'Solutions premium et gain de temps pour styles de vie charges',
   },
   {
     id: 2,
-    name: 'The Budget-Conscious Parent',
+    name: 'Parent Econome',
     age: '30-45',
-    income: '$30K-60K',
-    painPoints: ['Limited budget', 'Needs durability', 'Family-focused'],
+    income: '30K-60K€',
+    painPoints: ['Budget limite', 'A besoin de durability', 'Oriente famille'],
     channels: ['Facebook', 'TikTok', 'Google'],
-    messaging: 'Affordable quality that lasts for the whole family',
+    messaging: 'Qualite abordable qui dure pour toute la famille',
   },
   {
     id: 3,
-    name: 'The Trendsetter',
+    name: 'Innoveur',
     age: '18-28',
-    income: '$25K-50K',
-    painPoints: ['Wants latest trends', 'Social media driven', 'FOMO'],
+    income: '25K-50K€',
+    painPoints: ['Veut les dernieres tendances', 'Guide par les reseaux sociaux', 'FOMO'],
     channels: ['TikTok', 'Instagram', 'Snapchat'],
-    messaging: 'Be the first to experience what everyone is talking about',
+    messaging: 'Soyez le premier a vivre ce dont tout le monde parle',
   },
 ]
 
 const mockCompetitors = [
-  { name: 'Competitor A', strength: 'Brand awareness', weakness: 'High prices' },
-  { name: 'Competitor B', strength: 'Wide distribution', weakness: 'Low quality' },
-  { name: 'Competitor C', strength: 'Innovation', weakness: 'Poor service' },
+  { name: 'Concurrent A', strength: 'Notoriete de marque', weakness: 'Prix eleves' },
+  { name: 'Concurrent B', strength: 'Large distribution', weakness: 'Qualite faible' },
+  { name: 'Concurrent C', strength: 'Innovation', weakness: 'Service mediocre' },
 ]
 
 const mockOffers = [
   {
     id: 1,
     type: 'Lead Magnet',
-    title: 'Free Product Guide',
-    description: 'Download our comprehensive guide to choosing the right product',
+    title: 'Guide Produit Gratuit',
+    description: 'Telechargez notre guide complet pour choisir le bon produit',
     conversion: '12%',
   },
   {
     id: 2,
     type: 'Bonus',
-    title: 'Buy 2 Get 1 Free',
-    description: 'Limited time offer on all accessories',
+    title: 'Achetez 2 Obtenez 1 Gratuit',
+    description: 'Offre limitee sur tous les accessoires',
     conversion: '8%',
   },
   {
     id: 3,
-    type: 'Urgency',
-    title: '24-Hour Sale',
-    description: 'Flash sale ending soon - Don\'t miss out!',
+    type: 'Urgence',
+    title: 'Vente 24 Heures',
+    description: 'Flash sale terminant bientot - Ne manquez pas!',
     conversion: '15%',
   },
 ]
@@ -84,72 +84,80 @@ export default function PositioningPage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const handleAnalyze = async () => {
     if (!productNiche || !targetAudience) return
     setIsAnalyzing(true)
+    setNotification('Analyse du positionnement en cours...')
     await new Promise(resolve => setTimeout(resolve, 3000))
     setIsAnalyzing(false)
     setShowResults(true)
+    setNotification('Analyse terminee!')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    setNotification('Copie dans le presse-papiers!')
+    setTimeout(() => {
+      setCopied(false)
+      setNotification(null)
+    }, 2000)
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-electron-purple/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <Crosshair className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electron-blue via-electron-purple to-blue-600 flex items-center justify-center shadow-lg shadow-electron-blue/30">
+            <Crosshair className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Positioning Engine</h1>
-            <p className="text-gray-400">Define your market position and customer targeting</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Moteur de Positionnement IA</h1>
+            <p className="text-gray-300">Definis votre position sur le marche et votre ciblage clients</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Product / Niche</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Produit / Niches</label>
             <input
               type="text"
               value={productNiche}
               onChange={(e) => setProductNiche(e.target.value)}
-              placeholder="e.g., Smart home devices"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Ex: Appareils maison connectee"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Current Target Audience</label>
+            <label className="block text-sm text-gray-300 mb-2 font-medium">Audience Cible Actuelle</label>
             <input
               type="text"
               value={targetAudience}
               onChange={(e) => setTargetAudience(e.target.value)}
-              placeholder="e.g., Young professionals"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
+              placeholder="Ex: Jeunes professionnels"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
             />
           </div>
         </div>
 
         <button
           onClick={handleAnalyze}
-          disabled={isAnalyzing || !productNiche || !targetAudience}
-          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+          disabled={isAnalyzing}
+          className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-electron-blue via-electron-purple to-blue-600 font-semibold flex items-center justify-center gap-2 hover:opacity-90 hover:shadow-lg hover:shadow-electron-blue/30 transition-all disabled:opacity-70 cursor-pointer"
         >
           {isAnalyzing ? (
             <>
               <Sparkles className="w-5 h-5 animate-pulse" />
-              Analyzing market position...
+              Analyse du positionnement...
             </>
           ) : (
             <>
               <Target className="w-5 h-5" />
-              Analyze Positioning
+              Analyser le positionnement
             </>
           )}
         </button>
@@ -161,12 +169,12 @@ export default function PositioningPage() {
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-semibold font-[var(--font-sora)]">Target Personas</h2>
-                <p className="text-gray-400 text-sm">AI-generated customer profiles based on your audience</p>
+                <h2 className="text-xl font-semibold font-[var(--font-sora)]">Personas Cibles</h2>
+                <p className="text-gray-400 text-sm">Profils clients generes par IA selon votre audience</p>
               </div>
-              <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
+              <button onClick={() => setNotification('Export en cours...')} className="px-4 py-2 rounded-lg bg-electron-blue/20 hover:bg-electron-blue/30 text-electron-blue border border-electron-blue/30 transition-colors flex items-center gap-2 text-sm font-medium">
                 <Download className="w-4 h-4" />
-                Export
+                Exporter
               </button>
             </div>
 
@@ -191,7 +199,7 @@ export default function PositioningPage() {
 
                   <div className="space-y-3 mb-4">
                     <div>
-                      <label className="text-xs text-electron-blue">Pain Points</label>
+                      <label className="text-xs text-electron-blue">Points de Douleur</label>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {persona.painPoints.map((pp, j) => (
                           <span key={j} className="px-2 py-0.5 rounded-full bg-white/5 text-xs">
@@ -201,13 +209,13 @@ export default function PositioningPage() {
                       </div>
                     </div>
                     <div>
-                      <label className="text-xs text-electron-purple">Channels</label>
+                      <label className="text-xs text-electron-purple">Canaux</label>
                       <p className="text-sm text-gray-300">{persona.channels.join(', ')}</p>
                     </div>
                   </div>
 
                   <div className="p-3 rounded-lg bg-electron-blue/10 border border-electron-blue/20">
-                    <label className="text-xs text-gray-400">Messaging</label>
+                    <label className="text-xs text-gray-400">Message</label>
                     <p className="text-sm font-medium">&quot;{persona.messaging}&quot;</p>
                   </div>
                 </motion.div>
@@ -218,7 +226,7 @@ export default function PositioningPage() {
           {/* Competitive Analysis */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="glass-card p-6">
-              <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Competitive Analysis</h2>
+              <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Analyse Concurrentielle</h2>
               <div className="space-y-4">
                 {mockCompetitors.map((comp, i) => (
                   <motion.div
@@ -231,11 +239,11 @@ export default function PositioningPage() {
                     <h3 className="font-medium mb-2">{comp.name}</h3>
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div className="p-2 rounded-lg bg-green-500/10">
-                        <span className="text-green-400 text-xs">Strength</span>
+                        <span className="text-green-400 text-xs">Force</span>
                         <p className="text-gray-300">{comp.strength}</p>
                       </div>
                       <div className="p-2 rounded-lg bg-red-500/10">
-                        <span className="text-red-400 text-xs">Weakness</span>
+                        <span className="text-red-400 text-xs">Faiblesse</span>
                         <p className="text-gray-300">{comp.weakness}</p>
                       </div>
                     </div>
@@ -246,7 +254,7 @@ export default function PositioningPage() {
 
             {/* Unique Value Proposition */}
             <div className="glass-card p-6">
-              <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Your Unique Position</h2>
+              <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Votre Position Unique</h2>
               <div className="space-y-4">
                 <div className="p-4 rounded-xl bg-gradient-to-r from-electron-blue/20 to-electron-purple/20 border border-electron-blue/30">
                   <div className="flex items-center gap-2 mb-2">
@@ -254,27 +262,27 @@ export default function PositioningPage() {
                     <span className="font-semibold">Differentiation</span>
                   </div>
                   <p className="text-gray-300">
-                    Focus on &quot;Smart Innovation at Accessible Prices&quot; - Position between premium competitors (higher quality, lower price) and budget options (better quality, similar price)
+                    Concentrez-vous sur "Innovation Intelligente a Prix Accessibles" - Positionnez-vous entre les concurrents premium (qualite superieure, prix inferieur) et les options budget (meilleure qualite, prix similaire)
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-white/5">
                   <div className="flex items-center gap-2 mb-2">
                     <Crown className="w-5 h-5 text-yellow-400" />
-                    <span className="font-semibold">Market Gap</span>
+                    <span className="font-semibold">Marche Non Servi</span>
                   </div>
                   <p className="text-gray-300">
-                    Underserved segment: Quality-conscious millennials who want premium features without premium pricing
+                    Segment desserti: Millenials soucieux de la qualite qui veulent des fonctionnalites premium sans le prix premium
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-white/5">
                   <div className="flex items-center gap-2 mb-2">
                     <Shield className="w-5 h-5 text-green-400" />
-                    <span className="font-semibold">Competitive Advantage</span>
+                    <span className="font-semibold">Avantage Concurrentiel</span>
                   </div>
                   <p className="text-gray-300">
-                    2-year warranty + 30-day returns + Premium customer support = Trust building
+                    Garantie 2 ans + Retours 30 jours + Support client premium = Construction de confiance
                   </p>
                 </div>
               </div>
@@ -283,7 +291,7 @@ export default function PositioningPage() {
 
           {/* Irresistible Offers */}
           <div className="glass-card p-6">
-            <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Suggested Irresistible Offers</h2>
+            <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Offres Irresistibles Suggerees</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {mockOffers.map((offer, i) => (
                 <motion.div
@@ -310,14 +318,14 @@ export default function PositioningPage() {
 
           {/* Action Plan */}
           <div className="glass-card p-6">
-            <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Recommended Action Plan</h2>
+            <h2 className="text-xl font-semibold font-[var(--font-sora)] mb-6">Plan d'Action Recommande</h2>
             <div className="space-y-4">
               {[
-                { step: 1, title: 'Primary Persona', desc: 'Focus on "The Busy Professional" as primary target' },
-                { step: 2, title: 'Messaging', desc: 'Use "Smart Innovation at Accessible Prices" tagline' },
-                { step: 3, title: 'Channels', desc: 'Prioritize Instagram and Email marketing' },
-                { step: 4, title: 'Offer', desc: 'Start with "Free Product Guide" lead magnet' },
-                { step: 5, title: 'Differentiation', desc: 'Emphasize 2-year warranty in all marketing' },
+                { step: 1, title: 'Persona Principal', desc: 'Concentrez-vous sur "Le Professionnel Occupe" comme cible principale' },
+                { step: 2, title: 'Message', desc: 'Utilisez le slogan "Innovation Intelligente a Prix Accessibles"' },
+                { step: 3, title: 'Canaux', desc: 'Priorisez Instagram et l\'email marketing' },
+                { step: 4, title: 'Offre', desc: 'Commencez avec le lead magnet "Guide Produit Gratuit"' },
+                { step: 5, title: 'Differentiation', desc: 'Mettez en avant la garantie 2 ans dans tous vos marketing' },
               ].map((action, i) => (
                 <motion.div
                   key={action.step}
@@ -347,10 +355,17 @@ export default function PositioningPage() {
       {!showResults && (
         <div className="glass-card p-12 text-center">
           <Crosshair className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold mb-2">Ready to Define Your Position</h3>
+          <h3 className="text-xl font-semibold mb-2">Pret a Definir Votre Position</h3>
           <p className="text-gray-400 max-w-md mx-auto">
-            Enter your product niche and target audience above, then click analyze to get AI-powered positioning recommendations.
+            Entrez votre niche de produit et votre audience cible ci-dessus, puis cliquez sur analyser pour obtenir des recommandations de positionnement IA.
           </p>
+        </div>
+      )}
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
         </div>
       )}
     </div>
