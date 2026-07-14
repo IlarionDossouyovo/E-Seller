@@ -539,6 +539,7 @@ export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState<TemplateCategory | 'all'>('all')
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'tablet' | 'mobile'>('mobile')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const filteredTemplates = templates.filter(t => 
     selectedCategory === 'all' || t.category === selectedCategory
@@ -549,14 +550,14 @@ export default function TemplatesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-purple-500/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-            <Layout className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center shadow-lg shadow-electron-blue/30">
+            <Layout className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Responsive Templates</h1>
-            <p className="text-gray-400">Beautiful animated templates for any use case</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Modeles Responsive</h1>
+            <p className="text-gray-300"> Beaux modeles animes pour tous les cas d'utilisation</p>
           </div>
         </div>
       </div>
@@ -567,15 +568,15 @@ export default function TemplatesPage() {
           {categories.map(cat => (
             <button
               key={cat.key}
-              onClick={() => setSelectedCategory(cat.key)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl whitespace-nowrap transition-all ${
+              onClick={() => { setSelectedCategory(cat.key); setNotification(cat.label + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap transition-all font-medium ${
                 selectedCategory === cat.key
                   ? 'bg-electron-blue text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
               }`}
             >
               <cat.icon className="w-4 h-4" />
-              {cat.label}
+              {cat.key === 'all' ? 'Tous les Modeles' : cat.label}
             </button>
           ))}
         </div>
@@ -608,7 +609,7 @@ export default function TemplatesPage() {
                       {template.category === 'portfolio' && '🎨'}
                       {template.category === 'landing' && '🌐'}
                     </div>
-                    <p className="text-gray-500 text-sm">Click to preview</p>
+                    <p className="text-gray-500 text-sm">Cliquez pour previsualiser</p>
                   </div>
                 </div>
               )}
@@ -617,13 +618,15 @@ export default function TemplatesPage() {
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-3 rounded-full bg-white/20 backdrop-blur"
+                  onClick={(e) => { e.stopPropagation(); setSelectedTemplate(template); setNotification('Previsualisation: ' + template.name); setTimeout(() => setNotification(null), 2000) }}
+                  className="p-3 rounded-full bg-white/20 backdrop-blur cursor-pointer"
                 >
                   <Eye className="w-5 h-5 text-white" />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-3 rounded-full bg-white/20 backdrop-blur"
+                  onClick={(e) => { e.stopPropagation(); setNotification('Telechargement: ' + template.name); setTimeout(() => setNotification(null), 2000) }}
+                  className="p-3 rounded-full bg-white/20 backdrop-blur cursor-pointer"
                 >
                   <Download className="w-5 h-5 text-white" />
                 </motion.button>
@@ -635,7 +638,7 @@ export default function TemplatesPage() {
                   <span className="px-2 py-0.5 rounded-full bg-green-500/80 text-white text-[10px]">Responsive</span>
                 )}
                 {template.animated && (
-                  <span className="px-2 py-0.5 rounded-full bg-purple-500/80 text-white text-[10px]">Animated</span>
+                  <span className="px-2 py-0.5 rounded-full bg-purple-500/80 text-white text-[10px]">Anime</span>
                 )}
               </div>
             </div>
@@ -698,17 +701,17 @@ export default function TemplatesPage() {
               {/* Device Tabs */}
               <div className="p-4 border-b border-white/10 flex gap-4">
                 {[
-                  { key: 'desktop', label: 'Desktop', icon: Monitor },
-                  { key: 'tablet', label: 'Tablet', icon: Tablet },
+                  { key: 'desktop', label: 'Ordinateur', icon: Monitor },
+                  { key: 'tablet', label: 'Tablette', icon: Tablet },
                   { key: 'mobile', label: 'Mobile', icon: Smartphone },
                 ].map(device => (
                   <button
                     key={device.key}
-                    onClick={() => setPreviewDevice(device.key as any)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                    onClick={() => { setPreviewDevice(device.key as any); setNotification('Vue: ' + device.label); setTimeout(() => setNotification(null), 1500) }}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors font-medium ${
                       previewDevice === device.key
                         ? 'bg-electron-blue text-white'
-                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                        : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
                     }`}
                   >
                     <device.icon className="w-4 h-4" />
@@ -730,7 +733,7 @@ export default function TemplatesPage() {
 
               {/* Features */}
               <div className="p-6 border-t border-white/10">
-                <h3 className="font-semibold mb-4">Template Features</h3>
+                <h3 className="font-semibold mb-4 text-white">Fonctionnalites du Modele</h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {selectedTemplate.features.map((feature, i) => (
                     <div key={i} className="flex items-center gap-2 p-3 rounded-lg bg-white/5">
@@ -743,18 +746,25 @@ export default function TemplatesPage() {
 
               {/* Actions */}
               <div className="p-6 border-t border-white/10 flex gap-4">
-                <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity font-semibold flex items-center justify-center gap-2">
+                <button onClick={() => { setNotification('Telechargement: ' + selectedTemplate.name); setTimeout(() => setNotification(null), 2000) }} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity font-semibold flex items-center justify-center gap-2">
                   <Download className="w-5 h-5" />
-                  Download Template
+                  Telecharger le Modele
                 </button>
-                <button className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">
-                  Customize
+                <button onClick={() => { setNotification('Personnalisation: ' + selectedTemplate.name); setTimeout(() => setNotification(null), 2000) }} className="px-6 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition-colors font-medium">
+                  Personnaliser
                 </button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
