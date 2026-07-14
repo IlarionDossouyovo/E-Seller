@@ -98,9 +98,64 @@ const stepColors = {
 }
 
 export default function FunnelsPage() {
-  const [funnels] = useState(mockFunnels)
+  const [funnels, setFunnels] = useState<Funnel[]>(mockFunnels)
   const [selectedFunnel, setSelectedFunnel] = useState<Funnel | null>(null)
   const [activeTab, setActiveTab] = useState<'funnels' | 'builder'>('funnels')
+  const [showNewFunnelModal, setShowNewFunnelModal] = useState(false)
+  const [editingFunnel, setEditingFunnel] = useState<Funnel | null>(null)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+
+  // Handlers
+  const handleNewFunnel = () => {
+    setShowNewFunnelModal(true)
+  }
+
+  const handleEdit = (funnel: Funnel, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setEditingFunnel(funnel)
+    setSelectedFunnel(funnel)
+    setActiveTab('builder')
+  }
+
+  const handleDelete = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (confirm('Are you sure you want to delete this funnel?')) {
+      setFunnels(prev => prev.filter(f => f.id !== id))
+    }
+  }
+
+  const handleToggleStatus = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setFunnels(prev => prev.map(f => {
+      if (f.id === id) {
+        return { ...f, status: f.status === 'active' ? 'paused' : 'active' }
+      }
+      return f
+    }))
+  }
+
+  const handleDuplicate = (funnel: Funnel, e: React.MouseEvent) => {
+    e.stopPropagation()
+    const newFunnel: Funnel = {
+      ...funnel,
+      id: Date.now(),
+      name: `${funnel.name} (Copy)`,
+      status: 'draft',
+      conversions: 0,
+      revenue: 0,
+    }
+    setFunnels(prev => [newFunnel, ...prev])
+  }
+
+  const handleLaunch = (funnel: Funnel) => {
+    setFunnels(prev => prev.map(f => {
+      if (f.id === funnel.id) {
+        return { ...f, status: 'active' }
+      }
+      return f
+    }))
+    setSelectedFunnel(prev => prev ? { ...prev, status: 'active' } : null)
+  }
 
   const stats = {
     totalFunnels: funnels.length,
@@ -117,7 +172,10 @@ export default function FunnelsPage() {
           <h1 className="text-2xl font-bold font-[var(--font-sora)]">Funnel Builder</h1>
           <p className="text-gray-400">Create automated marketing funnels</p>
         </div>
-        <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+        <button 
+          onClick={handleNewFunnel}
+          className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer"
+        >
           <Plus className="w-5 h-5" />
           New Funnel
         </button>
@@ -212,11 +270,31 @@ export default function FunnelsPage() {
             )}
 
             <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm">
+              <button 
+                onClick={(e) => handleEdit(funnel, e)}
+                className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm cursor-pointer"
+              >
                 Edit
               </button>
-              <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors">
+              <button 
+                onClick={(e) => handleToggleStatus(funnel.id, e)}
+                className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
+              >
                 {funnel.status === 'active' ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              </button>
+              <button 
+                onClick={(e) => handleDuplicate(funnel, e)}
+                className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
+                title="Duplicate"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={(e) => handleDelete(funnel.id, e)}
+                className="px-4 py-2 rounded-lg border border-white/10 hover:bg-red-500/20 transition-colors text-red-400 cursor-pointer"
+                title="Delete"
+              >
+                <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </motion.div>
@@ -236,11 +314,14 @@ export default function FunnelsPage() {
               <p className="text-gray-400">{selectedFunnel.steps.length} steps</p>
             </div>
             <div className="flex gap-2">
-              <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm">
+              <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm cursor-pointer">
                 <Settings className="w-4 h-4" />
                 Settings
               </button>
-              <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 text-sm">
+              <button 
+                onClick={() => selectedFunnel && handleLaunch(selectedFunnel)}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 text-sm cursor-pointer"
+              >
                 <Play className="w-4 h-4" />
                 Launch
               </button>
@@ -283,12 +364,83 @@ export default function FunnelsPage() {
 
           {/* Add Step */}
           <div className="mt-12 text-center">
-            <button className="px-6 py-3 rounded-xl border border-dashed border-white/20 hover:border-electron-blue hover:bg-electron-blue/5 transition-colors flex items-center gap-2 mx-auto">
+            <button className="px-6 py-3 rounded-xl border border-dashed border-white/20 hover:border-electron-blue hover:bg-electron-blue/5 transition-colors flex items-center gap-2 mx-auto cursor-pointer">
               <Plus className="w-5 h-5" />
               Add Step
             </button>
           </div>
         </motion.div>
+      )}
+
+      {/* Modal for New Funnel */}
+      {showNewFunnelModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="glass-card p-6 w-full max-w-lg"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold">New Funnel</h2>
+              <button 
+                onClick={() => setShowNewFunnelModal(false)}
+                className="p-2 rounded-lg hover:bg-white/10 cursor-pointer"
+              >
+                <Settings className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Funnel Name</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g., Summer Sale Funnel"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Funnel Type</label>
+                <select className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white">
+                  <option>Product Launch</option>
+                  <option>Lead Magnet</option>
+                  <option>Webinar</option>
+                  <option>Upsell</option>
+                  <option>Custom</option>
+                </select>
+              </div>
+              
+              <div className="flex gap-3 pt-4">
+                <button 
+                  onClick={() => setShowNewFunnelModal(false)}
+                  className="flex-1 px-4 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={() => {
+                    const newFunnel: Funnel = {
+                      id: Date.now(),
+                      name: 'New Funnel',
+                      status: 'draft',
+                      conversions: 0,
+                      revenue: 0,
+                      steps: [
+                        { id: '1', type: 'landing', name: 'Landing Page', description: 'Welcome page' },
+                        { id: '2', type: 'email', name: 'Follow Up', description: 'Email sequence' },
+                      ],
+                    }
+                    setFunnels(prev => [newFunnel, ...prev])
+                    setShowNewFunnelModal(false)
+                  }}
+                  className="flex-1 px-4 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity"
+                >
+                  Create Funnel
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       )}
     </div>
   )
