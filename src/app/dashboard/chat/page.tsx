@@ -122,36 +122,36 @@ export default function ChatPage() {
             {chats.map((chat) => (
               <motion.div
                 key={chat.id}
-                whileHover={{ scale: 1.02 }}
-                onClick={() => setSelectedChat(chat)}
-                className={`p-3 rounded-xl cursor-pointer transition-colors ${
+                whileHover={{ scale: 1.01 }}
+                onClick={() => { setSelectedChat(chat); setNotification('Discussion avec ' + chat.customer); setTimeout(() => setNotification(null), 1500) }}
+                className={`p-3 rounded-xl cursor-pointer transition-all border ${
                   selectedChat?.id === chat.id 
-                    ? 'bg-electron-blue/20 border border-electron-blue/30' 
-                    : 'hover:bg-white/5'
+                    ? 'bg-electron-blue/20 border-electron-blue/40' 
+                    : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{chat.avatar}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <p className="font-medium truncate">{chat.customer}</p>
-                      <span className="text-xs text-gray-500">{chat.time}</span>
+                      <p className="font-medium text-white truncate">{chat.customer}</p>
+                      <span className="text-xs text-gray-400">{chat.time}</span>
                     </div>
                     <p className="text-sm text-gray-400 truncate">{chat.lastMessage}</p>
                   </div>
                   {chat.unread > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-electron-blue flex items-center justify-center text-xs">
+                    <span className="w-6 h-6 rounded-full bg-electron-blue flex items-center justify-center text-xs font-medium text-white">
                       {chat.unread}
                     </span>
                   )}
                 </div>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className={`px-2 py-0.5 rounded-full text-xs ${
-                    chat.status === 'active' ? 'bg-green-500/20 text-green-400' :
-                    chat.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                    'bg-gray-500/20 text-gray-400'
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    chat.status === 'active' ? 'bg-green-500/30 text-green-400 border border-green-500/30' :
+                    chat.status === 'pending' ? 'bg-yellow-500/30 text-yellow-400 border border-yellow-500/30' :
+                    'bg-gray-500/30 text-gray-400 border border-gray-500/30'
                   }`}>
-                    {chat.status}
+                    {chat.status === 'active' ? 'Actif' : chat.status === 'pending' ? 'En attente' : 'Ferme'}
                   </span>
                   {chat.rating && (
                     <div className="flex items-center gap-1">
@@ -216,21 +216,22 @@ export default function ChatPage() {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-white/10">
+          <div className="p-4 border-t border-white/10 bg-gray-900/50">
             <div className="flex items-center gap-3">
               <input
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Tapez votre message..."
-                className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50"
+                className="flex-1 bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50"
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
               />
               <button
                 onClick={sendMessage}
-                className="p-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity"
+                className="p-4 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 text-white font-medium"
               >
                 <Send className="w-5 h-5" />
+                <span className="hidden sm:inline">Envoyer</span>
               </button>
             </div>
           </div>
