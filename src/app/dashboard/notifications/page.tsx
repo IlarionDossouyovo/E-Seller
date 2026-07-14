@@ -99,6 +99,15 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState(mockNotifications)
   const [filter, setFilter] = useState<'all' | 'unread'>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [settings, setSettings] = useState({
+    orders: true,
+    analytics: true,
+    products: true,
+    marketing: true,
+    email: true,
+    push: true,
+    sms: false,
+  })
 
   const filteredNotifications = notifications.filter(n => {
     if (filter === 'unread' && n.read) return false
@@ -123,6 +132,10 @@ export default function NotificationsPage() {
 
   const clearAll = () => {
     setNotifications([])
+  }
+
+  const toggleSetting = (key: keyof typeof settings) => {
+    setSettings(prev => ({ ...prev, [key]: !prev[key] }))
   }
 
   return (
@@ -243,29 +256,67 @@ export default function NotificationsPage() {
 
       {/* Notification Settings */}
       <div className="glass-card p-6">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold">Notification Settings</h2>
           <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
             <Settings className="w-5 h-5" />
           </button>
         </div>
-        <div className="space-y-4">
-          {[
-            { label: 'Order notifications', desc: 'Get notified when you receive orders' },
-            { label: 'Analytics alerts', desc: 'Alerts when metrics change significantly' },
-            { label: 'Product updates', desc: 'News about your products' },
-            { label: 'Marketing emails', desc: 'Tips and promotions' },
-          ].map((setting, i) => (
-            <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
-              <div>
-                <h3 className="font-medium">{setting.label}</h3>
-                <p className="text-sm text-gray-400">{setting.desc}</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Push Notifications */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Push Notifications</h3>
+            {[
+              { key: 'orders', label: 'Order notifications', desc: 'Get notified when you receive orders' },
+              { key: 'analytics', label: 'Analytics alerts', desc: 'Alerts when metrics change significantly' },
+              { key: 'products', label: 'Product updates', desc: 'News about your products' },
+              { key: 'marketing', label: 'Marketing emails', desc: 'Tips and promotions' },
+            ].map((setting) => (
+              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
+                <div>
+                  <h3 className="font-medium">{setting.label}</h3>
+                  <p className="text-sm text-gray-400">{setting.desc}</p>
+                </div>
+                <button 
+                  onClick={() => toggleSetting(setting.key as keyof typeof settings)}
+                  className={`w-12 h-6 rounded-full transition-colors ${settings[setting.key as keyof typeof settings] ? 'bg-electron-blue' : 'bg-gray-600'}`}
+                >
+                  <div className={`w-5 h-5 rounded-full bg-white transition-transform ${settings[setting.key as keyof typeof settings] ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                </button>
               </div>
-              <button className="w-12 h-6 rounded-full bg-electron-blue">
-                <div className="w-5 h-5 rounded-full bg-white translate-x-6" />
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Other Channels */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Other Channels</h3>
+            {[
+              { key: 'email', label: 'Email notifications', desc: 'Receive notifications via email' },
+              { key: 'push', label: 'Push to phone', desc: 'Instant push notifications' },
+              { key: 'sms', label: 'SMS alerts', desc: 'Important alerts via SMS' },
+            ].map((setting) => (
+              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
+                <div>
+                  <h3 className="font-medium">{setting.label}</h3>
+                  <p className="text-sm text-gray-400">{setting.desc}</p>
+                </div>
+                <button 
+                  onClick={() => toggleSetting(setting.key as keyof typeof settings)}
+                  className={`w-12 h-6 rounded-full transition-colors ${settings[setting.key as keyof typeof settings] ? 'bg-electron-blue' : 'bg-gray-600'}`}
+                >
+                  <div className={`w-5 h-5 rounded-full bg-white transition-transform ${settings[setting.key as keyof typeof settings] ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Save Button */}
+        <div className="mt-6 pt-6 border-t border-white/10">
+          <button className="px-6 py-2 rounded-lg bg-electron-blue hover:bg-electron-blue/80 transition-colors">
+            Save Settings
+          </button>
         </div>
       </div>
     </div>
