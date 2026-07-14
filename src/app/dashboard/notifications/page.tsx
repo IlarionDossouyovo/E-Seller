@@ -214,7 +214,7 @@ export default function NotificationsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className={`glass-card p-4 flex items-start gap-4 ${
+                className={`glass-card p-4 flex items-start gap-4 cursor-pointer hover:bg-white/5 transition-colors ${
                   !notification.read ? 'border-l-4 border-l-electron-blue' : ''
                 }`}
               >
@@ -223,16 +223,16 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <div>
+                    <div className="flex-1">
                       <h3 className="font-semibold">{notification.title}</h3>
                       <p className="text-sm text-gray-400 mt-1">{notification.message}</p>
                       <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
                     </div>
-                    <div className="flex gap-2 flex-shrink-0">
+                    <div className="flex gap-2 flex-shrink-0 items-center">
                       {!notification.read && (
                         <button 
                           onClick={() => markAsRead(notification.id)}
-                          className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                          className="p-2 rounded-lg hover:bg-green-500/20 transition-colors text-green-400"
                           title="Mark as read"
                         >
                           <Check className="w-4 h-4" />
@@ -240,10 +240,10 @@ export default function NotificationsPage() {
                       )}
                       <button 
                         onClick={() => deleteNotification(notification.id)}
-                        className="p-2 rounded-lg hover:bg-white/10 transition-colors text-red-400"
+                        className="p-2 rounded-lg hover:bg-red-500/20 transition-colors text-red-400"
                         title="Delete"
                       >
-                        <X className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -273,17 +273,22 @@ export default function NotificationsPage() {
               { key: 'products', label: 'Product updates', desc: 'News about your products' },
               { key: 'marketing', label: 'Marketing emails', desc: 'Tips and promotions' },
             ].map((setting) => (
-              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
-                <div>
+              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <div className="flex-1">
                   <h3 className="font-medium">{setting.label}</h3>
                   <p className="text-sm text-gray-400">{setting.desc}</p>
                 </div>
-                <button 
-                  onClick={() => toggleSetting(setting.key as keyof typeof settings)}
-                  className={`w-12 h-6 rounded-full transition-colors ${settings[setting.key as keyof typeof settings] ? 'bg-electron-blue' : 'bg-gray-600'}`}
-                >
-                  <div className={`w-5 h-5 rounded-full bg-white transition-transform ${settings[setting.key as keyof typeof settings] ? 'translate-x-6' : 'translate-x-0.5'}`} />
-                </button>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs ${settings[setting.key as keyof typeof settings] ? 'text-green-400' : 'text-gray-500'}`}>
+                    {settings[setting.key as keyof typeof settings] ? 'ON' : 'OFF'}
+                  </span>
+                  <button 
+                    onClick={() => toggleSetting(setting.key as keyof typeof settings)}
+                    className={`w-14 h-7 rounded-full transition-colors relative ${settings[setting.key as keyof typeof settings] ? 'bg-green-500' : 'bg-gray-600'}`}
+                  >
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${settings[setting.key as keyof typeof settings] ? 'left-8' : 'left-1'}`} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -296,17 +301,22 @@ export default function NotificationsPage() {
               { key: 'push', label: 'Push to phone', desc: 'Instant push notifications' },
               { key: 'sms', label: 'SMS alerts', desc: 'Important alerts via SMS' },
             ].map((setting) => (
-              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
-                <div>
+              <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <div className="flex-1">
                   <h3 className="font-medium">{setting.label}</h3>
                   <p className="text-sm text-gray-400">{setting.desc}</p>
                 </div>
-                <button 
-                  onClick={() => toggleSetting(setting.key as keyof typeof settings)}
-                  className={`w-12 h-6 rounded-full transition-colors ${settings[setting.key as keyof typeof settings] ? 'bg-electron-blue' : 'bg-gray-600'}`}
-                >
-                  <div className={`w-5 h-5 rounded-full bg-white transition-transform ${settings[setting.key as keyof typeof settings] ? 'translate-x-6' : 'translate-x-0.5'}`} />
-                </button>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs ${settings[setting.key as keyof typeof settings] ? 'text-green-400' : 'text-gray-500'}`}>
+                    {settings[setting.key as keyof typeof settings] ? 'ON' : 'OFF'}
+                  </span>
+                  <button 
+                    onClick={() => toggleSetting(setting.key as keyof typeof settings)}
+                    className={`w-14 h-7 rounded-full transition-colors relative ${settings[setting.key as keyof typeof settings] ? 'bg-green-500' : 'bg-gray-600'}`}
+                  >
+                    <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all ${settings[setting.key as keyof typeof settings] ? 'left-8' : 'left-1'}`} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
