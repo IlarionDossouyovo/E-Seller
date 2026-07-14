@@ -77,21 +77,41 @@ const transactions = [
 export default function ElectronPayPage() {
   const [enabledMethods, setEnabledMethods] = useState<string[]>(['card', 'paypal', 'stripe', 'apple', 'google'])
   const [enabledCurrencies, setEnabledCurrencies] = useState<string[]>(['USD', 'EUR', 'GBP'])
+  const [notification, setNotification] = useState<string | null>(null)
+  const [showSettings, setShowSettings] = useState(false)
 
-  const toggleMethod = (id: string) => {
+  const toggleMethod = (id: string, name: string) => {
     if (enabledMethods.includes(id)) {
       setEnabledMethods(enabledMethods.filter(m => m !== id))
+      setNotification(`${name} desactive`)
     } else {
       setEnabledMethods([...enabledMethods, id])
+      setNotification(`${name} active`)
     }
+    setTimeout(() => setNotification(null), 3000)
   }
 
-  const toggleCurrency = (code: string) => {
+  const toggleCurrency = (code: string, name: string) => {
     if (enabledCurrencies.includes(code)) {
       setEnabledCurrencies(enabledCurrencies.filter(c => c !== code))
+      setNotification(`${code} desactive`)
     } else {
       setEnabledCurrencies([...enabledCurrencies, code])
+      setNotification(`${code} active`)
     }
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const copyApiCode = () => {
+    const code = `const electronPay = require('electron-pay');
+const payment = await electronPay.create({
+  amount: 149.00,
+  currency: 'USD',
+  method: 'card'
+});`
+    navigator.clipboard.writeText(code)
+    setNotification('Code API copie!')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   return (
@@ -113,7 +133,7 @@ export default function ElectronPayPage() {
               <p className="text-gray-400">Processeur de paiements internationaux</p>
             </div>
           </div>
-          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+          <button onClick={() => { setShowSettings(true); setNotification('Parametres ouverture...'); setTimeout(() => setNotification(null), 3000); }} className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
             Parametres
             <ArrowRight className="w-4 h-4" />
           </button>
@@ -144,7 +164,7 @@ export default function ElectronPayPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.05 }}
-              onClick={() => toggleMethod(method.id)}
+              onClick={() => toggleMethod(method.id, method.name)}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 enabledMethods.includes(method.id)
                   ? 'border-electron-blue bg-electron-blue/10'
@@ -179,7 +199,7 @@ export default function ElectronPayPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.03 }}
-              onClick={() => toggleCurrency(currency.code)}
+              onClick={() => toggleCurrency(currency.code, currency.name)}
               className={`p-3 rounded-xl border-2 transition-all flex items-center gap-2 ${
                 enabledCurrencies.includes(currency.code)
                   ? 'border-electron-blue bg-electron-blue/10'
@@ -261,7 +281,12 @@ export default function ElectronPayPage() {
 
       {/* API Info */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4">Integration API</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Integration API</h3>
+          <button onClick={copyApiCode} className="px-3 py-1 rounded-lg bg-electron-blue/20 text-electron-blue text-sm flex items-center gap-1">
+            <Copy className="w-4 h-4" /> Copier
+          </button>
+        </div>
         <div className="p-4 rounded-xl bg-black/50 font-mono text-sm">
           <p className="text-gray-400 mb-2">{/* Initialisation d'Electron-Pay */}</p>
           <p className="text-blue-400">const</p> electronPay = <p className="text-yellow-400">require</p>(<span className="text-green-400">'electron-pay'</span>);
@@ -278,6 +303,13 @@ export default function ElectronPayPage() {
           {'}'});
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
