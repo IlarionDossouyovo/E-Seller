@@ -127,7 +127,7 @@ export default function InventoryPage() {
       </div>
 
       {/* Filters */}
-      <div className="glass-card p-4 flex flex-wrap gap-4 items-center">
+      <div className="glass-card p-4 flex flex-wrap gap-4 items-center bg-gray-900/80">
         <div className="flex items-center gap-2 flex-1 min-w-[200px]">
           <Search className="w-5 h-5 text-gray-400" />
           <input
@@ -135,29 +135,29 @@ export default function InventoryPage() {
             placeholder="Rechercher produits ou SKU..."
             value={searchTerm}
             onChange={(e) => { setSearchTerm(e.target.value); setNotification('Recherche: ' + e.target.value); setTimeout(() => setNotification(null), 1000) }}
-            className="bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"
+            className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 flex-1 outline-none focus:border-electron-blue"
           />
         </div>
         
         <select
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setNotification(e.target.value + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
-          className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-medium"
+          className="px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white font-medium cursor-pointer"
         >
-          {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+          {categories.map(cat => <option key={cat} value={cat} className="bg-gray-800">{cat}</option>)}
         </select>
 
         <select
           value={stockFilter}
           onChange={(e) => { setStockFilter(e.target.value as any); const label = e.target.value === 'all' ? 'Tous' : e.target.value === 'low' ? 'Stock Faible' : 'Rupture'; setNotification(label + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
-          className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-medium"
+          className="px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-white font-medium cursor-pointer"
         >
-          <option value="all">Tous les Stocks</option>
-          <option value="low">Stock Faible</option>
-          <option value="out">Rupture de Stock</option>
+          <option value="all" className="bg-gray-800">Tous les Stocks</option>
+          <option value="low" className="bg-gray-800">Stock Faible</option>
+          <option value="out" className="bg-gray-800">Rupture de Stock</option>
         </select>
 
-        <button onClick={() => { setNotification('Export en cours...'); setTimeout(() => { setNotification('Export termine!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors flex items-center gap-2 border border-white/20 font-medium">
+        <button onClick={() => { setNotification('Export en cours...'); setTimeout(() => { setNotification('Export termine!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-4 py-2.5 rounded-xl bg-electron-blue hover:opacity-90 transition-colors flex items-center gap-2 font-medium cursor-pointer text-white">
           <Download className="w-4 h-4" />
           Export
         </button>
