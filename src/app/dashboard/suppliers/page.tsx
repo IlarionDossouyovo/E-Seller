@@ -148,10 +148,10 @@ export default function SuppliersPage() {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm [&>option]:bg-gray-800 [&>option]:text-white"
             >
               {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat} className="bg-gray-800 text-white">{cat}</option>
               ))}
             </select>
           </div>
@@ -160,10 +160,10 @@ export default function SuppliersPage() {
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electron-blue/50 focus:bg-white/15 transition-all backdrop-blur-sm [&>option]:bg-gray-800 [&>option]:text-white"
             >
               {locations.map(loc => (
-                <option key={loc} value={loc}>{loc}</option>
+                <option key={loc} value={loc} className="bg-gray-800 text-white">{loc}</option>
               ))}
             </select>
           </div>
