@@ -18,7 +18,8 @@ import {
   JapaneseYen,
   Wallet,
   Landmark,
-  CircleDollarSign
+  CircleDollarSign,
+  XCircle
 } from 'lucide-react'
 
 const currencies = [
@@ -108,17 +109,35 @@ const regionalPayments = [
 export default function PaymentsPage() {
   const [paymentMethods, setPaymentMethods] = useState(mockPaymentMethods)
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0])
-  const [selectedRegion, setSelectedRegion] = useState('North America')
+  const [selectedRegion, setSelectedRegion] = useState('Amerique du Nord')
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const setDefault = (id: number) => {
     setPaymentMethods(prev => prev.map(pm => ({
       ...pm,
       isDefault: pm.id === id
     })))
+    setNotification('Moyen de paiement defini par defaut')
+    setTimeout(() => setNotification(null), 3000)
   }
 
   const deleteMethod = (id: number) => {
     setPaymentMethods(prev => prev.filter(pm => pm.id !== id))
+    setNotification('Moyen de paiement supprime')
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const addMethod = (method: PaymentMethod) => {
+    setPaymentMethods([...paymentMethods, method])
+    setShowAddModal(false)
+    setNotification('Moyen de paiement ajoute')
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const selectRegionMethod = (methodName: string) => {
+    setNotification(`${methodName} - Cette methode sera disponible bientot`)
+    setTimeout(() => setNotification(null), 3000)
   }
 
   return (
@@ -207,6 +226,7 @@ export default function PaymentsPage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.05 }}
+                onClick={() => selectRegionMethod(method.name)}
                 className="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-center cursor-pointer"
               >
                 <div className="text-3xl mb-2">{method.logo}</div>
@@ -220,7 +240,7 @@ export default function PaymentsPage() {
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold">Moyens de paiement enregistres</h2>
-          <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+          <button onClick={() => setShowAddModal(true)} className="px-4 py-2 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
             <Plus className="w-4 h-4" />
             Ajouter un moyen
           </button>
@@ -329,6 +349,86 @@ export default function PaymentsPage() {
           ))}
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
+
+      {/* Add Payment Method Modal */}
+      {showAddModal && (
+        <AddPaymentModal onClose={() => setShowAddModal(false)} onAdd={addMethod} />
+      )}
+    </div>
+  )
+}
+
+// Add Payment Method Modal
+function AddPaymentModal({ onClose, onAdd }: { onClose: () => void; onAdd: (method: PaymentMethod) => void }) {
+  const [methodType, setMethodType] = useState<'card' | 'paypal'>('card')
+  const [cardNumber, setCardNumber] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [cardName, setCardName] = useState('')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const newMethod: PaymentMethod = {
+      id: Date.now(),
+      type: methodType,
+      name: methodType === 'card' ? `Carte se terminant par ${cardNumber.slice(-4)}` : 'PayPal',
+      last4: methodType === 'card' ? cardNumber.slice(-4) : undefined,
+      expiry: methodType === 'card' ? expiry : undefined,
+      isDefault: false,
+      country: 'France'
+    }
+    onAdd(newMethod)
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="glass-card w-full max-w-md"
+      >
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          <h2 className="text-xl font-bold">Ajouter un moyen de paiement</h2>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/10">
+            <XCircle className="w-5 h-5" />
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div>
+            <label className="block text-sm text-gray-400 mb-2">Type de paiement</label>
+            <div className="flex gap-2">
+              <button type="button" onClick={() => setMethodType('card')} className={`flex-1 py-2 rounded-lg ${methodType === 'card' ? 'bg-electron-blue' : 'bg-white/10'}`}>Carte</button>
+              <button type="button" onClick={() => setMethodType('paypal')} className={`flex-1 py-2 rounded-lg ${methodType === 'paypal' ? 'bg-electron-blue' : 'bg-white/10'}`}>PayPal</button>
+            </div>
+          </div>
+          {methodType === 'card' && (
+            <>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Nom sur la carte</label>
+                <input required type="text" value={cardName} onChange={e => setCardName(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="JEAN DUPONT" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Numero de carte</label>
+                <input required type="text" value={cardNumber} onChange={e => setCardNumber(e.target.value.replace(/\D/g, '').slice(0, 16))} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="4242 4242 4242 4242" />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">Expiration (MM/AA)</label>
+                <input required type="text" value={expiry} onChange={e => setExpiry(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" placeholder="12/25" />
+              </div>
+            </>
+          )}
+          <div className="flex gap-3 pt-4">
+            <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl border border-white/10 hover:bg-white/5">Annuler</button>
+            <button type="submit" className="flex-1 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple">Ajouter</button>
+          </div>
+        </form>
+      </motion.div>
     </div>
   )
 }
