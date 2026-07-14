@@ -69,12 +69,12 @@ export default function BrandingPage() {
   const [copied, setCopied] = useState(false)
 
   const brandTabs: { key: BrandElement; label: string; icon: any }[] = [
-    { key: 'name', label: 'Brand Name', icon: Building2 },
+    { key: 'name', label: 'Nom de marque', icon: Building2 },
     { key: 'logo', label: 'Logo', icon: Image },
-    { key: 'colors', label: 'Colors', icon: Palette },
-    { key: 'typography', label: 'Typography', icon: Type },
-    { key: 'packaging', label: 'Packaging', icon: Box },
-    { key: 'story', label: 'Story', icon: PenTool },
+    { key: 'colors', label: 'Couleurs', icon: Palette },
+    { key: 'typography', label: 'Typographie', icon: Type },
+    { key: 'packaging', label: 'Emballage', icon: Box },
+    { key: 'story', label: 'Histoire', icon: PenTool },
   ]
 
   const handleGenerate = async () => {
@@ -100,29 +100,29 @@ export default function BrandingPage() {
             <Wand2 className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Branding Generator</h1>
-            <p className="text-gray-400">Create your complete brand identity in seconds</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Generateur de Marque IA</h1>
+            <p className="text-gray-400">Creez votre identite de marque complete en quelques secondes</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Product / Niche</label>
+            <label className="block text-sm text-gray-400 mb-2">Produit / Niche</label>
             <input
               type="text"
               value={productNiche}
               onChange={(e) => setProductNiche(e.target.value)}
-              placeholder="e.g., Smart home devices, Organic skincare..."
+              placeholder="ex: Appareils maison connectee, Cosmetiques bio..."
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Target Audience</label>
+            <label className="block text-sm text-gray-400 mb-2">Cible</label>
             <input
               type="text"
               value={targetAudience}
               onChange={(e) => setTargetAudience(e.target.value)}
-              placeholder="e.g., Young professionals, 25-35 years old..."
+              placeholder="ex: Jeunes professionnels, 25-35 ans..."
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
@@ -136,12 +136,12 @@ export default function BrandingPage() {
           {isGenerating ? (
             <>
               <Sparkles className="w-5 h-5 animate-pulse" />
-              Generating your brand identity...
+              Generation de votre identite de marque...
             </>
           ) : (
             <>
               <Wand2 className="w-5 h-5" />
-              Generate Brand Identity
+              Generer l'identite de marque
             </>
           )}
         </button>
@@ -201,10 +201,10 @@ export default function BrandingPage() {
                       <div className="flex gap-2">
                         <button className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm">
                           <Copy className="w-4 h-4" />
-                          Copy
+                          Copier
                         </button>
                         <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                          Select
+                          Selectionner
                         </button>
                       </div>
                     </motion.div>
@@ -231,7 +231,7 @@ export default function BrandingPage() {
                           <Heart className="w-4 h-4" />
                         </button>
                         <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                          Select
+                          Selectionner
                         </button>
                       </div>
                     </motion.div>
@@ -267,11 +267,11 @@ export default function BrandingPage() {
                       <h3 className="text-lg font-bold mb-2">{palette.name}</h3>
                       <div className="space-y-2 text-sm text-gray-400">
                         <div className="flex justify-between">
-                          <span>Primary</span>
+                          <span>Primaire</span>
                           <code className="bg-white/5 px-2 py-1 rounded">{palette.primary}</code>
                         </div>
                         <div className="flex justify-between">
-                          <span>Secondary</span>
+                          <span>Secondaire</span>
                           <code className="bg-white/5 px-2 py-1 rounded">{palette.secondary}</code>
                         </div>
                         <div className="flex justify-between">
@@ -280,7 +280,7 @@ export default function BrandingPage() {
                         </div>
                       </div>
                       <button className="mt-4 w-full py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                        Apply Palette
+                        Appliquer la palette
                       </button>
                     </motion.div>
                   ))}
@@ -300,17 +300,17 @@ export default function BrandingPage() {
                     >
                       <div className="mb-4">
                         <h3 className="text-4xl font-bold mb-2" style={{ fontFamily: font.heading }}>{font.heading}</h3>
-                        <p className="text-gray-400 text-sm">Heading Font</p>
+                        <p className="text-gray-400 text-sm">Police de titre</p>
                       </div>
                       <div className="mb-4 pb-4 border-b border-white/10">
                         <p className="text-xl" style={{ fontFamily: font.body }}>
-                          The quick brown fox jumps over the lazy dog.
+                          Portez ce vieux whisky au juge blond qui fume.
                         </p>
-                        <p className="text-gray-400 text-sm mt-2">Body Font</p>
+                        <p className="text-gray-400 text-sm mt-2">Police de texte</p>
                       </div>
                       <p className="text-electron-blue text-sm mb-4">{font.style}</p>
                       <button className="w-full py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                        Apply Fonts
+                        Appliquer les polices
                       </button>
                     </motion.div>
                   ))}
@@ -334,10 +334,10 @@ export default function BrandingPage() {
                       <div className="flex gap-2">
                         <button className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm">
                           <Download className="w-4 h-4" />
-                          Download
+                          Telecharger
                         </button>
                         <button className="flex-1 py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                          Select
+                          Selectionner
                         </button>
                       </div>
                     </motion.div>
@@ -357,7 +357,7 @@ export default function BrandingPage() {
                       className="glass-card p-6 group cursor-pointer hover:border-electron-blue/30 transition-all"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-lg font-bold">Brand Story Option {i + 1}</h3>
+                        <h3 className="text-lg font-bold">Option histoire de marque {i + 1}</h3>
                         <button 
                           onClick={() => copyToClipboard(story)}
                           className="p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -367,7 +367,7 @@ export default function BrandingPage() {
                       </div>
                       <p className="text-gray-300 leading-relaxed">{story}</p>
                       <button className="mt-4 w-full py-2 rounded-lg bg-electron-blue/20 text-electron-blue hover:bg-electron-blue/30 transition-colors text-sm">
-                        Use This Story
+                        Utiliser cette histoire
                       </button>
                     </motion.div>
                   ))}
@@ -380,12 +380,12 @@ export default function BrandingPage() {
           <div className="glass-card p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold">Need more options?</h3>
-                <p className="text-gray-400 text-sm">Regenerate any element for fresh ideas</p>
+                <h3 className="text-lg font-semibold">Besoin de plus d'options?</h3>
+                <p className="text-gray-400 text-sm">Regenerez n'importe quel element pour de nouvelles idees</p>
               </div>
               <button className="px-6 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2">
                 <RefreshCcw className="w-5 h-5" />
-                Regenerate All
+                Tout regenerer
               </button>
             </div>
           </div>
@@ -394,9 +394,9 @@ export default function BrandingPage() {
         /* Empty State */
         <div className="glass-card p-12 text-center">
           <Palette className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold mb-2">Ready to Create Your Brand</h3>
+          <h3 className="text-xl font-semibold mb-2">Pret a creer votre marque</h3>
           <p className="text-gray-400 max-w-md mx-auto">
-            Enter your product niche and target audience above, then click generate to create your complete brand identity including name, logo, colors, and more.
+            Entrez votre niche de produit et votre cible ci-dessus, puis cliquez sur generer pour creer votre identite de marque complete incluant le nom, le logo, les couleurs, et plus encore.
           </p>
         </div>
       )}
