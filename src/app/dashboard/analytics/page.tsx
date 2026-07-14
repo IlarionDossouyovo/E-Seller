@@ -20,28 +20,28 @@ import {
 
 const mockStats = [
   { 
-    label: 'Total Revenue', 
-    value: '$48,250', 
+    label: 'Revenu Total', 
+    value: '48 250 EUR', 
     change: '+18.2%',
     trend: 'up',
     icon: DollarSign,
   },
   { 
-    label: 'Orders', 
-    value: '1,245', 
+    label: 'Commandes', 
+    value: '1 245', 
     change: '+12.5%',
     trend: 'up',
     icon: ShoppingCart,
   },
   { 
-    label: 'Unique Visitors', 
+    label: 'Visiteurs Uniques', 
     value: '45.2K', 
     change: '+24.8%',
     trend: 'up',
     icon: Eye,
   },
   { 
-    label: 'Conversion Rate', 
+    label: 'Taux de Conversion', 
     value: '3.2%', 
     change: '-2.1%',
     trend: 'down',
@@ -50,21 +50,21 @@ const mockStats = [
 ]
 
 const mockChartData = [
-  { day: 'Mon', revenue: 4200, orders: 120 },
-  { day: 'Tue', revenue: 3800, orders: 98 },
-  { day: 'Wed', revenue: 5100, orders: 145 },
-  { day: 'Thu', revenue: 4700, orders: 132 },
-  { day: 'Fri', revenue: 6200, orders: 178 },
-  { day: 'Sat', revenue: 7800, orders: 220 },
-  { day: 'Sun', revenue: 5500, orders: 156 },
+  { day: 'Lun', revenue: 4200, orders: 120 },
+  { day: 'Mar', revenue: 3800, orders: 98 },
+  { day: 'Mer', revenue: 5100, orders: 145 },
+  { day: 'Jeu', revenue: 4700, orders: 132 },
+  { day: 'Ven', revenue: 6200, orders: 178 },
+  { day: 'Sam', revenue: 7800, orders: 220 },
+  { day: 'Dim', revenue: 5500, orders: 156 },
 ]
 
 const mockProducts = [
-  { name: 'Wireless Earbuds Pro', revenue: '$12,450', orders: 312, growth: '+24%' },
-  { name: 'Smart Watch Ultra', revenue: '$9,820', orders: 245, growth: '+18%' },
-  { name: 'LED Desk Lamp', revenue: '$6,540', orders: 189, growth: '+12%' },
-  { name: 'Portable Charger', revenue: '$4,320', orders: 156, growth: '+8%' },
-  { name: 'Bluetooth Speaker', revenue: '$3,890', orders: 134, growth: '+15%' },
+  { name: 'Ecouteurs Sans Fil Pro', revenue: '12 450 EUR', orders: 312, growth: '+24%' },
+  { name: 'Montre Connectee Ultra', revenue: '9 820 EUR', orders: 245, growth: '+18%' },
+  { name: 'Lampe de Bureau LED', revenue: '6 540 EUR', orders: 189, growth: '+12%' },
+  { name: 'Chargeur Portable', revenue: '4 320 EUR', orders: 156, growth: '+8%' },
+  { name: 'Haut-parleur Bluetooth', revenue: '3 890 EUR', orders: 134, growth: '+15%' },
 ]
 
 const mockTraffic = [
@@ -78,10 +78,30 @@ const mockTraffic = [
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState('7d')
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const handleRefresh = () => {
     setIsRefreshing(true)
-    setTimeout(() => setIsRefreshing(false), 1500)
+    setNotification('Actualisation des donnees...')
+    setTimeout(() => {
+      setIsRefreshing(false)
+      setNotification('Donnees actualisees!')
+      setTimeout(() => setNotification(null), 2000)
+    }, 1500)
+  }
+
+  const handleExport = () => {
+    setNotification('Export en cours...')
+    setTimeout(() => {
+      setNotification('Export termine!')
+      setTimeout(() => setNotification(null), 2000)
+    }, 1000)
+  }
+
+  const handleTimeRangeChange = (range: string) => {
+    setTimeRange(range)
+    setNotification('Donnees chargees pour: ' + range)
+    setTimeout(() => setNotification(null), 1500)
   }
 
   const maxRevenue = Math.max(...mockChartData.map(d => d.revenue))
@@ -91,20 +111,20 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-[var(--font-sora)]">Analytics Dashboard</h1>
-          <p className="text-gray-400">Track your business performance in real-time</p>
+          <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Tableau de Bord Analytique</h1>
+          <p className="text-gray-300">Suivez les performances de votre entreprise en temps reel</p>
         </div>
         <div className="flex items-center gap-3">
           {/* Time Range */}
-          <div className="flex bg-white/5 rounded-xl p-1">
-            {['24h', '7d', '30d', '90d'].map(range => (
+          <div className="flex bg-white/10 rounded-xl p-1 border border-white/20 backdrop-blur-sm">
+            {['24h', '7j', '30j', '90j'].map(range => (
               <button
                 key={range}
-                onClick={() => setTimeRange(range)}
-                className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+                onClick={() => handleTimeRangeChange(range)}
+                className={`px-4 py-2 rounded-lg text-sm transition-colors font-medium ${
                   timeRange === range
                     ? 'bg-electron-blue text-white'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {range}
@@ -113,13 +133,13 @@ export default function AnalyticsPage() {
           </div>
           <button 
             onClick={handleRefresh}
-            className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+            className="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border border-white/20"
           >
-            <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-5 h-5 text-white ${isRefreshing ? 'animate-spin' : ''}`} />
           </button>
-          <button className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-2 text-sm">
+          <button onClick={handleExport} className="px-4 py-2.5 rounded-xl bg-electron-blue/20 hover:bg-electron-blue/30 text-electron-blue font-medium transition-colors flex items-center gap-2 text-sm border border-electron-blue/30">
             <Download className="w-4 h-4" />
-            Export
+            Exporter
           </button>
         </div>
       </div>
@@ -160,15 +180,15 @@ export default function AnalyticsPage() {
         {/* Revenue Chart */}
         <div className="lg:col-span-2 glass-card p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold font-[var(--font-sora)]">Revenue & Orders</h2>
+            <h2 className="text-lg font-semibold font-[var(--font-sora)] text-white">Revenus et Commandes</h2>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-electron-blue" />
-                <span className="text-gray-400">Revenue</span>
+                <span className="text-gray-400">Revenus</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-electron-purple" />
-                <span className="text-gray-400">Orders</span>
+                <span className="text-gray-400">Commandes</span>
               </div>
             </div>
           </div>
@@ -208,7 +228,7 @@ export default function AnalyticsPage() {
 
         {/* Traffic Sources */}
         <div className="glass-card p-6">
-          <h2 className="text-lg font-semibold font-[var(--font-sora)] mb-6">Traffic Sources</h2>
+          <h2 className="text-lg font-semibold font-[var(--font-sora)] text-white mb-6">Sources de Trafic</h2>
           <div className="space-y-4">
             {mockTraffic.map((source, i) => (
               <motion.div
@@ -239,15 +259,15 @@ export default function AnalyticsPage() {
 
       {/* Products Table */}
       <div className="glass-card p-6">
-        <h2 className="text-lg font-semibold font-[var(--font-sora)] mb-6">Top Performing Products</h2>
+        <h2 className="text-lg font-semibold font-[var(--font-sora)] text-white mb-6">Produits les Plus Performants</h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="text-left py-3 px-4 text-sm text-gray-400 font-medium">Product</th>
-                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Revenue</th>
-                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Orders</th>
-                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Growth</th>
+                <th className="text-left py-3 px-4 text-sm text-gray-400 font-medium">Produit</th>
+                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Revenu</th>
+                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Commandes</th>
+                <th className="text-right py-3 px-4 text-sm text-gray-400 font-medium">Croissance</th>
               </tr>
             </thead>
             <tbody>
@@ -273,10 +293,10 @@ export default function AnalyticsPage() {
       {/* KPI Cards */}
       <div className="grid md:grid-cols-4 gap-4">
         {[
-          { label: 'Avg Order Value', value: '$38.75', change: '+5.2%' },
-          { label: 'Customer Retention', value: '68%', change: '+12%' },
-          { label: 'CAC', value: '$12.40', change: '-8%' },
-          { label: 'LTV', value: '$156', change: '+24%' },
+          { label: 'Panier Moyen', value: '38.75 EUR', change: '+5.2%' },
+          { label: 'Retention Client', value: '68%', change: '+12%' },
+          { label: 'CAC', value: '12.40 EUR', change: '-8%' },
+          { label: 'LTV', value: '156 EUR', change: '+24%' },
         ].map((kpi, i) => (
           <motion.div
             key={kpi.label}
@@ -293,6 +313,13 @@ export default function AnalyticsPage() {
           </motion.div>
         ))}
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
