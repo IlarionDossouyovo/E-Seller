@@ -7,7 +7,7 @@ import {
   Check, 
   Search,
   Plus,
-  Edit,
+  FileEdit,
   Trash2,
   Clock,
   AlertCircle
@@ -23,26 +23,27 @@ type Language = {
 }
 
 const mockLanguages: Language[] = [
-  { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸', status: 'active', translationProgress: 100 },
-  { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷', status: 'active', translationProgress: 100 },
-  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸', status: 'active', translationProgress: 85 },
-  { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪', status: 'active', translationProgress: 72 },
-  { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹', status: 'draft', translationProgress: 45 },
-  { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇵🇹', status: 'draft', translationProgress: 30 },
-  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳', status: 'draft', translationProgress: 20 },
-  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵', status: 'draft', translationProgress: 15 },
+  { code: 'en', name: 'Anglais', nativeName: 'English', flag: '🇺🇸', status: 'active', translationProgress: 100 },
+  { code: 'fr', name: 'Francais', nativeName: 'Francais', flag: '🇫🇷', status: 'active', translationProgress: 100 },
+  { code: 'es', name: 'Espagnol', nativeName: 'Espanol', flag: '🇪🇸', status: 'active', translationProgress: 85 },
+  { code: 'de', name: 'Allemand', nativeName: 'Deutsch', flag: '🇩🇪', status: 'active', translationProgress: 72 },
+  { code: 'it', name: 'Italien', nativeName: 'Italiano', flag: '🇮🇹', status: 'draft', translationProgress: 45 },
+  { code: 'pt', name: 'Portugais', nativeName: 'Portugues', flag: '🇵🇹', status: 'draft', translationProgress: 30 },
+  { code: 'zh', name: 'Chinois', nativeName: '中文', flag: '🇨🇳', status: 'draft', translationProgress: 20 },
+  { code: 'ja', name: 'Japonais', nativeName: '日本語', flag: '🇯🇵', status: 'draft', translationProgress: 15 },
 ]
 
 const stats = [
-  { label: 'Active Languages', value: '4', icon: Globe },
-  { label: 'Total Languages', value: '8', icon: Globe },
-  { label: 'Avg. Translation', value: '59%', icon: Check },
-  { label: 'Pending Review', value: '125', icon: Clock },
+  { label: 'Langues Actives', value: '4', icon: Globe },
+  { label: 'Total Langues', value: '8', icon: Globe },
+  { label: 'Trad. Moyenne', value: '59%', icon: Check },
+  { label: 'En Attente', value: '125', icon: Clock },
 ]
 
 export default function LanguagePage() {
   const [languages] = useState<Language[]>(mockLanguages)
   const [searchTerm, setSearchTerm] = useState('')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const filteredLanguages = languages.filter(lang => 
     lang.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -52,20 +53,20 @@ export default function LanguagePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-teal-500/20 via-cyan-500/10 to-transparent border border-teal-500/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
-              <Globe className="w-6 h-6 text-white" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-teal-500/30">
+              <Globe className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Multi-Language Support</h1>
-              <p className="text-gray-400">Manage translations and language settings</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Support Multi-Langue</h1>
+              <p className="text-gray-300">Gerez les traductions et parametres de langue</p>
             </div>
           </div>
-          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+          <button onClick={() => { setNotification('Ajout langue...'); setTimeout(() => { setNotification('Formulaire ouvert!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
             <Plus className="w-5 h-5" />
-            Add Language
+            Ajouter Langue
           </button>
         </div>
       </div>
@@ -81,7 +82,7 @@ export default function LanguagePage() {
             className="glass-card p-4"
           >
             <stat.icon className="w-5 h-5 text-cyan-400 mb-2" />
-            <p className="text-2xl font-bold">{stat.value}</p>
+            <p className="text-2xl font-bold text-white">{stat.value}</p>
             <p className="text-sm text-gray-400">{stat.label}</p>
           </motion.div>
         ))}
@@ -90,15 +91,15 @@ export default function LanguagePage() {
       {/* Language Selection */}
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Available Languages</h3>
+          <h3 className="text-lg font-semibold text-white">Langues Disponibles</h3>
           <div className="flex items-center gap-2">
             <Search className="w-4 h-4 text-gray-400" />
             <input 
               type="text" 
-              placeholder="Search languages..."
+              placeholder="Rechercher langues..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-transparent border-none outline-none text-white placeholder-gray-500"
+              onChange={(e) => { setSearchTerm(e.target.value); setNotification('Recherche: ' + e.target.value); setTimeout(() => setNotification(null), 1000) }}
+              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 flex-1 outline-none focus:border-electron-blue"
             />
           </div>
         </div>
@@ -115,17 +116,17 @@ export default function LanguagePage() {
               <div className="flex items-center justify-between mb-3">
                 <span className="text-3xl">{lang.flag}</span>
                 {lang.status === 'active' ? (
-                  <span className="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs">Active</span>
+                  <span className="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs border border-green-500/30">Actif</span>
                 ) : (
-                  <span className="px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs">Draft</span>
+                  <span className="px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs border border-yellow-500/30">Brouillon</span>
                 )}
               </div>
-              <h4 className="font-medium">{lang.name}</h4>
+              <h4 className="font-medium text-white">{lang.name}</h4>
               <p className="text-sm text-gray-400 mb-3">{lang.nativeName}</p>
               
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">Translation</span>
+                  <span className="text-gray-400">Traduction</span>
                   <span className={lang.translationProgress === 100 ? 'text-green-400' : 'text-yellow-400'}>
                     {lang.translationProgress}%
                   </span>
@@ -139,10 +140,10 @@ export default function LanguagePage() {
               </div>
 
               <div className="flex gap-2 mt-3">
-                <button className="flex-1 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-sm">
-                  Edit
+                <button onClick={() => { setNotification('Modification: ' + lang.name); setTimeout(() => setNotification(null), 2000) }} className="flex-1 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-sm border border-white/10 font-medium">
+                  Modifier
                 </button>
-                <button className="p-1.5 rounded-lg hover:bg-white/10">
+                <button onClick={() => { setNotification('Activation: ' + lang.name); setTimeout(() => setNotification(null), 2000) }} className="p-1.5 rounded-lg hover:bg-white/10">
                   <Globe className="w-4 h-4" />
                 </button>
               </div>
@@ -153,12 +154,12 @@ export default function LanguagePage() {
 
       {/* Translation Status */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4">Translation Status by Section</h3>
+        <h3 className="text-lg font-semibold mb-4 text-white">Statut des Traductions par Section</h3>
         <div className="space-y-3">
           {[
             { section: 'General', en: 100, fr: 100, es: 85, de: 70 },
-            { section: 'Products', en: 100, fr: 95, es: 80, de: 65 },
-            { section: 'Checkout', en: 100, fr: 100, es: 90, de: 75 },
+            { section: 'Produits', en: 100, fr: 95, es: 80, de: 65 },
+            { section: 'Paiement', en: 100, fr: 100, es: 90, de: 75 },
             { section: 'Dashboard', en: 100, fr: 90, es: 70, de: 60 },
             { section: 'Emails', en: 100, fr: 85, es: 60, de: 50 },
           ].map((item, i) => (
@@ -170,7 +171,7 @@ export default function LanguagePage() {
               className="p-4 rounded-xl bg-white/5"
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="font-medium">{item.section}</span>
+                <span className="font-medium text-white">{item.section}</span>
                 <div className="flex items-center gap-4 text-sm">
                   <span className="text-gray-400">EN: <span className="text-green-400">{item.en}%</span></span>
                   <span className="text-gray-400">FR: <span className={item.fr === 100 ? 'text-green-400' : 'text-yellow-400'}>{item.fr}%</span></span>
@@ -187,27 +188,34 @@ export default function LanguagePage() {
       <div className="glass-card p-6">
         <div className="flex items-center gap-3 mb-4">
           <AlertCircle className="w-5 h-5 text-yellow-400" />
-          <h3 className="text-lg font-semibold">Missing Translations</h3>
+          <h3 className="text-lg font-semibold text-white">Traductions Manquantes</h3>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {[
-            { lang: 'Spanish', missing: 145, progress: '85%' },
-            { lang: 'German', missing: 280, progress: '72%' },
-            { lang: 'Italian', missing: 550, progress: '45%' },
+            { lang: 'Espagnol', missing: 145, progress: '85%' },
+            { lang: 'Allemand', missing: 280, progress: '72%' },
+            { lang: 'Italien', missing: 550, progress: '45%' },
           ].map((item, i) => (
             <div key={i} className="p-4 rounded-xl bg-white/5">
               <div className="flex items-center justify-between mb-2">
-                <span className="font-medium">{item.lang}</span>
+                <span className="font-medium text-white">{item.lang}</span>
                 <span className="text-yellow-400">{item.progress}</span>
               </div>
-              <p className="text-sm text-gray-400">{item.missing} strings missing</p>
-              <button className="mt-3 w-full py-2 rounded-lg bg-electron-blue hover:opacity-90 text-sm">
-                Translate Now
+              <p className="text-sm text-gray-400">{item.missing} chaines manquantes</p>
+              <button onClick={() => { setNotification('Traduction: ' + item.lang); setTimeout(() => setNotification(null), 2000) }} className="mt-3 w-full py-2 rounded-lg bg-electron-blue hover:opacity-90 text-sm font-medium">
+                Traduire Maintenant
               </button>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
