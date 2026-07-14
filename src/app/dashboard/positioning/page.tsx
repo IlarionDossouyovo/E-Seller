@@ -22,8 +22,8 @@ const mockPersonas = [
   {
     id: 1,
     name: 'Le Professionnel Occupe',
-    age: '25-35',
-    income: '50K-80K€',
+    age: '25-35 ans',
+    income: '50 000 a 80 000 EUR',
     painPoints: ['Contraint par le temps', 'Prefere la qualite au prix', 'Veut de la commodite'],
     channels: ['LinkedIn', 'Instagram', 'Email'],
     messaging: 'Solutions premium et gain de temps pour styles de vie charges',
@@ -31,8 +31,8 @@ const mockPersonas = [
   {
     id: 2,
     name: 'Parent Econome',
-    age: '30-45',
-    income: '30K-60K€',
+    age: '30-45 ans',
+    income: '30 000 a 60 000 EUR',
     painPoints: ['Budget limite', 'A besoin de durability', 'Oriente famille'],
     channels: ['Facebook', 'TikTok', 'Google'],
     messaging: 'Qualite abordable qui dure pour toute la famille',
@@ -40,8 +40,8 @@ const mockPersonas = [
   {
     id: 3,
     name: 'Innoveur',
-    age: '18-28',
-    income: '25K-50K€',
+    age: '18-28 ans',
+    income: '25 000 a 50 000 EUR',
     painPoints: ['Veut les dernieres tendances', 'Guide par les reseaux sociaux', 'FOMO'],
     channels: ['TikTok', 'Instagram', 'Snapchat'],
     messaging: 'Soyez le premier a vivre ce dont tout le monde parle',
