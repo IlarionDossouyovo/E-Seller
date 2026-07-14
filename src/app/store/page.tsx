@@ -55,7 +55,7 @@ export default function StorePage() {
       price: product.price,
       image: product.image,
     })
-    alert(`${product.name} added to cart!`)
+    alert(`${product.name} ajoute au panier!`)
   }
 
   const filteredProducts = products.filter(p => {
@@ -80,17 +80,18 @@ export default function StorePage() {
             <div className="hidden md:flex flex-1 max-w-md mx-8">
               <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input type="text" placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-10 pr-4 text-white placeholder-gray-400" />
+                <input type="text" placeholder="Rechercher un produit..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-10 pr-4 text-white placeholder-gray-400" />
               </div>
             </div>
 
             <div className="flex items-center gap-4">
+              <Link href="/dashboard" className="hidden md:block px-3 py-2 text-gray-300 hover:text-white text-sm">Dashboard</Link>
               <button className="relative p-2 text-gray-300"><Heart className="w-6 h-6" /></button>
               <Link href="/store/cart" className="relative p-2 text-gray-300">
                 <ShoppingCart className="w-6 h-6" />
                 {count > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full text-xs flex items-center justify-center text-white">{count}</span>}
               </Link>
-              <Link href="/login" className="hidden md:block px-4 py-2 bg-blue-600 rounded-lg text-white text-sm">Sign In</Link>
+              <Link href="/login" className="hidden md:block px-4 py-2 bg-blue-600 rounded-lg text-white text-sm">Connexion</Link>
             </div>
           </div>
         </div>

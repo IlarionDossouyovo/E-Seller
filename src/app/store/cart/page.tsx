@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ShoppingCart, Trash2, Plus, Minus, ArrowRight, Shield } from 'lucide-react'
+import { ShoppingCart, Trash2, Plus, Minus, ArrowRight, Shield, ArrowLeft } from 'lucide-react'
 import { useCart } from '@/lib/cart-context'
 
 export default function CartPage() {
@@ -16,21 +16,26 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <header className="bg-slate-900/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/store" className="text-white hover:text-blue-400">← Back to Store</Link>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/store" className="text-white hover:text-blue-400 flex items-center gap-2">
+            <ArrowLeft className="w-5 h-5" /> Retour a la boutique
+          </Link>
+          <Link href="/store/checkout" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg text-white font-semibold flex items-center gap-2">
+            Paiement <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-          <ShoppingCart className="w-8 h-8" /> Shopping Cart
+          <ShoppingCart className="w-8 h-8" /> Panier
         </h1>
 
         {items.length === 0 ? (
           <div className="text-center py-16">
             <ShoppingCart className="w-16 h-16 mx-auto text-gray-600 mb-4" />
-            <p className="text-gray-400 mb-4">Your cart is empty</p>
-            <Link href="/store" className="text-blue-400 hover:underline">Continue Shopping</Link>
+            <p className="text-gray-400 mb-4">Votre panier est vide</p>
+            <Link href="/store" className="text-blue-400 hover:underline">Continuer vos achats</Link>
           </div>
         ) : (
           <div className="grid md:grid-cols-3 gap-8">
@@ -40,7 +45,7 @@ export default function CartPage() {
                   <div className="w-24 h-24 bg-white/5 rounded-xl flex items-center justify-center text-4xl">{item.image}</div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-white">{item.name}</h3>
-                    <p className="text-blue-400 font-bold">${item.price}</p>
+                    <p className="text-blue-400 font-bold">{item.price}€</p>
                     <div className="flex items-center gap-2 mt-2">
                       <button onClick={() => updateQuantity(item.id, -1)} className="p-1 bg-white/10 rounded"><Minus className="w-4 h-4" /></button>
                       <span className="px-3">{item.quantity}</span>
@@ -53,22 +58,22 @@ export default function CartPage() {
             </div>
 
             <div className="glass-card p-6 h-fit sticky top-24">
-              <h3 className="font-semibold text-white mb-4">Order Summary</h3>
+              <h3 className="font-semibold text-white mb-4">Resume de la commande</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">Subtotal</span><span className="text-white">${subtotal.toFixed(2)}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">Shipping</span><span className="text-white">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">Tax (20%)</span><span className="text-white">${tax.toFixed(2)}</span></div>
+                <div className="flex justify-between"><span className="text-gray-400">Sous-total</span><span className="text-white">{subtotal.toFixed(2)}€</span></div>
+                <div className="flex justify-between"><span className="text-gray-400">Livraison</span><span className="text-white">{shipping === 0 ? 'GRATUIT' : `${shipping.toFixed(2)}€`}</span></div>
+                <div className="flex justify-between"><span className="text-gray-400">TVA (20%)</span><span className="text-white">{tax.toFixed(2)}€</span></div>
                 <div className="flex justify-between pt-2 border-t border-white/10 font-bold">
                   <span className="text-white">Total</span>
-                  <span className="text-white text-xl">${finalTotal.toFixed(2)}</span>
+                  <span className="text-white text-xl">{finalTotal.toFixed(2)}€</span>
                 </div>
               </div>
-              {shipping > 0 && <p className="text-xs text-green-400 mt-2">Add ${(50 - subtotal).toFixed(2)} more for free shipping!</p>}
+              {shipping > 0 && <p className="text-xs text-green-400 mt-2">Ajoutez {(50 - subtotal).toFixed(2)}€ pour la livraison gratuite!</p>}
               <Link href="/store/checkout" className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl text-white font-semibold flex items-center justify-center gap-2">
-                Checkout <ArrowRight className="w-5 h-5" />
+                Passer a la caisse <ArrowRight className="w-5 h-5" />
               </Link>
               <div className="flex items-center gap-2 mt-4 text-gray-400 text-xs justify-center">
-                <Shield className="w-4 h-4" /> Secure checkout
+                <Shield className="w-4 h-4" /> Paiement securise
               </div>
             </div>
           </div>
