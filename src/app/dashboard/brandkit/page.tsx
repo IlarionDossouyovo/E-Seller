@@ -211,9 +211,9 @@ function ComponentShowcase() {
 // Mockups Showcase
 function MockupsShowcase() {
   const mockups = [
-    { name: 'Desktop Dashboard', emoji: '🖥️', size: '1920x1080' },
-    { name: 'Tablet View', emoji: '📱', size: '768x1024' },
-    { name: 'Mobile App', emoji: '📲', size: '375x812' },
+    { name: 'Tableau de Bord', emoji: '🖥️', size: '1920x1080' },
+    { name: 'Vue Tablette', emoji: '📱', size: '768x1024' },
+    { name: 'Application Mobile', emoji: '📲', size: '375x812' },
   ]
 
   return (
@@ -242,40 +242,41 @@ function MockupsShowcase() {
 export default function BrandKitPage() {
   const [activeTab, setActiveTab] = useState<'logos' | 'colors' | 'typography' | 'components' | 'mockups'>('logos')
   const [darkMode, setDarkMode] = useState(true)
+  const [notification, setNotification] = useState<string | null>(null)
 
   const tabs = [
     { key: 'logos', label: 'Logo', icon: Square },
-    { key: 'colors', label: 'Colors', icon: Palette },
-    { key: 'typography', label: 'Typography', icon: Type },
-    { key: 'components', icon: Grid, label: 'Components' },
-    { key: 'mockups', label: 'Mockups', icon: Image },
+    { key: 'colors', label: 'Couleurs', icon: Palette },
+    { key: 'typography', label: 'Typographie', icon: Type },
+    { key: 'components', icon: Grid, label: 'Composants' },
+    { key: 'mockups', label: 'Maquettes', icon: Image },
   ]
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-purple-500/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center">
-              <Palette className="w-6 h-6 text-white" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-electron-blue to-electron-purple flex items-center justify-center shadow-lg shadow-electron-blue/30">
+              <Palette className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Brand Kit</h1>
-              <p className="text-gray-400">Official brand guidelines & assets</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Kit de Marque</h1>
+              <p className="text-gray-300">Charte graphique officielle et ressources</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+              onClick={() => { setDarkMode(!darkMode); setNotification(darkMode ? 'Mode clair active' : 'Mode sombre active'); setTimeout(() => setNotification(null), 2000) }}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border border-white/20 font-medium"
             >
               {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-              {darkMode ? 'Dark' : 'Light'}
+              {darkMode ? 'Sombre' : 'Clair'}
             </button>
-            <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+            <button onClick={() => { setNotification('Telechargement du kit...'); setTimeout(() => { setNotification('Kit telecharge!'); setTimeout(() => setNotification(null), 2000) }, 1500) }} className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
               <DownloadIcon className="w-4 h-4" />
-              Download Kit
+              Telecharger le Kit
             </button>
           </div>
         </div>
@@ -294,11 +295,11 @@ export default function BrandKitPage() {
           E-Seller by ELECTRON
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          AI-Powered E-Commerce Operating System
+          Systeme d'Exploitation E-Commerce IA
         </p>
         <p className="text-sm text-gray-500 mt-4 max-w-xl mx-auto">
-          Premium SaaS platform for e-commerce entrepreneurs. Advanced, intelligent, automated. 
-          A billion-dollar startup brand.
+          Plateforme SaaS premium pour entrepreneurs e-commerce. Avancee, intelligente, automatisee. 
+          Une marque de startup milliardaire.
         </p>
       </div>
 
@@ -308,11 +309,11 @@ export default function BrandKitPage() {
           {tabs.map(tab => (
             <button
               key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
-              className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all ${
+              onClick={() => { setActiveTab(tab.key as any); setNotification(tab.label + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
+              className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all font-medium whitespace-nowrap ${
                 activeTab === tab.key
                   ? 'bg-electron-blue text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10 border border-white/10'
               }`}
             >
               <tab.icon className="w-4 h-4" />
@@ -329,14 +330,14 @@ export default function BrandKitPage() {
           <div className="space-y-6">
             {/* Full Logo */}
             <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold mb-4">Full Logo</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">Logo Complet</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-gray-400 mb-3">Dark Mode (Default)</p>
+                  <p className="text-sm text-gray-400 mb-3">Mode Sombre (Defaut)</p>
                   <LogoDarkMode variant="full" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 mb-3">Light Mode</p>
+                  <p className="text-sm text-gray-400 mb-3">Mode Clair</p>
                   <LogoLightMode variant="full" />
                 </div>
               </div>
@@ -344,16 +345,16 @@ export default function BrandKitPage() {
 
             {/* Icon Only */}
             <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold mb-4">Icon Only (App Icon)</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">Icone Seule (Icone App)</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-gray-400 mb-3">Dark Background</p>
+                  <p className="text-sm text-gray-400 mb-3">Fond Sombre</p>
                   <div className="p-8 rounded-2xl bg-[#0B0F1A] flex items-center justify-center">
                     <LogoIcon size={80} animated={true} />
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400 mb-3">White Background</p>
+                  <p className="text-sm text-gray-400 mb-3">Fond Blanc</p>
                   <div className="p-8 rounded-2xl bg-white flex items-center justify-center">
                     <LogoIcon size={80} />
                   </div>
@@ -363,13 +364,13 @@ export default function BrandKitPage() {
 
             {/* Logo Variations */}
             <div className="glass-card p-6">
-              <h3 className="text-lg font-semibold mb-4">Logo Variations</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">Variations du Logo</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: 'Primary', bg: '#0B0F1A' },
+                  { name: 'Primaire', bg: '#0B0F1A' },
                   { name: 'Gradient', bg: 'gradient' },
-                  { name: 'White', bg: '#FFFFFF' },
-                  { name: 'Blue', bg: '#0066FF' },
+                  { name: 'Blanc', bg: '#FFFFFF' },
+                  { name: 'Bleu', bg: '#0066FF' },
                 ].map((variation, i) => (
                   <motion.div
                     key={i}
@@ -425,30 +426,30 @@ export default function BrandKitPage() {
             <div className="grid md:grid-cols-2 gap-6">
               {/* Primary Colors */}
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold mb-4">Primary Colors</h3>
+                <h3 className="text-lg font-semibold mb-4 text-white">Couleurs Primaires</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <ColorSwatch color={brandColors.primary} name="Electric Blue" code="#0066FF" />
-                  <ColorSwatch color={brandColors.secondary} name="AI Purple" code="#7B3FE4" />
+                  <ColorSwatch color={brandColors.primary} name="Bleu Electrique" code="#0066FF" />
+                  <ColorSwatch color={brandColors.secondary} name="Violet IA" code="#7B3FE4" />
                 </div>
               </div>
 
               {/* Background Colors */}
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold mb-4">Background Colors</h3>
+                <h3 className="text-lg font-semibold mb-4 text-white">Couleurs de Fond</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <ColorSwatch color={brandColors.background} name="Deep Black" code="#0B0F1A" />
+                  <ColorSwatch color={brandColors.background} name="Noir Profond" code="#0B0F1A" />
                   <ColorSwatch color={brandColors.surface} name="Surface" code="#121829" />
                 </div>
               </div>
 
               {/* Accent Colors */}
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold mb-4">Accent Colors</h3>
+                <h3 className="text-lg font-semibold mb-4 text-white">Couleurs d'Accent</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <ColorSwatch color={brandColors.accent} name="Pure White" code="#F5F7FA" />
+                  <ColorSwatch color={brandColors.accent} name="Blanc Pur" code="#F5F7FA" />
                   <ColorSwatch 
                     gradient="linear-gradient(135deg, #0066FF 0%, #7B3FE4 100%)" 
-                    name="Brand Gradient" 
+                    name="Gradient de Marque" 
                     code="linear-gradient(135deg, #0066FF 0%, #7B3FE4 100%)" 
                   />
                 </div>
@@ -456,11 +457,11 @@ export default function BrandKitPage() {
 
               {/* Semantic Colors */}
               <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold mb-4">Semantic Colors</h3>
+                <h3 className="text-lg font-semibold mb-4 text-white">Couleurs Semantiques</h3>
                 <div className="grid grid-cols-3 gap-4">
-                  <ColorSwatch color="#10B981" name="Success" code="#10B981" />
-                  <ColorSwatch color="#EF4444" name="Error" code="#EF4444" />
-                  <ColorSwatch color="#F59E0B" name="Warning" code="#F59E0B" />
+                  <ColorSwatch color="#10B981" name="Succes" code="#10B981" />
+                  <ColorSwatch color="#EF4444" name="Erreur" code="#EF4444" />
+                  <ColorSwatch color="#F59E0B" name="Avertissement" code="#F59E0B" />
                 </div>
               </div>
             </div>
@@ -470,22 +471,22 @@ export default function BrandKitPage() {
         {/* Typography */}
         {activeTab === 'typography' && (
           <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold mb-6">Typography System</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Systeme de Typographie</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <TypographyShowcase />
               </div>
               <div className="space-y-4">
                 <div className="p-4 rounded-xl bg-white/5">
-                  <h4 className="font-medium mb-2">Font Usage</h4>
+                  <h4 className="font-medium mb-2 text-white">Utilisation des Polices</h4>
                   <ul className="space-y-2 text-sm text-gray-400">
-                    <li>• <strong>Sora</strong> - Headlines, brand elements, CTAs</li>
-                    <li>• <strong>DM Sans</strong> - Body text, paragraphs, descriptions</li>
-                    <li>• <strong>Inter</strong> - UI elements, buttons, labels</li>
+                    <li>• <strong>Sora</strong> - Titres, elements de marque, CTAs</li>
+                    <li>• <strong>DM Sans</strong> - Texte, paragraphes, descriptions</li>
+                    <li>• <strong>Inter</strong> - Elements UI, boutons, etiquettes</li>
                   </ul>
                 </div>
                 <div className="p-4 rounded-xl bg-white/5">
-                  <h4 className="font-medium mb-2">Web Safe Fallback</h4>
+                  <h4 className="font-medium mb-2 text-white">Fallback Web Securise</h4>
                   <code className="text-sm text-gray-400">
                     font-family: 'Sora', system-ui, sans-serif;
                   </code>
@@ -498,7 +499,7 @@ export default function BrandKitPage() {
         {/* Components */}
         {activeTab === 'components' && (
           <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold mb-6">UI Components Library</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Bibliotheque de Composants UI</h3>
             <ComponentShowcase />
           </div>
         )}
@@ -506,31 +507,38 @@ export default function BrandKitPage() {
         {/* Mockups */}
         {activeTab === 'mockups' && (
           <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold mb-6">Brand Mockups</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Maquettes de Marque</h3>
             <MockupsShowcase />
           </div>
         )}
       </div>
 
       {/* Download Section */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-electron-blue/20 via-purple-500/10 to-transparent border border-electron-blue/20">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold">Download Brand Assets</h3>
-            <p className="text-gray-400 text-sm">Get all brand assets in one package</p>
+            <h3 className="text-lg font-semibold text-white">Telecharger les Ressources</h3>
+            <p className="text-gray-400 text-sm">Obtenez toutes les ressources en un seul package</p>
           </div>
           <div className="flex gap-3">
-            <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2">
+            <button onClick={() => { setNotification('Partage en cours...'); setTimeout(() => setNotification('Lien copie!'), 1500); setTimeout(() => setNotification(null), 3000) }} className="px-4 py-2.5 rounded-xl border border-white/20 hover:bg-white/10 transition-colors flex items-center gap-2 font-medium">
               <Share2 className="w-4 h-4" />
-              Share
+              Partager
             </button>
-            <button className="px-6 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+            <button onClick={() => { setNotification('Telechargement en cours...'); setTimeout(() => { setNotification('Telechargement termine!'); setTimeout(() => setNotification(null), 2000) }, 1500) }} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
               <DownloadIcon className="w-4 h-4" />
-              Download All
+              Tout Telecharger
             </button>
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
