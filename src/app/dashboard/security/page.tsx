@@ -57,12 +57,12 @@ interface User {
 }
 
 const mockLogs: Log[] = [
-  { id: 1, type: 'login', action: 'Login successful', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:30:00', status: 'success' },
-  { id: 2, type: 'action', action: 'Updated product "Earbuds Pro"', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:25:00', status: 'success' },
-  { id: 3, type: 'security', action: '2FA enabled', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:20:00', status: 'success' },
-  { id: 4, type: 'login', action: 'Failed login attempt', ip: '45.33.22.11', location: 'Unknown', timestamp: '2024-04-09 13:15:00', status: 'failed' },
-  { id: 5, type: 'payment', action: 'Payment received: $49.99', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 12:00:00', status: 'success' },
-  { id: 6, type: 'security', action: 'Password changed', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 11:30:00', status: 'success' },
+  { id: 1, type: 'login', action: 'Connexion reussie', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:30:00', status: 'success' },
+  { id: 2, type: 'action', action: 'Produit "Ecouteurs Pro" mis a jour', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:25:00', status: 'success' },
+  { id: 3, type: 'security', action: '2FA active', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 14:20:00', status: 'success' },
+  { id: 4, type: 'login', action: 'Echec de connexion', ip: '45.33.22.11', location: 'Inconnu', timestamp: '2024-04-09 13:15:00', status: 'failed' },
+  { id: 5, type: 'payment', action: 'Paiement recu: 49.99 EUR', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 12:00:00', status: 'success' },
+  { id: 6, type: 'security', action: 'Mot de passe modifie', ip: '192.168.1.45', location: 'Paris, France', timestamp: '2024-04-09 11:30:00', status: 'success' },
 ]
 
 const mockUsers: User[] = [
@@ -73,10 +73,10 @@ const mockUsers: User[] = [
 ]
 
 const rolePermissions = {
-  admin: ['read', 'write', 'delete', 'manage_users', 'manage_settings', 'view_analytics', 'manage_payments'],
-  manager: ['read', 'write', 'view_analytics', 'manage_orders'],
-  employee: ['read', 'write', 'manage_orders'],
-  client: ['read', 'write_orders'],
+  admin: ['lecture', 'ecriture', 'suppression', 'gestion_utilisateurs', 'parametres', 'analytique', 'paiements'],
+  manager: ['lecture', 'ecriture', 'analytique', 'gestion_commandes'],
+  employee: ['lecture', 'ecriture', 'gestion_commandes'],
+  client: ['lecture', 'passer_commandes'],
 }
 
 export default function SecurityPage() {
@@ -86,6 +86,7 @@ export default function SecurityPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [passwordStrength, setPasswordStrength] = useState(0)
   const [filterLog, setFilterLog] = useState<'all' | LogType>('all')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const checkPasswordStrength = (pwd: string) => {
     let strength = 0
@@ -124,14 +125,14 @@ export default function SecurityPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-green-500/20 via-emerald-500/10 to-transparent border border-green-500/20">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
-            <Shield className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/30">
+            <Shield className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Security Center</h1>
-            <p className="text-gray-400">Manage your account security</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Centre de Securite</h1>
+            <p className="text-gray-300">Gerez la securite de votre compte</p>
           </div>
         </div>
       </div>
@@ -141,17 +142,17 @@ export default function SecurityPage() {
         <div className="flex gap-2">
           {[
             { key: '2fa', label: '2FA & Auth', icon: Fingerprint },
-            { key: 'roles', label: 'Roles & Access', icon: Users },
-            { key: 'logs', label: 'Activity Logs', icon: History },
-            { key: 'api', label: 'API Security', icon: Key },
+            { key: 'roles', label: 'Roles & Acces', icon: Users },
+            { key: 'logs', label: 'Journaux', icon: History },
+            { key: 'api', label: 'Securite API', icon: Key },
           ].map(tab => (
             <button
               key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
-              className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all ${
+              onClick={() => { setActiveTab(tab.key as any); setNotification(tab.label + ' selectionne'); setTimeout(() => setNotification(null), 1500) }}
+              className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all font-medium whitespace-nowrap ${
                 activeTab === tab.key
                   ? 'bg-electron-blue text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10 border border-white/10'
               }`}
             >
               <tab.icon className="w-4 h-4" />
@@ -166,31 +167,31 @@ export default function SecurityPage() {
         <div className="space-y-6">
           {/* 2FA Methods */}
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold mb-4">Two-Factor Authentication</h2>
+            <h2 className="text-lg font-semibold mb-4 text-white">Authentification a Deux Facteurs</h2>
             <p className="text-gray-400 mb-6">
-              Add an extra layer of security to your account
+              Ajoutez une couche de securite supplementaire a votre compte
             </p>
 
             <div className="space-y-4">
               {[
                 { 
                   key: 'app', 
-                  label: 'Authenticator App', 
-                  desc: 'Use Google Authenticator or similar',
+                  label: 'Application Authentificateur', 
+                  desc: 'Utilisez Google Authenticator ou similaire',
                   icon: Smartphone,
                   enabled: twoFactorMethod === 'app'
                 },
                 { 
                   key: 'sms', 
-                  label: 'SMS Code', 
-                  desc: 'Receive code via text message',
+                  label: 'Code SMS', 
+                  desc: 'Recevez le code par message texte',
                   icon: Smartphone,
                   enabled: twoFactorMethod === 'sms'
                 },
                 { 
                   key: 'email', 
-                  label: 'Email Code', 
-                  desc: 'Receive code via email',
+                  label: 'Code Email', 
+                  desc: 'Recevez le code par email',
                   icon: Mail,
                   enabled: twoFactorMethod === 'email'
                 },
@@ -227,21 +228,21 @@ export default function SecurityPage() {
 
           {/* Password Security */}
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold mb-4">Password Security</h2>
+            <h2 className="text-lg font-semibold mb-4 text-white">Securite du Mot de Passe</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">New Password</label>
+                <label className="block text-sm text-gray-400 mb-2">Nouveau Mot de Passe</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => handlePasswordChange(e.target.value)}
-                    placeholder="Enter new password"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50"
+                    placeholder="Entrez le nouveau mot de passe"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 pr-12 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50 backdrop-blur-sm"
                   />
                   <button
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() => { setShowPassword(!showPassword); setNotification(showPassword ? 'Mot de passe masque' : 'Mot de passe visible'); setTimeout(() => setNotification(null), 1500) }}
                     className="absolute right-4 top-1/2 -translate-y-1/2"
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -267,39 +268,39 @@ export default function SecurityPage() {
                     ))}
                   </div>
                   <p className="text-sm text-gray-400">
-                    {passwordStrength === 0 && 'Very weak'}
-                    {passwordStrength === 1 && 'Weak - Add more characters'}
-                    {passwordStrength === 2 && 'Medium - Add numbers'}
-                    {passwordStrength === 3 && 'Strong - Add special chars'}
-                    {passwordStrength === 4 && 'Very strong'}
+                    {passwordStrength === 0 && 'Tres faible'}
+                    {passwordStrength === 1 && 'Faible - Ajoutez des caracteres'}
+                    {passwordStrength === 2 && 'Moyen - Ajoutez des chiffres'}
+                    {passwordStrength === 3 && 'Fort - Ajoutez des caracteres speciaux'}
+                    {passwordStrength === 4 && 'Tres fort'}
                   </p>
                 </div>
               )}
 
               <div className="p-4 rounded-xl bg-white/5">
-                <h3 className="font-medium mb-2">Password Requirements:</h3>
+                <h3 className="font-medium mb-2 text-white">Exigences du Mot de Passe:</h3>
                 <ul className="space-y-1 text-sm text-gray-400">
                   <li className="flex items-center gap-2">
                     {password.length >= 8 ? <CheckCircle className="w-4 h-4 text-green-400" /> : <XCircle className="w-4 h-4" />}
-                    At least 8 characters
+                    Au moins 8 caracteres
                   </li>
                   <li className="flex items-center gap-2">
                     {password.match(/[A-Z]/) ? <CheckCircle className="w-4 h-4 text-green-400" /> : <XCircle className="w-4 h-4" />}
-                    At least one uppercase letter
+                    Au moins une lettre majuscule
                   </li>
                   <li className="flex items-center gap-2">
                     {password.match(/[0-9]/) ? <CheckCircle className="w-4 h-4 text-green-400" /> : <XCircle className="w-4 h-4" />}
-                    At least one number
+                    Au moins un chiffre
                   </li>
                   <li className="flex items-center gap-2">
                     {password.match(/[^A-Za-z0-9]/) ? <CheckCircle className="w-4 h-4 text-green-400" /> : <XCircle className="w-4 h-4" />}
-                    At least one special character
+                    Au moins un caractere special
                   </li>
                 </ul>
               </div>
 
-              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity">
-                Update Password
+              <button onClick={() => { setNotification('Mot de passe mis a jour!'); setTimeout(() => setNotification(null), 2000) }} className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity font-medium">
+                Mettre a Jour le Mot de Passe
               </button>
             </div>
           </div>
@@ -307,13 +308,13 @@ export default function SecurityPage() {
           {/* Sessions */}
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Active Sessions</h2>
-              <button className="text-red-400 text-sm hover:underline">Revoke All</button>
+              <h2 className="text-lg font-semibold text-white">Sessions Actives</h2>
+              <button onClick={() => { setNotification('Toutes les sessions revoquees!'); setTimeout(() => setNotification(null), 2000) }} className="text-red-400 text-sm hover:underline font-medium">Revoquer Tout</button>
             </div>
             <div className="space-y-3">
               {[
-                { device: 'MacBook Pro', location: 'Paris, France', current: true, time: '2 min ago' },
-                { device: 'iPhone 14', location: 'Paris, France', current: false, time: '1 hour ago' },
+                { device: 'MacBook Pro', location: 'Paris, France', current: true, time: 'Il y a 2 min' },
+                { device: 'iPhone 14', location: 'Paris, France', current: false, time: 'Il y a 1 heure' },
               ].map((session, i) => (
                 <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5">
                   <div className="flex items-center gap-4">
@@ -326,9 +327,9 @@ export default function SecurityPage() {
                     </div>
                   </div>
                   {session.current ? (
-                    <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Current</span>
+                    <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Actuel</span>
                   ) : (
-                    <button className="text-red-400 text-sm">Revoke</button>
+                    <button onClick={() => { setNotification('Session revoquee!'); setTimeout(() => setNotification(null), 2000) }} className="text-red-400 text-sm font-medium">Revoquer</button>
                   )}
                 </div>
               ))}
@@ -341,7 +342,7 @@ export default function SecurityPage() {
       {activeTab === 'roles' && (
         <div className="space-y-6">
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold mb-4">Team Members</h2>
+            <h2 className="text-lg font-semibold mb-4 text-white">Membres de l'Equipe</h2>
             
             <div className="space-y-4">
               {mockUsers.map((user, i) => (
@@ -363,9 +364,9 @@ export default function SecurityPage() {
                   </div>
                   <div className="flex items-center gap-4">
                     <span className={`px-3 py-1 rounded-full text-sm ${getRoleColor(user.role)}`}>
-                      {user.role}
+                      {user.role === 'admin' ? 'Administrateur' : user.role === 'manager' ? 'Manager' : user.role === 'employee' ? 'Employe' : 'Client'}
                     </span>
-                    <button className="p-2 rounded-lg hover:bg-white/10">
+                    <button onClick={() => { setNotification('Parametres ouverts'); setTimeout(() => setNotification(null), 1500) }} className="p-2 rounded-lg hover:bg-white/10">
                       <Settings className="w-4 h-4" />
                     </button>
                   </div>
@@ -373,15 +374,15 @@ export default function SecurityPage() {
               ))}
             </div>
 
-            <button className="mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+            <button onClick={() => { setNotification('Invitation envoyee!'); setTimeout(() => setNotification(null), 2000) }} className="mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
               <Users className="w-5 h-5" />
-              Add Team Member
+              Ajouter un Membre
             </button>
           </div>
 
           {/* Permissions */}
           <div className="glass-card p-6">
-            <h2 className="text-lg font-semibold mb-4">Role Permissions</h2>
+            <h2 className="text-lg font-semibold mb-4 text-white">Permissions des Roles</h2>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
@@ -389,18 +390,18 @@ export default function SecurityPage() {
                     <th className="text-left py-3 px-4 text-sm text-gray-400">Permission</th>
                     <th className="text-center py-3 px-4 text-sm text-gray-400">Admin</th>
                     <th className="text-center py-3 px-4 text-sm text-gray-400">Manager</th>
-                    <th className="text-center py-3 px-4 text-sm text-gray-400">Employee</th>
+                    <th className="text-center py-3 px-4 text-sm text-gray-400">Employe</th>
                     <th className="text-center py-3 px-4 text-sm text-gray-400">Client</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { perm: 'Read Data', admin: true, manager: true, employee: true, client: true },
-                    { perm: 'Write Data', admin: true, manager: true, employee: true, client: false },
-                    { perm: 'Delete Data', admin: true, manager: false, employee: false, client: false },
-                    { perm: 'Manage Users', admin: true, manager: false, employee: false, client: false },
-                    { perm: 'View Analytics', admin: true, manager: true, employee: false, client: false },
-                    { perm: 'Manage Payments', admin: true, manager: false, employee: false, client: false },
+                    { perm: 'Lecture Donnees', admin: true, manager: true, employee: true, client: true },
+                    { perm: 'Ecriture Donnees', admin: true, manager: true, employee: true, client: false },
+                    { perm: 'Suppression Donnees', admin: true, manager: false, employee: false, client: false },
+                    { perm: 'Gestion Utilisateurs', admin: true, manager: false, employee: false, client: false },
+                    { perm: 'Voir Analytique', admin: true, manager: true, employee: false, client: false },
+                    { perm: 'Gestion Paiements', admin: true, manager: false, employee: false, client: false },
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-white/5">
                       <td className="py-3 px-4">{row.perm}</td>
@@ -422,19 +423,19 @@ export default function SecurityPage() {
         <div className="space-y-6">
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Activity Log</h2>
+              <h2 className="text-lg font-semibold text-white">Journal d'Activite</h2>
               <div className="flex gap-2">
                 {(['all', 'login', 'action', 'security', 'payment'] as const).map(filter => (
                   <button
                     key={filter}
-                    onClick={() => setFilterLog(filter)}
-                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${
+                    onClick={() => { setFilterLog(filter); setNotification((filter === 'all' ? 'Tous' : filter) + ' filtre'); setTimeout(() => setNotification(null), 1500) }}
+                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors font-medium ${
                       filterLog === filter 
                         ? 'bg-electron-blue text-white' 
-                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                        : 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/10'
                     }`}
                   >
-                    {filter === 'all' ? 'All' : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                    {filter === 'all' ? 'Tous' : filter === 'login' ? 'Connexion' : filter === 'action' ? 'Action' : filter === 'security' ? 'Securite' : 'Paiement'}
                   </button>
                 ))}
               </div>
@@ -521,9 +522,9 @@ export default function SecurityPage() {
               </div>
             </div>
 
-            <button className="mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2">
+            <button onClick={() => { setNotification('Nouvelle cle generatee!'); setTimeout(() => setNotification(null), 2000) }} className="mt-4 px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
               <Key className="w-5 h-5" />
-              Generate New Key
+              Generer une Nouvelle Cle
             </button>
           </div>
 
@@ -565,12 +566,19 @@ export default function SecurityPage() {
                   <button className="text-red-400"><XCircle className="w-4 h-4" /></button>
                 </div>
               </div>
-              <button className="mt-4 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm flex items-center gap-2">
+              <button onClick={() => { setNotification('Plage IP ajoutee!'); setTimeout(() => setNotification(null), 2000) }} className="mt-4 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm flex items-center gap-2 font-medium border border-white/20">
                 <RefreshCcw className="w-4 h-4" />
-                Add IP Range
+                Ajouter une Plage IP
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
         </div>
       )}
     </div>
