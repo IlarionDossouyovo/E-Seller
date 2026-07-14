@@ -30,26 +30,26 @@ type Chat = {
 }
 
 const mockChats: Chat[] = [
-  { id: 1, customer: 'Sarah Johnson', avatar: '👩', lastMessage: 'When will my order arrive?', time: '2 min ago', status: 'active', unread: 2 },
-  { id: 2, customer: 'Mike Chen', avatar: '👨', lastMessage: 'Thanks for the help!', time: '15 min ago', status: 'closed', rating: 5, unread: 0 },
-  { id: 3, customer: 'Emma Wilson', avatar: '👩‍🦰', lastMessage: 'I need to change my shipping address', time: '1 hour ago', status: 'active', unread: 1 },
-  { id: 4, customer: 'James Brown', avatar: '👨‍🦱', lastMessage: 'Product arrived damaged', time: '2 hours ago', status: 'pending', unread: 0 },
-  { id: 5, customer: 'Lisa Anderson', avatar: '👩', lastMessage: 'Can I get a refund?', time: '3 hours ago', status: 'active', unread: 1 },
+  { id: 1, customer: 'Sophie Martin', avatar: '👩', lastMessage: 'Quand arrivera ma commande?', time: '2 min', status: 'active', unread: 2 },
+  { id: 2, customer: 'Marc Dubois', avatar: '👨', lastMessage: 'Merci pour votre aide!', time: '15 min', status: 'closed', rating: 5, unread: 0 },
+  { id: 3, customer: 'Emma Bernard', avatar: '👩‍🦰', lastMessage: 'Je dois changer mon adresse de livraison', time: '1 heure', status: 'active', unread: 1 },
+  { id: 4, customer: 'Jacques Petit', avatar: '👨‍🦱', lastMessage: 'Le produit est arrive endommage', time: '2 heures', status: 'pending', unread: 0 },
+  { id: 5, customer: 'Claire Moreau', avatar: '👩', lastMessage: 'Puis-je obtenir un remboursement?', time: '3 heures', status: 'active', unread: 1 },
 ]
 
 const mockMessages = [
-  { id: 1, sender: 'customer', text: 'Hi, I have a question about my order #12345', time: '10:30 AM' },
-  { id: 2, sender: 'me', text: 'Hello! Of course, I\'d be happy to help. What would you like to know?', time: '10:31 AM' },
-  { id: 3, sender: 'customer', text: 'When will it be delivered? I ordered it 3 days ago.', time: '10:32 AM' },
-  { id: 4, sender: 'me', text: 'Let me check that for you. Your order is currently being processed and should be shipped within 24 hours.', time: '10:33 AM' },
-  { id: 5, sender: 'me', text: 'You can track its status on our website with your order number.', time: '10:33 AM' },
-  { id: 6, sender: 'customer', text: 'Thank you! Can you also tell me about the warranty?', time: '10:35 AM' },
+  { id: 1, sender: 'customer', text: 'Bonjour, j\'ai une question sur ma commande #12345', time: '10:30' },
+  { id: 2, sender: 'me', text: 'Bonjour! Bien sur, je serais ravi de vous aider. Que souhaitez-vous savoir?', time: '10:31' },
+  { id: 3, sender: 'customer', text: 'Quand sera-t-elle livree? Je l\'ai commandee il y a 3 jours.', time: '10:32' },
+  { id: 4, sender: 'me', text: 'Laissez-moi verifier. Votre commande est en cours de traitement et devrait etre expediee sous 24 heures.', time: '10:33' },
+  { id: 5, sender: 'me', text: 'Vous pouvez suivre son statut sur notre site avec votre numero de commande.', time: '10:33' },
+  { id: 6, sender: 'customer', text: 'Merci! Pouvez-vous aussi me parler de la garantie?', time: '10:35' },
 ]
 
 const stats = [
   { label: 'Total Chats', value: '156', change: '+12%', icon: MessageSquare },
-  { label: 'Active Now', value: '8', change: '+3', icon: Circle },
-  { label: 'Avg Response', value: '< 2 min', change: '-30s', icon: Clock },
+  { label: 'Actifs', value: '8', change: '+3', icon: Circle },
+  { label: 'Reponse Moy.', value: '< 2 min', change: '-30s', icon: Clock },
   { label: 'Satisfaction', value: '94%', change: '+2%', icon: Star },
 ]
 
@@ -58,9 +58,12 @@ export default function ChatPage() {
   const [messages] = useState(mockMessages)
   const [selectedChat, setSelectedChat] = useState<Chat | null>(chats[0])
   const [newMessage, setNewMessage] = useState('')
+  const [notification, setNotification] = useState<string | null>(null)
 
   const sendMessage = () => {
     if (newMessage.trim()) {
+      setNotification('Message envoye!');
+      setTimeout(() => setNotification(null), 2000)
       setNewMessage('')
     }
   }
@@ -68,14 +71,14 @@ export default function ChatPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="glass-card p-6">
+      <div className="glass-card p-6 bg-gradient-to-r from-cyan-500/20 via-blue-500/10 to-transparent border border-cyan-500/20">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-            <MessageSquare className="w-6 h-6 text-white" />
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+            <MessageSquare className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Live Chat Support</h1>
-            <p className="text-gray-400">Real-time customer support conversations</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Support Chat en Direct</h1>
+            <p className="text-gray-300">Conversations de support client en temps reel</p>
           </div>
         </div>
       </div>
@@ -92,11 +95,11 @@ export default function ChatPage() {
           >
             <div className="flex items-center justify-between mb-2">
               <stat.icon className="w-5 h-5 text-cyan-400" />
-              <span className={`text-sm ${stat.change.startsWith('+') ? 'text-green-400' : 'text-yellow-400'}`}>
+              <span className={`text-sm font-medium ${stat.change.startsWith('+') ? 'text-green-400' : 'text-yellow-400'}`}>
                 {stat.change}
               </span>
             </div>
-            <p className="text-2xl font-bold">{stat.value}</p>
+            <p className="text-2xl font-bold text-white">{stat.value}</p>
             <p className="text-sm text-gray-400">{stat.label}</p>
           </motion.div>
         ))}
@@ -110,8 +113,9 @@ export default function ChatPage() {
             <Search className="w-4 h-4 text-gray-400" />
             <input 
               type="text" 
-              placeholder="Search chats..."
-              className="bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"
+              placeholder="Rechercher des chats..."
+              onChange={(e) => { setNotification('Recherche: ' + e.target.value); setTimeout(() => setNotification(null), 1000) }}
+              className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white placeholder-gray-400 flex-1 outline-none focus:border-electron-blue"
             />
           </div>
           <div className="space-y-2">
@@ -218,8 +222,8 @@ export default function ChatPage() {
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50"
+                placeholder="Tapez votre message..."
+                className="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-electron-blue/50"
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
               />
               <button
@@ -232,6 +236,13 @@ export default function ChatPage() {
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 px-6 py-3 bg-green-500 text-white rounded-xl shadow-lg z-50 animate-pulse">
+          {notification}
+        </div>
+      )}
     </div>
   )
 }
