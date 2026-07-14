@@ -49,6 +49,18 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <style jsx global>{`
+        select option {
+          background-color: #1e293b !important;
+          color: white !important;
+          padding: 12px !important;
+        }
+        select optgroup {
+          background-color: #0f172a !important;
+          color: #60a5fa !important;
+          font-weight: bold !important;
+        }
+      `}</style>
       <header className="bg-slate-900/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/store/cart" className="flex items-center gap-2 text-white hover:text-blue-400">
@@ -89,7 +101,7 @@ export default function CheckoutPage() {
                 <input type="text" placeholder="Ville" required className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} />
                 <input type="text" placeholder="Code postal" required className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" value={formData.postalCode} onChange={e => setFormData({...formData, postalCode: e.target.value})} />
               </div>
-              <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white" value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})}>
+              <select required className="w-full bg-slate-800 border border-white/10 rounded-xl px-4 py-3 text-white appearance-none cursor-pointer" value={formData.country} onChange={e => setFormData({...formData, country: e.target.value})} style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%239ca3af\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center', backgroundSize: '20px' }}>
                 <option value="">Selectionner un pays</option>
                 <optgroup label="Europe">
                   <option value="FR">France</option>
