@@ -39,9 +39,11 @@ curl -X POST http://localhost:11434/api/chat \
 
 | Model | Size | Purpose |
 |-------|------|---------|
-| `llama3.2` | 3.8GB | General AI, chat |
-| `mistral` | 4.1GB | Fast responses |
-| `codellama` | 3.8GB | Code generation |
+| `llama3.2` | 2.0 GB | General AI, chat (default) |
+| `llama3.1:8b` | 4.9 GB | Advanced reasoning |
+| `qwen2.5-coder:7b` | 4.7 GB | Code generation |
+| `phi3:mini` | 2.2 GB | Fast responses
+| `nomic-embed-text:latest` | 274 MB | Text embeddings
 
 ## 🔧 Environment Variables
 
