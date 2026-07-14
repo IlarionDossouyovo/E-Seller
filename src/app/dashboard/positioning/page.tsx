@@ -87,7 +87,6 @@ export default function PositioningPage() {
   const [notification, setNotification] = useState<string | null>(null)
 
   const handleAnalyze = async () => {
-    if (!productNiche || !targetAudience) return
     setIsAnalyzing(true)
     setNotification('Analyse du positionnement en cours...')
     await new Promise(resolve => setTimeout(resolve, 3000))
