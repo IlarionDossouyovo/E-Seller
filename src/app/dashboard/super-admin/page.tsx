@@ -107,7 +107,7 @@ export default function SuperAdminPage() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input type="text" placeholder={t.superAdmin?.search || 'Search...'} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg" />
               </div>
-              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg">
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-3 py-2 bg-gray-800 border border-white/20 rounded-lg text-white">
                 <option value="all">{t.superAdmin?.all || 'All'}</option>
                 <option value="active">{t.superAdmin?.active || 'Active'}</option>
                 <option value="pending">{t.superAdmin?.pending || 'Pending'}</option>
@@ -171,19 +171,19 @@ export default function SuperAdminPage() {
       <div className="glass-card p-6">
         <h3 className="font-semibold mb-4">{t.superAdmin?.quickActions || 'Quick Actions'}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
-            <Store className="w-5 h-5 text-yellow-500" />
+          <button className="p-4 bg-electron-blue/20 border border-electron-blue/30 rounded-xl hover:bg-electron-blue/40 flex items-center gap-3 transition-all cursor-pointer">
+            <Store className="w-5 h-5 text-electron-blue" />
             <span className="font-medium">{t.superAdmin?.addTenant || 'Add Tenant'}</span>
           </button>
-          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
             <TrendingUp className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.viewReports || 'View Reports'}</span>
           </button>
-          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
             <Shield className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.systemSettings || 'System Settings'}</span>
           </button>
-          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
             <Activity className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.viewAllLogs || 'View All Logs'}</span>
           </button>
