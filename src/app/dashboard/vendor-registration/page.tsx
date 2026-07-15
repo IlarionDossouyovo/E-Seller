@@ -5,8 +5,97 @@ import { motion } from 'framer-motion'
 import { useI18n } from '@/app/i18n'
 import { Store, User, Mail, MapPin, Phone, Globe, Upload, DollarSign, CheckCircle, AlertCircle, Building } from 'lucide-react'
 
-const countries = ['United States', 'China', 'France', 'Germany', 'United Kingdom', 'Japan', 'Canada', 'Australia', 'Brazil', 'India']
-const categories = ['Electronics', 'Fashion', 'Home & Garden', 'Beauty', 'Sports', 'Toys', 'Books', 'Automotive', 'Food', 'Health']
+const countries = [
+  'Afghanistan', 'Albania', 'Algeria', 'Argentina', 'Australia', 'Austria', 'Bahrain', 'Bangladesh', 'Belgium', 'Brazil',
+  'Bulgaria', 'Canada', 'Chile', 'China', 'Colombia', 'Croatia', 'Czech Republic', 'Denmark', 'Egypt', 'Finland',
+  'France', 'Germany', 'Ghana', 'Greece', 'Hong Kong', 'Hungary', 'India', 'Indonesia', 'Iran', 'Iraq',
+  'Ireland', 'Israel', 'Italy', 'Japan', 'Jordan', 'Kenya', 'South Korea', 'Kuwait', 'Lebanon', 'Malaysia',
+  'Mexico', 'Morocco', 'Netherlands', 'New Zealand', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Peru', 'Philippines',
+  'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Saudi Arabia', 'Serbia', 'Singapore', 'South Africa', 'Spain',
+  'Sri Lanka', 'Sweden', 'Switzerland', 'Taiwan', 'Thailand', 'Turkey', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States',
+  'Venezuela', 'Vietnam'
+]
+const categories = [
+  'Electronics', 'Fashion', 'Home & Garden', 'Beauty', 'Sports', 'Toys', 'Books', 'Automotive', 'Food & Beverages', 'Health & Wellness', 'Software', 'Services'
+]
+
+const getCountryName = (country: string): string => {
+  const countryNames: Record<string, string> = {
+    'Afghanistan': 'Afghanistan',
+    'Albania': 'Albanie',
+    'Algeria': 'Algerie',
+    'Argentina': 'Argentine',
+    'Australia': 'Australie',
+    'Austria': 'Autriche',
+    'Bahrain': 'Bahrein',
+    'Bangladesh': 'Bangladesh',
+    'Belgium': 'Belgique',
+    'Brazil': 'Bresil',
+    'Bulgaria': 'Bulgarie',
+    'Canada': 'Canada',
+    'Chile': 'Chili',
+    'China': 'Chine',
+    'Colombia': 'Colombie',
+    'Croatia': 'Croatie',
+    'Czech Republic': 'Republique tcheque',
+    'Denmark': 'Danemark',
+    'Egypt': 'Egypte',
+    'Finland': 'Finlande',
+    'France': 'France',
+    'Germany': 'Allemagne',
+    'Ghana': 'Ghana',
+    'Greece': 'Grece',
+    'Hong Kong': 'Hong Kong',
+    'Hungary': 'Hongrie',
+    'India': 'Inde',
+    'Indonesia': 'Indonesie',
+    'Iran': 'Iran',
+    'Iraq': 'Irak',
+    'Ireland': 'Irlande',
+    'Israel': 'Israel',
+    'Italy': 'Italie',
+    'Japan': 'Japon',
+    'Jordan': 'Jordanie',
+    'Kenya': 'Kenya',
+    'South Korea': 'Coree du Sud',
+    'Kuwait': 'Koweit',
+    'Lebanon': 'Liban',
+    'Malaysia': 'Malaisie',
+    'Mexico': 'Mexique',
+    'Morocco': 'Maroc',
+    'Netherlands': 'Pays-Bas',
+    'New Zealand': 'Nouvelle-Zelande',
+    'Nigeria': 'Nigeria',
+    'Norway': 'Norvege',
+    'Oman': 'Oman',
+    'Pakistan': 'Pakistan',
+    'Peru': 'Perou',
+    'Philippines': 'Philippines',
+    'Poland': 'Pologne',
+    'Portugal': 'Portugal',
+    'Qatar': 'Qatar',
+    'Romania': 'Roumanie',
+    'Russia': 'Russie',
+    'Saudi Arabia': 'Arabie Saoudite',
+    'Serbia': 'Serbie',
+    'Singapore': 'Singapour',
+    'South Africa': 'Afrique du Sud',
+    'Spain': 'Espagne',
+    'Sri Lanka': 'Sri Lanka',
+    'Sweden': 'Suede',
+    'Switzerland': 'Suisse',
+    'Taiwan': 'Taiwan',
+    'Thailand': 'Thailande',
+    'Turkey': 'Turquie',
+    'Ukraine': 'Ukraine',
+    'United Arab Emirates': 'Emirats arabes unis',
+    'United Kingdom': 'Royaume-Uni',
+    'United States': 'Etats-Unis',
+    'Venezuela': 'Venezuela',
+    'Vietnam': 'Vietnam',
+  }
+  return countryNames[country] || country
+}
 
 export default function VendorRegistrationPage() {
   const { t } = useI18n()
@@ -175,7 +264,7 @@ export default function VendorRegistrationPage() {
                 style={{ backgroundColor: '#1f2937', color: 'white' }}
               >
                 <option value="" style={{ backgroundColor: '#1f2937', color: 'white' }}>{t.vendorRegistration?.selectCountry || 'Select Country'}</option>
-                {countries.map(c => <option key={c} value={c} style={{ backgroundColor: '#1f2937', color: 'white' }}>{c}</option>)}
+                {countries.map(c => <option key={c} value={c} style={{ backgroundColor: '#1f2937', color: 'white' }}>{getCountryName(c)}</option>)}
               </select>
             </div>
 
