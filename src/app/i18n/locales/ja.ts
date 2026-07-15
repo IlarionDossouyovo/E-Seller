@@ -246,6 +246,7 @@ export const translation = {
     duplicate: '複製',
     delete: '削除',
     activate: '有効化',
+    pause: '一時停止',
     stats: '統計',
     confirmDelete: 'このキャンペーンを削除してもよろしいですか？',
   },

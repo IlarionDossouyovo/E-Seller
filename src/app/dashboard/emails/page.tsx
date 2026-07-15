@@ -117,6 +117,26 @@ export default function EmailsPage() {
   const [formSubject, setFormSubject] = useState('')
   const [formStatus, setFormStatus] = useState<CampaignStatus>('draft')
 
+  // Automation state
+  const [automations, setAutomations] = useState([
+    { name: 'Serie Bienvenue', trigger: 'Nouvel abonne', emails: 3, status: 'active' },
+    { name: 'Panier Abandonne', trigger: 'Panier abandonne', emails: 2, status: 'active' },
+    { name: 'Post-Achat', trigger: 'Commande terminee', emails: 2, status: 'paused' },
+    { name: 'Rappel', trigger: 'Pas d\'achat depuis 30 jours', emails: 3, status: 'active' },
+  ])
+
+  // Handle automation edit
+  const handleEditAutomation = (index: number) => {
+    alert(`Modifier: ${automations[index].name}`)
+  }
+
+  // Handle automation toggle (activate/deactivate)
+  const handleToggleAutomation = (index: number) => {
+    setAutomations(prev => prev.map((auto, i) => 
+      i === index ? { ...auto, status: auto.status === 'active' ? 'paused' : 'active' } : auto
+    ))
+  }
+
   // Handlers
   const handleNewCampaign = () => {
     setEditingCampaign(null)
@@ -439,12 +459,7 @@ export default function EmailsPage() {
 
       {activeTab === 'automation' && (
         <div className="grid md:grid-cols-2 gap-6">
-          {[
-            { name: 'Serie Bienvenue', trigger: 'Nouvel abonne', emails: 3, status: 'active', statusLabel: 'Actif' },
-            { name: 'Panier Abandonne', trigger: 'Panier abandonne', emails: 2, status: 'active', statusLabel: 'Actif' },
-            { name: 'Post-Achat', trigger: 'Commande terminee', emails: 2, status: 'paused', statusLabel: 'En pause' },
-            { name: 'Rappel', trigger: 'Pas d\'achat depuis 30 jours', emails: 3, status: 'active', statusLabel: 'Actif' },
-          ].map((automation, i) => (
+          {automations.map((automation, i) => (
             <motion.div
               key={automation.name}
               initial={{ opacity: 0, y: 20 }}
@@ -462,16 +477,28 @@ export default function EmailsPage() {
                     ? 'bg-green-500/20 text-green-400' 
                     : 'bg-gray-500/20 text-gray-400'
                 }`}>
-                  {automation.statusLabel}
+                  {automation.status === 'active' ? 'Actif' : 'En pause'}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm text-gray-400">{automation.emails} courriels</p>
                 <div className="flex gap-2">
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.edit || 'Modifier'}>
+                  <button 
+                    onClick={() => handleEditAutomation(i)}
+                    className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" 
+                    title={t.emailMarketing?.edit || 'Modifier'}
+                  >
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.activate || 'Activer'}>
+                  <button 
+                    onClick={() => handleToggleAutomation(i)}
+                    className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                      automation.status === 'active' 
+                        ? 'hover:bg-yellow-500/20 text-yellow-400' 
+                        : 'hover:bg-green-500/20 text-green-400'
+                    }`}
+                    title={automation.status === 'active' ? (t.emailMarketing?.pause || 'Pause') : (t.emailMarketing?.activate || 'Activer')}
+                  >
                     <Zap className="w-5 h-5" />
                   </button>
                 </div>
