@@ -67,9 +67,25 @@ const getCountryName = (country: string): string => {
   return countryNames[country] || country
 }
 
+const paymentMethods = [
+  { id: 'bank', name: 'Virement Bancaire', icon: '🏦' },
+  { id: 'orange', name: 'Orange Money', icon: '🟠' },
+  { id: 'mtn', name: 'MTN Mobile Money', icon: '🟡' },
+  { id: 'moov', name: 'Moov Money', icon: '🔵' },
+  { id: 'airtel', name: 'Airtel Money', icon: '🔴' },
+  { id: 'mpesa', name: 'M-Pesa', icon: '🟢' },
+  { id: 'wave', name: 'Wave', icon: '🌊' },
+  { id: 'paypal', name: 'PayPal', icon: '🔵' },
+  { id: 'stripe', name: 'Stripe', icon: '💳' },
+  { id: 'crypto', name: 'Cryptomonnaie (USDT)', icon: '₿' },
+  { id: 'western', name: 'Western Union', icon: '🌍' },
+  { id: 'moneygram', name: 'MoneyGram', icon: '💸' },
+]
+
 export default function VendorRegistrationPage() {
   const { t } = useI18n()
   const [step, setStep] = useState(1)
+  const [selectedPayment, setSelectedPayment] = useState('bank')
   const [formData, setFormData] = useState({
     storeName: '',
     slug: '',
@@ -83,7 +99,15 @@ export default function VendorRegistrationPage() {
     bankName: '',
     accountNumber: '',
     routingNumber: '',
+    iban: '',
+    swift: '',
+    mobileOperator: '',
+    mobileNumber: '',
     paypalEmail: '',
+    stripeEmail: '',
+    cryptoWallet: '',
+    westernName: '',
+    westernCity: '',
     logo: '',
     documents: [] as string[],
   })
