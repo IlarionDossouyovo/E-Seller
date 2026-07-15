@@ -450,7 +450,7 @@ export default function EmailsPage() {
             className="glass-card p-6 w-full max-w-lg"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold">{editingCampaign ? 'Edit Campaign' : 'New Campaign'}</h2>
+              <h2 className="text-xl font-bold">{editingCampaign ? (t.emailMarketing?.editCampaign || 'Modifier la campagne') : (t.emailMarketing?.newCampaign || 'Nouvelle campagne')}</h2>
               <button 
                 onClick={() => { setShowNewCampaignModal(false); setEditingCampaign(null); }}
                 className="p-2 rounded-lg hover:bg-white/10 cursor-pointer"
@@ -461,31 +461,31 @@ export default function EmailsPage() {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Campaign Name</label>
+                <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.campaignName || 'Nom de la campagne'}</label>
                 <input 
                   type="text" 
                   defaultValue={editingCampaign?.name || ''}
-                  placeholder="e.g., Summer Sale"
+                  placeholder={t.emailMarketing?.campaignNamePlaceholder || 'Ex: Soldes ete'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Subject Line</label>
+                <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.subjectLine || 'Objet'}</label>
                 <input 
                   type="text" 
                   defaultValue={editingCampaign?.subject || ''}
-                  placeholder="e.g., 🎉 Big Sale Inside!"
+                  placeholder={t.emailMarketing?.subjectPlaceholder || 'Ex: 🎉 Grande soldes!'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Status</label>
+                <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.status || 'Statut'}</label>
                 <select 
                   defaultValue={editingCampaign?.status || 'draft'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white"
                 >
-                  <option value="draft">Draft</option>
-                  <option value="scheduled">Scheduled</option>
+                  <option value="draft">{t.emailMarketing?.draft || 'Brouillon'}</option>
+                  <option value="scheduled">{t.emailMarketing?.scheduled || 'Planifie'}</option>
                 </select>
               </div>
               
@@ -494,7 +494,7 @@ export default function EmailsPage() {
                   onClick={() => { setShowNewCampaignModal(false); setEditingCampaign(null); }}
                   className="flex-1 px-4 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition-colors"
                 >
-                  Cancel
+                  {t.emailMarketing?.cancel || 'Annuler'}
                 </button>
                 <button 
                   onClick={() => {
@@ -503,8 +503,8 @@ export default function EmailsPage() {
                     } else {
                       const newCampaign: Campaign = {
                         id: Date.now(),
-                        name: 'New Campaign',
-                        subject: 'New email subject',
+                        name: 'Nouvelle campagne',
+                        subject: 'Nouvel objet',
                         status: 'draft',
                         sent: 0,
                         opened: 0,
@@ -519,7 +519,7 @@ export default function EmailsPage() {
                   }}
                   className="flex-1 px-4 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity"
                 >
-                  {editingCampaign ? 'Save Changes' : 'Create Campaign'}
+                  {editingCampaign ? (t.emailMarketing?.saveChanges || 'Enregistrer') : (t.emailMarketing?.createCampaign || 'Creer la campagne')}
                 </button>
               </div>
             </div>
