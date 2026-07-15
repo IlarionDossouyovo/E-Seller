@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, Reorder } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { 
   GitBranch, 
   Plus, 
@@ -98,6 +99,7 @@ const stepColors = {
 }
 
 export default function FunnelsPage() {
+  const { t } = useI18n()
   const [funnels, setFunnels] = useState<Funnel[]>(mockFunnels)
   const [selectedFunnel, setSelectedFunnel] = useState<Funnel | null>(null)
   const [activeTab, setActiveTab] = useState<'funnels' | 'builder'>('funnels')
@@ -119,7 +121,7 @@ export default function FunnelsPage() {
 
   const handleDelete = (id: number, e: React.MouseEvent) => {
     e.stopPropagation()
-    if (confirm('Are you sure you want to delete this funnel?')) {
+    if (confirm(t.emailMarketing?.confirmDelete || 'Voulez-vous vraiment supprimer ce funnel?')) {
       setFunnels(prev => prev.filter(f => f.id !== id))
     }
   }
@@ -169,25 +171,25 @@ export default function FunnelsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-[var(--font-sora)]">Funnel Builder</h1>
-          <p className="text-gray-400">Create automated marketing funnels</p>
+          <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.funnelBuilder?.title || 'Funnel Builder'}</h1>
+          <p className="text-gray-400">{t.funnelBuilder?.subtitle || 'Creer des funnel marketing automatises'}</p>
         </div>
         <button 
           onClick={handleNewFunnel}
           className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer"
         >
           <Plus className="w-5 h-5" />
-          New Funnel
+          {t.funnelBuilder?.newFunnel || 'Nouveau Funnel'}
         </button>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Funnels', value: stats.totalFunnels, icon: GitBranch },
-          { label: 'Active', value: stats.activeFunnels, icon: Play },
-          { label: 'Conversions', value: stats.totalConversions, icon: Users },
-          { label: 'Revenue', value: `$${stats.totalRevenue.toLocaleString()}`, icon: ShoppingCart },
+          { label: t.funnelBuilder?.totalFunnels || 'Total Funnels', value: stats.totalFunnels, icon: GitBranch },
+          { label: t.funnelBuilder?.active || 'Actif', value: stats.activeFunnels, icon: Play },
+          { label: t.funnelBuilder?.conversions || 'Conversions', value: stats.totalConversions, icon: Users },
+          { label: t.funnelBuilder?.revenue || 'Revenu', value: `$${stats.totalRevenue.toLocaleString()}`, icon: ShoppingCart },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -226,7 +228,7 @@ export default function FunnelsPage() {
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-semibold text-lg mb-1">{funnel.name}</h3>
-                <p className="text-sm text-gray-400">{funnel.steps.length} steps</p>
+                <p className="text-sm text-gray-400">{funnel.steps.length} {t.funnelBuilder?.steps || 'etapes'}</p>
               </div>
               <span className={`px-2 py-1 rounded-full text-xs ${
                 funnel.status === 'active' 
@@ -235,7 +237,7 @@ export default function FunnelsPage() {
                   ? 'bg-yellow-500/20 text-yellow-400'
                   : 'bg-gray-500/20 text-gray-400'
               }`}>
-                {funnel.status}
+                {funnel.status === 'active' ? (t.funnelBuilder?.active || 'Actif') : funnel.status === 'paused' ? (t.funnelBuilder?.pause || 'Pause') : (t.emailMarketing?.draft || 'Brouillon')}
               </span>
             </div>
 
@@ -259,11 +261,11 @@ export default function FunnelsPage() {
             {funnel.status !== 'draft' && (
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
                 <div>
-                  <p className="text-xs text-gray-400">Conversions</p>
+                  <p className="text-xs text-gray-400">{t.funnelBuilder?.conversions || 'Conversions'}</p>
                   <p className="font-bold">{funnel.conversions}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400">Revenue</p>
+                  <p className="text-xs text-gray-400">{t.funnelBuilder?.revenue || 'Revenu'}</p>
                   <p className="font-bold">${funnel.revenue.toLocaleString()}</p>
                 </div>
               </div>
@@ -274,25 +276,26 @@ export default function FunnelsPage() {
                 onClick={(e) => handleEdit(funnel, e)}
                 className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm cursor-pointer"
               >
-                Edit
+                {t.funnelBuilder?.edit || 'Modifier'}
               </button>
               <button 
                 onClick={(e) => handleToggleStatus(funnel.id, e)}
                 className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
+                title={funnel.status === 'active' ? (t.funnelBuilder?.pause || 'Pause') : (t.funnelBuilder?.activate || 'Activer')}
               >
                 {funnel.status === 'active' ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
               </button>
               <button 
                 onClick={(e) => handleDuplicate(funnel, e)}
                 className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
-                title="Duplicate"
+                title={t.funnelBuilder?.duplicate || 'Dupliquer'}
               >
                 <Copy className="w-4 h-4" />
               </button>
               <button 
                 onClick={(e) => handleDelete(funnel.id, e)}
                 className="px-4 py-2 rounded-lg border border-white/10 hover:bg-red-500/20 transition-colors text-red-400 cursor-pointer"
-                title="Delete"
+                title={t.funnelBuilder?.delete || 'Supprimer'}
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -311,19 +314,19 @@ export default function FunnelsPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold">{selectedFunnel.name}</h2>
-              <p className="text-gray-400">{selectedFunnel.steps.length} steps</p>
+              <p className="text-gray-400">{selectedFunnel.steps.length} {t.funnelBuilder?.steps || 'etapes'}</p>
             </div>
             <div className="flex gap-2">
               <button className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 text-sm cursor-pointer">
                 <Settings className="w-4 h-4" />
-                Settings
+                {t.funnelBuilder?.settings || 'Parametres'}
               </button>
               <button 
                 onClick={() => selectedFunnel && handleLaunch(selectedFunnel)}
                 className="px-4 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 text-sm cursor-pointer"
               >
                 <Play className="w-4 h-4" />
-                Launch
+                {t.funnelBuilder?.activate || 'Activer'}
               </button>
             </div>
           </div>
@@ -366,7 +369,7 @@ export default function FunnelsPage() {
           <div className="mt-12 text-center">
             <button className="px-6 py-3 rounded-xl border border-dashed border-white/20 hover:border-electron-blue hover:bg-electron-blue/5 transition-colors flex items-center gap-2 mx-auto cursor-pointer">
               <Plus className="w-5 h-5" />
-              Add Step
+              {t.funnelBuilder?.newFunnel || 'Nouveau Funnel'}
             </button>
           </div>
         </motion.div>
@@ -381,7 +384,7 @@ export default function FunnelsPage() {
             className="glass-card p-6 w-full max-w-lg"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold">New Funnel</h2>
+              <h2 className="text-xl font-bold">{t.funnelBuilder?.newFunnel || 'Nouveau Funnel'}</h2>
               <button 
                 onClick={() => setShowNewFunnelModal(false)}
                 className="p-2 rounded-lg hover:bg-white/10 cursor-pointer"

@@ -258,6 +258,26 @@ export const translation = {
     stats: 'Statistiques',
     confirmDelete: 'Voulez-vous vraiment supprimer cette campagne?',
   },
+
+  // Funnel Builder
+  funnelBuilder: {
+    title: 'Funnel Builder',
+    subtitle: 'Creer des funnel marketing automatises',
+    newFunnel: 'Nouveau Funnel',
+    totalFunnels: 'Total Funnels',
+    active: 'Actif',
+    conversions: 'Conversions',
+    revenue: 'Revenu',
+    steps: 'etapes',
+    edit: 'Modifier',
+    delete: 'Supprimer',
+    duplicate: 'Dupliquer',
+    pause: 'Pause',
+    activate: 'Activer',
+    settings: 'Parametres',
+    save: 'Enregistrer',
+    cancel: 'Annuler',
+  },
 }
 
 export type Translation = typeof translation
