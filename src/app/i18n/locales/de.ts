@@ -353,6 +353,29 @@ export const translation = {
     profitLoss: 'Gewinn & Verlust',
     shippingReport: 'Versandbericht',
   },
+
+  // Environment Variables
+  environment: {
+    title: 'Umgebungsvariablen',
+    subtitle: 'API-Schlussel und sensible Konfiguration verwalten',
+    addNewVariable: 'Neue Variable hinzufugen',
+    keyName: 'SCHLUSSEL_NAME',
+    value: 'Wert',
+    custom: 'Benutzerdefiniert',
+    database: 'Datenbank',
+    payment: 'Zahlung',
+    auth: 'Authentifizierung',
+    email: 'E-Mail',
+    storage: 'Speicher',
+    production: 'Produktion',
+    staging: 'Staging',
+    development: 'Entwicklung',
+    add: 'Hinzufugen',
+    securityNotice: 'Sicherheitshinweis',
+    securityMessage: 'Teilen Sie niemals Ihre Produktions-API-Schlussel. Verwenden Sie Umgebungsvariablen, um sie sicher zu halten.',
+    copied: 'Kopiert!',
+    delete: 'Loschen',
+  },
 }
 
 export type Translation = typeof translation

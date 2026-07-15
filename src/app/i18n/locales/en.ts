@@ -335,6 +335,29 @@ export const translation = {
     profitLoss: 'Profit & Loss',
     shippingReport: 'Shipping Report',
   },
+
+  // Environment Variables
+  environment: {
+    title: 'Environment Variables',
+    subtitle: 'Manage API keys and sensitive configuration',
+    addNewVariable: 'Add New Variable',
+    keyName: 'KEY_NAME',
+    value: 'value',
+    custom: 'Custom',
+    database: 'Database',
+    payment: 'Payment',
+    auth: 'Auth',
+    email: 'Email',
+    storage: 'Storage',
+    production: 'Production',
+    staging: 'Staging',
+    development: 'Development',
+    add: 'Add',
+    securityNotice: 'Security Notice',
+    securityMessage: 'Never share your production API keys. Use environment variables to keep them secure.',
+    copied: 'Copied!',
+    delete: 'Delete',
+  },
 }
 
 export type Translation = typeof translation

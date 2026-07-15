@@ -353,6 +353,29 @@ export const translation = {
     profitLoss: '损益',
     shippingReport: '物流报告',
   },
+
+  // Environment Variables
+  environment: {
+    title: '环境变量',
+    subtitle: '管理API密钥和敏感配置',
+    addNewVariable: '添加新变量',
+    keyName: '密钥名称',
+    value: '值',
+    custom: '自定义',
+    database: '数据库',
+    payment: '支付',
+    auth: '认证',
+    email: '邮件',
+    storage: '存储',
+    production: '生产环境',
+    staging: '预发布',
+    development: '开发环境',
+    add: '添加',
+    securityNotice: '安全通知',
+    securityMessage: '切勿分享您的生产环境API密钥。使用环境变量来保护它们的安全。',
+    copied: '已复制！',
+    delete: '删除',
+  },
 }
 
 export type Translation = typeof translation

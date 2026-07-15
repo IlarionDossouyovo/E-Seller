@@ -353,6 +353,29 @@ export const translation = {
     profitLoss: '損益',
     shippingReport: '配送レポート',
   },
+
+  // Environment Variables
+  environment: {
+    title: '環境変数',
+    subtitle: 'APIキーと機密性の高い設定を管理',
+    addNewVariable: '新しい変数を追加',
+    keyName: 'キー名',
+    value: '値',
+    custom: 'カスタム',
+    database: 'データベース',
+    payment: '支払い',
+    auth: '認証',
+    email: 'メール',
+    storage: 'ストレージ',
+    production: '本番',
+    staging: 'ステージング',
+    development: '開発',
+    add: '追加',
+    securityNotice: 'セキュリティ通知',
+    securityMessage: '本番環境のAPIキーを共有しないでください。環境変数を使用して安全に保つことができます。',
+    copied: 'コピーしました！',
+    delete: '削除',
+  },
 }
 
 export type Translation = typeof translation

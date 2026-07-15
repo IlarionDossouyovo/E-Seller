@@ -342,6 +342,29 @@ export const translation = {
     profitLoss: 'Profit & Perte',
     shippingReport: 'Rapport de Livraison',
   },
+
+  // Environment Variables
+  environment: {
+    title: 'Variables d\'Environnement',
+    subtitle: 'Gerer les cles API et la configuration sensitive',
+    addNewVariable: 'Ajouter une Nouvelle Variable',
+    keyName: 'NOM_CLE',
+    value: 'valeur',
+    custom: 'Personnalise',
+    database: 'Base de donnees',
+    payment: 'Paiement',
+    auth: 'Authentification',
+    email: 'Email',
+    storage: 'Stockage',
+    production: 'Production',
+    staging: 'Pre-production',
+    development: 'Developpement',
+    add: 'Ajouter',
+    securityNotice: 'Avis de Securite',
+    securityMessage: 'Ne partagez jamais vos cles API de production. Utilisez les variables d\'environnement pour les garder securisees.',
+    copied: 'Copie!',
+    delete: 'Supprimer',
+  },
 }
 
 export type Translation = typeof translation

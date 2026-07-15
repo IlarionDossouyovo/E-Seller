@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { Key, Eye, EyeOff, Copy, Plus, Trash2, Check, AlertCircle } from 'lucide-react'
 
 const envVars = [
@@ -21,10 +22,32 @@ const typeColors: Record<string, string> = {
 }
 
 export default function EnvironmentPage() {
+  const { t } = useI18n()
   const [variables, setVariables] = useState(envVars)
   const [showValues, setShowValues] = useState<Record<string, boolean>>({})
   const [copied, setCopied] = useState<string | null>(null)
   const [newVar, setNewVar] = useState({ key: '', value: '', type: 'custom', env: 'production' })
+
+  const getTypeLabel = (type: string) => {
+    const labels: Record<string, string> = {
+      custom: t.environment?.custom || 'Custom',
+      database: t.environment?.database || 'Database',
+      payment: t.environment?.payment || 'Payment',
+      auth: t.environment?.auth || 'Auth',
+      email: t.environment?.email || 'Email',
+      storage: t.environment?.storage || 'Storage',
+    }
+    return labels[type] || type
+  }
+
+  const getEnvLabel = (env: string) => {
+    const labels: Record<string, string> = {
+      production: t.environment?.production || 'Production',
+      staging: t.environment?.staging || 'Staging',
+      development: t.environment?.development || 'Development',
+    }
+    return labels[env] || env
+  }
 
   const toggleShow = (id: string) => setShowValues(prev => ({ ...prev, [id]: !prev[id] }))
 
@@ -50,31 +73,33 @@ export default function EnvironmentPage() {
             <Key className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Environment Variables</h1>
-            <p className="text-gray-400">Manage API keys and sensitive configuration</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.environment?.title || 'Environment Variables'}</h1>
+            <p className="text-gray-400">{t.environment?.subtitle || 'Manage API keys and sensitive configuration'}</p>
           </div>
         </div>
       </div>
 
       {/* Add New Variable */}
       <div className="glass-card p-6">
-        <h3 className="font-semibold mb-4">Add New Variable</h3>
+        <h3 className="font-semibold mb-4">{t.environment?.addNewVariable || 'Add New Variable'}</h3>
         <div className="grid md:grid-cols-5 gap-4">
-          <input type="text" placeholder="KEY_NAME" value={newVar.key} onChange={(e) => setNewVar({...newVar, key: e.target.value.toUpperCase()})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
-          <input type="text" placeholder="value" value={newVar.value} onChange={(e) => setNewVar({...newVar, value: e.target.value})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
-          <select value={newVar.type} onChange={(e) => setNewVar({...newVar, type: e.target.value})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2">
-            <option value="custom">Custom</option>
-            <option value="database">Database</option>
-            <option value="payment">Payment</option>
-            <option value="auth">Auth</option>
+          <input type="text" placeholder={t.environment?.keyName || 'KEY_NAME'} value={newVar.key} onChange={(e) => setNewVar({...newVar, key: e.target.value.toUpperCase()})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
+          <input type="text" placeholder={t.environment?.value || 'value'} value={newVar.value} onChange={(e) => setNewVar({...newVar, value: e.target.value})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
+          <select value={newVar.type} onChange={(e) => setNewVar({...newVar, type: e.target.value})} className="bg-gray-800 border border-white/20 rounded-xl px-4 py-2 text-white">
+            <option value="custom">{t.environment?.custom || 'Custom'}</option>
+            <option value="database">{t.environment?.database || 'Database'}</option>
+            <option value="payment">{t.environment?.payment || 'Payment'}</option>
+            <option value="auth">{t.environment?.auth || 'Auth'}</option>
+            <option value="email">{t.environment?.email || 'Email'}</option>
+            <option value="storage">{t.environment?.storage || 'Storage'}</option>
           </select>
-          <select value={newVar.env} onChange={(e) => setNewVar({...newVar, env: e.target.value})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2">
-            <option value="production">Production</option>
-            <option value="staging">Staging</option>
-            <option value="development">Development</option>
+          <select value={newVar.env} onChange={(e) => setNewVar({...newVar, env: e.target.value})} className="bg-gray-800 border border-white/20 rounded-xl px-4 py-2 text-white">
+            <option value="production">{t.environment?.production || 'Production'}</option>
+            <option value="staging">{t.environment?.staging || 'Staging'}</option>
+            <option value="development">{t.environment?.development || 'Development'}</option>
           </select>
-          <button onClick={addVariable} className="px-4 py-2 bg-teal-500 rounded-xl flex items-center justify-center gap-2">
-            <Plus className="w-5 h-5" /> Add
+          <button onClick={addVariable} className="px-4 py-2 bg-teal-500 rounded-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-transform">
+            <Plus className="w-5 h-5" /> {t.environment?.add || 'Add'}
           </button>
         </div>
       </div>
@@ -90,8 +115,8 @@ export default function EnvironmentPage() {
               <div>
                 <p className="font-mono font-semibold text-white">{variable.key}</p>
                 <div className="flex items-center gap-2 text-sm">
-                  <span className={`px-2 py-0.5 rounded-full ${typeColors[variable.type]}`}>{variable.type}</span>
-                  <span className="text-gray-500">{variable.env}</span>
+                  <span className={`px-2 py-0.5 rounded-full ${typeColors[variable.type]}`}>{getTypeLabel(variable.type)}</span>
+                  <span className="text-gray-500">{getEnvLabel(variable.env)}</span>
                 </div>
               </div>
             </div>
@@ -117,8 +142,8 @@ export default function EnvironmentPage() {
       <div className="glass-card p-4 flex items-start gap-3">
         <AlertCircle className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
         <div>
-          <p className="font-medium text-white">Security Notice</p>
-          <p className="text-sm text-gray-400">Never share your production API keys. Use environment variables to keep them secure.</p>
+          <p className="font-medium text-white">{t.environment?.securityNotice || 'Security Notice'}</p>
+          <p className="text-sm text-gray-400">{t.environment?.securityMessage || 'Never share your production API keys. Use environment variables to keep them secure.'}</p>
         </div>
       </div>
     </div>

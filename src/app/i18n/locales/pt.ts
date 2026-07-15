@@ -353,6 +353,29 @@ export const translation = {
     profitLoss: 'Lucro e Prejuizo',
     shippingReport: 'Relatorio de Envio',
   },
+
+  // Environment Variables
+  environment: {
+    title: 'Variaveis de Ambiente',
+    subtitle: 'Gerenciar chaves API e configuracoes sensiveis',
+    addNewVariable: 'Adicionar Nova Variavel',
+    keyName: 'NOME_CHAVE',
+    value: 'valor',
+    custom: 'Personalizado',
+    database: 'Banco de dados',
+    payment: 'Pagamento',
+    auth: 'Autenticacao',
+    email: 'E-mail',
+    storage: 'Armazenamento',
+    production: 'Producao',
+    staging: 'Pre-producao',
+    development: 'Desenvolvimento',
+    add: 'Adicionar',
+    securityNotice: 'Aviso de Seguranca',
+    securityMessage: 'Nunca compartilhe suas chaves API de producao. Use variaveis de ambiente para mantelas seguras.',
+    copied: 'Copiado!',
+    delete: 'Excluir',
+  },
 }
 
 export type Translation = typeof translation

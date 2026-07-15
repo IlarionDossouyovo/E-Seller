@@ -353,6 +353,29 @@ export const translation = {
     profitLoss: 'الربح والخسارة',
     shippingReport: 'تقرير الشحن',
   },
+
+  // Environment Variables
+  environment: {
+    title: 'متغيرات البيئة',
+    subtitle: 'إدارة مفاتيح API والإعدادات الحساسة',
+    addNewVariable: 'إضافة متغير جديد',
+    keyName: 'اسم المفتاح',
+    value: 'القيمة',
+    custom: 'مخصص',
+    database: 'قاعدة البيانات',
+    payment: 'الدفع',
+    auth: 'المصادقة',
+    email: 'البريد الإلكتروني',
+    storage: 'التخزين',
+    production: 'الإنتاج',
+    staging: 'التجهيز',
+    development: 'التطوير',
+    add: 'إضافة',
+    securityNotice: 'إشعار الأمان',
+    securityMessage: 'لا تشارك مفاتيح API الإنتاجية أبدًا. استخدم متغيرات البيئة للحفاظ عليها آمنة.',
+    copied: 'تم النسخ!',
+    delete: 'حذف',
+  },
 }
 
 export type Translation = typeof translation
