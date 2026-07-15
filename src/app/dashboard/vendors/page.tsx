@@ -200,14 +200,14 @@ export default function VendorDashboardPage() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr className="text-left text-sm text-gray-400">
-                <th className="p-4">Order ID</th>
-                <th className="p-4">Product</th>
-                <th className="p-4">Customer</th>
-                <th className="p-4">Quantity</th>
-                <th className="p-4">Total</th>
-                <th className="p-4">Date</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Actions</th>
+                <th className="p-4">{t.vendor?.orderId || 'Order ID'}</th>
+                <th className="p-4">{t.vendor?.product || 'Product'}</th>
+                <th className="p-4">{t.vendor?.customer || 'Customer'}</th>
+                <th className="p-4">{t.vendor?.quantity || 'Quantity'}</th>
+                <th className="p-4">{t.vendor?.total || 'Total'}</th>
+                <th className="p-4">{t.vendor?.date || 'Date'}</th>
+                <th className="p-4">{t.vendor?.status || 'Status'}</th>
+                <th className="p-4">{t.vendor?.actions || 'Actions'}</th>
               </tr>
             </thead>
             <tbody>
@@ -221,13 +221,17 @@ export default function VendorDashboardPage() {
                   <td className="p-4 text-gray-400">{order.date}</td>
                   <td className="p-4">
                     <span className={`px-2 py-1 rounded-full text-xs ${statusColors[order.status]}`}>
-                      {order.status}
+                      {order.status === 'processing' ? (t.vendor?.processing || 'processing') :
+                       order.status === 'shipped' ? (t.vendor?.shipped || 'shipped') :
+                       order.status === 'delivered' ? (t.vendor?.delivered || 'delivered') :
+                       order.status === 'pending' ? (t.vendor?.pending || 'pending') :
+                       order.status}
                     </span>
                   </td>
                   <td className="p-4">
                     <div className="flex gap-1">
-                      <button className="p-1 hover:bg-white/10 rounded"><Eye className="w-4 h-4" /></button>
-                      <button className="p-1 hover:bg-white/10 rounded"><Edit className="w-4 h-4" /></button>
+                      <button onClick={() => showNotification(`Voir: ${order.id}`, 'info')} className="p-1 hover:bg-white/10 rounded cursor-pointer"><Eye className="w-4 h-4" /></button>
+                      <button onClick={() => showNotification(`Modifier: ${order.id}`, 'info')} className="p-1 hover:bg-white/10 rounded cursor-pointer"><Edit className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -241,9 +245,9 @@ export default function VendorDashboardPage() {
       {activeTab === 'products' && (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-lg">My Products</h3>
-            <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center gap-2">
-              <Package className="w-4 h-4" /> Add Product
+            <h3 className="font-semibold text-lg">{t.vendor?.myProducts || 'My Products'}</h3>
+            <button onClick={() => showNotification(t.vendor?.addProduct || 'Add Product', 'info')} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center gap-2 cursor-pointer">
+              <Package className="w-4 h-4" /> {t.vendor?.addProduct || 'Add Product'}
             </button>
           </div>
 
@@ -252,19 +256,19 @@ export default function VendorDashboardPage() {
               <motion.div key={product.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="glass-card p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-16 h-16 rounded-xl bg-white/5 flex items-center justify-center text-3xl">{product.image}</div>
-                  <button className="p-1 hover:bg-white/10 rounded"><MoreVertical className="w-4 h-4" /></button>
+                  <button onClick={() => showNotification(`${product.name}`, 'info')} className="p-1 hover:bg-white/10 rounded cursor-pointer"><MoreVertical className="w-4 h-4" /></button>
                 </div>
                 <h4 className="font-semibold mb-1">{product.name}</h4>
                 <p className="text-2xl font-bold mb-2">${product.price}</p>
                 <div className="flex items-center justify-between text-sm">
                   <span className={product.stock > 0 ? 'text-green-400' : 'text-red-400'}>
-                    {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                    {product.stock > 0 ? `${product.stock} ${t.vendor?.inStock || 'in stock'}` : (t.vendor?.outOfStock || 'Out of stock')}
                   </span>
-                  <span className="text-gray-400">{product.sales} sales</span>
+                  <span className="text-gray-400">{product.sales} {t.vendor?.sales || 'sales'}</span>
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <button className="flex-1 px-3 py-2 bg-white/5 rounded-lg text-sm">Edit</button>
-                  <button className="flex-1 px-3 py-2 bg-white/5 rounded-lg text-sm">View</button>
+                  <button onClick={() => showNotification(`Modifier: ${product.name}`, 'info')} className="flex-1 px-3 py-2 bg-white/5 rounded-lg text-sm cursor-pointer hover:bg-white/10">{t.vendor?.edit || 'Edit'}</button>
+                  <button onClick={() => showNotification(`Voir: ${product.name}`, 'info')} className="flex-1 px-3 py-2 bg-white/5 rounded-lg text-sm cursor-pointer hover:bg-white/10">{t.vendor?.view || 'View'}</button>
                 </div>
               </motion.div>
             ))}
@@ -276,7 +280,7 @@ export default function VendorDashboardPage() {
       {activeTab === 'payouts' && (
         <div className="space-y-4">
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Next Payout</h3>
+            <h3 className="font-semibold mb-4">{t.vendor?.nextPayout || 'Next Payout'}</h3>
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-3xl font-bold">$1,245.00</p>
@@ -288,15 +292,15 @@ export default function VendorDashboardPage() {
             </div>
             <div className="grid grid-cols-3 gap-4 text-sm">
               <div className="text-center p-3 bg-white/5 rounded-lg">
-                <p className="text-gray-400">Gross Sales</p>
+                <p className="text-gray-400">{t.vendor?.grossSales || 'Gross Sales'}</p>
                 <p className="font-semibold">$1,380.00</p>
               </div>
               <div className="text-center p-3 bg-white/5 rounded-lg">
-                <p className="text-gray-400">Commission (10%)</p>
+                <p className="text-gray-400">{t.vendor?.commission || 'Commission (10%)'}</p>
                 <p className="font-semibold">-$138.00</p>
               </div>
               <div className="text-center p-3 bg-white/5 rounded-lg">
-                <p className="text-gray-400">Processing Fee</p>
+                <p className="text-gray-400">{t.vendor?.processingFee || 'Processing Fee'}</p>
                 <p className="font-semibold">-$2.00</p>
               </div>
             </div>
@@ -304,15 +308,15 @@ export default function VendorDashboardPage() {
 
           <div className="glass-card overflow-hidden">
             <div className="p-4 border-b border-white/5">
-              <h3 className="font-semibold">Payout History</h3>
+              <h3 className="font-semibold">{t.vendor?.payoutHistory || 'Payout History'}</h3>
             </div>
             <table className="w-full">
               <thead className="bg-white/5">
                 <tr className="text-left text-sm text-gray-400">
-                  <th className="p-4">Date</th>
-                  <th className="p-4">Amount</th>
-                  <th className="p-4">Method</th>
-                  <th className="p-4">Status</th>
+                  <th className="p-4">{t.vendor?.date || 'Date'}</th>
+                  <th className="p-4">{t.vendor?.amount || 'Amount'}</th>
+                  <th className="p-4">{t.vendor?.method || 'Method'}</th>
+                  <th className="p-4">{t.vendor?.status || 'Status'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -326,7 +330,7 @@ export default function VendorDashboardPage() {
                     <td className="p-4 font-semibold">{payout.amount}</td>
                     <td className="p-4">{payout.method}</td>
                     <td className="p-4">
-                      <span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">{payout.status}</span>
+                      <span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">{payout.status === 'completed' ? (t.vendor?.paid || 'completed') : payout.status}</span>
                     </td>
                   </tr>
                 ))}
