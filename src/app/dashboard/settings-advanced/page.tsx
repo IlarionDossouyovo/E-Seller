@@ -9,7 +9,7 @@ import {
 import { useI18n } from '@/app/i18n'
 
 export default function SettingsAdvancedPage() {
-  const { t } = useI18n()
+  const { t, locale, setLocale } = useI18n()
   
   const tabs = [
     { id: 'general', label: t.settingsPage?.general || 'General', icon: Settings },
@@ -53,12 +53,24 @@ export default function SettingsAdvancedPage() {
   
   const [selectedTheme, setSelectedTheme] = useState(0)
   
+  // Map locale to settings language format
+  const localeToLanguage: Record<string, string> = {
+    'en': 'English',
+    'fr': 'French',
+    'es': 'Spanish',
+    'de': 'German',
+    'zh': 'Chinese',
+    'ja': 'Japanese',
+    'pt': 'Portuguese',
+    'ar': 'Arabic',
+  }
+
   // General settings
   const [generalSettings, setGeneralSettings] = useState({
     storeName: 'E-SELLER Store',
     storeEmail: 'contact@e-seller.com',
     timezone: 'UTC',
-    language: 'English',
+    language: localeToLanguage[locale] || 'English',
   })
 
   const handleSave = () => {
@@ -158,7 +170,22 @@ export default function SettingsAdvancedPage() {
                   <div className="relative">
                     <select 
                       value={generalSettings.language}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, language: e.target.value }))}
+                      onChange={(e) => {
+                        setGeneralSettings(prev => ({ ...prev, language: e.target.value }))
+                        // Map language back to locale and update i18n
+                        const languageToLocale: Record<string, string> = {
+                          'English': 'en',
+                          'French': 'fr',
+                          'Spanish': 'es',
+                          'German': 'de',
+                          'Chinese': 'zh',
+                          'Japanese': 'ja',
+                          'Portuguese': 'pt',
+                          'Arabic': 'ar',
+                        }
+                        const newLocale = languageToLocale[e.target.value]
+                        if (newLocale) setLocale(newLocale as any)
+                      }}
                       className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white appearance-none cursor-pointer hover:bg-white/15 transition-colors"
                       style={{ colorScheme: 'dark' }}
                     >
@@ -166,6 +193,10 @@ export default function SettingsAdvancedPage() {
                       <option value="French" className="bg-gray-800">Français</option>
                       <option value="Spanish" className="bg-gray-800">Español</option>
                       <option value="German" className="bg-gray-800">Deutsch</option>
+                      <option value="Chinese" className="bg-gray-800">中文</option>
+                      <option value="Japanese" className="bg-gray-800">日本語</option>
+                      <option value="Portuguese" className="bg-gray-800">Português</option>
+                      <option value="Arabic" className="bg-gray-800">العربية</option>
                     </select>
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
