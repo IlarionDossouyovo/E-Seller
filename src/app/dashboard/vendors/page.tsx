@@ -2,13 +2,14 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { Store, Package, DollarSign, Star, TrendingUp, Users, Clock, AlertTriangle, Clock as ClockIcon, CheckCircle, XCircle, Edit, Trash2, Eye, MoreVertical } from 'lucide-react'
 
 const dashboardStats = [
-  { label: 'Total Sales', value: '$12,450', change: '+18%', icon: DollarSign },
-  { label: 'Orders', value: '234', change: '+12%', icon: Package },
-  { label: 'Customers', value: '189', change: '+8%', icon: Users },
-  { label: 'Rating', value: '4.8', change: '+0.2', icon: Star },
+  { label: 'totalSales', value: '$12,450', change: '+18%', icon: DollarSign },
+  { label: 'orders', value: '234', change: '+12%', icon: Package },
+  { label: 'customers', value: '189', change: '+8%', icon: Users },
+  { label: 'rating', value: '4.8', change: '+0.2', icon: Star },
 ]
 
 const recentOrders = [
@@ -35,10 +36,45 @@ const statusColors: Record<string, string> = {
 }
 
 export default function VendorDashboardPage() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState('overview')
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'info' = 'info') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab)
+    const tabNames: Record<string, string> = {
+      overview: t.vendor?.overview || 'Overview',
+      orders: t.vendor?.orders || 'Orders',
+      products: t.vendor?.products || 'Products',
+      analytics: t.vendor?.analytics || 'Analytics',
+      payouts: t.vendor?.payouts || 'Payouts',
+    }
+    showNotification(`${tabNames[tab]}`, 'info')
+  }
 
   return (
     <div className="space-y-6">
+      {/* Notification */}
+      {notification && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500/90 text-white' 
+              : 'bg-blue-500/90 text-white'
+          }`}
+        >
+          {notification.message}
+        </motion.div>
+      )}
+
       {/* Header */}
       <div className="glass-card p-6">
         <div className="flex items-center justify-between">
@@ -49,16 +85,16 @@ export default function VendorDashboardPage() {
               <p className="text-gray-400">vendor.e-seller.com/techgear-pro</p>
               <div className="flex items-center gap-2 mt-1">
                 <span className="px-2 py-0.5 bg-green-500/20 text-green-400 rounded-full text-xs flex items-center gap-1">
-                  <CheckCircle className="w-3 h-3" /> Verified
+                  <CheckCircle className="w-3 h-3" /> {t.vendor?.verified || 'Verified'}
                 </span>
                 <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded-full text-xs">
-                  Level: Gold
+                  {t.vendor?.level || 'Level'}: {t.vendor?.gold || 'Gold'}
                 </span>
               </div>
             </div>
           </div>
-          <button className="px-4 py-2 bg-white/5 rounded-xl flex items-center gap-2">
-            <Edit className="w-4 h-4" /> Edit Store
+          <button onClick={() => showNotification(t.vendor?.editStore || 'Edit Store', 'info')} className="px-4 py-2 bg-white/5 rounded-xl flex items-center gap-2 cursor-pointer hover:bg-white/10">
+            <Edit className="w-4 h-4" /> {t.vendor?.editStore || 'Edit Store'}
           </button>
         </div>
       </div>
@@ -72,7 +108,12 @@ export default function VendorDashboardPage() {
               <span className="text-green-400 text-sm">{stat.change}</span>
             </div>
             <p className="text-2xl font-bold">{stat.value}</p>
-            <p className="text-sm text-gray-400">{stat.label}</p>
+            <p className="text-sm text-gray-400">
+              {stat.label === 'totalSales' ? (t.vendor?.totalSales || 'Total Sales') : 
+               stat.label === 'orders' ? (t.vendor?.orders || 'Orders') :
+               stat.label === 'customers' ? (t.vendor?.customers || 'Customers') :
+               (t.vendor?.rating || 'Rating')}
+            </p>
           </motion.div>
         ))}
       </div>
@@ -80,8 +121,12 @@ export default function VendorDashboardPage() {
       {/* Tabs */}
       <div className="flex gap-2 overflow-x-auto">
         {['overview', 'orders', 'products', 'analytics', 'payouts'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl whitespace-nowrap ${activeTab === tab ? 'bg-blue-500' : 'bg-white/5'}`}>
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          <button key={tab} onClick={() => handleTabClick(tab)} className={`px-4 py-2 rounded-xl whitespace-nowrap cursor-pointer active:scale-95 transition-transform ${activeTab === tab ? 'bg-blue-500' : 'bg-white/5 hover:bg-white/10'}`}>
+            {tab === 'overview' ? (t.vendor?.overview || 'Overview') : 
+             tab === 'orders' ? (t.vendor?.orders || 'Orders') :
+             tab === 'products' ? (t.vendor?.products || 'Products') :
+             tab === 'analytics' ? (t.vendor?.analytics || 'Analytics') :
+             (t.vendor?.payouts || 'Payouts')}
           </button>
         ))}
       </div>
@@ -92,16 +137,16 @@ export default function VendorDashboardPage() {
           {/* Recent Orders */}
           <div className="glass-card overflow-hidden">
             <div className="p-4 border-b border-white/5 flex items-center justify-between">
-              <h3 className="font-semibold">Recent Orders</h3>
-              <button className="text-blue-400 text-sm">View All</button>
+              <h3 className="font-semibold">{t.vendor?.recentOrders || 'Recent Orders'}</h3>
+              <button onClick={() => showNotification(t.vendor?.viewAll || 'View All', 'info')} className="text-blue-400 text-sm">{t.vendor?.viewAll || 'View All'}</button>
             </div>
             <table className="w-full">
               <thead className="bg-white/5">
                 <tr className="text-left text-sm text-gray-400">
-                  <th className="p-3">Order</th>
-                  <th className="p-3">Customer</th>
-                  <th className="p-3">Total</th>
-                  <th className="p-3">Status</th>
+                  <th className="p-3">{t.vendor?.order || 'Order'}</th>
+                  <th className="p-3">{t.vendor?.customer || 'Customer'}</th>
+                  <th className="p-3">{t.vendor?.total || 'Total'}</th>
+                  <th className="p-3">{t.vendor?.status || 'Status'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,7 +157,10 @@ export default function VendorDashboardPage() {
                     <td className="p-3">${order.price.toFixed(2)}</td>
                     <td className="p-3">
                       <span className={`px-2 py-1 rounded-full text-xs ${statusColors[order.status]}`}>
-                        {order.status}
+                        {order.status === 'processing' ? (t.vendor?.processing || 'processing') :
+                         order.status === 'shipped' ? (t.vendor?.shipped || 'shipped') :
+                         order.status === 'delivered' ? (t.vendor?.delivered || 'delivered') :
+                         order.status}
                       </span>
                     </td>
                   </tr>
@@ -124,8 +172,8 @@ export default function VendorDashboardPage() {
           {/* Top Products */}
           <div className="glass-card overflow-hidden">
             <div className="p-4 border-b border-white/5 flex items-center justify-between">
-              <h3 className="font-semibold">Top Products</h3>
-              <button className="text-blue-400 text-sm">View All</button>
+              <h3 className="font-semibold">{t.vendor?.topProducts || 'Top Products'}</h3>
+              <button onClick={() => showNotification(t.vendor?.viewAll || 'View All', 'info')} className="text-blue-400 text-sm">{t.vendor?.viewAll || 'View All'}</button>
             </div>
             <div className="divide-y divide-white/5">
               {products.slice(0, 4).map((product, i) => (
@@ -133,11 +181,11 @@ export default function VendorDashboardPage() {
                   <span className="text-2xl">{product.image}</span>
                   <div className="flex-1">
                     <p className="font-medium">{product.name}</p>
-                    <p className="text-sm text-gray-400">{product.sales} sales</p>
+                    <p className="text-sm text-gray-400">{product.sales} {t.vendor?.sales || 'sales'}</p>
                   </div>
                   <div className="text-right">
                     <p className="font-semibold">${product.price}</p>
-                    <p className="text-sm text-gray-400">{product.stock} stock</p>
+                    <p className="text-sm text-gray-400">{product.stock} {t.vendor?.stock || 'stock'}</p>
                   </div>
                 </div>
               ))}
