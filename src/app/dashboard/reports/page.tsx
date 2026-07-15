@@ -27,6 +27,24 @@ export default function ReportsPage() {
   const { t } = useI18n()
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'info' = 'info') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleGenerateReport = () => {
+    showNotification(t.reports?.generateReport || 'Generer un Rapport clique!', 'success')
+  }
+
+  const handleView = (reportName: string) => {
+    showNotification(`${t.reports?.view || 'Voir'}: ${reportName}`, 'info')
+  }
+
+  const handleDownload = (reportName: string) => {
+    showNotification(`${t.reports?.download || 'Telecharger'}: ${reportName}`, 'success')
+  }
 
   const getReportName = (report: typeof reports[0]) => {
     const names: Record<string, string> = {
@@ -48,6 +66,22 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-6">
+      {/* Notification */}
+      {notification && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500/90 text-white' 
+              : 'bg-blue-500/90 text-white'
+          }`}
+        >
+          {notification.message}
+        </motion.div>
+      )}
+
       <div className="glass-card p-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
@@ -75,7 +109,7 @@ export default function ReportsPage() {
             <option value="financial">{t.reports?.financial || 'Financial'}</option>
           </select>
         </div>
-        <button className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center gap-2 cursor-pointer">
+        <button onClick={handleGenerateReport} className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center gap-2 cursor-pointer active:scale-95 transition-transform">
           <Plus className="w-5 h-5" /> {t.reports?.generateReport || 'Generate Report'}
         </button>
       </div>
@@ -97,8 +131,8 @@ export default function ReportsPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button className="p-2 hover:bg-white/5 rounded-lg cursor-pointer"><Eye className="w-5 h-5 text-gray-400" /></button>
-              <button className="p-2 hover:bg-white/5 rounded-lg cursor-pointer"><Download className="w-5 h-5 text-gray-400" /></button>
+              <button onClick={() => handleView(getReportName(report))} className="p-2 hover:bg-white/5 rounded-lg cursor-pointer active:scale-90 transition-transform"><Eye className="w-5 h-5 text-gray-400" /></button>
+              <button onClick={() => handleDownload(getReportName(report))} className="p-2 hover:bg-white/5 rounded-lg cursor-pointer active:scale-90 transition-transform"><Download className="w-5 h-5 text-gray-400" /></button>
             </div>
           </motion.div>
         ))}
