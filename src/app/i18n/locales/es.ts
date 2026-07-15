@@ -459,6 +459,27 @@ export const translation = {
     rating: 'Calificacion',
     status: 'Estado',
   },
+
+  // Taxes Management
+  taxes: {
+    title: 'Gestion de Impuestos',
+    subtitle: 'Configure las tasas de impuesto y presente declaraciones',
+    rates: 'Tasas',
+    filings: 'Declaraciones',
+    reports: 'Informes',
+    taxRates: 'Tasas de Impuesto',
+    collected: 'Recaudado',
+    averageRate: 'Tasa Promedio',
+    dueSoon: 'Vence Pronto',
+    taxName: 'Nombre del Impuesto',
+    rate: 'Tasa',
+    type: 'Tipo',
+    region: 'Region',
+    collectedAmount: 'Recaudado',
+    status: 'Estado',
+    state: 'Estado',
+    country: 'Pais',
+  },
 }
 
 export type Translation = typeof translation

@@ -448,6 +448,27 @@ export const translation = {
     rating: 'Note',
     status: 'Statut',
   },
+
+  // Taxes Management
+  taxes: {
+    title: 'Gestion des Taxes',
+    subtitle: 'Configurez les taux de taxe et deposez les declarations',
+    rates: 'Taux',
+    filings: 'Declarations',
+    reports: 'Rapports',
+    taxRates: 'Taux de Taxe',
+    collected: 'Collecte',
+    averageRate: 'Taux Moyen',
+    dueSoon: 'Echeance',
+    taxName: 'Nom de la Taxe',
+    rate: 'Taux',
+    type: 'Type',
+    region: 'Region',
+    collectedAmount: 'Collecte',
+    status: 'Statut',
+    state: 'Etat',
+    country: 'Pays',
+  },
 }
 
 export type Translation = typeof translation

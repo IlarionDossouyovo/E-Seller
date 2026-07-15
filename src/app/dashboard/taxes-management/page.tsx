@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { Calculator, DollarSign, MapPin, Clock, AlertTriangle, Search, Plus, FileText } from 'lucide-react'
 
 const taxRates = [
@@ -26,7 +27,24 @@ const statusColors: Record<string, string> = {
 }
 
 export default function TaxesManagementPage() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState('rates')
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'info' = 'info') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab)
+    const tabNames: Record<string, string> = {
+      rates: t.taxes?.rates || 'Rates',
+      filings: t.taxes?.filings || 'Filings',
+      reports: t.taxes?.reports || 'Reports',
+    }
+    showNotification(`${tabNames[tab]}`, 'info')
+  }
 
   const stats = {
     totalRates: taxRates.length,
@@ -37,22 +55,38 @@ export default function TaxesManagementPage() {
 
   return (
     <div className="space-y-6">
+      {/* Notification */}
+      {notification && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500/90 text-white' 
+              : 'bg-blue-500/90 text-white'
+          }`}
+        >
+          {notification.message}
+        </motion.div>
+      )}
+
       <div className="glass-card p-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
             <Calculator className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Taxes Management</h1>
-            <p className="text-gray-400">Configure tax rates and file returns</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.taxes?.title || 'Taxes Management'}</h1>
+            <p className="text-gray-400">{t.taxes?.subtitle || 'Configure tax rates and file returns'}</p>
           </div>
         </div>
       </div>
 
       <div className="flex gap-2">
         {['rates', 'filings', 'reports'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl ${activeTab === tab ? 'bg-indigo-500' : 'bg-white/5'}`}>
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          <button key={tab} onClick={() => handleTabClick(tab)} className={`px-4 py-2 rounded-xl cursor-pointer active:scale-95 transition-transform ${activeTab === tab ? 'bg-indigo-500' : 'bg-white/5 hover:bg-white/10'}`}>
+            {tab === 'rates' ? (t.taxes?.rates || 'Rates') : tab === 'filings' ? (t.taxes?.filings || 'Filings') : (t.taxes?.reports || 'Reports')}
           </button>
         ))}
       </div>
@@ -60,19 +94,19 @@ export default function TaxesManagementPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.totalRates}</p>
-          <p className="text-sm text-gray-400">Tax Rates</p>
+          <p className="text-sm text-gray-400">{t.taxes?.taxRates || 'Tax Rates'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">${stats.totalCollected.toLocaleString()}</p>
-          <p className="text-sm text-gray-400">Collected</p>
+          <p className="text-sm text-gray-400">{t.taxes?.collected || 'Collected'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.averageRate}%</p>
-          <p className="text-sm text-gray-400">Average Rate</p>
+          <p className="text-sm text-gray-400">{t.taxes?.averageRate || 'Average Rate'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.pendingFilings}</p>
-          <p className="text-sm text-gray-400">Due Soon</p>
+          <p className="text-sm text-gray-400">{t.taxes?.dueSoon || 'Due Soon'}</p>
         </motion.div>
       </div>
 
@@ -81,12 +115,12 @@ export default function TaxesManagementPage() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr className="text-left text-sm text-gray-400">
-                <th className="p-4">Tax Name</th>
-                <th className="p-4">Rate</th>
-                <th className="p-4">Type</th>
-                <th className="p-4">Region</th>
-                <th className="p-4">Collected</th>
-                <th className="p-4">Status</th>
+                <th className="p-4">{t.taxes?.taxName || 'Tax Name'}</th>
+                <th className="p-4">{t.taxes?.rate || 'Rate'}</th>
+                <th className="p-4">{t.taxes?.type || 'Type'}</th>
+                <th className="p-4">{t.taxes?.region || 'Region'}</th>
+                <th className="p-4">{t.taxes?.collectedAmount || 'Collected'}</th>
+                <th className="p-4">{t.taxes?.status || 'Status'}</th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +128,7 @@ export default function TaxesManagementPage() {
                 <motion.tr key={tax.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }} className="border-t border-white/5">
                   <td className="p-4 font-medium">{tax.name}</td>
                   <td className="p-4">{tax.rate}%</td>
-                  <td className="p-4">{tax.type}</td>
+                  <td className="p-4">{tax.type === 'state' ? (t.taxes?.state || 'State') : (t.taxes?.country || 'Country')}</td>
                   <td className="p-4">{tax.region}</td>
                   <td className="p-4 text-green-400">${tax.collected.toLocaleString()}</td>
                   <td className="p-4">

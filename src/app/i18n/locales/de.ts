@@ -459,6 +459,27 @@ export const translation = {
     rating: 'Bewertung',
     status: 'Status',
   },
+
+  // Taxes Management
+  taxes: {
+    title: 'Steuerverwaltung',
+    subtitle: 'Konfigurieren Sie Steuersatze und reichen Sie Erklarungen ein',
+    rates: 'Satze',
+    filings: 'Erklarungen',
+    reports: 'Berichte',
+    taxRates: 'Steuersatze',
+    collected: 'Erhoben',
+    averageRate: 'Durchschnittssatz',
+    dueSoon: 'Fallig',
+    taxName: 'Steuername',
+    rate: 'Satz',
+    type: 'Typ',
+    region: 'Region',
+    collectedAmount: 'Erhoben',
+    status: 'Status',
+    state: 'Staat',
+    country: 'Land',
+  },
 }
 
 export type Translation = typeof translation

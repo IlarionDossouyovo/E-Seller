@@ -459,6 +459,27 @@ export const translation = {
     rating: '評価',
     status: 'ステータス',
   },
+
+  // Taxes Management
+  taxes: {
+    title: '税管理',
+    subtitle: '税率を設定して申告書を提出',
+    rates: '税率',
+    filings: '申告',
+    reports: 'レポート',
+    taxRates: '税率',
+    collected: '徴収額',
+    averageRate: '平均税率',
+    dueSoon: '期限間近',
+    taxName: '税金名',
+    rate: '税率',
+    type: 'タイプ',
+    region: '地域',
+    collectedAmount: '徴収額',
+    status: 'ステータス',
+    state: '州',
+    country: '国',
+  },
 }
 
 export type Translation = typeof translation

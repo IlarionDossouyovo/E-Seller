@@ -459,6 +459,27 @@ export const translation = {
     rating: 'التقييم',
     status: 'الحالة',
   },
+
+  // Taxes Management
+  taxes: {
+    title: 'إدارة الضرائب',
+    subtitle: 'تكوين معدلات الضرائب وتقديم الإقرارات',
+    rates: 'المعدلات',
+    filings: 'الإقرارات',
+    reports: 'التقارير',
+    taxRates: 'معدلات الضرائب',
+    collected: 'المحصل',
+    averageRate: 'المعدل المتوسط',
+    dueSoon: 'مستحق قريباً',
+    taxName: 'اسم الضريبة',
+    rate: 'المعدل',
+    type: 'النوع',
+    region: 'المنطقة',
+    collectedAmount: 'المحصل',
+    status: 'الحالة',
+    state: 'الولاية',
+    country: 'البلد',
+  },
 }
 
 export type Translation = typeof translation

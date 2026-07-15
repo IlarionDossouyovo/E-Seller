@@ -459,6 +459,27 @@ export const translation = {
     rating: '评分',
     status: '状态',
   },
+
+  // Taxes Management
+  taxes: {
+    title: '税务管理',
+    subtitle: '配置税率并提交申报表',
+    rates: '税率',
+    filings: '申报',
+    reports: '报告',
+    taxRates: '税率',
+    collected: '已征收',
+    averageRate: '平均税率',
+    dueSoon: '即将到期',
+    taxName: '税名',
+    rate: '税率',
+    type: '类型',
+    region: '地区',
+    collectedAmount: '已征收',
+    status: '状态',
+    state: '州',
+    country: '国家',
+  },
 }
 
 export type Translation = typeof translation
