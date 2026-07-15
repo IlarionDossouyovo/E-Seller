@@ -363,7 +363,7 @@ export default function VendorRegistrationPage() {
                 type="text"
                 value={formData.bankName}
                 onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
                 placeholder="Bank of America"
               />
             </div>
@@ -375,7 +375,7 @@ export default function VendorRegistrationPage() {
                   type="text"
                   value={formData.accountNumber}
                   onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
                   placeholder="XXXX XXXX XXXX"
                 />
               </div>
@@ -385,7 +385,7 @@ export default function VendorRegistrationPage() {
                   type="text"
                   value={formData.routingNumber}
                   onChange={(e) => setFormData({ ...formData, routingNumber: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
                   placeholder="XXXXXXX"
                 />
               </div>
@@ -399,7 +399,7 @@ export default function VendorRegistrationPage() {
                 type="email"
                 value={formData.paypalEmail}
                 onChange={(e) => setFormData({ ...formData, paypalEmail: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
                 placeholder="paypal@vendor.com"
               />
             </div>

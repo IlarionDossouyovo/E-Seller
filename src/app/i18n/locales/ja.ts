@@ -600,6 +600,7 @@ export const translation = {
     routingPlaceholder: 'XXXXXXX',
     paypalExample: 'paypal@ベンダー.com',
     applicationSubmitted: '申請が送信されました！24〜48時間で審査します。',
+    selectPayment: '支払い方法',
   },
 }
 

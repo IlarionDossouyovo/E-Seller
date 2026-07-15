@@ -589,6 +589,7 @@ export const translation = {
     routingPlaceholder: 'XXXXXXX',
     paypalExample: 'paypal@fournisseur.com',
     applicationSubmitted: 'Candidature soumise ! Nous examinerons votre demande dans les 24-48 heures.',
+    selectPayment: 'Mode de paiement',
   },
 }
 

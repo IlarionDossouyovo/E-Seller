@@ -600,6 +600,7 @@ export const translation = {
     routingPlaceholder: 'XXXXXXX',
     paypalExample: 'paypal@verkaufer.com',
     applicationSubmitted: 'Antrag eingereicht! Wir prufen Ihren Antrag innerhalb von 24-48 Stunden.',
+    selectPayment: 'Zahlungsmethode',
   },
 }
 
