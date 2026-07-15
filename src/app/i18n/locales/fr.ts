@@ -287,6 +287,38 @@ export const translation = {
     upsell: 'Upsell',
     custom: 'Personnalise',
   },
+
+  // Super Admin
+  superAdmin: {
+    title: 'Super Admin',
+    subtitle: 'Gestion de la plateforme',
+    totalTenants: 'Total Tenants',
+    activeUsers: 'Utilisateurs Actifs',
+    monthlyRevenue: 'Revenu Mensuel',
+    systemHealth: 'Sante Systeme',
+    optimal: 'Optimal',
+    tenants: 'Tenants',
+    search: 'Rechercher...',
+    all: 'Tout',
+    active: 'Actif',
+    pending: 'En attente',
+    suspended: 'Suspendu',
+    name: 'Nom',
+    plan: 'Plan',
+    users: 'Utilisateurs',
+    revenue: 'Revenu',
+    status: 'Statut',
+    recentActivity: 'Activite Recente',
+    newTenantRegistered: 'Nouveau tenant enregistre',
+    paid: 'a paye',
+    exceededUsageLimit: 'a depasse la limite d\'utilisation',
+    adminLogin: 'Connexion admin depuis',
+    quickActions: 'Actions Rapides',
+    addTenant: 'Ajouter un Tenant',
+    viewReports: 'Voir les Rapports',
+    systemSettings: 'Parametres Systeme',
+    viewAllLogs: 'Voir tous les Logs',
+  },
 }
 
 export type Translation = typeof translation

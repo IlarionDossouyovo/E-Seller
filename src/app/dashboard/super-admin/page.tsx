@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { 
   Crown, Users, Store, Activity, Shield, DollarSign, TrendingUp,
   AlertTriangle, Search, MoreVertical
@@ -30,8 +31,19 @@ const systemStats = [
 ]
 
 export default function SuperAdminPage() {
+  const { t } = useI18n()
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+
+  const getActivityMessage = (activity: typeof recentActivity[0]) => {
+    const messages: Record<string, string> = {
+      new_tenant: `${t.superAdmin?.newTenantRegistered || 'New tenant registered'}: ${activity.message.split(': ')[1] || ''}`,
+      payment: `${activity.message.split(' paid ')[0]} ${t.superAdmin?.paid || 'paid'} $${activity.message.split('$')[1] || '0'}`,
+      alert: `${activity.message.split(' exceeded ')[0]} ${t.superAdmin?.exceededUsageLimit || 'exceeded usage limit'}`,
+      login: `${t.superAdmin?.adminLogin || 'Admin login from'} ${activity.message.split('from ')[1] || ''}`,
+    }
+    return messages[activity.type] || activity.message
+  }
 
   return (
     <div className="space-y-6">
@@ -42,24 +54,46 @@ export default function SuperAdminPage() {
             <Crown className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Super Admin</h1>
-            <p className="text-gray-400">Platform-wide management</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.superAdmin?.title || 'Super Admin'}</h1>
+            <p className="text-gray-400">{t.superAdmin?.subtitle || 'Platform-wide management'}</p>
           </div>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {systemStats.map((stat, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="glass-card p-4">
-            <div className="flex items-center justify-between mb-2">
-              <stat.icon className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm text-green-400">{stat.change}</span>
-            </div>
-            <p className="text-2xl font-bold">{stat.value}</p>
-            <p className="text-sm text-gray-400">{stat.label}</p>
-          </motion.div>
-        ))}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0 }} className="glass-card p-4">
+          <div className="flex items-center justify-between mb-2">
+            <Store className="w-5 h-5 text-yellow-500" />
+            <span className="text-sm text-green-400">+12%</span>
+          </div>
+          <p className="text-2xl font-bold">156</p>
+          <p className="text-sm text-gray-400">{t.superAdmin?.totalTenants || 'Total Tenants'}</p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
+          <div className="flex items-center justify-between mb-2">
+            <Users className="w-5 h-5 text-yellow-500" />
+            <span className="text-sm text-green-400">+8%</span>
+          </div>
+          <p className="text-2xl font-bold">2,340</p>
+          <p className="text-sm text-gray-400">{t.superAdmin?.activeUsers || 'Active Users'}</p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
+          <div className="flex items-center justify-between mb-2">
+            <DollarSign className="w-5 h-5 text-yellow-500" />
+            <span className="text-sm text-green-400">+15%</span>
+          </div>
+          <p className="text-2xl font-bold">$45,200</p>
+          <p className="text-sm text-gray-400">{t.superAdmin?.monthlyRevenue || 'Monthly Revenue'}</p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
+          <div className="flex items-center justify-between mb-2">
+            <Activity className="w-5 h-5 text-yellow-500" />
+            <span className="text-sm text-green-400">{t.superAdmin?.optimal || 'Optimal'}</span>
+          </div>
+          <p className="text-2xl font-bold">99.9%</p>
+          <p className="text-sm text-gray-400">{t.superAdmin?.systemHealth || 'System Health'}</p>
+        </motion.div>
       </div>
 
       {/* Main Content */}
@@ -67,17 +101,17 @@ export default function SuperAdminPage() {
         {/* Tenants Table */}
         <div className="lg:col-span-2 glass-card p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold">Tenants</h3>
+            <h3 className="font-semibold">{t.superAdmin?.tenants || 'Tenants'}</h3>
             <div className="flex gap-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg" />
+                <input type="text" placeholder={t.superAdmin?.search || 'Search...'} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg" />
               </div>
               <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg">
-                <option value="all">All</option>
-                <option value="active">Active</option>
-                <option value="pending">Pending</option>
-                <option value="suspended">Suspended</option>
+                <option value="all">{t.superAdmin?.all || 'All'}</option>
+                <option value="active">{t.superAdmin?.active || 'Active'}</option>
+                <option value="pending">{t.superAdmin?.pending || 'Pending'}</option>
+                <option value="suspended">{t.superAdmin?.suspended || 'Suspended'}</option>
               </select>
             </div>
           </div>
@@ -86,11 +120,11 @@ export default function SuperAdminPage() {
             <table className="w-full">
               <thead>
                 <tr className="text-left text-sm text-gray-400 border-b border-white/10">
-                  <th className="pb-3">Name</th>
-                  <th className="pb-3">Plan</th>
-                  <th className="pb-3">Users</th>
-                  <th className="pb-3">Revenue</th>
-                  <th className="pb-3">Status</th>
+                  <th className="pb-3">{t.superAdmin?.name || 'Name'}</th>
+                  <th className="pb-3">{t.superAdmin?.plan || 'Plan'}</th>
+                  <th className="pb-3">{t.superAdmin?.users || 'Users'}</th>
+                  <th className="pb-3">{t.superAdmin?.revenue || 'Revenue'}</th>
+                  <th className="pb-3">{t.superAdmin?.status || 'Status'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,7 +138,7 @@ export default function SuperAdminPage() {
                     <td className="py-3">${tenant.revenue.toLocaleString()}</td>
                     <td className="py-3">
                       <span className={`px-2 py-1 rounded-full text-xs ${tenant.status === 'active' ? 'bg-green-500/20 text-green-400' : tenant.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>
-                        {tenant.status}
+                        {t.superAdmin?.[tenant.status as keyof typeof t.superAdmin] || tenant.status}
                       </span>
                     </td>
                   </tr>
@@ -116,7 +150,7 @@ export default function SuperAdminPage() {
 
         {/* Recent Activity */}
         <div className="glass-card p-6">
-          <h3 className="font-semibold mb-4">Recent Activity</h3>
+          <h3 className="font-semibold mb-4">{t.superAdmin?.recentActivity || 'Recent Activity'}</h3>
           <div className="space-y-4">
             {recentActivity.map((activity, i) => (
               <div key={i} className="flex items-start gap-3 p-3 bg-white/5 rounded-xl">
@@ -124,7 +158,7 @@ export default function SuperAdminPage() {
                   {activity.type === 'alert' ? <AlertTriangle className="w-4 h-4" /> : activity.type === 'payment' ? <DollarSign className="w-4 h-4" /> : activity.type === 'new_tenant' ? <Store className="w-4 h-4" /> : <Shield className="w-4 h-4" />}
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm">{activity.message}</p>
+                  <p className="text-sm">{getActivityMessage(activity)}</p>
                   <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                 </div>
               </div>
@@ -135,14 +169,24 @@ export default function SuperAdminPage() {
 
       {/* Quick Actions */}
       <div className="glass-card p-6">
-        <h3 className="font-semibold mb-4">Quick Actions</h3>
+        <h3 className="font-semibold mb-4">{t.superAdmin?.quickActions || 'Quick Actions'}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[{ label: 'Add Tenant', icon: Store }, { label: 'View Reports', icon: TrendingUp }, { label: 'System Settings', icon: Shield }, { label: 'View All Logs', icon: Activity }].map((action, i) => (
-            <button key={i} className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
-              <action.icon className="w-5 h-5 text-yellow-500" />
-              <span className="font-medium">{action.label}</span>
-            </button>
-          ))}
+          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+            <Store className="w-5 h-5 text-yellow-500" />
+            <span className="font-medium">{t.superAdmin?.addTenant || 'Add Tenant'}</span>
+          </button>
+          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+            <TrendingUp className="w-5 h-5 text-yellow-500" />
+            <span className="font-medium">{t.superAdmin?.viewReports || 'View Reports'}</span>
+          </button>
+          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+            <Shield className="w-5 h-5 text-yellow-500" />
+            <span className="font-medium">{t.superAdmin?.systemSettings || 'System Settings'}</span>
+          </button>
+          <button className="p-4 bg-white/5 rounded-xl hover:bg-white/10 flex items-center gap-3">
+            <Activity className="w-5 h-5 text-yellow-500" />
+            <span className="font-medium">{t.superAdmin?.viewAllLogs || 'View All Logs'}</span>
+          </button>
         </div>
       </div>
     </div>

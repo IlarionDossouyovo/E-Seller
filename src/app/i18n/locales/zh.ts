@@ -298,6 +298,38 @@ export const translation = {
     upsell: '追加销售',
     custom: '自定义',
   },
+
+  // Super Admin
+  superAdmin: {
+    title: '超级管理员',
+    subtitle: '平台管理',
+    totalTenants: '租户总数',
+    activeUsers: '活跃用户',
+    monthlyRevenue: '月收入',
+    systemHealth: '系统状态',
+    optimal: '最佳',
+    tenants: '租户',
+    search: '搜索...',
+    all: '全部',
+    active: '活跃',
+    pending: '待处理',
+    suspended: '已暂停',
+    name: '名称',
+    plan: '套餐',
+    users: '用户',
+    revenue: '收入',
+    status: '状态',
+    recentActivity: '最近活动',
+    newTenantRegistered: '新租户已注册',
+    paid: '已支付',
+    exceededUsageLimit: '超出使用限制',
+    adminLogin: '管理员登录',
+    quickActions: '快速操作',
+    addTenant: '添加租户',
+    viewReports: '查看报告',
+    systemSettings: '系统设置',
+    viewAllLogs: '查看所有日志',
+  },
 }
 
 export type Translation = typeof translation

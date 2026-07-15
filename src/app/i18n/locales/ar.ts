@@ -298,6 +298,38 @@ export const translation = {
     upsell: 'بيع إضافي',
     custom: 'مخصص',
   },
+
+  // Super Admin
+  superAdmin: {
+    title: 'مدير عام',
+    subtitle: 'إدارة المنصة',
+    totalTenants: 'إجمالي المستأجرين',
+    activeUsers: 'المستخدمون النشطون',
+    monthlyRevenue: 'الإيرادات الشهرية',
+    systemHealth: 'صحة النظام',
+    optimal: 'مثالي',
+    tenants: 'المستأجرون',
+    search: 'بحث...',
+    all: 'الكل',
+    active: 'نشط',
+    pending: 'معلق',
+    suspended: 'موقوف',
+    name: 'الاسم',
+    plan: 'الخطة',
+    users: 'المستخدمون',
+    revenue: 'الإيرادات',
+    status: 'الحالة',
+    recentActivity: 'النشاط الأخير',
+    newTenantRegistered: 'تم تسجيل مستأجر جديد',
+    paid: 'دفع',
+    exceededUsageLimit: 'تجاوز حد الاستخدام',
+    adminLogin: 'تسجيل دخول المسؤول من',
+    quickActions: 'إجراءات سريعة',
+    addTenant: 'إضافة مستأجر',
+    viewReports: 'عرض التقارير',
+    systemSettings: 'إعدادات النظام',
+    viewAllLogs: 'عرض جميع السجلات',
+  },
 }
 
 export type Translation = typeof translation

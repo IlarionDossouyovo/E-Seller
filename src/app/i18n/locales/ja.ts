@@ -298,6 +298,38 @@ export const translation = {
     upsell: 'アップセル',
     custom: 'カスタム',
   },
+
+  // Super Admin
+  superAdmin: {
+    title: 'スーパ管理者',
+    subtitle: 'プラットフォーム全体の管理',
+    totalTenants: 'テナント合計',
+    activeUsers: 'アクティブユーザー',
+    monthlyRevenue: '月間収益',
+    systemHealth: 'システム状態',
+    optimal: '最適',
+    tenants: 'テナント',
+    search: '検索...',
+    all: 'すべて',
+    active: 'アクティブ',
+    pending: '保留中',
+    suspended: '一時停止',
+    name: '名前',
+    plan: 'プラン',
+    users: 'ユーザー',
+    revenue: '収益',
+    status: 'ステータス',
+    recentActivity: '最近のアクティビティ',
+    newTenantRegistered: '新しいテナントを登録しました',
+    paid: '支払い済み',
+    exceededUsageLimit: '使用制限を超過',
+    adminLogin: '管理者ログイン',
+    quickActions: 'クイックアクション',
+    addTenant: 'テナントを追加',
+    viewReports: 'レポートを表示',
+    systemSettings: 'システム設定',
+    viewAllLogs: 'すべてのログを表示',
+  },
 }
 
 export type Translation = typeof translation
