@@ -104,120 +104,122 @@ export default function VendorRegistrationPage() {
       <div className="glass-card p-6">
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">Store Information</h2>
+            <h2 className="text-xl font-semibold mb-4">{t.vendorRegistration?.storeInfo || 'Store Information'}</h2>
             
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Store Name *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.storeName || 'Store Name'} *</label>
               <input
                 type="text"
                 value={formData.storeName}
                 onChange={(e) => {
                   setFormData({ ...formData, storeName: e.target.value, slug: generateSlug(e.target.value) })
                 }}
-                className={`w-full bg-white/5 border ${errors.storeName ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
-                placeholder="Your Store Name"
+                className={`w-full bg-white/5 border ${errors.storeName ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                placeholder={t.vendorRegistration?.yourStoreName || 'Your Store Name'}
               />
               {errors.storeName && <p className="text-red-400 text-sm mt-1">{errors.storeName}</p>}
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Store URL *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.storeUrl || 'Store URL'} *</label>
               <div className="flex items-center gap-2">
                 <span className="text-gray-400">e-seller.com/</span>
                 <input
                   type="text"
                   value={formData.slug}
                   onChange={(e) => setFormData({ ...formData, slug: generateSlug(e.target.value) })}
-                  className={`flex-1 bg-white/5 border ${errors.slug ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
-                  placeholder="your-store"
+                  className={`flex-1 bg-white/5 border ${errors.slug ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                  placeholder={t.vendorRegistration?.yourStore || 'your-store'}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Email *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.email || 'Email'} *</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
-                placeholder="vendor@store.com"
+                className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                placeholder={t.vendorRegistration?.vendorAtStore || 'vendor@store.com'}
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Phone *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.phone || 'Phone'} *</label>
               <input
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
-                placeholder="+1 (555) 000-0000"
+                className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                placeholder={t.vendorRegistration?.phoneNumber || '+1 (555) 000-0000'}
               />
             </div>
 
-            <button onClick={handleNext} className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-semibold">
-              Continue
+            <button onClick={handleNext} className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-semibold cursor-pointer">
+              {t.vendorRegistration?.continue || 'Continue'}
             </button>
           </motion.div>
         )}
 
         {step === 2 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">Location & Category</h2>
+            <h2 className="text-xl font-semibold mb-4">{t.vendorRegistration?.location || 'Location & Category'}</h2>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Country *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.country || 'Country'} *</label>
               <select
                 value={formData.country}
                 onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                className={`w-full bg-white/5 border ${errors.country ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
+                className={`w-full bg-gray-800 border ${errors.country ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                style={{ backgroundColor: '#1f2937', color: 'white' }}
               >
-                <option value="">Select Country</option>
-                {countries.map(c => <option key={c} value={c}>{c}</option>)}
+                <option value="" style={{ backgroundColor: '#1f2937', color: 'white' }}>{t.vendorRegistration?.selectCountry || 'Select Country'}</option>
+                {countries.map(c => <option key={c} value={c} style={{ backgroundColor: '#1f2937', color: 'white' }}>{c}</option>)}
               </select>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Business Address *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.businessAddress || 'Business Address'} *</label>
               <textarea
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className={`w-full bg-white/5 border ${errors.address ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
+                className={`w-full bg-white/5 border ${errors.address ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
                 rows={3}
-                placeholder="Full business address"
+                placeholder={t.vendorRegistration?.fullAddress || 'Full business address'}
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Product Category *</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.productCategory || 'Product Category'} *</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className={`w-full bg-white/5 border ${errors.category ? 'border-red-500' : 'border-white/10'} rounded-xl p-3`}
+                className={`w-full bg-gray-800 border ${errors.category ? 'border-red-500' : 'border-white/10'} rounded-xl p-3 text-white`}
+                style={{ backgroundColor: '#1f2937', color: 'white' }}
               >
-                <option value="">Select Category</option>
-                {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                <option value="" style={{ backgroundColor: '#1f2937', color: 'white' }}>{t.vendorRegistration?.selectCategory || 'Select Category'}</option>
+                {categories.map(c => <option key={c} value={c} style={{ backgroundColor: '#1f2937', color: 'white' }}>{c}</option>)}
               </select>
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Store Description</label>
+              <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.storeDescription || 'Store Description'}</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
                 rows={4}
-                placeholder="Describe your store and products..."
+                placeholder={t.vendorRegistration?.describeStore || 'Describe your store and products...'}
               />
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => setStep(1)} className="flex-1 py-3 bg-white/5 rounded-xl font-semibold">
-                Back
+              <button onClick={() => setStep(1)} className="flex-1 py-3 bg-white/5 rounded-xl font-semibold cursor-pointer">
+                {t.vendorRegistration?.back || 'Back'}
               </button>
-              <button onClick={handleNext} className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-semibold">
-                Continue
+              <button onClick={handleNext} className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-semibold cursor-pointer">
+                {t.vendorRegistration?.continue || 'Continue'}
               </button>
             </div>
           </motion.div>
