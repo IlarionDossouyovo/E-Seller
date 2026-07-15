@@ -34,6 +34,28 @@ export default function SuperAdminPage() {
   const { t } = useI18n()
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'info' = 'info') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const handleAddTenant = () => {
+    showNotification(t.superAdmin?.addTenant || 'Ajouter un Tenant clicked!', 'success')
+  }
+
+  const handleViewReports = () => {
+    showNotification(t.superAdmin?.viewReports || 'View Reports clicked!', 'info')
+  }
+
+  const handleSystemSettings = () => {
+    showNotification(t.superAdmin?.systemSettings || 'System Settings clicked!', 'info')
+  }
+
+  const handleViewAllLogs = () => {
+    showNotification(t.superAdmin?.viewAllLogs || 'View All Logs clicked!', 'info')
+  }
 
   const getActivityMessage = (activity: typeof recentActivity[0]) => {
     const messages: Record<string, string> = {
@@ -47,6 +69,22 @@ export default function SuperAdminPage() {
 
   return (
     <div className="space-y-6">
+      {/* Notification */}
+      {notification && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500/90 text-white' 
+              : 'bg-blue-500/90 text-white'
+          }`}
+        >
+          {notification.message}
+        </motion.div>
+      )}
+
       {/* Header */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-3">
@@ -171,19 +209,19 @@ export default function SuperAdminPage() {
       <div className="glass-card p-6">
         <h3 className="font-semibold mb-4">{t.superAdmin?.quickActions || 'Quick Actions'}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="p-4 bg-electron-blue/20 border border-electron-blue/30 rounded-xl hover:bg-electron-blue/40 flex items-center gap-3 transition-all cursor-pointer">
+          <button onClick={handleAddTenant} className="p-4 bg-electron-blue/20 border border-electron-blue/30 rounded-xl hover:bg-electron-blue/40 flex items-center gap-3 transition-all cursor-pointer active:scale-95">
             <Store className="w-5 h-5 text-electron-blue" />
             <span className="font-medium">{t.superAdmin?.addTenant || 'Add Tenant'}</span>
           </button>
-          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
+          <button onClick={handleViewReports} className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer active:scale-95">
             <TrendingUp className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.viewReports || 'View Reports'}</span>
           </button>
-          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
+          <button onClick={handleSystemSettings} className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer active:scale-95">
             <Shield className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.systemSettings || 'System Settings'}</span>
           </button>
-          <button className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer">
+          <button onClick={handleViewAllLogs} className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 flex items-center gap-3 transition-all cursor-pointer active:scale-95">
             <Activity className="w-5 h-5 text-yellow-500" />
             <span className="font-medium">{t.superAdmin?.viewAllLogs || 'View All Logs'}</span>
           </button>
