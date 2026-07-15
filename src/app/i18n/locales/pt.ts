@@ -479,6 +479,12 @@ export const translation = {
     status: 'Status',
     state: 'Estado',
     country: 'Pais',
+    period: 'Periodo',
+    dueDate: 'Data de Vencimento',
+    amountDue: 'Valor Devido',
+    payNow: 'Pagar Agora',
+    paid: 'Pago',
+    actions: 'Acoes',
   },
 }
 

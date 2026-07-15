@@ -479,6 +479,12 @@ export const translation = {
     status: 'الحالة',
     state: 'الولاية',
     country: 'البلد',
+    period: 'الفترة',
+    dueDate: 'تاريخ الاستحقاق',
+    amountDue: 'المبلغ المستحق',
+    payNow: 'ادفع الآن',
+    paid: 'مدفوع',
+    actions: 'الإجراءات',
   },
 }
 

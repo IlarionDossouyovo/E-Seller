@@ -479,6 +479,12 @@ export const translation = {
     status: 'Status',
     state: 'Staat',
     country: 'Land',
+    period: 'Zeitraum',
+    dueDate: 'Falligkeitsdatum',
+    amountDue: 'Fahiger Betrag',
+    payNow: 'Jetzt Bezahlen',
+    paid: 'Bezahlt',
+    actions: 'Aktionen',
   },
 }
 

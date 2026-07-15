@@ -479,6 +479,12 @@ export const translation = {
     status: 'ステータス',
     state: '州',
     country: '国',
+    period: '期間',
+    dueDate: '期限日',
+    amountDue: '支払金額',
+    payNow: '今すぐ支払う',
+    paid: '支払済',
+    actions: 'アクション',
   },
 }
 

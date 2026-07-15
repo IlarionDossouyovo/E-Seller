@@ -461,6 +461,12 @@ export const translation = {
     status: 'Status',
     state: 'State',
     country: 'Country',
+    period: 'Period',
+    dueDate: 'Due Date',
+    amountDue: 'Amount Due',
+    payNow: 'Pay Now',
+    paid: 'Paid',
+    actions: 'Actions',
   },
 }
 

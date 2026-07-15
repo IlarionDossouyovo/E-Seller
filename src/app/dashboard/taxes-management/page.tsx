@@ -148,11 +148,11 @@ export default function TaxesManagementPage() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr className="text-left text-sm text-gray-400">
-                <th className="p-4">Period</th>
-                <th className="p-4">Due Date</th>
-                <th className="p-4">Amount Due</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Actions</th>
+                <th className="p-4">{t.taxes?.period || 'Period'}</th>
+                <th className="p-4">{t.taxes?.dueDate || 'Due Date'}</th>
+                <th className="p-4">{t.taxes?.amountDue || 'Amount Due'}</th>
+                <th className="p-4">{t.taxes?.status || 'Status'}</th>
+                <th className="p-4">{t.taxes?.actions || 'Actions'}</th>
               </tr>
             </thead>
             <tbody>
@@ -163,11 +163,11 @@ export default function TaxesManagementPage() {
                   <td className="p-4 text-green-400">${filing.amount.toLocaleString()}</td>
                   <td className="p-4">
                     <span className={`px-2 py-1 rounded-full text-xs ${statusColors[filing.status]}`}>
-                      {filing.status.replace('_', ' ')}
+                      {filing.status === 'due_soon' ? (t.taxes?.dueSoon || 'due soon') : (t.taxes?.paid || 'paid')}
                     </span>
                   </td>
                   <td className="p-4">
-                    <button className="px-3 py-1 bg-blue-500 rounded-lg text-sm">Pay Now</button>
+                    <button onClick={() => showNotification(`Paiement: ${filing.period} - $${filing.amount}`, 'success')} className="px-3 py-1 bg-blue-500 rounded-lg text-sm cursor-pointer hover:bg-blue-600">{t.taxes?.payNow || 'Pay Now'}</button>
                   </td>
                 </motion.tr>
               ))}

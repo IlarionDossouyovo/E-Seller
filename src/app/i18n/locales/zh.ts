@@ -479,6 +479,12 @@ export const translation = {
     status: '状态',
     state: '州',
     country: '国家',
+    period: '期间',
+    dueDate: '到期日',
+    amountDue: '应付金额',
+    payNow: '立即付款',
+    paid: '已付',
+    actions: '操作',
   },
 }
 

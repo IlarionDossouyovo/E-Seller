@@ -468,6 +468,12 @@ export const translation = {
     status: 'Statut',
     state: 'Etat',
     country: 'Pays',
+    period: 'Periode',
+    dueDate: 'Date Limite',
+    amountDue: 'Montant Du',
+    payNow: 'Payer Maintenant',
+    paid: 'Paye',
+    actions: 'Actions',
   },
 }
 
