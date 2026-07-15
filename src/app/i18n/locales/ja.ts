@@ -208,6 +208,35 @@ export const translation = {
     pt: 'ポルトガル語',
     ar: 'アラビア語',
   },
+
+  // Email Marketing
+  emailMarketing: {
+    title: 'メールマーケティング',
+    subtitle: 'メールキャンペーンの作成と管理',
+    newCampaign: '新規キャンペーン',
+    totalSubscribers: '購読者数',
+    avgOpenRate: '平均オープン率',
+    avgClickRate: '平均クリック率',
+    sentThisMonth: '今月送信',
+    campaigns: 'キャンペーン',
+    templates: 'テンプレート',
+    automation: '自動化',
+    searchPlaceholder: 'キャンペーンを検索...',
+    all: 'すべて',
+    draft: '下書き',
+    scheduled: '予定',
+    sending: '送信中',
+    sent: '送信済み',
+    failed: '失敗',
+    notScheduled: '未予定',
+    opened: '開封',
+    clicked: 'クリック',
+    send: '送信',
+    edit: '編集',
+    view: '表示',
+    duplicate: '複製',
+    delete: '削除',
+  },
 }
 
 export type Translation = typeof translation

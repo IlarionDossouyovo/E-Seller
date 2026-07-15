@@ -208,6 +208,35 @@ export const translation = {
     pt: 'Português',
     ar: 'Árabe',
   },
+
+  // Email Marketing
+  emailMarketing: {
+    title: 'Email Marketing',
+    subtitle: 'Criar e gerenciar campanhas de email',
+    newCampaign: 'Nova campanha',
+    totalSubscribers: 'Total assinantes',
+    avgOpenRate: 'Taxa abertura',
+    avgClickRate: 'Taxa clique',
+    sentThisMonth: 'Enviados este mês',
+    campaigns: 'Campanhas',
+    templates: 'Modelos',
+    automation: 'Automação',
+    searchPlaceholder: 'Pesquisar campanhas...',
+    all: 'Todos',
+    draft: 'Rascunho',
+    scheduled: 'Programado',
+    sending: 'Enviando',
+    sent: 'Enviado',
+    failed: 'Falhou',
+    notScheduled: 'Não programado',
+    opened: 'Aberto',
+    clicked: 'Clicado',
+    send: 'Enviar',
+    edit: 'Editar',
+    view: 'Ver',
+    duplicate: 'Duplicar',
+    delete: 'Excluir',
+  },
 }
 
 export type Translation = typeof translation

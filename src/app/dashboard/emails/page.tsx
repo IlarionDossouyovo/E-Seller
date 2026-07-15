@@ -20,6 +20,7 @@ import {
   CheckCircle,
   XCircle
 } from 'lucide-react'
+import { useI18n } from '@/app/i18n'
 
 type CampaignStatus = 'draft' | 'scheduled' | 'sending' | 'sent' | 'failed'
 
@@ -101,6 +102,7 @@ const mockTemplates = [
 ]
 
 export default function EmailsPage() {
+  const { t } = useI18n()
   const [campaigns, setCampaigns] = useState<Campaign[]>(mockCampaigns)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<CampaignStatus | 'all'>('all')
@@ -167,11 +169,11 @@ export default function EmailsPage() {
   }
 
   const statusConfig = {
-    draft: { label: 'Draft', color: 'text-gray-400', bg: 'bg-gray-500/20' },
-    scheduled: { label: 'Scheduled', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
-    sending: { label: 'Sending', color: 'text-blue-400', bg: 'bg-blue-500/20' },
-    sent: { label: 'Sent', color: 'text-green-400', bg: 'bg-green-500/20' },
-    failed: { label: 'Failed', color: 'text-red-400', bg: 'bg-red-500/20' },
+    draft: { label: t.emailMarketing?.draft || 'Brouillon', color: 'text-gray-400', bg: 'bg-gray-500/20' },
+    scheduled: { label: t.emailMarketing?.scheduled || 'Planifie', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+    sending: { label: t.emailMarketing?.sending || 'Envoi en cours', color: 'text-blue-400', bg: 'bg-blue-500/20' },
+    sent: { label: t.emailMarketing?.sent || 'Envoye', color: 'text-green-400', bg: 'bg-green-500/20' },
+    failed: { label: t.emailMarketing?.failed || 'Echoue', color: 'text-red-400', bg: 'bg-red-500/20' },
   }
 
   return (
@@ -179,25 +181,25 @@ export default function EmailsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold font-[var(--font-sora)]">Email Marketing</h1>
-          <p className="text-gray-400">Create and manage email campaigns</p>
+          <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.emailMarketing?.title || 'Marketing Email'}</h1>
+          <p className="text-gray-400">{t.emailMarketing?.subtitle || 'Creer et gerer les campagnes email'}</p>
         </div>
         <button 
           onClick={handleNewCampaign}
           className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer"
         >
           <Plus className="w-5 h-5" />
-          New Campaign
+          {t.emailMarketing?.newCampaign || 'Nouvelle campagne'}
         </button>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total Subscribers', value: stats.totalSubscribers.toLocaleString(), icon: Users },
-          { label: 'Avg Open Rate', value: stats.avgOpenRate, icon: Mail },
-          { label: 'Avg Click Rate', value: stats.avgClickRate, icon: TrendingUp },
-          { label: 'Sent This Month', value: stats.sentThisMonth.toLocaleString(), icon: Send },
+          { label: t.emailMarketing?.totalSubscribers || 'Total abonnes', value: stats.totalSubscribers.toLocaleString(), icon: Users },
+          { label: t.emailMarketing?.avgOpenRate || 'Taux ouverture', value: stats.avgOpenRate, icon: Mail },
+          { label: t.emailMarketing?.avgClickRate || 'Taux clic', value: stats.avgClickRate, icon: TrendingUp },
+          { label: t.emailMarketing?.sentThisMonth || 'Envoyes ce mois', value: stats.sentThisMonth.toLocaleString(), icon: Send },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -223,9 +225,9 @@ export default function EmailsPage() {
       <div className="glass-card p-2 overflow-x-auto">
         <div className="flex gap-2">
           {[
-            { key: 'campaigns', label: 'Campaigns' },
-            { key: 'templates', label: 'Templates' },
-            { key: 'automation', label: 'Automation' },
+            { key: 'campaigns', label: t.emailMarketing?.campaigns || 'Campagnes' },
+            { key: 'templates', label: t.emailMarketing?.templates || 'Modeles' },
+            { key: 'automation', label: t.emailMarketing?.automation || 'Automatisation' },
           ].map(tab => (
             <button
               key={tab.key}
@@ -253,7 +255,7 @@ export default function EmailsPage() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search campaigns..."
+                  placeholder={t.emailMarketing?.searchPlaceholder || 'Rechercher des campagnes...'}
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
                 />
               </div>
@@ -268,7 +270,7 @@ export default function EmailsPage() {
                         : 'bg-white/5 text-gray-400 hover:bg-white/10'
                     }`}
                   >
-                    {status === 'all' ? 'All' : statusConfig[status as CampaignStatus].label}
+                    {status === 'all' ? (t.emailMarketing?.all || 'Tout') : statusConfig[status as CampaignStatus].label}
                   </button>
                 ))}
               </div>
@@ -299,22 +301,22 @@ export default function EmailsPage() {
                         </span>
                       </div>
                       <p className="text-gray-400 text-sm mb-2">{campaign.subject}</p>
-                      <p className="text-xs text-gray-500">{campaign.date || 'Not scheduled'}</p>
+                      <p className="text-xs text-gray-500">{campaign.date || (t.emailMarketing?.notScheduled || 'Non planifie')}</p>
                     </div>
 
                     {campaign.status === 'sent' && (
                       <div className="flex gap-6 text-sm">
                         <div className="text-center">
                           <p className="font-bold">{campaign.sent.toLocaleString()}</p>
-                          <p className="text-gray-400 text-xs">Sent</p>
+                          <p className="text-gray-400 text-xs">{t.emailMarketing?.sent || 'Envoye'}</p>
                         </div>
                         <div className="text-center">
                           <p className="font-bold">{openRate}%</p>
-                          <p className="text-gray-400 text-xs">Opened</p>
+                          <p className="text-gray-400 text-xs">{t.emailMarketing?.opened || 'Ouvert'}</p>
                         </div>
                         <div className="text-center">
                           <p className="font-bold">{clickRate}%</p>
-                          <p className="text-gray-400 text-xs">Clicked</p>
+                          <p className="text-gray-400 text-xs">{t.emailMarketing?.clicked || 'Clique'}</p>
                         </div>
                       </div>
                     )}
@@ -326,7 +328,7 @@ export default function EmailsPage() {
                           disabled={sendingId === campaign.id}
                           className="px-4 py-2 rounded-lg bg-electron-blue hover:opacity-90 transition-opacity text-sm cursor-pointer disabled:opacity-50"
                         >
-                          {sendingId === campaign.id ? 'Sending...' : 'Send'}
+                          {sendingId === campaign.id ? (t.emailMarketing?.sending || 'Envoi...') : (t.emailMarketing?.send || 'Envoyer')}
                         </button>
                       )}
                       {campaign.status === 'scheduled' && (
@@ -334,7 +336,7 @@ export default function EmailsPage() {
                           onClick={() => handleEdit(campaign)}
                           className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors text-sm cursor-pointer"
                         >
-                          Edit
+                          {t.emailMarketing?.edit || 'Modifier'}
                         </button>
                       )}
                       {campaign.status === 'sent' && (

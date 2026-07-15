@@ -208,6 +208,35 @@ export const translation = {
     pt: 'البرتغالية',
     ar: 'العربية',
   },
+
+  // Email Marketing
+  emailMarketing: {
+    title: 'تسويق البريد الإلكتروني',
+    subtitle: 'إنشاء وإدارة حملات البريد الإلكتروني',
+    newCampaign: 'حملة جديدة',
+    totalSubscribers: 'إجمالي المشتركين',
+    avgOpenRate: 'معدل الفتح',
+    avgClickRate: 'معدل النقر',
+    sentThisMonth: 'أرسل هذا الشهر',
+    campaigns: 'الحملات',
+    templates: 'القوالب',
+    automation: 'الأتمتة',
+    searchPlaceholder: 'البحث في الحملات...',
+    all: 'الكل',
+    draft: 'مسودة',
+    scheduled: 'مجدول',
+    sending: 'جار الإرسال',
+    sent: 'أرسل',
+    failed: 'فشل',
+    notScheduled: 'غير مجدول',
+    opened: 'مفتوح',
+    clicked: 'تم النقر',
+    send: 'إرسال',
+    edit: 'تعديل',
+    view: 'عرض',
+    duplicate: 'تكرار',
+    delete: 'حذف',
+  },
 }
 
 export type Translation = typeof translation

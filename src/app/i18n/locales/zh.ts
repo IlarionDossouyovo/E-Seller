@@ -208,6 +208,35 @@ export const translation = {
     pt: '葡萄牙语',
     ar: '阿拉伯语',
   },
+
+  // Email Marketing
+  emailMarketing: {
+    title: '邮件营销',
+    subtitle: '创建和管理邮件活动',
+    newCampaign: '新活动',
+    totalSubscribers: '订阅者总数',
+    avgOpenRate: '平均打开率',
+    avgClickRate: '平均点击率',
+    sentThisMonth: '本月发送',
+    campaigns: '活动',
+    templates: '模板',
+    automation: '自动化',
+    searchPlaceholder: '搜索活动...',
+    all: '全部',
+    draft: '草稿',
+    scheduled: '已计划',
+    sending: '发送中',
+    sent: '已发送',
+    failed: '失败',
+    notScheduled: '未计划',
+    opened: '已打开',
+    clicked: '已点击',
+    send: '发送',
+    edit: '编辑',
+    view: '查看',
+    duplicate: '复制',
+    delete: '删除',
+  },
 }
 
 export type Translation = typeof translation

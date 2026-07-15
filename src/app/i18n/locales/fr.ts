@@ -215,6 +215,35 @@ export const translation = {
     pt: 'Portugais',
     ar: 'Arabe',
   },
+
+  // Email Marketing
+  emailMarketing: {
+    title: 'Marketing Email',
+    subtitle: 'Creer et gerer les campagnes email',
+    newCampaign: 'Nouvelle campagne',
+    totalSubscribers: 'Total abonnes',
+    avgOpenRate: 'Taux ouverture',
+    avgClickRate: 'Taux clic',
+    sentThisMonth: 'Envoyes ce mois',
+    campaigns: 'Campagnes',
+    templates: 'Modeles',
+    automation: 'Automatisation',
+    searchPlaceholder: 'Rechercher des campagnes...',
+    all: 'Tout',
+    draft: 'Brouillon',
+    scheduled: 'Planifie',
+    sending: 'Envoi en cours',
+    sent: 'Envoye',
+    failed: 'Echoue',
+    notScheduled: 'Non planifie',
+    opened: 'Ouvert',
+    clicked: 'Clique',
+    send: 'Envoyer',
+    edit: 'Modifier',
+    view: 'Voir',
+    duplicate: 'Dupliquer',
+    delete: 'Supprimer',
+  },
 }
 
 export type Translation = typeof translation
