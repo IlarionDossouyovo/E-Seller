@@ -288,6 +288,15 @@ export const translation = {
     settings: '设置',
     save: '保存',
     cancel: '取消',
+    createFunnel: '创建漏斗',
+    funnelName: '漏斗名称',
+    funnelNamePlaceholder: '例如：夏季促销漏斗',
+    funnelType: '漏斗类型',
+    productLaunch: '产品发布',
+    leadMagnet: '潜在客户磁铁',
+    webinar: '网络研讨会',
+    upsell: '追加销售',
+    custom: '自定义',
   },
 }
 

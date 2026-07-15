@@ -288,6 +288,15 @@ export const translation = {
     settings: 'Configuracoes',
     save: 'Salvar',
     cancel: 'Cancelar',
+    createFunnel: 'Criar Funil',
+    funnelName: 'Nome do Funil',
+    funnelNamePlaceholder: 'Ex: Funil Promocao Verao',
+    funnelType: 'Tipo de Funil',
+    productLaunch: 'Lancamento Produto',
+    leadMagnet: 'Lead Magnet',
+    webinar: 'Webinario',
+    upsell: 'Upsell',
+    custom: 'Personalizado',
   },
 }
 

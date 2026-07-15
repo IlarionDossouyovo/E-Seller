@@ -270,6 +270,15 @@ export const translation = {
     settings: 'Settings',
     save: 'Save',
     cancel: 'Cancel',
+    createFunnel: 'Create Funnel',
+    funnelName: 'Funnel Name',
+    funnelNamePlaceholder: 'e.g., Summer Sale Funnel',
+    funnelType: 'Funnel Type',
+    productLaunch: 'Product Launch',
+    leadMagnet: 'Lead Magnet',
+    webinar: 'Webinar',
+    upsell: 'Upsell',
+    custom: 'Custom',
   },
 }
 

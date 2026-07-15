@@ -19,7 +19,8 @@ import {
   MessageSquare,
   ExternalLink,
   Settings,
-  GripVertical
+  GripVertical,
+  X
 } from 'lucide-react'
 
 type StepType = 'landing' | 'email' | 'upsell' | 'checkout' | 'thankyou' | 'delay'
@@ -384,32 +385,32 @@ export default function FunnelsPage() {
             className="glass-card p-6 w-full max-w-lg"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold">{t.funnelBuilder?.newFunnel || 'Nouveau Funnel'}</h2>
+              <h2 className="text-xl font-bold">{t.funnelBuilder?.createFunnel || 'Creer un Funnel'}</h2>
               <button 
                 onClick={() => setShowNewFunnelModal(false)}
                 className="p-2 rounded-lg hover:bg-white/10 cursor-pointer"
               >
-                <Settings className="w-6 h-6" />
+                <X className="w-6 h-6" />
               </button>
             </div>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Funnel Name</label>
+                <label className="block text-sm text-gray-400 mb-2">{t.funnelBuilder?.funnelName || 'Funnel Name'}</label>
                 <input 
                   type="text" 
-                  placeholder="e.g., Summer Sale Funnel"
+                  placeholder={t.funnelBuilder?.funnelNamePlaceholder || 'e.g., Summer Sale Funnel'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Funnel Type</label>
-                <select className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white">
-                  <option>Product Launch</option>
-                  <option>Lead Magnet</option>
-                  <option>Webinar</option>
-                  <option>Upsell</option>
-                  <option>Custom</option>
+                <label className="block text-sm text-gray-400 mb-2">{t.funnelBuilder?.funnelType || 'Funnel Type'}</label>
+                <select className="w-full bg-gray-800 border border-white/20 rounded-xl px-4 py-3 text-white [&>option]:bg-gray-800 [&>option]:text-white">
+                  <option value="product-launch">{t.funnelBuilder?.productLaunch || 'Product Launch'}</option>
+                  <option value="lead-magnet">{t.funnelBuilder?.leadMagnet || 'Lead Magnet'}</option>
+                  <option value="webinar">{t.funnelBuilder?.webinar || 'Webinar'}</option>
+                  <option value="upsell">{t.funnelBuilder?.upsell || 'Upsell'}</option>
+                  <option value="custom">{t.funnelBuilder?.custom || 'Custom'}</option>
                 </select>
               </div>
               
@@ -418,7 +419,7 @@ export default function FunnelsPage() {
                   onClick={() => setShowNewFunnelModal(false)}
                   className="flex-1 px-4 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition-colors"
                 >
-                  Cancel
+                  {t.funnelBuilder?.cancel || 'Cancel'}
                 </button>
                 <button 
                   onClick={() => {
@@ -438,7 +439,7 @@ export default function FunnelsPage() {
                   }}
                   className="flex-1 px-4 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity"
                 >
-                  Create Funnel
+                  {t.funnelBuilder?.createFunnel || 'Create Funnel'}
                 </button>
               </div>
             </div>

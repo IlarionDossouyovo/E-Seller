@@ -288,6 +288,15 @@ export const translation = {
     settings: 'الإعدادات',
     save: 'حفظ',
     cancel: 'إلغاء',
+    createFunnel: 'إنشاء مسار',
+    funnelName: 'اسم المسار',
+    funnelNamePlaceholder: 'مثال: مسار تخفيضات الصيف',
+    funnelType: 'نوع المسار',
+    productLaunch: 'إطلاق منتج',
+    leadMagnet: 'مولد عملاء محتملين',
+    webinar: 'ندوة عبر الإنترنت',
+    upsell: 'بيع إضافي',
+    custom: 'مخصص',
   },
 }
 

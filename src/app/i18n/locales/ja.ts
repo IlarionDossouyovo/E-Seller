@@ -288,6 +288,15 @@ export const translation = {
     settings: '設定',
     save: '保存',
     cancel: 'キャンセル',
+    createFunnel: 'ファネルを作成',
+    funnelName: 'ファネル名',
+    funnelNamePlaceholder: '例：夏セールファネル',
+    funnelType: 'ファネルタイプ',
+    productLaunch: ' 商品発売',
+    leadMagnet: 'リードマグネット',
+    webinar: 'ウェビナー',
+    upsell: 'アップセル',
+    custom: 'カスタム',
   },
 }
 

@@ -277,6 +277,15 @@ export const translation = {
     settings: 'Parametres',
     save: 'Enregistrer',
     cancel: 'Annuler',
+    createFunnel: 'Creer un Funnel',
+    funnelName: 'Nom du Funnel',
+    funnelNamePlaceholder: 'Ex: Funnel Soldes Ete',
+    funnelType: 'Type de Funnel',
+    productLaunch: 'Lancement Produit',
+    leadMagnet: 'Aimant a leads',
+    webinar: 'Webinar',
+    upsell: 'Upsell',
+    custom: 'Personnalise',
   },
 }
 
