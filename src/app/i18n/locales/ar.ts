@@ -245,6 +245,7 @@ export const translation = {
     view: 'عرض',
     duplicate: 'تكرار',
     delete: 'حذف',
+    confirmDelete: 'هل انت متاكد من حذف هذه الحملة؟',
   },
 }
 

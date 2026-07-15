@@ -245,6 +245,7 @@ export const translation = {
     view: '表示',
     duplicate: '複製',
     delete: '削除',
+    confirmDelete: 'このキャンペーンを削除してもよろしいですか？',
   },
 }
 

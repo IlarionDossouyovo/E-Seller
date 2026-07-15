@@ -245,6 +245,7 @@ export const translation = {
     view: '查看',
     duplicate: '复制',
     delete: '删除',
+    confirmDelete: '您确定要删除此活动吗？',
   },
 }
 

@@ -111,21 +111,61 @@ export default function EmailsPage() {
   const [editingCampaign, setEditingCampaign] = useState<Campaign | null>(null)
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const [sendingId, setSendingId] = useState<number | null>(null)
+  
+  // Form state
+  const [formName, setFormName] = useState('')
+  const [formSubject, setFormSubject] = useState('')
+  const [formStatus, setFormStatus] = useState<CampaignStatus>('draft')
 
   // Handlers
   const handleNewCampaign = () => {
+    setEditingCampaign(null)
+    setFormName('')
+    setFormSubject('')
+    setFormStatus('draft')
     setShowNewCampaignModal(true)
   }
 
   const handleEdit = (campaign: Campaign) => {
     setEditingCampaign(campaign)
+    setFormName(campaign.name)
+    setFormSubject(campaign.subject)
+    setFormStatus(campaign.status)
     setShowNewCampaignModal(true)
   }
 
   const handleDelete = (id: number) => {
-    if (confirm('Are you sure you want to delete this campaign?')) {
+    const confirmMsg = t.emailMarketing?.confirmDelete || 'Voulez-vous vraiment supprimer cette campagne?'
+    if (confirm(confirmMsg)) {
       setCampaigns(prev => prev.filter(c => c.id !== id))
     }
+  }
+  
+  const handleSaveCampaign = () => {
+    if (editingCampaign) {
+      // Update existing campaign
+      setCampaigns(prev => prev.map(c => 
+        c.id === editingCampaign.id 
+          ? { ...c, name: formName, subject: formSubject, status: formStatus }
+          : c
+      ))
+    } else {
+      // Create new campaign
+      const newCampaign: Campaign = {
+        id: Date.now(),
+        name: formName || 'Nouvelle campagne',
+        subject: formSubject || 'Nouvel objet',
+        status: formStatus,
+        sent: 0,
+        opened: 0,
+        clicked: 0,
+        date: '',
+        type: 'newsletter',
+      }
+      setCampaigns(prev => [newCampaign, ...prev])
+    }
+    setShowNewCampaignModal(false)
+    setEditingCampaign(null)
   }
 
   const handleSend = (id: number) => {
@@ -464,7 +504,8 @@ export default function EmailsPage() {
                 <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.campaignName || 'Nom de la campagne'}</label>
                 <input 
                   type="text" 
-                  defaultValue={editingCampaign?.name || ''}
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
                   placeholder={t.emailMarketing?.campaignNamePlaceholder || 'Ex: Soldes ete'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
                 />
@@ -473,15 +514,17 @@ export default function EmailsPage() {
                 <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.subjectLine || 'Objet'}</label>
                 <input 
                   type="text" 
-                  defaultValue={editingCampaign?.subject || ''}
-                  placeholder={t.emailMarketing?.subjectPlaceholder || 'Ex: 🎉 Grande soldes!'}
+                  value={formSubject}
+                  onChange={(e) => setFormSubject(e.target.value)}
+                  placeholder={t.emailMarketing?.subjectPlaceholder || 'Ex: Grande soldes!'}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-500"
                 />
               </div>
               <div>
                 <label className="block text-sm text-gray-400 mb-2">{t.emailMarketing?.status || 'Statut'}</label>
                 <select 
-                  defaultValue={editingCampaign?.status || 'draft'}
+                  value={formStatus}
+                  onChange={(e) => setFormStatus(e.target.value as CampaignStatus)}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white"
                 >
                   <option value="draft">{t.emailMarketing?.draft || 'Brouillon'}</option>
@@ -497,26 +540,7 @@ export default function EmailsPage() {
                   {t.emailMarketing?.cancel || 'Annuler'}
                 </button>
                 <button 
-                  onClick={() => {
-                    if (editingCampaign) {
-                      setCampaigns(prev => prev.map(c => c.id === editingCampaign.id ? { ...c, name: editingCampaign.name } : c))
-                    } else {
-                      const newCampaign: Campaign = {
-                        id: Date.now(),
-                        name: 'Nouvelle campagne',
-                        subject: 'Nouvel objet',
-                        status: 'draft',
-                        sent: 0,
-                        opened: 0,
-                        clicked: 0,
-                        date: '',
-                        type: 'newsletter',
-                      }
-                      setCampaigns(prev => [newCampaign, ...prev])
-                    }
-                    setShowNewCampaignModal(false)
-                    setEditingCampaign(null)
-                  }}
+                  onClick={handleSaveCampaign}
                   className="flex-1 px-4 py-3 rounded-xl bg-electron-blue hover:opacity-90 transition-opacity"
                 >
                   {editingCampaign ? (t.emailMarketing?.saveChanges || 'Enregistrer') : (t.emailMarketing?.createCampaign || 'Creer la campagne')}

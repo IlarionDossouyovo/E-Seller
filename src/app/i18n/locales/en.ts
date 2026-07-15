@@ -245,6 +245,7 @@ export const translation = {
     view: 'View',
     duplicate: 'Duplicate',
     delete: 'Delete',
+    confirmDelete: 'Are you sure you want to delete this campaign?',
   },
 }
 
