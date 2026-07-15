@@ -1,0 +1,10 @@
+# Prevent all search engine crawling
+User-agent: *
+Disallow: /
+
+# Allow specific paths if needed (uncomment when ready)
+# Allow: /store
+# Allow: /store/product/
+
+# Sitemap - disable until launch
+# Sitemap: https://your-domain.com/sitemap.xml

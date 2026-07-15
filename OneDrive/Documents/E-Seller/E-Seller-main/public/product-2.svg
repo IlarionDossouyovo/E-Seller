@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  
+  <!-- Watch Body -->
+  <rect x="120" y="80" width="160" height="200" rx="30" fill="#2d3748" stroke="#a855f7" stroke-width="4"/>
+  <circle cx="200" cy="180" r="70" fill="#1a1a2e" stroke="#a855f7" stroke-width="3"/>
+  
+  <!-- Screen -->
+  <circle cx="200" cy="180" r="55" fill="#2d3748"/>
+  
+  <!-- Time -->
+  <text x="200" y="170" text-anchor="middle" font-family="Arial" font-size="32" fill="#a855f7" font-weight="bold">12:45</text>
+  <text x="200" y="200" text-anchor="middle" font-family="Arial" font-size="12" fill="#a855f7">SMART</text>
+  
+  <!-- Crown -->
+  <rect x="280" y="160" width="12" height="40" rx="3" fill="#a855f7"/>
+  
+  <!-- Text -->
+  <text x="200" y="320" text-anchor="middle" font-family="Arial" font-size="16" fill="#fff" font-weight="bold">SERIES X</text>
+  <text x="200" y="345" text-anchor="middle" font-family="Arial" font-size="16" fill="#a855f7">$299.99</text>
+</svg>
