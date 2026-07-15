@@ -43,6 +43,10 @@ export default function CustomersPage() {
     showNotification(`${t.customers?.viewOrders || 'Commandes'}: ${name}`, 'info')
   }
 
+  const handleMore = (name: string) => {
+    showNotification(`Options: ${name}`, 'info')
+  }
+
   const filtered = customers.filter(c => {
     const matchSearch = c.name.toLowerCase().includes(search.toLowerCase()) || c.email.toLowerCase().includes(search.toLowerCase())
     const matchFilter = filter === 'all' || c.status === filter
@@ -98,7 +102,7 @@ export default function CustomersPage() {
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.vip}</p>
-          <p className="text-sm text-gray-400">VIP</p>
+          <p className="text-sm text-gray-400">{t.customers?.vip || 'VIP'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">${stats.revenue.toFixed(0)}</p>
@@ -136,7 +140,7 @@ export default function CustomersPage() {
                   <p className="text-sm text-gray-400">{customer.email}</p>
                 </div>
               </div>
-              <button className="p-1 hover:bg-white/10 rounded"><MoreVertical className="w-4 h-4" /></button>
+              <button onClick={() => handleMore(customer.name)} className="p-1 hover:bg-white/10 rounded cursor-pointer"><MoreVertical className="w-4 h-4" /></button>
             </div>
             <div className="grid grid-cols-3 gap-2 text-sm">
               <div className="text-center p-2 bg-white/5 rounded">
