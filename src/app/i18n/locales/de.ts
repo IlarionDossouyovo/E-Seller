@@ -417,6 +417,29 @@ export const translation = {
     paid: 'Bezahlt',
     pending: 'Ausstehend',
   },
+
+  // Returns Management
+  returns: {
+    title: 'Ruckgabeverwaltung',
+    subtitle: 'Ruckgabeantrage bearbeiten',
+    totalRequests: 'Gesamtanfragen',
+    pending: 'Ausstehend',
+    approved: 'Genehmigt',
+    refunded: 'Erstattet',
+    returnId: 'Ruckgabe-ID',
+    order: 'Bestellung',
+    product: 'Produkt',
+    reason: 'Grund',
+    amount: 'Betrag',
+    date: 'Datum',
+    status: 'Status',
+    actions: 'Aktionen',
+    defective: 'Defekt',
+    wrongSize: 'Falsche Grosse',
+    notAsDesc: 'Nicht wie beschrieben',
+    changedMind: 'Andere Meinung',
+    rejected: 'Abgelehnt',
+  },
 }
 
 export type Translation = typeof translation

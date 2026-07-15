@@ -417,6 +417,29 @@ export const translation = {
     paid: 'Pagado',
     pending: 'Pendiente',
   },
+
+  // Returns Management
+  returns: {
+    title: 'Gestion de Devoluciones',
+    subtitle: 'Procesar solicitudes de devolucion',
+    totalRequests: 'Total de Solicitudes',
+    pending: 'Pendiente',
+    approved: 'Aprobado',
+    refunded: 'Reembolsado',
+    returnId: 'ID de Devolucion',
+    order: 'Pedido',
+    product: 'Producto',
+    reason: 'Razon',
+    amount: 'Monto',
+    date: 'Fecha',
+    status: 'Estado',
+    actions: 'Acciones',
+    defective: 'Defectuoso',
+    wrongSize: 'Talla incorrecta',
+    notAsDesc: 'No como se describio',
+    changedMind: 'Cambio de opinion',
+    rejected: 'Rechazado',
+  },
 }
 
 export type Translation = typeof translation

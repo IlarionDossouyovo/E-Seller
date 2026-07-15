@@ -417,6 +417,29 @@ export const translation = {
     paid: '已付',
     pending: '待处理',
   },
+
+  // Returns Management
+  returns: {
+    title: '退货管理',
+    subtitle: '处理退货请求',
+    totalRequests: '总请求数',
+    pending: '待处理',
+    approved: '已批准',
+    refunded: '已退款',
+    returnId: '退货ID',
+    order: '订单',
+    product: '产品',
+    reason: '原因',
+    amount: '金额',
+    date: '日期',
+    status: '状态',
+    actions: '操作',
+    defective: '有缺陷',
+    wrongSize: '尺寸错误',
+    notAsDesc: '与描述不符',
+    changedMind: '改变主意',
+    rejected: '已拒绝',
+  },
 }
 
 export type Translation = typeof translation

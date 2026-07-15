@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { RotateCcw, Package, DollarSign, Clock, AlertTriangle, CheckCircle, XCircle, Search, Filter } from 'lucide-react'
 
 const returns = [
@@ -18,8 +19,34 @@ const statusColors: Record<string, string> = {
 }
 
 export default function ReturnsManagementPage() {
+  const { t } = useI18n()
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' } | null>(null)
+
+  const showNotification = (message: string, type: 'success' | 'info' = 'info') => {
+    setNotification({ message, type })
+    setTimeout(() => setNotification(null), 3000)
+  }
+
+  const getReasonLabel = (reason: string) => {
+    const labels: Record<string, string> = {
+      'Defective': t.returns?.defective || 'Defective',
+      'Wrong Size': t.returns?.wrongSize || 'Wrong Size',
+      'Not as described': t.returns?.notAsDesc || 'Not as described',
+      'Changed mind': t.returns?.changedMind || 'Changed mind',
+    }
+    return labels[reason] || reason
+  }
+
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, string> = {
+      'approved': t.returns?.approved || 'Approved',
+      'pending': t.returns?.pending || 'Pending',
+      'rejected': t.returns?.rejected || 'Rejected',
+    }
+    return labels[status] || status
+  }
 
   const stats = {
     total: returns.length,
@@ -30,14 +57,30 @@ export default function ReturnsManagementPage() {
 
   return (
     <div className="space-y-6">
+      {/* Notification */}
+      {notification && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-lg ${
+            notification.type === 'success' 
+              ? 'bg-green-500/90 text-white' 
+              : 'bg-blue-500/90 text-white'
+          }`}
+        >
+          {notification.message}
+        </motion.div>
+      )}
+
       <div className="glass-card p-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
             <RotateCcw className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Returns Management</h1>
-            <p className="text-gray-400">Process return requests</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.returns?.title || 'Returns Management'}</h1>
+            <p className="text-gray-400">{t.returns?.subtitle || 'Process return requests'}</p>
           </div>
         </div>
       </div>
@@ -45,19 +88,19 @@ export default function ReturnsManagementPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.total}</p>
-          <p className="text-sm text-gray-400">Total Requests</p>
+          <p className="text-sm text-gray-400">{t.returns?.totalRequests || 'Total Requests'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.pending}</p>
-          <p className="text-sm text-gray-400">Pending</p>
+          <p className="text-sm text-gray-400">{t.returns?.pending || 'Pending'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.approved}</p>
-          <p className="text-sm text-gray-400">Approved</p>
+          <p className="text-sm text-gray-400">{t.returns?.approved || 'Approved'}</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">${stats.totalAmount.toFixed(2)}</p>
-          <p className="text-sm text-gray-400">Refunded</p>
+          <p className="text-sm text-gray-400">{t.returns?.refunded || 'Refunded'}</p>
         </motion.div>
       </div>
 
@@ -65,14 +108,14 @@ export default function ReturnsManagementPage() {
         <table className="w-full">
           <thead className="bg-white/5">
             <tr className="text-left text-sm text-gray-400">
-              <th className="p-4">Return ID</th>
-              <th className="p-4">Order</th>
-              <th className="p-4">Product</th>
-              <th className="p-4">Reason</th>
-              <th className="p-4">Amount</th>
-              <th className="p-4">Date</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Actions</th>
+              <th className="p-4">{t.returns?.returnId || 'Return ID'}</th>
+              <th className="p-4">{t.returns?.order || 'Order'}</th>
+              <th className="p-4">{t.returns?.product || 'Product'}</th>
+              <th className="p-4">{t.returns?.reason || 'Reason'}</th>
+              <th className="p-4">{t.returns?.amount || 'Amount'}</th>
+              <th className="p-4">{t.returns?.date || 'Date'}</th>
+              <th className="p-4">{t.returns?.status || 'Status'}</th>
+              <th className="p-4">{t.returns?.actions || 'Actions'}</th>
             </tr>
           </thead>
           <tbody>
@@ -81,19 +124,19 @@ export default function ReturnsManagementPage() {
                 <td className="p-4 font-mono">{ret.id}</td>
                 <td className="p-4">{ret.orderId}</td>
                 <td className="p-4">{ret.product}</td>
-                <td className="p-4 text-gray-400">{ret.reason}</td>
+                <td className="p-4 text-gray-400">{getReasonLabel(ret.reason)}</td>
                 <td className="p-4">${ret.amount}</td>
                 <td className="p-4 text-gray-400">{ret.date}</td>
                 <td className="p-4">
                   <span className={`px-2 py-1 rounded-full text-xs ${statusColors[ret.status]}`}>
-                    {ret.status}
+                    {getStatusLabel(ret.status)}
                   </span>
                 </td>
                 <td className="p-4">
                   {ret.status === 'pending' && (
                     <div className="flex gap-1">
-                      <button className="p-1 bg-green-500/20 rounded"><CheckCircle className="w-4 h-4 text-green-400" /></button>
-                      <button className="p-1 bg-red-500/20 rounded"><XCircle className="w-4 h-4 text-red-400" /></button>
+                      <button onClick={() => showNotification(`Approuve: ${ret.id}`, 'success')} className="p-1 bg-green-500/20 rounded cursor-pointer hover:bg-green-500/40"><CheckCircle className="w-4 h-4 text-green-400" /></button>
+                      <button onClick={() => showNotification(`Rejete: ${ret.id}`, 'info')} className="p-1 bg-red-500/20 rounded cursor-pointer hover:bg-red-500/40"><XCircle className="w-4 h-4 text-red-400" /></button>
                     </div>
                   )}
                 </td>

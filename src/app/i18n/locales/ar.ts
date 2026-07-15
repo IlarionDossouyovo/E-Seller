@@ -417,6 +417,29 @@ export const translation = {
     paid: 'مدفوع',
     pending: 'معلق',
   },
+
+  // Returns Management
+  returns: {
+    title: 'إدارة المردودات',
+    subtitle: 'معالجة طلبات الإرجاع',
+    totalRequests: 'إجمالي الطلبات',
+    pending: 'معلق',
+    approved: 'موافق عليه',
+    refunded: 'مسترد',
+    returnId: 'معرف الإرجاع',
+    order: 'الطلب',
+    product: 'المنتج',
+    reason: 'السبب',
+    amount: 'المبلغ',
+    date: 'التاريخ',
+    status: 'الحالة',
+    actions: 'الإجراءات',
+    defective: 'معيب',
+    wrongSize: 'حجم خاطئ',
+    notAsDesc: 'ليس كما وصف',
+    changedMind: 'غير رأي',
+    rejected: 'مرفوض',
+  },
 }
 
 export type Translation = typeof translation

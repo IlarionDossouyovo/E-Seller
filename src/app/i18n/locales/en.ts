@@ -399,6 +399,29 @@ export const translation = {
     paid: 'Paid',
     pending: 'Pending',
   },
+
+  // Returns Management
+  returns: {
+    title: 'Returns Management',
+    subtitle: 'Process return requests',
+    totalRequests: 'Total Requests',
+    pending: 'Pending',
+    approved: 'Approved',
+    refunded: 'Refunded',
+    returnId: 'Return ID',
+    order: 'Order',
+    product: 'Product',
+    reason: 'Reason',
+    amount: 'Amount',
+    date: 'Date',
+    status: 'Status',
+    actions: 'Actions',
+    defective: 'Defective',
+    wrongSize: 'Wrong Size',
+    notAsDesc: 'Not as described',
+    changedMind: 'Changed mind',
+    rejected: 'Rejected',
+  },
 }
 
 export type Translation = typeof translation
