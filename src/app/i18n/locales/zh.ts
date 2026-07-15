@@ -376,6 +376,24 @@ export const translation = {
     copied: '已复制！',
     delete: '删除',
   },
+
+  // Customers
+  customers: {
+    title: '客户',
+    subtitle: '管理您的客户群',
+    totalCustomers: '客户总数',
+    active: '活跃',
+    vip: 'VIP',
+    totalRevenue: '总收入',
+    search: '搜索客户...',
+    allStatus: '所有状态',
+    addCustomer: '添加客户',
+    orders: '订单',
+    spent: '消费',
+    last: '最后',
+    email: '邮件',
+    viewOrders: '订单',
+  },
 }
 
 export type Translation = typeof translation

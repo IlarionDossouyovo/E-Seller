@@ -376,6 +376,24 @@ export const translation = {
     copied: 'تم النسخ!',
     delete: 'حذف',
   },
+
+  // Customers
+  customers: {
+    title: 'العملاء',
+    subtitle: 'إدارة قاعدة العملاء',
+    totalCustomers: 'إجمالي العملاء',
+    active: 'نشط',
+    vip: 'VIP',
+    totalRevenue: 'إجمالي الإيرادات',
+    search: 'البحث عن العملاء...',
+    allStatus: 'جميع الحالات',
+    addCustomer: 'إضافة عميل',
+    orders: 'الطلبات',
+    spent: 'المصروف',
+    last: 'الأخيرة',
+    email: 'البريد الإلكتروني',
+    viewOrders: 'الطلبات',
+  },
 }
 
 export type Translation = typeof translation

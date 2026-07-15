@@ -376,6 +376,24 @@ export const translation = {
     copied: 'コピーしました！',
     delete: '削除',
   },
+
+  // Customers
+  customers: {
+    title: '顧客',
+    subtitle: '顧客ベースを管理',
+    totalCustomers: '顧客総数',
+    active: 'アクティブ',
+    vip: 'VIP',
+    totalRevenue: '総収益',
+    search: '顧客を検索...',
+    allStatus: 'すべてのステータス',
+    addCustomer: '顧客を追加',
+    orders: '注文',
+    spent: '使用額',
+    last: '最後',
+    email: 'メール',
+    viewOrders: '注文',
+  },
 }
 
 export type Translation = typeof translation

@@ -358,6 +358,24 @@ export const translation = {
     copied: 'Copied!',
     delete: 'Delete',
   },
+
+  // Customers
+  customers: {
+    title: 'Customers',
+    subtitle: 'Manage your customer base',
+    totalCustomers: 'Total Customers',
+    active: 'Active',
+    vip: 'VIP',
+    totalRevenue: 'Total Revenue',
+    search: 'Search customers...',
+    allStatus: 'All Status',
+    addCustomer: 'Add Customer',
+    orders: 'Orders',
+    spent: 'Spent',
+    last: 'Last',
+    email: 'Email',
+    viewOrders: 'Orders',
+  },
 }
 
 export type Translation = typeof translation
