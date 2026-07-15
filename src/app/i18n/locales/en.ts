@@ -99,6 +99,103 @@ export const translation = {
     profile: 'Profile',
     account: 'Account',
   },
+
+  // Settings Page
+  settingsPage: {
+    title: 'Settings',
+    subtitle: 'Configure your platform',
+    general: 'General',
+    store: 'Store',
+    payments: 'Payments',
+    notifications: 'Notifications',
+    security: 'Security',
+    appearance: 'Appearance',
+    email: 'Email',
+    api: 'API',
+    saveChanges: 'Save Changes',
+    saved: 'Saved!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'Store Name',
+    storeEmail: 'Store Email',
+    timezone: 'Timezone',
+    defaultLanguage: 'Default Language',
+    save: 'Save',
+  },
+
+  // Store Settings
+  store: {
+    title: 'Store Configuration',
+    maintenanceMode: 'Maintenance Mode',
+    maintenanceModeDesc: 'Disable store temporarily',
+    guestCheckout: 'Guest Checkout',
+    guestCheckoutDesc: 'Allow checkout without account',
+    currencySelector: 'Currency Selector',
+    currencySelectorDesc: 'Show currency switcher',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'Payment Settings',
+    currency: 'Currency',
+    taxRate: 'Tax Rate (%)',
+    taxIncluded: 'Tax Included',
+    taxIncludedDesc: 'Prices include tax',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'Notifications',
+    newOrder: 'New Order',
+    newOrderDesc: 'Email when order placed',
+    lowStock: 'Low Stock',
+    lowStockDesc: 'Alert when product low',
+    customerRegistration: 'Customer Registration',
+    customerRegistrationDesc: 'Notify new customer',
+    paymentReceived: 'Payment Received',
+    paymentReceivedDesc: 'Confirm payment',
+  },
+
+  // Security
+  security: {
+    title: 'Security',
+    twoFactorAuth: 'Two-Factor Auth',
+    twoFactorAuthDesc: 'Require 2FA for admin',
+    ipWhitelist: 'IP Whitelist',
+    ipWhitelistDesc: 'Restrict access by IP',
+    sessionTimeout: 'Session Timeout',
+    sessionTimeoutDesc: 'Auto logout after 30min',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'Appearance',
+    theme: 'Theme',
+    darkMode: 'Dark Mode',
+    lightMode: 'Light Mode',
+  },
+
+  // Email Settings
+  email: {
+    title: 'Email Configuration',
+    smtpHost: 'SMTP Host',
+    smtpPort: 'SMTP Port',
+    smtpUser: 'SMTP Username',
+    smtpPassword: 'SMTP Password',
+    fromEmail: 'From Email',
+    fromName: 'From Name',
+  },
+
+  // API Settings
+  api: {
+    title: 'API Keys',
+    productionKey: 'Production Key',
+    developmentKey: 'Development Key',
+    generateNewKey: 'Generate New Key',
+    view: 'View',
+  },
   
   // Languages
   languages: {

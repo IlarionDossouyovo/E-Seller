@@ -99,7 +99,104 @@ export const translation = {
     profile: '个人资料',
     account: '账户',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: '设置',
+    subtitle: '配置您的平台',
+    general: '通用',
+    store: '商店',
+    payments: '支付',
+    notifications: '通知',
+    security: '安全',
+    appearance: '外观',
+    email: '邮件',
+    api: 'API',
+    saveChanges: '保存',
+    saved: '已保存!',
+  },
+
+  // General Settings
+  general: {
+    storeName: '商店名称',
+    storeEmail: '商店邮箱',
+    timezone: '时区',
+    defaultLanguage: '默认语言',
+    save: '保存',
+  },
+
+  // Store Settings
+  store: {
+    title: '商店配置',
+    maintenanceMode: '维护模式',
+    maintenanceModeDesc: '暂时关闭商店',
+    guestCheckout: '访客结账',
+    guestCheckoutDesc: '允许无账户购买',
+    currencySelector: '货币选择器',
+    currencySelectorDesc: '显示货币切换器',
+  },
+
+  // Payment Settings
+  payments: {
+    title: '支付设置',
+    currency: '货币',
+    taxRate: '税率 (%)',
+    taxIncluded: '含税',
+    taxIncludedDesc: '价格含税',
+  },
+
+  // Notifications
+  notifications: {
+    title: '通知',
+    newOrder: '新订单',
+    newOrderDesc: '下单时通知',
+    lowStock: '库存不足',
+    lowStockDesc: '产品库存低时提醒',
+    customerRegistration: '新客户',
+    customerRegistrationDesc: '新客户注册通知',
+    paymentReceived: '收到付款',
+    paymentReceivedDesc: '确认付款通知',
+  },
+
+  // Security
+  security: {
+    title: '安全',
+    twoFactorAuth: '双因素认证',
+    twoFactorAuthDesc: '要求管理员使用2FA',
+    ipWhitelist: 'IP白名单',
+    ipWhitelistDesc: '按IP限制访问',
+    sessionTimeout: '会话超时',
+    sessionTimeoutDesc: '30分钟后自动登出',
+  },
+
+  // Appearance
+  appearance: {
+    title: '外观',
+    theme: '主题',
+    darkMode: '深色模式',
+    lightMode: '浅色模式',
+  },
+
+  // Email Settings
+  email: {
+    title: '邮件配置',
+    smtpHost: 'SMTP服务器',
+    smtpPort: 'SMTP端口',
+    smtpUser: 'SMTP用户名',
+    smtpPassword: 'SMTP密码',
+    fromEmail: '发件人邮箱',
+    fromName: '发件人名称',
+  },
+
+  // API Settings
+  api: {
+    title: 'API密钥',
+    productionKey: '生产密钥',
+    developmentKey: '开发密钥',
+    generateNewKey: '生成新密钥',
+    view: '查看',
+  },
+
   // Languages
   languages: {
     en: '英语',

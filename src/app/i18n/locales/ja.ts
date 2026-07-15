@@ -99,7 +99,104 @@ export const translation = {
     profile: 'プロフィール',
     account: 'アカウント',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: '設定',
+    subtitle: 'プラットフォームを設定',
+    general: '一般',
+    store: 'ストア',
+    payments: '支払い',
+    notifications: '通知',
+    security: 'セキュリティ',
+    appearance: '外観',
+    email: 'メール',
+    api: 'API',
+    saveChanges: '保存',
+    saved: '保存しました!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'ストア名',
+    storeEmail: 'ストアメール',
+    timezone: 'タイムゾーン',
+    defaultLanguage: 'デフォルト言語',
+    save: '保存',
+  },
+
+  // Store Settings
+  store: {
+    title: 'ストア設定',
+    maintenanceMode: 'メンテナンスモード',
+    maintenanceModeDesc: 'ストアを一時的に無効化',
+    guestCheckout: 'ゲストチェックアウト',
+    guestCheckoutDesc: 'アカウントなしで購入を許可',
+    currencySelector: '通貨セレクター',
+    currencySelectorDesc: '通貨切替を表示',
+  },
+
+  // Payment Settings
+  payments: {
+    title: '支払い設定',
+    currency: '通貨',
+    taxRate: '税率 (%)',
+    taxIncluded: '税込み',
+    taxIncludedDesc: '価格は税込み',
+  },
+
+  // Notifications
+  notifications: {
+    title: '通知',
+    newOrder: '新規注文',
+    newOrderDesc: '注文時に通知',
+    lowStock: '在庫少',
+    lowStockDesc: '在庫が少ない時のアラート',
+    customerRegistration: '新規顧客',
+    customerRegistrationDesc: '新規顧客登録を通知',
+    paymentReceived: '入金確認',
+    paymentReceivedDesc: '支払確認を通知',
+  },
+
+  // Security
+  security: {
+    title: 'セキュリティ',
+    twoFactorAuth: '二要素認証',
+    twoFactorAuthDesc: '管理者に2FAを要求',
+    ipWhitelist: 'IPホワイトリスト',
+    ipWhitelistDesc: 'IPでアクセスを制限',
+    sessionTimeout: 'セッションタイムアウト',
+    sessionTimeoutDesc: '30分後に自動ログアウト',
+  },
+
+  // Appearance
+  appearance: {
+    title: '外観',
+    theme: 'テーマ',
+    darkMode: 'ダークモード',
+    lightMode: 'ライトモード',
+  },
+
+  // Email Settings
+  email: {
+    title: 'メール設定',
+    smtpHost: 'SMTPサーバー',
+    smtpPort: 'SMTPポート',
+    smtpUser: 'SMTPユーザー',
+    smtpPassword: 'SMTPパスワード',
+    fromEmail: '送信者メール',
+    fromName: '送信者名',
+  },
+
+  // API Settings
+  api: {
+    title: 'APIキー',
+    productionKey: '本番キー',
+    developmentKey: '開発キー',
+    generateNewKey: '新しいキーを生成',
+    view: '表示',
+  },
+
   // Languages
   languages: {
     en: '英語',

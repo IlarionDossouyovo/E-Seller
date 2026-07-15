@@ -12,8 +12,15 @@ export const translation = {
     payments: 'Paiements',
     settings: 'Parametres',
     logout: 'Deconnexion',
+    store: 'Boutique',
+    customers: 'Clients',
+    inventory: 'Inventaire',
+    shipping: 'Livraison',
+    returns: 'Retours',
+    blog: 'Blog',
+    reports: 'Rapports',
   },
-  
+
   // Dashboard
   dashboard: {
     title: 'Tableau de bord',
@@ -23,7 +30,7 @@ export const translation = {
     users: 'Utilisateurs',
     welcome: 'Bon retour',
   },
-  
+
   // Common
   common: {
     save: 'Enregistrer',
@@ -44,7 +51,7 @@ export const translation = {
     submit: 'Soumettre',
     close: 'Fermer',
   },
-  
+
   // AI Agents
   ai: {
     title: 'Tableau de bord IA',
@@ -57,7 +64,7 @@ export const translation = {
     businessAssistant: 'Assistant commercial',
     recommendations: 'Recommandations',
   },
-  
+
   // Status
   status: {
     active: 'Actif',
@@ -68,7 +75,7 @@ export const translation = {
     online: 'En ligne',
     offline: 'Hors ligne',
   },
-  
+
   // Footer
   footer: {
     allRightsReserved: 'Tous droits reserves',
@@ -76,7 +83,7 @@ export const translation = {
     termsOfService: 'Conditions d\'utilisation',
     contact: 'Contact',
   },
-  
+
   // Auth
   auth: {
     login: 'Connexion',
@@ -87,7 +94,7 @@ export const translation = {
     forgotPassword: 'Mot de passe oublie?',
     rememberMe: 'Se souvenir de moi',
   },
-  
+
   // Settings
   settings: {
     title: 'Parametres',
@@ -99,7 +106,104 @@ export const translation = {
     profile: 'Profil',
     account: 'Compte',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: 'Parametres',
+    subtitle: 'Configurez votre plateforme',
+    general: 'General',
+    store: 'Boutique',
+    payments: 'Paiements',
+    notifications: 'Notifications',
+    security: 'Securite',
+    appearance: 'Apparence',
+    email: 'Email',
+    api: 'API',
+    saveChanges: 'Enregistrer',
+    saved: 'Enregistre!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'Nom de la boutique',
+    storeEmail: 'Email de la boutique',
+    timezone: 'Fuseau horaire',
+    defaultLanguage: 'Langue par defaut',
+    save: 'Enregistrer',
+  },
+
+  // Store Settings
+  store: {
+    title: 'Configuration de la boutique',
+    maintenanceMode: 'Mode maintenance',
+    maintenanceModeDesc: 'Desactiver temporairement la boutique',
+    guestCheckout: 'Achats invite',
+    guestCheckoutDesc: 'Autoriser les achats sans compte',
+    currencySelector: 'Selecteur de devise',
+    currencySelectorDesc: 'Afficher le changeur de devise',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'Parametres de paiement',
+    currency: 'Devise',
+    taxRate: 'Taux de taxe (%)',
+    taxIncluded: 'Taxe incluse',
+    taxIncludedDesc: 'Les prix incluent la taxe',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'Notifications',
+    newOrder: 'Nouvelle commande',
+    newOrderDesc: 'Notifier pour chaque nouvelle commande',
+    lowStock: 'Stock faible',
+    lowStockDesc: 'Alerte quand le stock est faible',
+    customerRegistration: 'Nouveau client',
+    customerRegistrationDesc: 'Notifier lors dun nouveau compte',
+    paymentReceived: 'Paiement recu',
+    paymentReceivedDesc: 'Notifier lors dun paiement',
+  },
+
+  // Security
+  security: {
+    title: 'Securite',
+    twoFactorAuth: 'Authentification a deux facteurs',
+    twoFactorAuthDesc: 'Exiger 2FA pour tous les comptes',
+    ipWhitelist: 'Liste blanche IP',
+    ipWhitelistDesc: 'Restreindre acces par IP',
+    sessionTimeout: 'Delai de session',
+    sessionTimeoutDesc: 'Deconnexion automatique apres inactivite',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'Apparence',
+    theme: 'Theme',
+    darkMode: 'Mode sombre',
+    lightMode: 'Mode clair',
+  },
+
+  // Email Settings
+  email: {
+    title: 'Configuration email',
+    smtpHost: 'Serveur SMTP',
+    smtpPort: 'Port SMTP',
+    smtpUser: 'Utilisateur SMTP',
+    smtpPassword: 'Mot de passe SMTP',
+    fromEmail: 'Email expediteur',
+    fromName: 'Nom expediteur',
+  },
+
+  // API Settings
+  api: {
+    title: 'Configuration API',
+    productionKey: 'Cle de production',
+    developmentKey: 'Cle de developpement',
+    generateNewKey: 'Generer une nouvelle cle',
+    view: 'Voir',
+  },
+
   // Languages
   languages: {
     en: 'Anglais',

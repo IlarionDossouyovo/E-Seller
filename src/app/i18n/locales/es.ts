@@ -99,7 +99,104 @@ export const translation = {
     profile: 'Perfil',
     account: 'Cuenta',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: 'Configuración',
+    subtitle: 'Configura tu plataforma',
+    general: 'General',
+    store: 'Tienda',
+    payments: 'Pagos',
+    notifications: 'Notificaciones',
+    security: 'Seguridad',
+    appearance: 'Apariencia',
+    email: 'Email',
+    api: 'API',
+    saveChanges: 'Guardar',
+    saved: '¡Guardado!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'Nombre de la tienda',
+    storeEmail: 'Email de la tienda',
+    timezone: 'Zona horaria',
+    defaultLanguage: 'Idioma predeterminado',
+    save: 'Guardar',
+  },
+
+  // Store Settings
+  store: {
+    title: 'Configuración de la tienda',
+    maintenanceMode: 'Modo mantenimiento',
+    maintenanceModeDesc: 'Desactivar tienda temporalmente',
+    guestCheckout: 'Compra de invitado',
+    guestCheckoutDesc: 'Permitir compra sin cuenta',
+    currencySelector: 'Selector de moneda',
+    currencySelectorDesc: 'Mostrar cambiador de moneda',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'Configuración de pagos',
+    currency: 'Moneda',
+    taxRate: 'Tasa de impuesto (%)',
+    taxIncluded: 'Impuesto incluido',
+    taxIncludedDesc: 'Los precios incluyen impuesto',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'Notificaciones',
+    newOrder: 'Nuevo pedido',
+    newOrderDesc: 'Notificar cuando se realice un pedido',
+    lowStock: 'Stock bajo',
+    lowStockDesc: 'Alerta cuando el producto está bajo',
+    customerRegistration: 'Nuevo cliente',
+    customerRegistrationDesc: 'Notificar nuevo cliente',
+    paymentReceived: 'Pago recibido',
+    paymentReceivedDesc: 'Confirmar pago',
+  },
+
+  // Security
+  security: {
+    title: 'Seguridad',
+    twoFactorAuth: 'Autenticación de dos factores',
+    twoFactorAuthDesc: 'Requerir 2FA para admin',
+    ipWhitelist: 'Lista blanca IP',
+    ipWhitelistDesc: 'Restringir acceso por IP',
+    sessionTimeout: 'Tiempo de sesión',
+    sessionTimeoutDesc: 'Cerrar sesión después de 30 min',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'Apariencia',
+    theme: 'Tema',
+    darkMode: 'Modo oscuro',
+    lightMode: 'Modo claro',
+  },
+
+  // Email Settings
+  email: {
+    title: 'Configuración de email',
+    smtpHost: 'Servidor SMTP',
+    smtpPort: 'Puerto SMTP',
+    smtpUser: 'Usuario SMTP',
+    smtpPassword: 'Contraseña SMTP',
+    fromEmail: 'Email remitente',
+    fromName: 'Nombre remitente',
+  },
+
+  // API Settings
+  api: {
+    title: 'Claves API',
+    productionKey: 'Clave de producción',
+    developmentKey: 'Clave de desarrollo',
+    generateNewKey: 'Generar nueva clave',
+    view: 'Ver',
+  },
+
   // Languages
   languages: {
     en: 'Inglés',

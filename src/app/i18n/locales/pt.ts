@@ -99,7 +99,104 @@ export const translation = {
     profile: 'Perfil',
     account: 'Conta',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: 'Configurações',
+    subtitle: 'Configure sua plataforma',
+    general: 'Geral',
+    store: 'Loja',
+    payments: 'Pagamentos',
+    notifications: 'Notificações',
+    security: 'Segurança',
+    appearance: 'Aparência',
+    email: 'Email',
+    api: 'API',
+    saveChanges: 'Salvar',
+    saved: 'Salvo!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'Nome da loja',
+    storeEmail: 'Email da loja',
+    timezone: 'Fuso horário',
+    defaultLanguage: 'Idioma padrão',
+    save: 'Salvar',
+  },
+
+  // Store Settings
+  store: {
+    title: 'Configuração da loja',
+    maintenanceMode: 'Modo manutenção',
+    maintenanceModeDesc: 'Desativar loja temporariamente',
+    guestCheckout: 'Compra como convidado',
+    guestCheckoutDesc: 'Permitir compra sem conta',
+    currencySelector: 'Seletor de moeda',
+    currencySelectorDesc: 'Mostrar trocador de moeda',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'Configuração de pagamentos',
+    currency: 'Moeda',
+    taxRate: 'Taxa de imposto (%)',
+    taxIncluded: 'Imposto incluído',
+    taxIncludedDesc: 'Preços incluem imposto',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'Notificações',
+    newOrder: 'Novo pedido',
+    newOrderDesc: 'Notificar quando pedido for feito',
+    lowStock: 'Estoque baixo',
+    lowStockDesc: 'Alerta quando produto está baixo',
+    customerRegistration: 'Novo cliente',
+    customerRegistrationDesc: 'Notificar novo cliente',
+    paymentReceived: 'Pagamento recebido',
+    paymentReceivedDesc: 'Confirmar pagamento',
+  },
+
+  // Security
+  security: {
+    title: 'Segurança',
+    twoFactorAuth: 'Autenticação de dois fatores',
+    twoFactorAuthDesc: 'Exigir 2FA para admin',
+    ipWhitelist: 'Lista branca IP',
+    ipWhitelistDesc: 'Restringir acesso por IP',
+    sessionTimeout: 'Tempo limite de sessão',
+    sessionTimeoutDesc: 'Logout automático após 30 min',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'Aparência',
+    theme: 'Tema',
+    darkMode: 'Modo escuro',
+    lightMode: 'Modo claro',
+  },
+
+  // Email Settings
+  email: {
+    title: 'Configuração de email',
+    smtpHost: 'Servidor SMTP',
+    smtpPort: 'Porta SMTP',
+    smtpUser: 'Usuário SMTP',
+    smtpPassword: 'Senha SMTP',
+    fromEmail: 'Email do remetente',
+    fromName: 'Nome do remetente',
+  },
+
+  // API Settings
+  api: {
+    title: 'Chaves API',
+    productionKey: 'Chave de produção',
+    developmentKey: 'Chave de desenvolvimento',
+    generateNewKey: 'Gerar nova chave',
+    view: 'Ver',
+  },
+
   // Languages
   languages: {
     en: 'Inglês',

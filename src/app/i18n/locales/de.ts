@@ -99,7 +99,104 @@ export const translation = {
     profile: 'Profil',
     account: 'Konto',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: 'Einstellungen',
+    subtitle: 'Plattform konfigurieren',
+    general: 'Allgemein',
+    store: 'Shop',
+    payments: 'Zahlungen',
+    notifications: 'Benachrichtigungen',
+    security: 'Sicherheit',
+    appearance: 'Erscheinungsbild',
+    email: 'E-Mail',
+    api: 'API',
+    saveChanges: 'Speichern',
+    saved: 'Gespeichert!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'Shop Name',
+    storeEmail: 'Shop E-Mail',
+    timezone: 'Zeitzone',
+    defaultLanguage: 'Standardsprache',
+    save: 'Speichern',
+  },
+
+  // Store Settings
+  store: {
+    title: 'Shop-Konfiguration',
+    maintenanceMode: 'Wartungsmodus',
+    maintenanceModeDesc: 'Shop vorübergehend deaktivieren',
+    guestCheckout: 'Gast Checkout',
+    guestCheckoutDesc: 'Kauf ohne Konto erlauben',
+    currencySelector: 'Währungsauswahl',
+    currencySelectorDesc: 'Währungswechsel anzeigen',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'Zahlungseinstellungen',
+    currency: 'Währung',
+    taxRate: 'Steuersatz (%)',
+    taxIncluded: 'Steuer inbegriffen',
+    taxIncludedDesc: 'Preise inklusive Steuer',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'Benachrichtigungen',
+    newOrder: 'Neue Bestellung',
+    newOrderDesc: 'Benachrichtigung bei Bestellung',
+    lowStock: 'Niedriger Bestand',
+    lowStockDesc: 'Warnung bei niedrigem Bestand',
+    customerRegistration: 'Neukunde',
+    customerRegistrationDesc: 'Benachrichtigung bei neuem Konto',
+    paymentReceived: 'Zahlung erhalten',
+    paymentReceivedDesc: 'Zahlung bestätigen',
+  },
+
+  // Security
+  security: {
+    title: 'Sicherheit',
+    twoFactorAuth: 'Zwei-Faktor-Authentifizierung',
+    twoFactorAuthDesc: '2FA für Admin erforderlich',
+    ipWhitelist: 'IP-Whitelist',
+    ipWhitelistDesc: 'Zugang nach IP einschränken',
+    sessionTimeout: 'Sitzungszeitlimit',
+    sessionTimeoutDesc: 'Abmeldung nach 30 Min',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'Erscheinungsbild',
+    theme: 'Thema',
+    darkMode: 'Dunkelmodus',
+    lightMode: 'Hellmodus',
+  },
+
+  // Email Settings
+  email: {
+    title: 'E-Mail-Konfiguration',
+    smtpHost: 'SMTP-Server',
+    smtpPort: 'SMTP-Port',
+    smtpUser: 'SMTP-Benutzer',
+    smtpPassword: 'SMTP-Passwort',
+    fromEmail: 'Absender-E-Mail',
+    fromName: 'Absendername',
+  },
+
+  // API Settings
+  api: {
+    title: 'API-Schlüssel',
+    productionKey: 'Produktionsschlüssel',
+    developmentKey: 'Entwicklungsschlüssel',
+    generateNewKey: 'Neuen Schlüssel generieren',
+    view: 'Anzeigen',
+  },
+
   // Languages
   languages: {
     en: 'Englisch',

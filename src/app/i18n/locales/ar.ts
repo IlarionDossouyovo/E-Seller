@@ -99,7 +99,104 @@ export const translation = {
     profile: 'الملف الشخصي',
     account: 'الحساب',
   },
-  
+
+  // Settings Page
+  settingsPage: {
+    title: 'الإعدادات',
+    subtitle: 'قم بتكوين منصتك',
+    general: 'عام',
+    store: 'المتجر',
+    payments: 'المدفوعات',
+    notifications: 'الإشعارات',
+    security: 'الأمان',
+    appearance: 'المظهر',
+    email: 'البريد الإلكتروني',
+    api: 'API',
+    saveChanges: 'حفظ',
+    saved: 'تم الحفظ!',
+  },
+
+  // General Settings
+  general: {
+    storeName: 'اسم المتجر',
+    storeEmail: 'بريد المتجر',
+    timezone: 'المنطقة الزمنية',
+    defaultLanguage: 'اللغة الافتراضية',
+    save: 'حفظ',
+  },
+
+  // Store Settings
+  store: {
+    title: 'إعدادات المتجر',
+    maintenanceMode: 'وضع الصيانة',
+    maintenanceModeDesc: 'تعطيل المتجر مؤقتاً',
+    guestCheckout: 'الدفع كضيف',
+    guestCheckoutDesc: 'السماح بالدفع بدون حساب',
+    currencySelector: 'منتقي العملة',
+    currencySelectorDesc: 'إظهار مبدّل العملة',
+  },
+
+  // Payment Settings
+  payments: {
+    title: 'إعدادات الدفع',
+    currency: 'العملة',
+    taxRate: 'معدل الضريبة (%)',
+    taxIncluded: 'شامل الضريبة',
+    taxIncludedDesc: 'الأسعار تشمل الضريبة',
+  },
+
+  // Notifications
+  notifications: {
+    title: 'الإشعارات',
+    newOrder: 'طلب جديد',
+    newOrderDesc: 'إشعار عند تقديم طلب',
+    lowStock: 'مخزون منخفض',
+    lowStockDesc: 'تنبيه عند انخفاض المخزون',
+    customerRegistration: 'عميل جديد',
+    customerRegistrationDesc: 'إشعار عند تسجيل عميل جديد',
+    paymentReceived: 'تم استلام الدفع',
+    paymentReceivedDesc: 'تأكيد استلام الدفع',
+  },
+
+  // Security
+  security: {
+    title: 'الأمان',
+    twoFactorAuth: 'المصادقة الثنائية',
+    twoFactorAuthDesc: 'يتطلب 2FA للمسؤول',
+    ipWhitelist: 'قائمة بيضاء IP',
+    ipWhitelistDesc: 'تقييد الوصول حسب IP',
+    sessionTimeout: 'مهلة الجلسة',
+    sessionTimeoutDesc: 'تسجيل الخروج تلقائياً بعد 30 دقيقة',
+  },
+
+  // Appearance
+  appearance: {
+    title: 'المظهر',
+    theme: 'السمة',
+    darkMode: 'الوضع الداكن',
+    lightMode: 'الوضع الفاتح',
+  },
+
+  // Email Settings
+  email: {
+    title: 'إعدادات البريد الإلكتروني',
+    smtpHost: 'خادم SMTP',
+    smtpPort: 'منفذ SMTP',
+    smtpUser: 'مستخدم SMTP',
+    smtpPassword: 'كلمة مرور SMTP',
+    fromEmail: 'بريد المرسل',
+    fromName: 'اسم المرسل',
+  },
+
+  // API Settings
+  api: {
+    title: 'مفاتيح API',
+    productionKey: 'مفتاح الإنتاج',
+    developmentKey: 'مفتاح التطوير',
+    generateNewKey: 'إنشاء مفتاح جديد',
+    view: 'عرض',
+  },
+
   // Languages
   languages: {
     en: 'الإنجليزية',
