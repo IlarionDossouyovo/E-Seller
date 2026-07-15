@@ -39,8 +39,8 @@ interface Campaign {
 const mockCampaigns: Campaign[] = [
   {
     id: 1,
-    name: 'Spring Sale Announcement',
-    subject: '🌸 Up to 50% Off - Spring Sale!',
+    name: 'Annonce Soldes Printemps',
+    subject: '🌸 Jusqu\'a 50% de reduction - Soldes!',
     status: 'sent',
     sent: 12500,
     opened: 5625,
@@ -50,8 +50,8 @@ const mockCampaigns: Campaign[] = [
   },
   {
     id: 2,
-    name: 'New Product Launch',
-    subject: 'Introducing: Smart Watch Ultra',
+    name: 'Lancement Nouveau Produit',
+    subject: 'Decouvrez: Smart Watch Ultra',
     status: 'sent',
     sent: 15000,
     opened: 7500,
@@ -61,8 +61,8 @@ const mockCampaigns: Campaign[] = [
   },
   {
     id: 3,
-    name: 'Welcome Series - Day 1',
-    subject: 'Welcome to E-Seller! Here\'s what\'s next...',
+    name: 'Serie Bienvenue - Jour 1',
+    subject: 'Bienvenue chez E-Seller! Voici ce qui vous attend...',
     status: 'sending',
     sent: 450,
     opened: 180,
@@ -72,8 +72,8 @@ const mockCampaigns: Campaign[] = [
   },
   {
     id: 4,
-    name: 'Abandoned Cart Reminder',
-    subject: 'You left something behind...',
+    name: 'Rappel Panier Abandonne',
+    subject: 'Vous avez oublie quelque chose...',
     status: 'scheduled',
     sent: 0,
     opened: 0,
@@ -83,8 +83,8 @@ const mockCampaigns: Campaign[] = [
   },
   {
     id: 5,
-    name: 'April Newsletter',
-    subject: 'What\'s New at E-Seller - April 2024',
+    name: 'Newsletter Avril',
+    subject: 'Les nouvelles E-Seller - Avril 2024',
     status: 'draft',
     sent: 0,
     opened: 0,
@@ -95,10 +95,10 @@ const mockCampaigns: Campaign[] = [
 ]
 
 const mockTemplates = [
-  { name: 'Welcome Email', category: 'Automation' },
-  { name: 'Promo Announcement', category: 'Promotion' },
+  { name: 'Email de Bienvenue', category: 'Automatisation' },
+  { name: 'Annonce Promotion', category: 'Promotion' },
   { name: 'Newsletter', category: 'Newsletter' },
-  { name: 'Re-engagement', category: 'Automation' },
+  { name: 'Re-engagement', category: 'Automatisation' },
 ]
 
 export default function EmailsPage() {
@@ -440,10 +440,10 @@ export default function EmailsPage() {
       {activeTab === 'automation' && (
         <div className="grid md:grid-cols-2 gap-6">
           {[
-            { name: 'Welcome Series', trigger: 'New subscriber', emails: 3, status: 'active' },
-            { name: 'Abandoned Cart', trigger: 'Cart abandoned', emails: 2, status: 'active' },
-            { name: 'Post-Purchase', trigger: 'Order completed', emails: 2, status: 'paused' },
-            { name: 'Win-Back', trigger: 'No purchase in 30 days', emails: 3, status: 'active' },
+            { name: 'Serie Bienvenue', trigger: 'Nouvel abonne', emails: 3, status: 'active', statusLabel: 'Actif' },
+            { name: 'Panier Abandonne', trigger: 'Panier abandonne', emails: 2, status: 'active', statusLabel: 'Actif' },
+            { name: 'Post-Achat', trigger: 'Commande terminee', emails: 2, status: 'paused', statusLabel: 'En pause' },
+            { name: 'Rappel', trigger: 'Pas d\'achat depuis 30 jours', emails: 3, status: 'active', statusLabel: 'Actif' },
           ].map((automation, i) => (
             <motion.div
               key={automation.name}
@@ -455,14 +455,14 @@ export default function EmailsPage() {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="font-semibold text-lg">{automation.name}</h3>
-                  <p className="text-sm text-gray-400">Trigger: {automation.trigger}</p>
+                  <p className="text-sm text-gray-400">Declencheur: {automation.trigger}</p>
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs ${
                   automation.status === 'active' 
                     ? 'bg-green-500/20 text-green-400' 
                     : 'bg-gray-500/20 text-gray-400'
                 }`}>
-                  {automation.status}
+                  {automation.statusLabel}
                 </span>
               </div>
               <div className="flex items-center justify-between">
