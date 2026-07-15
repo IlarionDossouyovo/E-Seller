@@ -1,0 +1,217 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { useCart } from '@/lib/cart-context'
+import { 
+  Search, 
+  ShoppingCart, 
+  Heart, 
+  Menu, 
+  X,
+  Star,
+  ChevronRight,
+  Zap,
+  Shield,
+  Truck,
+  CreditCard,
+  Globe,
+  ArrowRight
+} from 'lucide-react'
+
+const products = [
+  { id: '1', name: 'Wireless Earbuds Pro Max', price: 49.99, originalPrice: 79.99, rating: 4.8, reviews: 234, image: '/images/products/earbuds.svg', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '2', name: 'Smart Water Bottle with Temp Display', price: 29.99, originalPrice: 39.99, rating: 4.7, reviews: 156, image: '/images/products/bottle.svg', category: 'Home & Garden', tag: 'Winner', tagIcon: '🏆' },
+  { id: '3', name: 'Portable Ring Light Kit', price: 24.99, originalPrice: 34.99, rating: 4.6, reviews: 312, image: '/images/products/ringlight.svg', category: 'Electronics', tag: 'Winner', tagIcon: '🏆' },
+  { id: '4', name: 'Ergonomic Laptop Stand', price: 39.99, originalPrice: 49.99, rating: 4.9, reviews: 89, image: '/images/products/laptopstand.svg', category: 'Office', tag: 'Winner', tagIcon: '🏆' },
+  { id: '5', name: 'Minimalist Watch Collection', price: 89.99, originalPrice: 129.99, rating: 4.5, reviews: 178, image: '/images/products/watch.svg', category: 'Fashion', tag: 'Winner', tagIcon: '🏆' },
+  { id: '6', name: 'Yoga Mat with Alignment Lines', price: 34.99, originalPrice: 44.99, rating: 4.8, reviews: 95, image: '/images/products/yogamat.svg', category: 'Sports', tag: 'Winner', tagIcon: '🏆' },
+  { id: '7', name: 'Smart Watch Series X', price: 299.99, originalPrice: 399.99, rating: 4.9, reviews: 156, image: '/images/products/smartwatch.svg', category: 'Electronics', tag: 'New', tagIcon: '⌚' },
+  { id: '8', name: 'Portable Charger 20K', price: 49.99, originalPrice: 69.99, rating: 4.6, reviews: 312, image: '/images/products/charger.svg', category: 'Electronics', tag: 'Sale', tagIcon: '🔋' },
+  { id: '9', name: 'Yoga Mat Premium', price: 39.99, originalPrice: 59.99, rating: 4.8, reviews: 178, image: null, category: 'Sports', tag: null, tagIcon: null },
+  { id: '10', name: 'LED Desk Lamp', price: 44.99, originalPrice: 54.99, rating: 4.5, reviews: 95, image: '/images/products/lamp.svg', category: 'Home', tag: null, tagIcon: null },
+]
+
+const categories = [
+  { name: 'Electronics', icon: '📱', count: 120 },
+  { name: 'Beauty', icon: '💄', count: 85 },
+  { name: 'Fashion', icon: '👗', count: 200 },
+  { name: 'Home & Garden', icon: '🏠', count: 150 },
+  { name: 'Sports', icon: '⚽', count: 90 },
+  { name: 'Office', icon: '💼', count: 45 },
+]
+
+export default function StorePage() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const { addItem, count } = useCart()
+
+  const addToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    })
+    alert(`${product.name} added to cart!`)
+  }
+
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = !selectedCategory || p.category === selectedCategory
+    const matchesSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-white">E-SELLER</span>
+            </Link>
+
+            <div className="hidden md:flex flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input type="text" placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-white/10 border border-white/20 rounded-full py-2 pl-10 pr-4 text-white placeholder-gray-400" />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <button className="relative p-2 text-gray-300"><Heart className="w-6 h-6" /></button>
+              <Link href="/store/cart" className="relative p-2 text-gray-300">
+                <ShoppingCart className="w-6 h-6" />
+                {count > 0 && <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-500 rounded-full text-xs flex items-center justify-center text-white">{count}</span>}
+              </Link>
+              <Link href="/login" className="hidden md:block px-4 py-2 bg-blue-600 rounded-lg text-white text-sm">Sign In</Link>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="pt-24 pb-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-white/10 p-8 md:p-16">
+            <div className="relative z-10">
+              <span className="inline-block px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm mb-4">⚡ Powered by AI</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Discover Amazing Products</h1>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl">Shop the best products curated by AI. Fast shipping, secure payments.</p>
+              <div className="flex gap-4">
+                <a href="#products" className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold flex items-center gap-2">Shop Now <ArrowRight className="w-5 h-5" /></a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[{ icon: Truck, label: 'Free Shipping', href: '/shipping' }, { icon: Shield, label: 'Secure Payment', href: '/security' }, { icon: CreditCard, label: 'Easy Returns', href: '/returns' }, { icon: Globe, label: 'Global Delivery', href: '/international' }].map((f, i) => (
+              <Link key={i} href={f.href} className="flex items-center gap-3 p-4 bg-white/5 rounded-xl hover:bg-white/10">
+                <f.icon className="w-5 h-5 text-blue-400" />
+                <span className="text-white font-medium text-sm">{f.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-8">Categories</h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {categories.map((cat, i) => (
+              <Link href={`/store/${cat.name.toLowerCase()}`} key={i} className="block">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                transition={{ delay: i * 0.05 }} 
+                className="p-6 bg-white/5 rounded-2xl text-center hover:bg-white/10"
+              >
+                <span className="text-4xl mb-2 block">{cat.icon}</span>
+                <p className="text-white font-medium">{cat.name}</p>
+                <p className="text-gray-400 text-sm">{cat.count} products</p>
+              </motion.div>
+            </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section id="products" className="py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          {selectedCategory && (
+            <button 
+              onClick={() => setSelectedCategory(null)}
+              className="mb-4 px-4 py-2 bg-purple-600 rounded-lg text-white text-sm"
+            >
+              ← Show All Products
+            </button>
+          )}
+          <h2 className="text-2xl font-bold text-white mb-8">{selectedCategory ? `${selectedCategory} Products` : 'Featured Products'}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map((product, i) => (
+              <motion.div 
+                key={product.id} 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: i * 0.1 }} 
+                className="bg-white/5 rounded-2xl overflow-hidden hover:bg-white/10"
+              >
+                <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative p-4">
+                  {product.image ? (
+                    <Image src={product.image} alt={product.name} width={200} height={200} className="object-contain w-full h-full" priority />
+                  ) : (
+                    <div className="w-24 h-24 rounded-2xl flex items-center justify-center text-5xl bg-gray-700">
+                      📦
+                    </div>
+                  )}
+                  {product.tag && <span className="absolute top-3 left-3 px-3 py-1 bg-blue-500 rounded-full text-xs text-white flex items-center gap-1">{product.tagIcon} {product.tag}</span>}
+                </div>
+                <div className="p-4">
+                  <p className="text-gray-400 text-xs">{product.category}</p>
+                  <h3 className="text-white font-medium mb-2">{product.name}</h3>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    <span className="text-white text-sm">{product.rating}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-white font-bold">${product.price}</span>
+                      <span className="text-gray-500 line-through text-sm">${product.originalPrice}</span>
+                    </div>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+                      className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-white text-sm"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black/50 border-t border-white/10 py-12 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-gray-500">© 2026 E-SELLER. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  )
+}

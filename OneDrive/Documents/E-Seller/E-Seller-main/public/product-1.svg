@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#1a1a2e"/>
+  
+  <!-- Left Earbud -->
+  <ellipse cx="110" cy="140" rx="50" ry="60" fill="#2d3748" stroke="#00d4ff" stroke-width="3"/>
+  <ellipse cx="110" cy="140" rx="25" ry="35" fill="#00d4ff"/>
+  
+  <!-- Right Earbud -->
+  <ellipse cx="290" cy="140" rx="50" ry="60" fill="#2d3748" stroke="#00d4ff" stroke-width="3"/>
+  <ellipse cx="290" cy="140" rx="25" ry="35" fill="#00d4ff"/>
+  
+  <!-- Case -->
+  <rect x="140" y="230" width="120" height="90" rx="12" fill="#2d3748" stroke="#00d4ff" stroke-width="3"/>
+  <rect x="155" y="250" width="90" height="12" rx="4" fill="#00ff88"/>
+  
+  <!-- LED -->
+  <circle cx="170" cy="290" r="5" fill="#00ff88"/>
+  <circle cx="190" cy="290" r="5" fill="#00ff88"/>
+  <circle cx="210" cy="290" r="5" fill="#00ff88"/>
+  <circle cx="230" cy="290" r="5" fill="#1a1a2e"/>
+  
+  <!-- Text -->
+  <text x="200" y="360" text-anchor="middle" font-family="Arial" font-size="20" fill="#fff" font-weight="bold">EARBUDS PRO</text>
+  <text x="200" y="385" text-anchor="middle" font-family="Arial" font-size="16" fill="#00d4ff">$49.99</text>
+</svg>
