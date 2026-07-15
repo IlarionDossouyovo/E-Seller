@@ -394,6 +394,29 @@ export const translation = {
     email: 'メール',
     viewOrders: '注文',
   },
+
+  // Affiliate Management
+  affiliate: {
+    title: 'アフィリエイト管理',
+    subtitle: 'アフィリエイト партナーを管理',
+    affiliates: 'アフィリエイト',
+    payouts: '支払い',
+    tracking: 'トラッキング',
+    totalAffiliates: '合計アフィリエイト',
+    active: 'アクティブ',
+    totalSales: '総売上',
+    totalEarnings: '総収益',
+    affiliate: 'アフィリエイト',
+    commission: '手数料',
+    sales: '売上',
+    earnings: '収益',
+    joined: '参加日',
+    status: 'ステータス',
+    amount: '金額',
+    date: '日付',
+    paid: '支払済',
+    pending: '保留中',
+  },
 }
 
 export type Translation = typeof translation

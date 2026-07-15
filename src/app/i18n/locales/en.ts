@@ -376,6 +376,29 @@ export const translation = {
     email: 'Email',
     viewOrders: 'Orders',
   },
+
+  // Affiliate Management
+  affiliate: {
+    title: 'Affiliate Management',
+    subtitle: 'Manage your affiliate partners',
+    affiliates: 'Affiliates',
+    payouts: 'Payouts',
+    tracking: 'Tracking',
+    totalAffiliates: 'Total Affiliates',
+    active: 'Active',
+    totalSales: 'Total Sales',
+    totalEarnings: 'Total Earnings',
+    affiliate: 'Affiliate',
+    commission: 'Commission',
+    sales: 'Sales',
+    earnings: 'Earnings',
+    joined: 'Joined',
+    status: 'Status',
+    amount: 'Amount',
+    date: 'Date',
+    paid: 'Paid',
+    pending: 'Pending',
+  },
 }
 
 export type Translation = typeof translation

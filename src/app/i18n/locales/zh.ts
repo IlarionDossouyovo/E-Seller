@@ -394,6 +394,29 @@ export const translation = {
     email: '邮件',
     viewOrders: '订单',
   },
+
+  // Affiliate Management
+  affiliate: {
+    title: '联盟管理',
+    subtitle: '管理您的联盟合作伙伴',
+    affiliates: '联盟',
+    payouts: '支付',
+    tracking: '跟踪',
+    totalAffiliates: '联盟总数',
+    active: '活跃',
+    totalSales: '总销售额',
+    totalEarnings: '总收入',
+    affiliate: '联盟',
+    commission: '佣金',
+    sales: '销售',
+    earnings: '收入',
+    joined: '加入日期',
+    status: '状态',
+    amount: '金额',
+    date: '日期',
+    paid: '已付',
+    pending: '待处理',
+  },
 }
 
 export type Translation = typeof translation

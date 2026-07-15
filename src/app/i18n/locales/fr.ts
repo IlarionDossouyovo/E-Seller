@@ -383,6 +383,29 @@ export const translation = {
     email: 'Email',
     viewOrders: 'Commandes',
   },
+
+  // Affiliate Management
+  affiliate: {
+    title: 'Gestion des Affiliations',
+    subtitle: 'Gerez vos partenaires affiliés',
+    affiliates: 'Affiliés',
+    payouts: 'Paiements',
+    tracking: 'Suivi',
+    totalAffiliates: 'Total Affiliés',
+    active: 'Actif',
+    totalSales: 'Ventes Totales',
+    totalEarnings: 'Gains Totaux',
+    affiliate: 'Affilié',
+    commission: 'Commission',
+    sales: 'Ventes',
+    earnings: 'Gains',
+    joined: 'Rejoint',
+    status: 'Statut',
+    amount: 'Montant',
+    date: 'Date',
+    paid: 'Payé',
+    pending: 'En attente',
+  },
 }
 
 export type Translation = typeof translation

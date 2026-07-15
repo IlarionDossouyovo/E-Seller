@@ -394,6 +394,29 @@ export const translation = {
     email: 'البريد الإلكتروني',
     viewOrders: 'الطلبات',
   },
+
+  // Affiliate Management
+  affiliate: {
+    title: 'إدارة المنتسبين',
+    subtitle: 'إدارة الشركاء المنتسبين',
+    affiliates: 'المنتسبون',
+    payouts: 'المدفوعات',
+    tracking: 'التتبع',
+    totalAffiliates: 'إجمالي المنتسبين',
+    active: 'نشط',
+    totalSales: 'إجمالي المبيعات',
+    totalEarnings: 'إجمالي الأرباح',
+    affiliate: 'المنتسب',
+    commission: 'العمولة',
+    sales: 'المبيعات',
+    earnings: 'الأرباح',
+    joined: 'تاريخ الانضمام',
+    status: 'الحالة',
+    amount: 'المبلغ',
+    date: 'التاريخ',
+    paid: 'مدفوع',
+    pending: 'معلق',
+  },
 }
 
 export type Translation = typeof translation
