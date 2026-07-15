@@ -230,6 +230,7 @@ export const translation = {
     campaigns: 'Campaigns',
     templates: 'Templates',
     automation: 'Automation',
+    newsletter: 'Newsletter',
     searchPlaceholder: 'Search campaigns...',
     all: 'All',
     draft: 'Draft',

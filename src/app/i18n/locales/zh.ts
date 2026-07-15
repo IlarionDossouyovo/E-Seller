@@ -230,6 +230,7 @@ export const translation = {
     campaigns: '活动',
     templates: '模板',
     automation: '自动化',
+    newsletter: '通讯',
     searchPlaceholder: '搜索活动...',
     all: '全部',
     draft: '草稿',

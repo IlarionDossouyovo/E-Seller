@@ -230,6 +230,7 @@ export const translation = {
     campaigns: 'Kampagnen',
     templates: 'Vorlagen',
     automation: 'Automatisierung',
+    newsletter: 'Newsletter',
     searchPlaceholder: 'Kampagnen suchen...',
     all: 'Alle',
     draft: 'Entwurf',

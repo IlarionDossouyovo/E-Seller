@@ -230,6 +230,7 @@ export const translation = {
     campaigns: 'キャンペーン',
     templates: 'テンプレート',
     automation: '自動化',
+    newsletter: 'ニュースレター',
     searchPlaceholder: 'キャンペーンを検索...',
     all: 'すべて',
     draft: '下書き',

@@ -230,6 +230,7 @@ export const translation = {
     campaigns: 'الحملات',
     templates: 'القوالب',
     automation: 'الأتمتة',
+    newsletter: 'النشرة الإخبارية',
     searchPlaceholder: 'البحث في الحملات...',
     all: 'الكل',
     draft: 'مسودة',

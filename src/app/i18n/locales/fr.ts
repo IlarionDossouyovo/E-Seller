@@ -237,6 +237,7 @@ export const translation = {
     campaigns: 'Campagnes',
     templates: 'Modeles',
     automation: 'Automatisation',
+    newsletter: 'Newsletter',
     searchPlaceholder: 'Rechercher des campagnes...',
     all: 'Tout',
     draft: 'Brouillon',

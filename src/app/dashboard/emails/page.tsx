@@ -137,6 +137,25 @@ export default function EmailsPage() {
     ))
   }
 
+  // Handle template click
+  const handleTemplateClick = (templateName: string) => {
+    setFormName(templateName)
+    setFormSubject('')
+    setFormStatus('draft')
+    setEditingCampaign(null)
+    setShowNewCampaignModal(true)
+  }
+
+  // Get category translation
+  const getCategoryLabel = (category: string) => {
+    const categoryMap: Record<string, string> = {
+      'Automatisation': t.emailMarketing?.automation || 'Automatisation',
+      'Promotion': t.emailMarketing?.templates || 'Promotion',
+      'Newsletter': t.emailMarketing?.newsletter || 'Newsletter',
+    }
+    return categoryMap[category] || category
+  }
+
   // Handlers
   const handleNewCampaign = () => {
     setEditingCampaign(null)
@@ -445,13 +464,14 @@ export default function EmailsPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
+              onClick={() => handleTemplateClick(template.name)}
               className="glass-card p-6 cursor-pointer hover:border-electron-blue/30 transition-all group"
             >
               <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-electron-blue/20 transition-colors">
                 <Mail className="w-6 h-6 text-gray-400 group-hover:text-electron-blue transition-colors" />
               </div>
               <h3 className="font-semibold mb-1">{template.name}</h3>
-              <p className="text-sm text-gray-400">{template.category}</p>
+              <p className="text-sm text-gray-400">{getCategoryLabel(template.category)}</p>
             </motion.div>
           ))}
         </div>
