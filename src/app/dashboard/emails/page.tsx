@@ -380,31 +380,31 @@ export default function EmailsPage() {
                         </button>
                       )}
                       {campaign.status === 'sent' && (
-                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                        <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.stats || 'Statistiques'}>
                           <BarChart3 className="w-5 h-5" />
                         </button>
                       )}
-                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title="View">
+                      <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.view || 'Voir'}>
                         <Eye className="w-5 h-5" />
                       </button>
                       <button 
                         onClick={() => handleEdit(campaign)}
                         className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" 
-                        title="Edit"
+                        title={t.emailMarketing?.edit || 'Modifier'}
                       >
                         <Edit className="w-5 h-5" />
                       </button>
                       <button 
                         onClick={() => handleDuplicate(campaign)}
                         className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" 
-                        title="Duplicate"
+                        title={t.emailMarketing?.duplicate || 'Dupliquer'}
                       >
                         <Copy className="w-5 h-5" />
                       </button>
                       <button 
                         onClick={() => handleDelete(campaign.id)}
                         className="p-2 rounded-lg hover:bg-red-500/20 transition-colors text-red-400 cursor-pointer" 
-                        title="Delete"
+                        title={t.emailMarketing?.delete || 'Supprimer'}
                       >
                         <Trash2 className="w-5 h-5" />
                       </button>
@@ -466,12 +466,12 @@ export default function EmailsPage() {
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-400">{automation.emails} emails</p>
+                <p className="text-sm text-gray-400">{automation.emails} courriels</p>
                 <div className="flex gap-2">
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.edit || 'Modifier'}>
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                  <button className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer" title={t.emailMarketing?.activate || 'Activer'}>
                     <Zap className="w-5 h-5" />
                   </button>
                 </div>

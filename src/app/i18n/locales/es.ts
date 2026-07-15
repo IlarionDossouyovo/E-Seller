@@ -245,6 +245,8 @@ export const translation = {
     view: 'Ver',
     duplicate: 'Duplicar',
     delete: 'Eliminar',
+    activate: 'Activar',
+    stats: 'Estadisticas',
     confirmDelete: 'Estas seguro de que quieres eliminar esta campanha?',
   },
 }
