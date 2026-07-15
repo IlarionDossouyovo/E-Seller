@@ -319,6 +319,29 @@ export const translation = {
     systemSettings: 'Parametres Systeme',
     viewAllLogs: 'Voir tous les Logs',
   },
+
+  // Reports
+  reports: {
+    title: 'Rapports',
+    subtitle: 'Generer et telecharger des rapports',
+    search: 'Rechercher des rapports...',
+    allTypes: 'Tous les Types',
+    sales: 'Ventes',
+    inventory: 'Inventaire',
+    customers: 'Clients',
+    tax: 'Taxes',
+    financial: 'Financier',
+    shipping: 'Livraison',
+    generateReport: 'Generer un Rapport',
+    view: 'Voir',
+    download: 'Telecharger',
+    monthlySalesReport: 'Rapport de Ventes Mensuel',
+    inventoryStatus: 'Etat de l\'Inventaire',
+    customerAnalytics: 'Analyse Clients',
+    taxSummary: 'Resume des Taxes',
+    profitLoss: 'Profit & Perte',
+    shippingReport: 'Rapport de Livraison',
+  },
 }
 
 export type Translation = typeof translation

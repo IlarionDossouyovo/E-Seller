@@ -330,6 +330,29 @@ export const translation = {
     systemSettings: 'システム設定',
     viewAllLogs: 'すべてのログを表示',
   },
+
+  // Reports
+  reports: {
+    title: 'レポート',
+    subtitle: 'ビジネスレポートの生成とダウンロード',
+    search: 'レポートを検索...',
+    allTypes: 'すべてのタイプ',
+    sales: '売上',
+    inventory: '在庫',
+    customers: '顧客',
+    tax: '税金',
+    financial: '財務',
+    shipping: '配送',
+    generateReport: 'レポートを生成',
+    view: '表示',
+    download: 'ダウンロード',
+    monthlySalesReport: '月次売上レポート',
+    inventoryStatus: '在庫状況',
+    customerAnalytics: '顧客分析',
+    taxSummary: '税金概要',
+    profitLoss: '損益',
+    shippingReport: '配送レポート',
+  },
 }
 
 export type Translation = typeof translation

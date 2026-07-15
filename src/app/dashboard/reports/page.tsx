@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { FileText, Download, Calendar, Filter, Plus, Search, Eye } from 'lucide-react'
 
 const reports = [
@@ -23,8 +24,21 @@ const typeColors: Record<string, string> = {
 }
 
 export default function ReportsPage() {
+  const { t } = useI18n()
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+
+  const getReportName = (report: typeof reports[0]) => {
+    const names: Record<string, string> = {
+      'Monthly Sales Report': t.reports?.monthlySalesReport || 'Monthly Sales Report',
+      'Inventory Status': t.reports?.inventoryStatus || 'Inventory Status',
+      'Customer Analytics': t.reports?.customerAnalytics || 'Customer Analytics',
+      'Tax Summary': t.reports?.taxSummary || 'Tax Summary',
+      'Profit & Loss': t.reports?.profitLoss || 'Profit & Loss',
+      'Shipping Report': t.reports?.shippingReport || 'Shipping Report',
+    }
+    return names[report.name] || report.name
+  }
 
   const filtered = reports.filter(r => {
     const matchSearch = r.name.toLowerCase().includes(search.toLowerCase())
@@ -40,8 +54,8 @@ export default function ReportsPage() {
             <FileText className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Reports</h1>
-            <p className="text-gray-400">Generate and download business reports</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.reports?.title || 'Reports'}</h1>
+            <p className="text-gray-400">{t.reports?.subtitle || 'Generate and download business reports'}</p>
           </div>
         </div>
       </div>
@@ -50,19 +64,19 @@ export default function ReportsPage() {
         <div className="flex gap-4 items-center flex-1">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input type="text" placeholder="Search reports..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2" />
+            <input type="text" placeholder={t.reports?.search || 'Search reports...'} value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2" />
           </div>
-          <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
-            <option value="all">All Types</option>
-            <option value="sales">Sales</option>
-            <option value="inventory">Inventory</option>
-            <option value="customers">Customers</option>
-            <option value="tax">Tax</option>
-            <option value="financial">Financial</option>
+          <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-4 py-2 bg-gray-800 border border-white/20 rounded-xl text-white">
+            <option value="all">{t.reports?.allTypes || 'All Types'}</option>
+            <option value="sales">{t.reports?.sales || 'Sales'}</option>
+            <option value="inventory">{t.reports?.inventory || 'Inventory'}</option>
+            <option value="customers">{t.reports?.customers || 'Customers'}</option>
+            <option value="tax">{t.reports?.tax || 'Tax'}</option>
+            <option value="financial">{t.reports?.financial || 'Financial'}</option>
           </select>
         </div>
-        <button className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center gap-2">
-          <Plus className="w-5 h-5" /> Generate Report
+        <button className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center gap-2 cursor-pointer">
+          <Plus className="w-5 h-5" /> {t.reports?.generateReport || 'Generate Report'}
         </button>
       </div>
 
@@ -74,17 +88,17 @@ export default function ReportsPage() {
                 <FileText className="w-6 h-6 text-indigo-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">{report.name}</h3>
+                <h3 className="font-semibold text-white">{getReportName(report)}</h3>
                 <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <span className={`px-2 py-0.5 rounded-full ${typeColors[report.type]}`}>{report.type}</span>
+                  <span className={`px-2 py-0.5 rounded-full ${typeColors[report.type]}`}>{t.reports?.[report.type as keyof typeof t.reports] || report.type}</span>
                   <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {report.period}</span>
                   <span>{report.size}</span>
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button className="p-2 hover:bg-white/5 rounded-lg"><Eye className="w-5 h-5 text-gray-400" /></button>
-              <button className="p-2 hover:bg-white/5 rounded-lg"><Download className="w-5 h-5 text-gray-400" /></button>
+              <button className="p-2 hover:bg-white/5 rounded-lg cursor-pointer"><Eye className="w-5 h-5 text-gray-400" /></button>
+              <button className="p-2 hover:bg-white/5 rounded-lg cursor-pointer"><Download className="w-5 h-5 text-gray-400" /></button>
             </div>
           </motion.div>
         ))}

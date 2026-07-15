@@ -330,6 +330,29 @@ export const translation = {
     systemSettings: '系统设置',
     viewAllLogs: '查看所有日志',
   },
+
+  // Reports
+  reports: {
+    title: '报告',
+    subtitle: '生成和下载业务报告',
+    search: '搜索报告...',
+    allTypes: '所有类型',
+    sales: '销售',
+    inventory: '库存',
+    customers: '客户',
+    tax: '税务',
+    financial: '财务',
+    shipping: '物流',
+    generateReport: '生成报告',
+    view: '查看',
+    download: '下载',
+    monthlySalesReport: '月度销售报告',
+    inventoryStatus: '库存状态',
+    customerAnalytics: '客户分析',
+    taxSummary: '税务摘要',
+    profitLoss: '损益',
+    shippingReport: '物流报告',
+  },
 }
 
 export type Translation = typeof translation

@@ -312,6 +312,29 @@ export const translation = {
     systemSettings: 'System Settings',
     viewAllLogs: 'View All Logs',
   },
+
+  // Reports
+  reports: {
+    title: 'Reports',
+    subtitle: 'Generate and download business reports',
+    search: 'Search reports...',
+    allTypes: 'All Types',
+    sales: 'Sales',
+    inventory: 'Inventory',
+    customers: 'Customers',
+    tax: 'Tax',
+    financial: 'Financial',
+    shipping: 'Shipping',
+    generateReport: 'Generate Report',
+    view: 'View',
+    download: 'Download',
+    monthlySalesReport: 'Monthly Sales Report',
+    inventoryStatus: 'Inventory Status',
+    customerAnalytics: 'Customer Analytics',
+    taxSummary: 'Tax Summary',
+    profitLoss: 'Profit & Loss',
+    shippingReport: 'Shipping Report',
+  },
 }
 
 export type Translation = typeof translation

@@ -330,6 +330,29 @@ export const translation = {
     systemSettings: 'إعدادات النظام',
     viewAllLogs: 'عرض جميع السجلات',
   },
+
+  // Reports
+  reports: {
+    title: 'التقارير',
+    subtitle: 'إنشاء وتنزيل تقارير الأعمال',
+    search: 'البحث في التقارير...',
+    allTypes: 'جميع الأنواع',
+    sales: 'المبيعات',
+    inventory: 'المخزون',
+    customers: 'العملاء',
+    tax: 'الضرائب',
+    financial: 'المالية',
+    shipping: 'الشحن',
+    generateReport: 'إنشاء تقرير',
+    view: 'عرض',
+    download: 'تحميل',
+    monthlySalesReport: 'تقرير المبيعات الشهري',
+    inventoryStatus: 'حالة المخزون',
+    customerAnalytics: 'تحليل العملاء',
+    taxSummary: 'ملخص الضرائب',
+    profitLoss: 'الربح والخسارة',
+    shippingReport: 'تقرير الشحن',
+  },
 }
 
 export type Translation = typeof translation

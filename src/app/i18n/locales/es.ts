@@ -330,6 +330,29 @@ export const translation = {
     systemSettings: 'Configuracion del Sistema',
     viewAllLogs: 'Ver Todos los Registros',
   },
+
+  // Reports
+  reports: {
+    title: 'Informes',
+    subtitle: 'Generar y descargar informes empresariales',
+    search: 'Buscar informes...',
+    allTypes: 'Todos los Tipos',
+    sales: 'Ventas',
+    inventory: 'Inventario',
+    customers: 'Clientes',
+    tax: 'Impuesto',
+    financial: 'Financiero',
+    shipping: 'Envio',
+    generateReport: 'Generar Informe',
+    view: 'Ver',
+    download: 'Descargar',
+    monthlySalesReport: 'Informe de Ventas Mensual',
+    inventoryStatus: 'Estado del Inventario',
+    customerAnalytics: 'Analisis de Clientes',
+    taxSummary: 'Resumen de Impuestos',
+    profitLoss: 'Ganancias y Perdidas',
+    shippingReport: 'Informe de Envio',
+  },
 }
 
 export type Translation = typeof translation
