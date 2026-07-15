@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useI18n } from '@/app/i18n'
 import { Store, User, Mail, MapPin, Phone, Globe, Upload, DollarSign, CheckCircle, AlertCircle, Building } from 'lucide-react'
 
 const countries = ['United States', 'China', 'France', 'Germany', 'United Kingdom', 'Japan', 'Canada', 'Australia', 'Brazil', 'India']
 const categories = ['Electronics', 'Fashion', 'Home & Garden', 'Beauty', 'Sports', 'Toys', 'Books', 'Automotive', 'Food', 'Health']
 
 export default function VendorRegistrationPage() {
+  const { t } = useI18n()
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     storeName: '',
@@ -32,20 +34,20 @@ export default function VendorRegistrationPage() {
     const newErrors: Record<string, string> = {}
     
     if (currentStep === 1) {
-      if (!formData.storeName) newErrors.storeName = 'Store name is required'
-      if (!formData.slug) newErrors.slug = 'Store URL is required'
-      if (!formData.email) newErrors.email = 'Email is required'
-      if (!formData.phone) newErrors.phone = 'Phone is required'
+      if (!formData.storeName) newErrors.storeName = t.vendorRegistration?.storeNameRequired || 'Store name is required'
+      if (!formData.slug) newErrors.slug = t.vendorRegistration?.storeUrlRequired || 'Store URL is required'
+      if (!formData.email) newErrors.email = t.vendorRegistration?.emailRequired || 'Email is required'
+      if (!formData.phone) newErrors.phone = t.vendorRegistration?.phoneRequired || 'Phone is required'
     }
     
     if (currentStep === 2) {
-      if (!formData.country) newErrors.country = 'Country is required'
-      if (!formData.address) newErrors.address = 'Address is required'
-      if (!formData.category) newErrors.category = 'Category is required'
+      if (!formData.country) newErrors.country = t.vendorRegistration?.selectCountry || 'Country is required'
+      if (!formData.address) newErrors.address = t.vendorRegistration?.businessAddress || 'Address is required'
+      if (!formData.category) newErrors.category = t.vendorRegistration?.productCategory || 'Category is required'
     }
     
     if (currentStep === 3) {
-      if (!formData.taxId) newErrors.taxId = 'Tax ID is required'
+      if (!formData.taxId) newErrors.taxId = t.vendorRegistration?.taxId || 'Tax ID is required'
     }
     
     setErrors(newErrors)
@@ -57,9 +59,8 @@ export default function VendorRegistrationPage() {
   }
 
   const handleSubmit = async () => {
-    // In production, this would submit to the API
     console.log('Submitting vendor application:', formData)
-    alert('Application submitted! We will review your application within 24-48 hours.')
+    alert(t.vendorRegistration?.applicationSubmitted || 'Application submitted!')
   }
 
   const generateSlug = (name: string) => {
@@ -74,8 +75,8 @@ export default function VendorRegistrationPage() {
             <Store className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Become a Vendor</h1>
-            <p className="text-gray-400">Join the E-Seller marketplace</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.vendorRegistration?.title || 'Become a Vendor'}</h1>
+            <p className="text-gray-400">{t.vendorRegistration?.subtitle || 'Join the E-Seller marketplace'}</p>
           </div>
         </div>
       </div>
@@ -84,10 +85,10 @@ export default function VendorRegistrationPage() {
       <div className="glass-card p-4">
         <div className="flex items-center justify-between">
           {[
-            { num: 1, label: 'Store Info' },
-            { num: 2, label: 'Location' },
-            { num: 3, label: 'Verification' },
-            { num: 4, label: 'Payment' },
+            { num: 1, label: t.vendorRegistration?.storeInfo || 'Store Info' },
+            { num: 2, label: t.vendorRegistration?.location || 'Location' },
+            { num: 3, label: t.vendorRegistration?.verification || 'Verification' },
+            { num: 4, label: t.vendorRegistration?.payment || 'Payment' },
           ].map((s, i) => (
             <div key={s.num} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= s.num ? 'bg-blue-500 text-white' : 'bg-white/10 text-gray-400'}`}>
