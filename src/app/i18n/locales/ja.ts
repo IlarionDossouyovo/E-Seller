@@ -440,6 +440,25 @@ export const translation = {
     changedMind: '購入中止',
     rejected: '拒否',
   },
+
+  // Suppliers Management
+  suppliers: {
+    title: '仕入先管理',
+    subtitle: '仕入先と発注を管理',
+    suppliers: '仕入先',
+    orders: '発注',
+    analytics: '分析',
+    totalSuppliers: '仕入先合計',
+    active: 'アクティブ',
+    products: '製品',
+    avgRating: '平均評価',
+    supplier: '仕入先',
+    country: '国',
+    productsCount: '製品数',
+    leadTime: 'リードタイム',
+    rating: '評価',
+    status: 'ステータス',
+  },
 }
 
 export type Translation = typeof translation

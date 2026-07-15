@@ -440,6 +440,25 @@ export const translation = {
     changedMind: '改变主意',
     rejected: '已拒绝',
   },
+
+  // Suppliers Management
+  suppliers: {
+    title: '供应商管理',
+    subtitle: '管理您的供应商和采购订单',
+    suppliers: '供应商',
+    orders: '订单',
+    analytics: '分析',
+    totalSuppliers: '供应商总数',
+    active: '活跃',
+    products: '产品',
+    avgRating: '平均评分',
+    supplier: '供应商',
+    country: '国家',
+    productsCount: '产品数',
+    leadTime: '交货时间',
+    rating: '评分',
+    status: '状态',
+  },
 }
 
 export type Translation = typeof translation

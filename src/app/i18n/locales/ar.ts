@@ -440,6 +440,25 @@ export const translation = {
     changedMind: 'غير رأي',
     rejected: 'مرفوض',
   },
+
+  // Suppliers Management
+  suppliers: {
+    title: 'إدارة الموردين',
+    subtitle: 'إدارة الموردين وطلبات الشراء',
+    suppliers: 'الموردون',
+    orders: 'الطلبات',
+    analytics: 'التحليلات',
+    totalSuppliers: 'إجمالي الموردين',
+    active: 'نشط',
+    products: 'المنتجات',
+    avgRating: 'متوسط التقييم',
+    supplier: 'المورد',
+    country: 'البلد',
+    productsCount: 'المنتجات',
+    leadTime: 'وقت التسليم',
+    rating: 'التقييم',
+    status: 'الحالة',
+  },
 }
 
 export type Translation = typeof translation

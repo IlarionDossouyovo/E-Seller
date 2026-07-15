@@ -440,6 +440,25 @@ export const translation = {
     changedMind: 'Mudou de ideia',
     rejected: 'Rejeitado',
   },
+
+  // Suppliers Management
+  suppliers: {
+    title: 'Gestao de Fornecedores',
+    subtitle: 'Gerencie seus fornecedores e pedidos',
+    suppliers: 'Fornecedores',
+    orders: 'Pedidos',
+    analytics: 'Analitica',
+    totalSuppliers: 'Total de Fornecedores',
+    active: 'Ativo',
+    products: 'Produtos',
+    avgRating: 'Avaliacao Media',
+    supplier: 'Fornecedor',
+    country: 'Pais',
+    productsCount: 'Produtos',
+    leadTime: 'Prazo de Entrega',
+    rating: 'Avaliacao',
+    status: 'Status',
+  },
 }
 
 export type Translation = typeof translation

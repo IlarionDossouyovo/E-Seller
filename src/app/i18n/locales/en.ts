@@ -422,6 +422,25 @@ export const translation = {
     changedMind: 'Changed mind',
     rejected: 'Rejected',
   },
+
+  // Suppliers Management
+  suppliers: {
+    title: 'Suppliers Management',
+    subtitle: 'Manage your suppliers and purchase orders',
+    suppliers: 'Suppliers',
+    orders: 'Orders',
+    analytics: 'Analytics',
+    totalSuppliers: 'Total Suppliers',
+    active: 'Active',
+    products: 'Products',
+    avgRating: 'Avg Rating',
+    supplier: 'Supplier',
+    country: 'Country',
+    productsCount: 'Products',
+    leadTime: 'Lead Time',
+    rating: 'Rating',
+    status: 'Status',
+  },
 }
 
 export type Translation = typeof translation
