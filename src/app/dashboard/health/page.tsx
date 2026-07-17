@@ -186,7 +186,7 @@ export default function HealthPage() {
               <Server className="w-5 h-5 text-blue-400" />
               Services Surveillés
             </h2>
-            <button className="flex items-center gap-2 px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
+            <button onClick={() => alert('Actualisation des services en cours...')} className="flex items-center gap-2 px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
               <RefreshCw className="w-4 h-4" />
               Actualiser
             </button>
@@ -242,7 +242,7 @@ export default function HealthPage() {
                     <p className="text-slate-500 text-xs">{alert.time}</p>
                   </div>
                 </div>
-                <button className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
+                <button onClick={() => alert('Affichage des détails de l\'alerte...')} className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
                   Détails
                 </button>
               </div>
