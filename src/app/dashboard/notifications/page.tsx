@@ -32,57 +32,57 @@ const mockNotifications: Notification[] = [
   {
     id: 1,
     type: 'order',
-    title: 'New Order Received',
-    message: 'You just received a new order for "Wireless Earbuds Pro" - $49.99',
-    time: '2 minutes ago',
+    title: 'Nouvelle Commande Reçue',
+    message: 'Vous venez de recevoir une nouvelle commande pour "Wireless Earbuds Pro" - 49,99€',
+    time: 'Il y a 2 minutes',
     read: false,
   },
   {
     id: 2,
     type: 'analytics',
-    title: 'ROAS Alert',
-    message: 'Your ad campaign "Summer Sale" ROAS dropped below 2.0x',
-    time: '15 minutes ago',
+    title: 'Alerte ROAS',
+    message: 'Le ROAS de votre campagne publicitaire "Summer Sale" est descendu en dessous de 2.0x',
+    time: 'Il y a 15 minutes',
     read: false,
   },
   {
     id: 3,
     type: 'success',
-    title: 'Product Approved',
-    message: 'Your product "Smart Watch Ultra" has been approved and is now live',
-    time: '1 hour ago',
+    title: 'Produit Approuvé',
+    message: 'Votre produit "Smart Watch Ultra" a été approuvé et est maintenant en ligne',
+    time: 'Il y a 1 heure',
     read: true,
   },
   {
     id: 4,
     type: 'info',
-    title: 'New Feature Available',
-    message: 'Check out our new AI Branding Generator with logo creation',
-    time: '2 hours ago',
+    title: 'Nouvelle Fonctionnalité Disponible',
+    message: 'Découvrez notre nouveau générateur de branding IA avec création de logo',
+    time: 'Il y a 2 heures',
     read: true,
   },
   {
     id: 5,
     type: 'alert',
-    title: 'Low Stock Warning',
-    message: 'Portable Charger is running low on stock (15 units left)',
-    time: '3 hours ago',
+    title: 'Alerte Stock Faible',
+    message: 'Le chargeur portable manque de stock (15 unités restantes)',
+    time: 'Il y a 3 heures',
     read: true,
   },
   {
     id: 6,
     type: 'order',
-    title: 'Order Shipped',
-    message: 'Order #12345 has been shipped to John Doe',
-    time: '5 hours ago',
+    title: 'Commande Expédiée',
+    message: 'La commande #12345 a été expédiée à John Doe',
+    time: 'Il y a 5 heures',
     read: true,
   },
   {
     id: 7,
     type: 'analytics',
-    title: 'Milestone Reached',
-    message: 'Congratulations! You\'ve reached $50,000 in total revenue 🎉',
-    time: '1 day ago',
+    title: 'Jalon Atteint',
+    message: 'Félicitations! Vous avez atteint 50 000€ de chiffre d\'affaires total 🎉',
+    time: 'Il y a 1 jour',
     read: true,
   },
 ]
@@ -144,21 +144,21 @@ export default function NotificationsPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold font-[var(--font-sora)]">Notifications</h1>
-          <p className="text-gray-400">{unreadCount} unread notifications</p>
+          <p className="text-gray-400">{unreadCount} notification(s) non lue(s)</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
             onClick={markAllAsRead}
             className="px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors text-sm"
           >
-            Mark all as read
+            Tout marquer comme lu
           </button>
           <button 
             onClick={clearAll}
             className="px-4 py-2 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 transition-colors text-sm flex items-center gap-2"
           >
             <Trash2 className="w-4 h-4" />
-            Clear all
+            Tout effacer
           </button>
         </div>
       </div>
@@ -172,14 +172,14 @@ export default function NotificationsPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search notifications..."
+              placeholder="Rechercher des notifications..."
               className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-electron-blue/50 transition-colors"
             />
           </div>
           <div className="flex gap-2">
             {[
-              { key: 'all', label: 'All' },
-              { key: 'unread', label: 'Unread' },
+              { key: 'all', label: 'Toutes' },
+              { key: 'unread', label: 'Non lues' },
             ].map(f => (
               <button
                 key={f.key}
@@ -202,8 +202,8 @@ export default function NotificationsPage() {
         {filteredNotifications.length === 0 ? (
           <div className="glass-card p-12 text-center">
             <Bell className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">No notifications</h3>
-            <p className="text-gray-400">You're all caught up!</p>
+            <h3 className="text-xl font-semibold mb-2">Aucune notification</h3>
+            <p className="text-gray-400">Vous êtes à jour!</p>
           </div>
         ) : (
           filteredNotifications.map((notification, i) => {
@@ -233,7 +233,7 @@ export default function NotificationsPage() {
                         <button 
                           onClick={() => markAsRead(notification.id)}
                           className="p-2 rounded-lg hover:bg-green-500/20 transition-colors text-green-400"
-                          title="Mark as read"
+                          title="Marquer comme lu"
                         >
                           <Check className="w-4 h-4" />
                         </button>
@@ -257,7 +257,7 @@ export default function NotificationsPage() {
       {/* Notification Settings */}
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold">Notification Settings</h2>
+          <h2 className="text-lg font-semibold">Paramètres de Notification</h2>
           <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
             <Settings className="w-5 h-5" />
           </button>
@@ -266,12 +266,12 @@ export default function NotificationsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Push Notifications */}
           <div className="space-y-4">
-            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Push Notifications</h3>
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Notifications Push</h3>
             {[
-              { key: 'orders', label: 'Order notifications', desc: 'Get notified when you receive orders' },
-              { key: 'analytics', label: 'Analytics alerts', desc: 'Alerts when metrics change significantly' },
-              { key: 'products', label: 'Product updates', desc: 'News about your products' },
-              { key: 'marketing', label: 'Marketing emails', desc: 'Tips and promotions' },
+              { key: 'orders', label: 'Notifications de commande', desc: 'Soyez notifié lorsque vous recevez des commandes' },
+              { key: 'analytics', label: 'Alertes analytiques', desc: 'Alertes lorsque les métriques changent significativement' },
+              { key: 'products', label: 'Mises à jour produit', desc: 'Actualités sur vos produits' },
+              { key: 'marketing', label: 'Emails marketing', desc: 'Conseils et promotions' },
             ].map((setting) => (
               <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
                 <div className="flex-1">
@@ -295,11 +295,11 @@ export default function NotificationsPage() {
 
           {/* Other Channels */}
           <div className="space-y-4">
-            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Other Channels</h3>
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">Autres Canaux</h3>
             {[
-              { key: 'email', label: 'Email notifications', desc: 'Receive notifications via email' },
-              { key: 'push', label: 'Push to phone', desc: 'Instant push notifications' },
-              { key: 'sms', label: 'SMS alerts', desc: 'Important alerts via SMS' },
+              { key: 'email', label: 'Notifications par email', desc: 'Recevoir les notifications par email' },
+              { key: 'push', label: 'Push vers téléphone', desc: 'Notifications push instantanées' },
+              { key: 'sms', label: 'Alertes SMS', desc: 'Alertes importantes par SMS' },
             ].map((setting) => (
               <div key={setting.key} className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
                 <div className="flex-1">
