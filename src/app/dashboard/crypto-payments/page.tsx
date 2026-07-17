@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Wallet, Bitcoin, TrendingUp, TrendingDown, DollarSign, Copy, ExternalLink, RefreshCw, Shield, Clock, CheckCircle, AlertTriangle, Plus, Settings, QrCode, ArrowUpRight, ArrowDownRight, Activity } from 'lucide-react'
+import { Wallet, Bitcoin, TrendingUp, TrendingDown, DollarSign, Copy, ExternalLink, RefreshCw, Shield, Clock, CheckCircle, AlertTriangle, Plus, Settings, QrCode, ArrowUpRight, ArrowDownRight, Activity, ArrowLeft, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const transactions = [
   { id: 'TX1', type: 'receive', amount: '0.025 BTC', usd: '$1,234.50', from: '3Fhz...2kP9', status: 'confirmed', time: '2 min ago' },
@@ -238,6 +239,18 @@ export default function CryptoPaymentsPage() {
           </div>
         </div>
       )}
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/payments" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Payments
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }
