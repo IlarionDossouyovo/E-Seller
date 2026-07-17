@@ -13,6 +13,8 @@ import {
   Shield,
   TrendingUp,
   DollarSign,
+  ArrowLeft,
+  ArrowRight,
   Euro,
   PoundSterling,
   JapaneseYen,
@@ -21,6 +23,7 @@ import {
   CircleDollarSign,
   XCircle
 } from 'lucide-react'
+import Link from 'next/link'
 
 const currencies = [
   { code: 'USD', name: 'Dollar americain', symbol: '$', icon: DollarSign, countries: ['Etats-Unis', 'Canada', 'Australie', 'Singapour'] },
@@ -361,6 +364,18 @@ export default function PaymentsPage() {
       {showAddModal && (
         <AddPaymentModal onClose={() => setShowAddModal(false)} onAdd={addMethod} />
       )}
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/stripe" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Stripe
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }

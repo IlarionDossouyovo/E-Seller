@@ -17,8 +17,11 @@ import {
   ExternalLink,
   ArrowUpRight,
   Shield,
-  TrendingUp
+  TrendingUp,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
+import Link from 'next/link'
 
 const mockSuppliers = [
   {
@@ -351,6 +354,19 @@ export default function SuppliersPage() {
           {notification}
         </div>
       )}
+    </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/inventory" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Inventory
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }
