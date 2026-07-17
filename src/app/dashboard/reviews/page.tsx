@@ -101,7 +101,7 @@ export default function ReviewsPage() {
           <Search className="w-5 h-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Search reviews..."
+            placeholder="Rechercher des avis..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"

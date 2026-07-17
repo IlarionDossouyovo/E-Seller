@@ -73,15 +73,15 @@ export default function ProductResearchPage() {
         <div className="flex gap-4 items-center flex-wrap">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input type="text" placeholder="Search products..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2" />
+            <input type="text" placeholder="Rechercher des produits..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-800 border border-gray-600 rounded-xl pl-10 pr-4 py-2 text-white placeholder-gray-400" />
           </div>
-          <select value={platform} onChange={(e) => setPlatform(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+          <select value={platform} onChange={(e) => setPlatform(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-xl text-white">
             {platforms.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-xl text-white">
             {categories.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
-          <select value={timeRange} onChange={(e) => setTimeRange(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+          <select value={timeRange} onChange={(e) => setTimeRange(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-xl text-white">
             <option value="24h">Last 24 hours</option>
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>

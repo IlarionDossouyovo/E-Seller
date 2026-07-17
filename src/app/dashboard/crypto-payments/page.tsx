@@ -152,7 +152,7 @@ export default function CryptoPaymentsPage() {
           <div className="space-y-4">
             <div>
               <label className="text-sm text-gray-400 mb-1 block">Currency</label>
-              <select className="w-full bg-white/5 border border-white/10 rounded-lg p-3">
+              <select className="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white">
                 <option>Bitcoin (BTC)</option>
                 <option>Ethereum (ETH)</option>
                 <option>USDT</option>
@@ -160,11 +160,11 @@ export default function CryptoPaymentsPage() {
             </div>
             <div>
               <label className="text-sm text-gray-400 mb-1 block">Recipient Address</label>
-              <input type="text" placeholder="Enter wallet address" className="w-full bg-white/5 border border-white/10 rounded-lg p-3" />
+              <input type="text" placeholder="Enter wallet address" className="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white" />
             </div>
             <div>
               <label className="text-sm text-gray-400 mb-1 block">Amount</label>
-              <input type="number" placeholder="0.00" className="w-full bg-white/5 border border-white/10 rounded-lg p-3" />
+              <input type="number" placeholder="0.00" className="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white" />
             </div>
             <button className="w-full py-3 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-xl font-semibold">
               Send Crypto

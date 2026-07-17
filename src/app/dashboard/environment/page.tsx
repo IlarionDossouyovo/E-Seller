@@ -83,8 +83,8 @@ export default function EnvironmentPage() {
       <div className="glass-card p-6">
         <h3 className="font-semibold mb-4">{t.environment?.addNewVariable || 'Add New Variable'}</h3>
         <div className="grid md:grid-cols-5 gap-4">
-          <input type="text" placeholder={t.environment?.keyName || 'KEY_NAME'} value={newVar.key} onChange={(e) => setNewVar({...newVar, key: e.target.value.toUpperCase()})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
-          <input type="text" placeholder={t.environment?.value || 'value'} value={newVar.value} onChange={(e) => setNewVar({...newVar, value: e.target.value})} className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-mono" />
+          <input type="text" placeholder={t.environment?.keyName || 'KEY_NAME'} value={newVar.key} onChange={(e) => setNewVar({...newVar, key: e.target.value.toUpperCase()})} className="bg-gray-800 border border-gray-600 rounded-xl px-4 py-2 font-mono text-white placeholder-gray-400" />
+          <input type="text" placeholder={t.environment?.value || 'value'} value={newVar.value} onChange={(e) => setNewVar({...newVar, value: e.target.value})} className="bg-gray-800 border border-gray-600 rounded-xl px-4 py-2 font-mono text-white placeholder-gray-400" />
           <select value={newVar.type} onChange={(e) => setNewVar({...newVar, type: e.target.value})} className="bg-gray-800 border border-white/20 rounded-xl px-4 py-2 text-white">
             <option value="custom">{t.environment?.custom || 'Custom'}</option>
             <option value="database">{t.environment?.database || 'Database'}</option>

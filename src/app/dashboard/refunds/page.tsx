@@ -115,7 +115,7 @@ export default function ReturnsPage() {
           <Search className="w-5 h-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Search by order ID or customer..."
+            placeholder="Rechercher par ID de commande ou client..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-transparent border-none outline-none text-white placeholder-gray-500 flex-1"

@@ -69,11 +69,11 @@ export default function TaxCalculatorPage() {
             <div className="space-y-4">
               <div>
                 <label className="text-sm text-gray-400 mb-1 block">Subtotal</label>
-                <input type="number" value={subtotal} onChange={(e) => setSubtotal(Number(e.target.value))} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3" />
+                <input type="number" value={subtotal} onChange={(e) => setSubtotal(Number(e.target.value))} className="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white" />
               </div>
               <div>
                 <label className="text-sm text-gray-400 mb-1 block">Region</label>
-                <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                <select className="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-white">
                   <option>US - California (7.25%)</option>
                   <option>US - New York (8.0%)</option>
                   <option>EU - Germany (19.0%)</option>

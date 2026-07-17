@@ -86,7 +86,7 @@ export default function CompetitionAnalysisPage() {
           <div className="flex items-center gap-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 w-64" />
+              <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-800 border border-gray-600 rounded-xl pl-10 pr-4 py-2 w-64 text-white placeholder-gray-400" />
             </div>
             <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl">
               <RefreshCw className="w-4 h-4" />

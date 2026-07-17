@@ -135,7 +135,7 @@ export default function VideoAdsPage() {
                 <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">1</span>
                 <span className="font-medium">Select Product</span>
               </div>
-              <select className="w-full bg-white/5 border border-white/10 rounded-lg p-2">
+              <select className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white">
                 <option>Wireless Earbuds Pro</option>
                 <option>Smart Watch Series X</option>
                 <option>Phone Case Premium</option>
@@ -183,7 +183,7 @@ export default function VideoAdsPage() {
                   <span className="text-xs">Music</span>
                 </button>
               </div>
-              <textarea className="w-full bg-white/5 border border-white/10 rounded-lg p-2" rows={2} placeholder="Enter ad script or description..." />
+              <textarea className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white" rows={2} placeholder="Enter ad script or description..." />
             </div>
 
             {/* Step 4: Generate */}
@@ -372,7 +372,7 @@ export default function VideoAdsPage() {
                 <p className="font-medium">AI Voice Default</p>
                 <p className="text-sm text-gray-400">Default voice for new videos</p>
               </div>
-              <select className="bg-white/5 border border-white/10 rounded-lg px-3 py-1">
+              <select className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1 text-white">
                 <option>English (US) - Male</option>
                 <option>English (US) - Female</option>
                 <option>French</option>
