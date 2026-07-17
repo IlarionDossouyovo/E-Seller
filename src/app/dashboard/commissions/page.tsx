@@ -5,18 +5,18 @@ import { motion } from 'framer-motion'
 import { DollarSign, Percent, TrendingUp, Users, Store, Settings, Download, Filter, Search, Edit, Trash2 } from 'lucide-react'
 
 const commissions = [
-  { id: 'C1', tier: 'Bronze', salesMin: 0, salesMax: 999, commission: 8, vendors: 45, revenue: 23400 },
-  { id: 'C2', tier: 'Silver', salesMin: 1000, salesMax: 4999, commission: 10, vendors: 28, revenue: 45600 },
-  { id: 'C3', tier: 'Gold', salesMin: 5000, salesMax: 19999, commission: 12, vendors: 15, revenue: 67800 },
-  { id: 'C4', tier: 'Platinum', salesMin: 20000, salesMax: 999999, commission: 15, vendors: 7, revenue: 89000 },
+  { id: 'C1', tier: 'Bronze', tierFr: 'Bronze', salesMin: 0, salesMax: 999, commission: 8, vendors: 45, revenue: 23400 },
+  { id: 'C2', tier: 'Silver', tierFr: 'Argent', salesMin: 1000, salesMax: 4999, commission: 10, vendors: 28, revenue: 45600 },
+  { id: 'C3', tier: 'Gold', tierFr: 'Or', salesMin: 5000, salesMax: 19999, commission: 12, vendors: 15, revenue: 67800 },
+  { id: 'C4', tier: 'Platinum', tierFr: 'Platine', salesMin: 20000, salesMax: 999999, commission: 15, vendors: 7, revenue: 89000 },
 ]
 
 const transactions = [
-  { id: 'T1', vendor: 'TechGear Pro', order: 'ORD-V001', amount: 79.99, commission: 7.99, tier: 'Bronze', date: '2024-04-12' },
-  { id: 'T2', vendor: 'Fashion Hub', order: 'ORD-V002', amount: 299.99, commission: 29.99, tier: 'Silver', date: '2024-04-12' },
-  { id: 'T3', vendor: 'Home Essentials', order: 'ORD-V003', amount: 149.99, commission: 14.99, tier: 'Bronze', date: '2024-04-11' },
-  { id: 'T4', vendor: 'Beauty Box', order: 'ORD-V004', amount: 89.99, commission: 8.99, tier: 'Bronze', date: '2024-04-11' },
-  { id: 'T5', vendor: 'TechGear Pro', order: 'ORD-V005', amount: 599.99, commission: 59.99, tier: 'Gold', date: '2024-04-10' },
+  { id: 'T1', vendor: 'TechGear Pro', order: 'ORD-V001', amount: 79.99, commission: 7.99, tier: 'Bronze', tierFr: 'Bronze', date: '12/04/2024' },
+  { id: 'T2', vendor: 'Fashion Hub', order: 'ORD-V002', amount: 299.99, commission: 29.99, tier: 'Silver', tierFr: 'Argent', date: '12/04/2024' },
+  { id: 'T3', vendor: 'Home Essentials', order: 'ORD-V003', amount: 149.99, commission: 14.99, tier: 'Bronze', tierFr: 'Bronze', date: '11/04/2024' },
+  { id: 'T4', vendor: 'Beauty Box', order: 'ORD-V004', amount: 89.99, commission: 8.99, tier: 'Bronze', tierFr: 'Bronze', date: '11/04/2024' },
+  { id: 'T5', vendor: 'TechGear Pro', order: 'ORD-V005', amount: 599.99, commission: 59.99, tier: 'Gold', tierFr: 'Or', date: '10/04/2024' },
 ]
 
 export default function CommissionsPage() {
@@ -26,12 +26,12 @@ export default function CommissionsPage() {
   const stats = {
     totalRevenue: transactions.reduce((sum, t) => sum + t.commission, 0),
     totalVendors: commissions.reduce((sum, c) => sum + c.vendors, 0),
-    avgCommission: '10.7%',
-    pendingPayouts: '$4,560.00',
+    avgCommission: '10,7%',
+    pendingPayouts: '4 560,00 €',
   }
 
   const handleExport = () => {
-    alert('Exporting commission report...')
+    alert('Exportation du rapport de commission...')
   }
 
   return (
@@ -43,12 +43,12 @@ export default function CommissionsPage() {
               <Percent className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Commission Management</h1>
-              <p className="text-gray-400">Manage vendor tiers and commissions</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Gestion des Commissions</h1>
+              <p className="text-gray-400">Gérer les niveaux et les commissions des fournisseurs</p>
             </div>
           </div>
           <button onClick={handleExport} className="px-4 py-2 bg-white/5 rounded-xl flex items-center gap-2">
-            <Download className="w-4 h-4" /> Export Report
+            <Download className="w-4 h-4" /> Exporter le Rapport
           </button>
         </div>
       </div>
@@ -56,29 +56,29 @@ export default function CommissionsPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
-          <p className="text-2xl font-bold text-white">${stats.totalRevenue.toFixed(2)}</p>
-          <p className="text-sm text-gray-400">Total Commission</p>
+          <p className="text-2xl font-bold text-white">{stats.totalRevenue.toFixed(2)} €</p>
+          <p className="text-sm text-gray-400">Commission Totale</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.totalVendors}</p>
-          <p className="text-sm text-gray-400">Active Vendors</p>
+          <p className="text-sm text-gray-400">Fournisseurs Actifs</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.avgCommission}</p>
-          <p className="text-sm text-gray-400">Avg Commission</p>
+          <p className="text-sm text-gray-400">Commission Moyenne</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.pendingPayouts}</p>
-          <p className="text-sm text-gray-400">Pending Payouts</p>
+          <p className="text-sm text-gray-400">Paiements en Attente</p>
         </motion.div>
       </div>
 
       {/* Commission Tiers */}
       <div className="glass-card p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">Commission Tiers</h2>
+          <h2 className="text-xl font-semibold">Niveaux de Commission</h2>
           <button className="px-4 py-2 bg-blue-500 rounded-xl flex items-center gap-2">
-            <Settings className="w-4 h-4" /> Configure
+            <Settings className="w-4 h-4" /> Configurer
           </button>
         </div>
 
@@ -91,7 +91,7 @@ export default function CommissionsPage() {
                   tier.tier === 'Silver' ? 'text-gray-300' :
                   tier.tier === 'Gold' ? 'text-yellow-400' :
                   'text-purple-400'
-                }`}>{tier.tier}</h3>
+                }`}>{tier.tierFr}</h3>
                 <button onClick={() => setEditingTier(editingTier === tier.id ? null : tier.id)} className="p-1 hover:bg-white/10 rounded">
                   <Edit className="w-4 h-4" />
                 </button>
@@ -115,13 +115,13 @@ export default function CommissionsPage() {
               ) : (
                 <div className="mb-3">
                   <p className="text-3xl font-bold">{tier.commission}%</p>
-                  <p className="text-sm text-gray-400">${tier.salesMin.toLocaleString()} - ${tier.salesMax.toLocaleString()}</p>
+                  <p className="text-sm text-gray-400">{tier.salesMin.toLocaleString()} € - {tier.salesMax.toLocaleString()} €</p>
                 </div>
               )}
 
               <div className="flex items-center justify-between text-sm pt-3 border-t border-white/5">
-                <span className="text-gray-400">{tier.vendors} vendors</span>
-                <span className="text-green-400">${tier.revenue.toLocaleString()}</span>
+                <span className="text-gray-400">{tier.vendors} vendeurs</span>
+                <span className="text-green-400">{tier.revenue.toLocaleString()} €</span>
               </div>
             </motion.div>
           ))}
@@ -131,18 +131,18 @@ export default function CommissionsPage() {
       {/* Recent Transactions */}
       <div className="glass-card overflow-hidden">
         <div className="p-4 border-b border-white/5 flex items-center justify-between">
-          <h3 className="font-semibold">Recent Commission Transactions</h3>
+          <h3 className="font-semibold">Transactions Récentes sur Commissions</h3>
           <div className="flex gap-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-white/5 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-sm" />
+              <input type="text" placeholder="Rechercher..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-800 border border-gray-600 rounded-lg pl-9 pr-3 py-1.5 text-sm text-white placeholder-gray-400" />
             </div>
-            <select className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm">
-              <option value="">All Tiers</option>
+            <select className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1.5 text-sm text-white">
+              <option value="">Tous les niveaux</option>
               <option value="Bronze">Bronze</option>
-              <option value="Silver">Silver</option>
-              <option value="Gold">Gold</option>
-              <option value="Platinum">Platinum</option>
+              <option value="Argent">Argent</option>
+              <option value="Or">Or</option>
+              <option value="Platine">Platine</option>
             </select>
           </div>
         </div>
@@ -150,11 +150,11 @@ export default function CommissionsPage() {
           <thead className="bg-white/5">
             <tr className="text-left text-sm text-gray-400">
               <th className="p-4">ID</th>
-              <th className="p-4">Vendor</th>
-              <th className="p-4">Order</th>
-              <th className="p-4">Order Amount</th>
+              <th className="p-4">Fournisseur</th>
+              <th className="p-4">Commande</th>
+              <th className="p-4">Montant Commande</th>
               <th className="p-4">Commission</th>
-              <th className="p-4">Tier</th>
+              <th className="p-4">Niveau</th>
               <th className="p-4">Date</th>
             </tr>
           </thead>
@@ -164,15 +164,15 @@ export default function CommissionsPage() {
                 <td className="p-4 font-mono text-sm">{t.id}</td>
                 <td className="p-4 font-medium">{t.vendor}</td>
                 <td className="p-4 font-mono text-sm">{t.order}</td>
-                <td className="p-4">${t.amount.toFixed(2)}</td>
-                <td className="p-4 text-green-400 font-semibold">+${t.commission.toFixed(2)}</td>
+                <td className="p-4">{t.amount.toFixed(2)} €</td>
+                <td className="p-4 text-green-400 font-semibold">+{t.commission.toFixed(2)} €</td>
                 <td className="p-4">
                   <span className={`px-2 py-1 rounded-full text-xs ${
                     t.tier === 'Bronze' ? 'bg-amber-500/20 text-amber-400' :
                     t.tier === 'Silver' ? 'bg-gray-500/20 text-gray-400' :
                     t.tier === 'Gold' ? 'bg-yellow-500/20 text-yellow-400' :
                     'bg-purple-500/20 text-purple-400'
-                  }`}>{t.tier}</span>
+                  }`}>{t.tierFr}</span>
                 </td>
                 <td className="p-4 text-gray-400">{t.date}</td>
               </motion.tr>
