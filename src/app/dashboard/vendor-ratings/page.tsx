@@ -131,7 +131,18 @@ export default function VendorRatingsPage() {
             <option value="response" className="bg-gray-800">Meilleure réponse</option>
           </select>
         </div>
-        <button className="px-4 py-2 bg-white/5 rounded-lg flex items-center gap-2">
+        <button onClick={() => {
+            const csvContent = [
+              ['Nom', 'Catégorie', 'Note', 'Avis', 'Taux de réponse', 'Expédition', 'Service client'],
+              ...vendors.map(v => [v.name, v.category, v.rating, v.reviews, v.responseRate + '%', v.shipsOnTime + '%', v.customerService])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'fournisseurs_notes.csv';
+            link.click();
+          }} className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg flex items-center gap-2 text-white font-medium transition-colors">
           <Download className="w-4 h-4" /> Exporter
         </button>
       </div>
