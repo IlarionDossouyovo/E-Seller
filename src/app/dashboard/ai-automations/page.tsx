@@ -70,36 +70,75 @@ export default function AIAutomations() {
   const [error, setError] = useState<string | null>(null)
 
   const runAutomation = async (chainId: string) => {
-    if (!input.trim() && chainId !== 'ai-business') {
+    // Show selection alert first
+    const chain = automationChains.find(c => c.id === chainId)
+    alert(`✅ "${chain?.name}" sélectionné!\n\nVeuillez entrer un produit puis cliquez sur "Lancer"`)
+    
+    setSelectedChain(chainId)
+    setError(null)
+    setResults(null)
+    
+    // If input already exists, run immediately
+    if (input.trim() || chainId === 'ai-business') {
+      setLoading(true)
+
+      // Simulate API call for demo
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // Demo results
+      setResults({
+        success: true,
+        automation: chain?.name || chainId,
+        input: input,
+        results: chain?.modules.map((mod, i) => ({
+          module: mod,
+          result: {
+            status: 'success',
+            data: `✅ Résultat de l'étape ${i + 1} pour: ${input || 'Assistant IA'}`
+          }
+        }))
+      })
+      
+      setLoading(false)
+      alert('🎉 Automation terminée avec succès!')
+    }
+  }
+
+  const handleLaunch = async () => {
+    if (!selectedChain) {
+      setError('Veuillez sélectionner une automation ci-dessus')
+      return
+    }
+    if (!input.trim() && selectedChain !== 'ai-business') {
       setError('Veuillez entrer un produit ou une question')
       return
     }
 
     setLoading(true)
-    setSelectedChain(chainId)
     setError(null)
     setResults(null)
 
     // Simulate API call for demo
     await new Promise(resolve => setTimeout(resolve, 2000))
     
-    const chain = automationChains.find(c => c.id === chainId)
+    const chain = automationChains.find(c => c.id === selectedChain)
     
     // Demo results
     setResults({
       success: true,
-      automation: chain?.name || chainId,
+      automation: chain?.name || selectedChain,
       input: input,
       results: chain?.modules.map((mod, i) => ({
         module: mod,
         result: {
           status: 'success',
-          data: `Résultat de l'étape ${i + 1} pour: ${input || 'Assistant IA'}`
+          data: `✅ Résultat de l'étape ${i + 1} pour: ${input || 'Assistant IA'}`
         }
       }))
     })
     
     setLoading(false)
+    alert('🎉 Automation terminée avec succès!')
   }
 
   const reset = () => {
@@ -188,7 +227,7 @@ export default function AIAutomations() {
               <RotateCcw className="w-5 h-5" />
             </button>
             <button
-              onClick={() => selectedChain && runAutomation(selectedChain)}
+              onClick={handleLaunch}
               disabled={loading || !selectedChain}
               className="bg-yellow-600 hover:bg-yellow-700 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
             >
