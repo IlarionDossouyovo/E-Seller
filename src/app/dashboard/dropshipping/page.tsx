@@ -91,7 +91,7 @@ export default function DropshippingPage() {
           <button onClick={() => { setSyncAll(!syncAll); alert('Synchronisation en cours...'); }} className={`px-4 py-2 rounded-xl ${syncAll ? 'bg-teal-500' : 'bg-teal-600'} text-white flex items-center gap-2`}>
             <RefreshCw className="w-4 h-4" /> Synchroniser
           </button>
-          <button className="px-4 py-2 bg-white/5 rounded-xl">
+          <button onClick={() => alert('Paramètres de synchronisation')} className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-xl text-white transition-colors">
             <Settings className="w-4 h-4" />
           </button>
         </div>
@@ -232,32 +232,32 @@ export default function DropshippingPage() {
 
       {activeTab === 'settings' && (
         <div className="glass-card p-6 max-w-2xl">
-          <h3 className="font-semibold mb-4">Dropshipping Settings</h3>
+          <h3 className="font-semibold mb-4">Paramètres Dropshipping</h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">Auto-sync Inventory</p>
-                <p className="text-sm text-gray-400">Sync stock levels automatically</p>
+                <p className="font-medium">Synchronisation Auto du Stock</p>
+                <p className="text-sm text-gray-400">Synchroniser les niveaux de stock automatiquement</p>
               </div>
-              <button className="w-12 h-6 bg-teal-500 rounded-full relative">
+              <button onClick={() => alert('Paramètres de synchronisation du stock')} className="w-12 h-6 bg-teal-500 rounded-full relative cursor-pointer">
                 <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1" />
               </button>
             </div>
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">Auto-fulfill Orders</p>
-                <p className="text-sm text-gray-400">Automatically send orders to suppliers</p>
+                <p className="font-medium">Traitement Auto des Commandes</p>
+                <p className="text-sm text-gray-400">Envoyer automatiquement les commandes aux fournisseurs</p>
               </div>
-              <button className="w-12 h-6 bg-teal-500 rounded-full relative">
+              <button onClick={() => alert('Paramètres de traitement des commandes')} className="w-12 h-6 bg-teal-500 rounded-full relative cursor-pointer">
                 <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1" />
               </button>
             </div>
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">Price Markup Rules</p>
-                <p className="text-sm text-gray-400">Auto-calculate prices from cost</p>
+                <p className="font-medium">Règles de Marge sur Prix</p>
+                <p className="text-sm text-gray-400">Calculer automatiquement les prix à partir du coût</p>
               </div>
-              <button className="px-3 py-1 bg-white/10 rounded-lg text-sm">Configure</button>
+              <button onClick={() => alert('Configurer les règles de marge')} className="px-3 py-1 bg-teal-600 hover:bg-teal-700 rounded-lg text-sm text-white transition-colors">Configurer</button>
             </div>
           </div>
         </div>
