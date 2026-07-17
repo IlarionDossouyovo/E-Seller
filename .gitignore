@@ -13,3 +13,8 @@ node_modules
 !.env.production
 !.env.vercel
 !.env.database
+
+# Environment
+.env.local
+.env.*.local
+

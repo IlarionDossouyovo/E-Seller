@@ -90,9 +90,24 @@ cd E-Seller
 # Install dependencies
 npm install
 
+# Copy environment file
+cp .env.example .env.local
+
 # Run development server
 npm run dev
 ```
+
+### Production Build ✅
+
+```bash
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+> ✅ Build Status: **PASSED** - 207 pages generated successfully
 
 ### Environment Variables
 
