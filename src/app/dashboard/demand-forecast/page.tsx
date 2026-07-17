@@ -54,12 +54,12 @@ export default function DemandForecastPage() {
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Demand Forecast</h1>
-              <p className="text-gray-400">AI-powered sales predictions</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Prévisions de la Demande</h1>
+              <p className="text-gray-400">Prédictions de ventes par IA</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 rounded-xl flex items-center gap-2">
-            <RefreshCw className="w-4 h-4" /> Refresh Predictions
+          <button onClick={() => alert('Prévisions actualisées!')} className="px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 rounded-xl flex items-center gap-2 text-white transition-all">
+            <RefreshCw className="w-4 h-4" /> Actualiser les Prévisions
           </button>
         </div>
       </div>
@@ -68,27 +68,32 @@ export default function DemandForecastPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.totalSales.toLocaleString()}</p>
-          <p className="text-sm text-gray-400">Current Sales</p>
+          <p className="text-sm text-gray-400">Ventes Actuelles</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.growthRate}</p>
-          <p className="text-sm text-gray-400">Growth Rate</p>
+          <p className="text-sm text-gray-400">Taux de Croissance</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-purple-400">{stats.nextMonthForecast.toLocaleString()}</p>
-          <p className="text-sm text-gray-400">Next Month</p>
+          <p className="text-sm text-gray-400">Mois Suivant</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.accuracy}</p>
-          <p className="text-sm text-gray-400">AI Accuracy</p>
+          <p className="text-sm text-gray-400">Précision IA</p>
         </motion.div>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-2">
-        {['overview', 'products', 'seasonal', 'alerts'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl ${activeTab === tab ? 'bg-violet-500' : 'bg-white/5'}`}>
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+        {[
+          { key: 'overview', label: 'Aperçu' },
+          { key: 'products', label: 'Produits' },
+          { key: 'seasonal', label: 'Saisonnier' },
+          { key: 'alerts', label: 'Alertes' }
+        ].map(tab => (
+          <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-4 py-2 rounded-xl ${activeTab === tab.key ? 'bg-violet-500 text-white' : 'bg-gray-700 text-gray-300'} transition-colors`}>
+            {tab.label}
           </button>
         ))}
       </div>
@@ -97,7 +102,7 @@ export default function DemandForecastPage() {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Sales Trend */}
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Sales Trend & Forecast</h3>
+            <h3 className="font-semibold mb-4">Tendances des Ventes & Prévisions</h3>
             <div className="h-64 flex items-end gap-2">
               {forecastData.map((data, i) => (
                 <div key={data.month} className="flex-1 flex flex-col items-center gap-2">
@@ -114,39 +119,39 @@ export default function DemandForecastPage() {
             <div className="flex justify-center gap-4 mt-4">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-blue-500" />
-                <span className="text-sm text-gray-400">Actual</span>
+                <span className="text-sm text-gray-400">Réel/span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-purple-500" />
-                <span className="text-sm text-gray-400">Forecast</span>
+                <span className="text-sm text-gray-400">Prévision/span>
               </div>
             </div>
           </div>
 
-          {/* Key Insights */}
+          {/* Points Clés */}
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Key Insights</h3>
+            <h3 className="font-semibold mb-4">Points Clés</h3>
             <div className="space-y-3">
               <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <Zap className="w-5 h-5 text-green-400" />
-                  <span className="font-semibold text-green-400">Growth Opportunity</span>
+                  <span className="font-semibold text-green-400">Opportunité de Croissance</span>
                 </div>
-                <p className="text-sm text-gray-400">Sales projected to grow 18.5% next month. Consider increasing inventory.</p>
+                <p className="text-sm text-gray-400">Les ventes devraient augmenter de 18.5% le mois prochain. Envisagez d'augmenter les stocks.</p>
               </div>
               <div className="p-4 bg-blue-500/20 border border-blue-500/30 rounded-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <Calendar className="w-5 h-5 text-blue-400" />
-                  <span className="font-semibold text-blue-400">Best Time to Launch</span>
+                  <span className="font-semibold text-blue-400">Meilleur Moment pour Lancer</span>
                 </div>
-                <p className="text-sm text-gray-400">New products perform best in Q4 (Oct-Dec) with 45% higher conversion.</p>
+                <p className="text-sm text-gray-400">Les nouveaux produits performent mieux au T4 (Oct-Déc) avec 45% de conversion en plus.</p>
               </div>
               <div className="p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle className="w-5 h-5 text-yellow-400" />
-                  <span className="font-semibold text-yellow-400">Risk Alert</span>
+                  <span className="font-semibold text-yellow-400">Alerte de Risque</span>
                 </div>
-                <p className="text-sm text-gray-400">Expect lower demand in Jun-Jul. Plan promotions accordingly.</p>
+                <p className="text-sm text-gray-400">Attendez-vous à une demande plus faible en Juin-Juillet. Planifiez des promotions en conséquence.</p>
               </div>
             </div>
           </div>
@@ -158,11 +163,11 @@ export default function DemandForecastPage() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr className="text-left text-sm text-gray-400">
-                <th className="p-4">Product</th>
-                <th className="p-4">Current Sales</th>
-                <th className="p-4">Next Month</th>
-                <th className="p-4">Trend</th>
-                <th className="p-4">Confidence</th>
+                <th className="p-4">Produit</th>
+                <th className="p-4">Ventes Actuelles</th>
+                <th className="p-4">Mois Suivant</th>
+                <th className="p-4">Tendance</th>
+                <th className="p-4">Confiance</th>
                 <th className="p-4">Action</th>
               </tr>
             </thead>
@@ -187,8 +192,8 @@ export default function DemandForecastPage() {
                     </div>
                   </td>
                   <td className="p-4">
-                    <button className="px-3 py-1 bg-blue-500 rounded-lg text-sm">
-                      {product.trend.startsWith('+') ? 'Increase Stock' : 'Monitor'}
+                    <button onClick={() => alert('Action: ' + product.name)} className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm text-white transition-colors">
+                      {product.trend.startsWith('+') ? 'Augmenter Stock' : 'Surveiller'}
                     </button>
                   </td>
                 </motion.tr>
@@ -200,7 +205,7 @@ export default function DemandForecastPage() {
 
       {activeTab === 'seasonal' && (
         <div className="glass-card p-6">
-          <h3 className="font-semibold mb-4">Seasonal Demand Pattern</h3>
+          <h3 className="font-semibold mb-4">Modèle de Demande Saisonnière</h3>
           <div className="h-48 flex items-end gap-1">
             {seasonalTrends.map((trend, i) => (
               <div key={trend.month} className="flex-1 flex flex-col items-center gap-1">
@@ -216,16 +221,16 @@ export default function DemandForecastPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-4 mt-6">
             <div className="p-4 bg-red-500/20 rounded-xl">
-              <p className="font-semibold text-red-400">Low Season</p>
-              <p className="text-sm text-gray-400">Jun-Aug: Plan promotions</p>
+              <p className="font-semibold text-red-400">Basse Saison</p>
+              <p className="text-sm text-gray-400">Juin-Août: Planifier des promotions</p>
             </div>
             <div className="p-4 bg-yellow-500/20 rounded-xl">
-              <p className="font-semibold text-yellow-400">Moderate</p>
-              <p className="text-sm text-gray-400">Jan-May, Sep: Maintain</p>
+              <p className="font-semibold text-yellow-400">Modéré</p>
+              <p className="text-sm text-gray-400">Jan-Mai, Sept: Maintenir</p>
             </div>
             <div className="p-4 bg-green-500/20 rounded-xl">
-              <p className="font-semibold text-green-400">Peak Season</p>
-              <p className="text-sm text-gray-400">Oct-Dec: Maximize ads</p>
+              <p className="font-semibold text-green-400">Pic de Saison</p>
+              <p className="text-sm text-gray-400">Oct-Déc: Maximiser les pubs</p>
             </div>
           </div>
         </div>
@@ -233,37 +238,37 @@ export default function DemandForecastPage() {
 
       {activeTab === 'alerts' && (
         <div className="glass-card p-6">
-          <h3 className="font-semibold mb-4">Forecast Alerts</h3>
+          <h3 className="font-semibold mb-4">Alertes de Prévision</h3>
           <div className="space-y-3">
             <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <AlertTriangle className="w-5 h-5 text-red-400" />
                 <div>
-                  <p className="font-semibold">Inventory Warning</p>
-                  <p className="text-sm text-gray-400">Wireless Earbuds Pro may sell out in 5 days</p>
+                  <p className="font-semibold">Alerte de Stock</p>
+                  <p className="text-sm text-gray-400">Les Wireless Earbuds Pro peuvent être épuisés dans 5 jours</p>
                 </div>
               </div>
-              <button className="px-3 py-1 bg-red-500 rounded-lg text-sm">Reorder Now</button>
+              <button onClick={() => alert('Commande passée!')} className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded-lg text-sm text-white transition-colors">Réapprovisionner</button>
             </div>
             <div className="p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <TrendingDown className="w-5 h-5 text-yellow-400" />
                 <div>
-                  <p className="font-semibold">Demand Dropping</p>
-                  <p className="text-sm text-gray-400">Smart Watch sales expected to decline 15%</p>
+                  <p className="font-semibold">Demande en baisse</p>
+                  <p className="text-sm text-gray-400">Les ventes de Smart Watch devraient chuter de 15%</p>
                 </div>
               </div>
-              <button className="px-3 py-1 bg-yellow-500 rounded-lg text-sm">Plan Promo</button>
+              <button onClick={() => alert('Promo planifiée!')} className="px-3 py-1 bg-yellow-600 hover:bg-yellow-700 rounded-lg text-sm text-white transition-colors">Planifier Promo</button>
             </div>
             <div className="p-4 bg-blue-500/20 border border-blue-500/30 rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <TrendingUp className="w-5 h-5 text-blue-400" />
                 <div>
-                  <p className="font-semibold">Opportunity</p>
-                  <p className="text-sm text-gray-400">Phone Case trending in Europe</p>
+                  <p className="font-semibold">Opportunité</p>
+                  <p className="text-sm text-gray-400">Coque de téléphone en tendance en Europe</p>
                 </div>
               </div>
-              <button className="px-3 py-1 bg-blue-500 rounded-lg text-sm">Boost Ads</button>
+              <button onClick={() => alert('Pub boostée!')} className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm text-white transition-colors">Augmenter les Pubs</button>
             </div>
           </div>
         </div>
