@@ -33,7 +33,7 @@ export default function SubscriptionBoxesPage() {
     totalBoxes: boxes.length,
     activeBoxes: boxes.filter(b => b.status === 'active').length,
     totalSubscribers: boxes.reduce((sum, b) => sum + b.subscribers, 0),
-    avgValue: '$57.49',
+    avgValue: '57,49 €',
   }
 
   return (
@@ -44,8 +44,8 @@ export default function SubscriptionBoxesPage() {
             <Box className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Subscription Boxes</h1>
-            <p className="text-gray-400">Create and manage monthly boxes</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Box par Abonnement</h1>
+            <p className="text-gray-400">Créer et gérer des boîtes mensuelles</p>
           </div>
         </div>
       </div>
@@ -54,19 +54,19 @@ export default function SubscriptionBoxesPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.totalBoxes}</p>
-          <p className="text-sm text-gray-400">Total Boxes</p>
+          <p className="text-sm text-gray-400">Total des boîtes</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.activeBoxes}</p>
-          <p className="text-sm text-gray-400">Active</p>
+          <p className="text-sm text-gray-400">Actif</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-purple-400">{stats.totalSubscribers}</p>
-          <p className="text-sm text-gray-400">Subscribers</p>
+          <p className="text-sm text-gray-400">Abonnés</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.avgValue}</p>
-          <p className="text-sm text-gray-400">Avg Box Value</p>
+          <p className="text-sm text-gray-400">Valeur moyenne de la boîte</p>
         </motion.div>
       </div>
 
@@ -74,9 +74,9 @@ export default function SubscriptionBoxesPage() {
         {/* Box List */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2 className="font-semibold">My Boxes</h2>
-            <button className="px-3 py-1.5 bg-violet-500 rounded-lg text-sm flex items-center gap-1">
-              <Plus className="w-4 h-4" /> New Box
+            <h2 className="font-semibold">Mes Boîtes</h2>
+            <button onClick={() => alert('Créer une nouvelle boîte!')} className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 rounded-lg text-sm flex items-center gap-1 text-white transition-colors">
+              <Plus className="w-4 h-4" /> Nouvelle Boîte
             </button>
           </div>
           {boxes.map((box) => (
@@ -90,12 +90,12 @@ export default function SubscriptionBoxesPage() {
                 <span className="text-2xl">{box.image}</span>
                 <div>
                   <p className="font-semibold">{box.name}</p>
-                  <p className="text-sm text-gray-400">{box.products} products</p>
+                  <p className="text-sm text-gray-400">{box.products} produits</p>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-bold">${box.price}</span>
-                <span className={`px-2 py-0.5 rounded-full text-xs ${statusColors[box.status]}`}>{box.status}</span>
+                <span className="font-bold">{box.price} €</span>
+                <span className={`px-2 py-0.5 rounded-full text-xs ${statusColors[box.status]}`}>{box.status === 'active' ? 'actif' : box.status === 'paused' ? 'pause' : 'brouillon'}</span>
               </div>
             </motion.button>
           ))}
@@ -109,20 +109,20 @@ export default function SubscriptionBoxesPage() {
                 <span className="text-4xl">{selectedBox.image}</span>
                 <div>
                   <h3 className="text-xl font-semibold">{selectedBox.name}</h3>
-                  <p className="text-gray-400">{selectedBox.products} products • {selectedBox.subscribers} subscribers</p>
+                  <p className="text-gray-400">{selectedBox.products} produits • {selectedBox.subscribers} abonnés</p>
                 </div>
               </div>
               <div className="flex gap-2">
-                <button className="px-3 py-2 bg-white/5 rounded-lg flex items-center gap-1">
-                  <Edit className="w-4 h-4" /> Edit
+                <button onClick={() => alert('Modifier la boîte')} className="px-3 py-2 bg-violet-600 hover:bg-violet-700 rounded-lg flex items-center gap-1 text-white transition-colors">
+                  <Edit className="w-4 h-4" /> Modifier
                 </button>
-                <button className="px-3 py-2 bg-white/5 rounded-lg flex items-center gap-1">
-                  <Eye className="w-4 h-4" /> Preview
+                <button onClick={() => alert('Aperçu de la boîte')} className="px-3 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg flex items-center gap-1 text-white transition-colors">
+                  <Eye className="w-4 h-4" /> Aperçu
                 </button>
               </div>
             </div>
 
-            <h4 className="font-semibold mb-3">Products in Box</h4>
+            <h4 className="font-semibold mb-3">Produits dans la boîte</h4>
             <div className="space-y-2">
               {products.map((product) => (
                 <div key={product.id} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
@@ -130,23 +130,23 @@ export default function SubscriptionBoxesPage() {
                     <CheckCircle className={`w-5 h-5 ${product.inBox ? 'text-green-400' : 'text-gray-600'}`} />
                     <span>{product.name}</span>
                   </div>
-                  <span className="text-green-400">${product.value}</span>
+                  <span className="text-green-400">{product.value} €</span>
                 </div>
               ))}
             </div>
 
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="p-3 bg-white/5 rounded-lg text-center">
-                <p className="text-sm text-gray-400">Box Cost</p>
-                <p className="font-semibold">$147.95</p>
+                <p className="text-sm text-gray-400">Coût de la boîte</p>
+                <p className="font-semibold">147,95 €</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg text-center">
-                <p className="text-sm text-gray-400">Your Price</p>
-                <p className="font-semibold">${selectedBox.price}</p>
+                <p className="text-sm text-gray-400">Votre prix</p>
+                <p className="font-semibold">{selectedBox.price} €</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg text-center">
-                <p className="text-sm text-gray-400">Profit/Box</p>
-                <p className="font-semibold text-green-400">${(selectedBox.price - 147.95).toFixed(2)}</p>
+                <p className="text-sm text-gray-400">Profit/Boîte</p>
+                <p className="font-semibold text-green-400">{(selectedBox.price - 147.95).toFixed(2)} €</p>
               </div>
             </div>
           </div>
