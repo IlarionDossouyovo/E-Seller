@@ -610,7 +610,7 @@ export default function AICommandCenter() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-2xl font-bold text-white">AI Command Center</h1>
+                  <h1 className="text-2xl font-bold text-white">Centre de Commande IA</h1>
                   <span className="px-2 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full border border-amber-500/30">
                     FONDATEUR
                   </span>
