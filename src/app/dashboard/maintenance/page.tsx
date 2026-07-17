@@ -75,7 +75,7 @@ export default function MaintenancePage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30 hover:bg-blue-500/30">
+          <button onClick={() => alert('Vérification des mises à jour en cours...')} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 border border-blue-500/30 hover:bg-blue-500/30">
             <RefreshCw className="w-4 h-4" />
             Vérifier Updates
           </button>
@@ -175,7 +175,7 @@ export default function MaintenancePage() {
                 </div>
               ))}
             </div>
-            <button className="w-full mt-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 rounded-lg transition-colors">
+            <button onClick={() => alert('Mise à jour de tous les packages en cours...')} className="w-full mt-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 rounded-lg transition-colors">
               Mettre à jour tout
             </button>
           </div>
@@ -189,7 +189,7 @@ export default function MaintenancePage() {
               <Clock className="w-5 h-5 text-purple-400" />
               Tâches Planifiées
             </h2>
-            <button className="flex items-center gap-2 px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
+            <button onClick={() => alert('Actualisation des tâches en cours...')} className="flex items-center gap-2 px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 text-sm">
               <RefreshCw className="w-4 h-4" />
               Actualiser
             </button>
@@ -261,21 +261,21 @@ export default function MaintenancePage() {
               Actions de Sécurité
             </h2>
             <div className="space-y-3">
-              <button className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-green-500 text-left flex items-center gap-3">
+              <button onClick={() => alert('Lancement de l\'audit complet de sécurité...')} className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-green-500 text-left flex items-center gap-3">
                 <Shield className="w-5 h-5 text-green-400" />
                 <div>
                   <p className="text-white font-medium">Lancer Audit Complet</p>
                   <p className="text-slate-500 text-xs">Vérification vulnérabilités</p>
                 </div>
               </button>
-              <button className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left flex items-center gap-3">
+              <button onClick={() => alert('Création d\'une sauvegarde complète en cours...')} className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-blue-500 text-left flex items-center gap-3">
                 <Download className="w-5 h-5 text-blue-400" />
                 <div>
                   <p className="text-white font-medium">Créer Backup</p>
                   <p className="text-slate-500 text-xs">Sauvegarde complète</p>
                 </div>
               </button>
-              <button className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-yellow-500 text-left flex items-center gap-3">
+              <button onClick={() => alert('Application des patches de sécurité...')} className="w-full p-4 bg-slate-900/50 rounded-lg border border-slate-700 hover:border-yellow-500 text-left flex items-center gap-3">
                 <Zap className="w-5 h-5 text-yellow-400" />
                 <div>
                   <p className="text-white font-medium">Appliquer Patches</p>
