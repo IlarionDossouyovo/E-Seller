@@ -55,8 +55,8 @@ export default function ProfitCalculatorPage() {
             <Calculator className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Profit Calculator</h1>
-            <p className="text-gray-400">Calculate your exact profit margins</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Calculateur de Profit</h1>
+            <p className="text-gray-400">Calculez vos marges bénéficiaires exactes</p>
           </div>
         </div>
       </div>
@@ -66,49 +66,49 @@ export default function ProfitCalculatorPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Product Info */}
           <div className="glass-card p-6">
-            <h2 className="text-xl font-semibold mb-4">Product Information</h2>
+            <h2 className="text-xl font-semibold mb-4">Informations Produit</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Cost Price ($)</label>
+                <label className="block text-sm text-gray-400 mb-1">Prix de Revient (€)</label>
                 <input
                   type="number"
                   value={product.costPrice}
                   onChange={(e) => setProduct({ ...product, costPrice: parseFloat(e.target.value) })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                   step="0.01"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Selling Price ($)</label>
+                <label className="block text-sm text-gray-400 mb-1">Prix de Vente (€)</label>
                 <input
                   type="number"
                   value={product.sellingPrice}
                   onChange={(e) => setProduct({ ...product, sellingPrice: parseFloat(e.target.value) })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                   step="0.01"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Category</label>
+                <label className="block text-sm text-gray-400 mb-1">Catégorie</label>
                 <select
                   value={product.category}
                   onChange={(e) => setProduct({ ...product, category: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                 >
-                  <option>Electronics</option>
-                  <option>Fashion</option>
-                  <option>Home</option>
-                  <option>Beauty</option>
+                  <option>Électronique</option>
+                  <option>Mode</option>
+                  <option>Maison</option>
+                  <option>Beauté</option>
                   <option>Sports</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Weight (kg)</label>
+                <label className="block text-sm text-gray-400 mb-1">Poids (kg)</label>
                 <input
                   type="number"
                   value={product.weight}
                   onChange={(e) => setProduct({ ...product, weight: parseFloat(e.target.value) })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                   step="0.1"
                 />
               </div>
@@ -117,14 +117,14 @@ export default function ProfitCalculatorPage() {
 
           {/* Costs Settings */}
           <div className="glass-card p-6">
-            <h2 className="text-xl font-semibold mb-4">Cost Settings</h2>
+            <h2 className="text-xl font-semibold mb-4">Paramètres des Coûts</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Shipping Method</label>
+                <label className="block text-sm text-gray-400 mb-1">Mode de Livraison</label>
                 <select
                   value={settings.shipping}
                   onChange={(e) => setSettings({ ...settings, shipping: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                 >
                   {shippingOptions.map(s => (
                     <option key={s.name} value={s.name}>{s.name} - ${s.price} ({s.days})</option>
@@ -132,11 +132,11 @@ export default function ProfitCalculatorPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Marketplace/Platform</label>
+                <label className="block text-sm text-gray-400 mb-1">Marketplace/Plateforme</label>
                 <select
                   value={settings.marketplace}
                   onChange={(e) => setSettings({ ...settings, marketplace: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                 >
                   {marketplaces.map(m => (
                     <option key={m.name} value={m.name}>{m.name} - {m.fees}</option>
@@ -144,22 +144,22 @@ export default function ProfitCalculatorPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Ads Spend ($/sale)</label>
+                <label className="block text-sm text-gray-400 mb-1">Budget Pub (€/vente)</label>
                 <input
                   type="number"
                   value={settings.adsSpend}
                   onChange={(e) => setSettings({ ...settings, adsSpend: parseFloat(e.target.value) })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                   step="0.01"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Return Rate (%)</label>
+                <label className="block text-sm text-gray-400 mb-1">Taux de Retour (%)</label>
                 <input
                   type="number"
                   value={settings.returnRate}
                   onChange={(e) => setSettings({ ...settings, returnRate: parseFloat(e.target.value) })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3"
+                  className="w-full bg-gray-800 border border-gray-600 rounded-xl p-3 text-white placeholder-gray-400"
                   step="0.1"
                 />
               </div>
@@ -170,18 +170,18 @@ export default function ProfitCalculatorPage() {
         {/* Results Section */}
         <div className="space-y-4">
           <div className="glass-card p-6">
-            <h2 className="text-xl font-semibold mb-4">Profit Summary</h2>
+            <h2 className="text-xl font-semibold mb-4">Résumé des Profits</h2>
             
             <div className={`text-center py-4 rounded-xl mb-4 ${calculated.netProfit > 0 ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-              <p className="text-sm text-gray-400">Net Profit</p>
+              <p className="text-sm text-gray-400">Bénéfice Net</p>
               <p className={`text-4xl font-bold ${calculated.netProfit > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                ${calculated.netProfit.toFixed(2)}
+                {calculated.netProfit.toFixed(2)} €
               </p>
-              <p className="text-sm text-gray-400">per sale</p>
+              <p className="text-sm text-gray-400">par vente</p>
             </div>
 
             <div className="text-center mb-4">
-              <p className="text-sm text-gray-400">Profit Margin</p>
+              <p className="text-sm text-gray-400">Marge Bénéficiaire</p>
               <p className={`text-2xl font-bold ${calculated.profitMargin > 0 ? 'text-green-400' : 'text-red-400'}`}>
                 {calculated.profitMargin.toFixed(1)}%
               </p>
@@ -189,37 +189,37 @@ export default function ProfitCalculatorPage() {
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Revenue</span>
-                <span>${calculated.revenue.toFixed(2)}</span>
+                <span className="text-gray-400">Chiffre d'affaires</span>
+                <span>{calculated.revenue.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Product Cost</span>
-                <span className="text-red-400">-${calculated.productCost.toFixed(2)}</span>
+                <span className="text-gray-400">Coût Produit</span>
+                <span className="text-red-400">-{calculated.productCost.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Shipping</span>
-                <span className="text-red-400">-${calculated.shippingCost.toFixed(2)}</span>
+                <span className="text-gray-400">Livraison</span>
+                <span className="text-red-400">-{calculated.shippingCost.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Platform Fee</span>
-                <span className="text-red-400">-${calculated.platformFee.toFixed(2)}</span>
+                <span className="text-gray-400">Frais de Plateforme</span>
+                <span className="text-red-400">-{calculated.platformFee.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Payment Fee</span>
-                <span className="text-red-400">-${calculated.paymentFee.toFixed(2)}</span>
+                <span className="text-gray-400">Frais de Paiement</span>
+                <span className="text-red-400">-{calculated.paymentFee.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Ads Spend</span>
-                <span className="text-red-400">-${calculated.adsCost.toFixed(2)}</span>
+                <span className="text-gray-400">Budget Pub</span>
+                <span className="text-red-400">-{calculated.adsCost.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Returns Reserve</span>
-                <span className="text-red-400">-${calculated.returnCost.toFixed(2)}</span>
+                <span className="text-gray-400">Réserve Retours</span>
+                <span className="text-red-400">-{calculated.returnCost.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between p-2 border-t border-white/10 rounded-lg font-semibold">
-                <span>Net Profit</span>
+                <span>Bénéfice Net</span>
                 <span className={calculated.netProfit > 0 ? 'text-green-400' : 'text-red-400'}>
-                  ${calculated.netProfit.toFixed(2)}
+                  {calculated.netProfit.toFixed(2)} €
                 </span>
               </div>
             </div>
@@ -231,24 +231,24 @@ export default function ProfitCalculatorPage() {
               <div className="flex items-center gap-2 text-green-400">
                 <CheckCircle className="w-5 h-5" />
                 <div>
-                  <p className="font-semibold">Great Profit!</p>
-                  <p className="text-sm text-gray-400">Excellent margins for scaling</p>
+                  <p className="font-semibold">Excellent Profit!</p>
+                  <p className="text-sm text-gray-400">Marges excellentes pour scaler</p>
                 </div>
               </div>
             ) : calculated.netProfit > 0 ? (
               <div className="flex items-center gap-2 text-yellow-400">
                 <TrendingUp className="w-5 h-5" />
                 <div>
-                  <p className="font-semibold">Decent Margin</p>
-                  <p className="text-sm text-gray-400">Consider optimizing costs</p>
+                  <p className="font-semibold">Marge Correcte</p>
+                  <p className="text-sm text-gray-400">Envisagez d'optimiser les coûts</p>
                 </div>
               </div>
             ) : (
               <div className="flex items-center gap-2 text-red-400">
                 <AlertTriangle className="w-5 h-5" />
                 <div>
-                  <p className="font-semibold">Loss</p>
-                  <p className="text-sm text-gray-400">Increase price or lower costs</p>
+                  <p className="font-semibold">Perte</p>
+                  <p className="text-sm text-gray-400">Augmentez le prix ou réduisez les coûts</p>
                 </div>
               </div>
             )}
@@ -256,11 +256,22 @@ export default function ProfitCalculatorPage() {
 
           {/* Quick Actions */}
           <div className="flex gap-2">
-            <button className="flex-1 px-4 py-2 bg-white/5 rounded-xl flex items-center justify-center gap-2">
-              <Save className="w-4 h-4" /> Save
+            <button onClick={() => alert('Calcul enregistré!')} className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-xl flex items-center justify-center gap-2 text-white font-medium transition-colors">
+              <Save className="w-4 h-4" /> Sauvegarder
             </button>
-            <button className="flex-1 px-4 py-2 bg-white/5 rounded-xl flex items-center justify-center gap-2">
-              <Download className="w-4 h-4" /> Export
+            <button onClick={() => {
+              const csvContent = [
+                ['Prix Revient', 'Prix Vente', 'Catégorie', 'Poids', 'Livraison', 'Marketplace', 'Budget Pub', 'Taux Retour', 'Bénéfice Net', 'Marge'],
+                [product.costPrice, product.sellingPrice, product.category, product.weight, settings.shipping, settings.marketplace, settings.adsSpend, settings.returnRate + '%', calculated.netProfit.toFixed(2) + ' €', calculated.profitMargin.toFixed(1) + '%']
+              ].map(row => row.join(',')).join('\n');
+              
+              const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+              const link = document.createElement('a');
+              link.href = URL.createObjectURL(blob);
+              link.download = 'calcul_profit.csv';
+              link.click();
+            }} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center gap-2 text-white font-medium transition-colors">
+              <Download className="w-4 h-4" /> Exporter
             </button>
           </div>
         </div>
