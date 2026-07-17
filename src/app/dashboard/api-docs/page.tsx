@@ -236,18 +236,18 @@ export default function APIDocsPage() {
               <BookOpen className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">API Documentation</h1>
-              <p className="text-gray-400">RESTful API reference for developers</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Documentation API</h1>
+              <p className="text-gray-400">Référence API REST pour développeurs</p>
             </div>
           </div>
           <div className="flex gap-2">
             <button className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 flex items-center gap-2">
               <Globe className="w-4 h-4" />
-              API Status
+              Statut API
             </button>
             <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-electron-blue to-electron-purple flex items-center gap-2">
               <Key className="w-4 h-4" />
-              Get API Key
+              Obtenir Clé API
             </button>
           </div>
         </div>
@@ -256,10 +256,10 @@ export default function APIDocsPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'API Version', value: 'v1', icon: Zap },
+          { label: 'Version API', value: 'v1', icon: Zap },
           { label: 'Total Endpoints', value: String(endpoints.reduce((acc, cat) => acc + cat.endpoints.length, 0)), icon: BookOpen },
-          { label: 'Rate Limit', value: '100/min', icon: Clock },
-          { label: 'Uptime', value: '99.9%', icon: Shield },
+          { label: 'Limite de débit', value: '100/min', icon: Clock },
+          { label: 'Disponibilité', value: '99.9%', icon: Shield },
         ].map((stat, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="glass-card p-4">
             <stat.icon className="w-5 h-5 text-indigo-400 mb-2" />
@@ -273,9 +273,9 @@ export default function APIDocsPage() {
       <div className="glass-card p-2 overflow-x-auto">
         <div className="flex gap-2">
           {[
-            { key: 'overview', label: 'Overview', icon: BookOpen },
-            { key: 'endpoints', label: 'Endpoints', icon: Terminal },
-            { key: 'authentication', label: 'Authentication', icon: Key },
+            { key: 'overview', label: 'Aperçu', icon: BookOpen },
+            { key: 'endpoints', label: 'Points de terminaison', icon: Terminal },
+            { key: 'authentication', label: 'Authentification', icon: Key },
           ].map(tab => (
             <button key={tab.key} onClick={() => setActiveTab(tab.key as any)} className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all ${activeTab === tab.key ? 'bg-electron-blue text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}>
               <tab.icon className="w-4 h-4" />
@@ -290,17 +290,17 @@ export default function APIDocsPage() {
         <div className="space-y-6">
           {/* Introduction */}
           <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold mb-4">Getting Started</h3>
+            <h3 className="text-lg font-semibold mb-4">Pour Commencer</h3>
             <div className="prose prose-invert max-w-none text-gray-400">
-              <p>The E-Seller API allows you to integrate our e-commerce platform with your applications. All API requests require authentication using an API key.</p>
-              <p className="mt-4">Base URL: <code className="bg-white/10 px-2 py-1 rounded">https://api.e-seller.com/v1</code></p>
+              <p>L'API E-Seller vous permet d'intégrer notre plateforme e-commerce avec vos applications. Toutes les requêtes API nécessitent une authentification par clé API.</p>
+              <p className="mt-4">URL de base: <code className="bg-white/10 px-2 py-1 rounded">http://localhost:3000/api</code></p>
             </div>
           </div>
 
           {/* Code Example */}
           <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Quick Start</h3>
+              <h3 className="text-lg font-semibold">Démarrage Rapide</h3>
               <div className="flex gap-2">
                 {(['curl', 'javascript', 'python'] as const).map(lang => (
                   <button key={lang} onClick={() => setCodeTab(lang)} className={`px-3 py-1 rounded-lg text-sm capitalize ${codeTab === lang ? 'bg-electron-blue text-white' : 'bg-white/5 text-gray-400'}`}>
@@ -321,22 +321,22 @@ export default function APIDocsPage() {
 
           {/* Rate Limits */}
           <div className="glass-card p-6">
-            <h3 className="text-lg font-semibold mb-4">Rate Limits</h3>
+            <h3 className="text-lg font-semibold mb-4">Limites de Débit</h3>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="p-4 rounded-xl bg-white/5">
                 <h4 className="font-medium mb-2">Standard</h4>
                 <p className="text-2xl font-bold">100/min</p>
-                <p className="text-sm text-gray-400">per API key</p>
+                <p className="text-sm text-gray-400">par clé API</p>
               </div>
               <div className="p-4 rounded-xl bg-white/5">
-                <h4 className="font-medium mb-2">Professional</h4>
+                <h4 className="font-medium mb-2">Professionnel</h4>
                 <p className="text-2xl font-bold">500/min</p>
-                <p className="text-sm text-gray-400">per API key</p>
+                <p className="text-sm text-gray-400">par clé API</p>
               </div>
               <div className="p-4 rounded-xl bg-white/5">
-                <h4 className="font-medium mb-2">Enterprise</h4>
-                <p className="text-2xl font-bold">Unlimited</p>
-                <p className="text-sm text-gray-400">Custom limits</p>
+                <h4 className="font-medium mb-2">Entreprise</h4>
+                <p className="text-2xl font-bold">Illimité</p>
+                <p className="text-sm text-gray-400">Limites personnalisées</p>
               </div>
             </div>
           </div>
@@ -374,22 +374,22 @@ export default function APIDocsPage() {
 
       {activeTab === 'authentication' && (
         <div className="glass-card p-6">
-          <h3 className="text-lg font-semibold mb-4">Authentication</h3>
+          <h3 className="text-lg font-semibold mb-4">Authentification</h3>
           <div className="space-y-4">
             <div className="p-4 rounded-xl bg-white/5">
-              <h4 className="font-medium mb-2">API Key Authentication</h4>
-              <p className="text-sm text-gray-400 mb-3">Include your API key in the Authorization header:</p>
+              <h4 className="font-medium mb-2">Authentification par Clé API</h4>
+              <p className="text-sm text-gray-400 mb-3">Incluez votre clé API dans l'en-tête Authorization:</p>
               <code className="block bg-black/50 p-3 rounded-lg font-mono text-sm">
                 Authorization: Bearer YOUR_API_KEY
               </code>
             </div>
             <div className="p-4 rounded-xl bg-white/5">
-              <h4 className="font-medium mb-2">Getting Your API Key</h4>
+              <h4 className="font-medium mb-2">Obtenir Votre Clé API</h4>
               <ol className="list-decimal list-inside text-sm text-gray-400 space-y-2">
-                <li>Go to Settings → API Keys</li>
-                <li>Click "Generate New Key"</li>
-                <li>Copy and store your key securely</li>
-                <li>Never share your API key publicly</li>
+                <li>Allez dans Paramètres → Clés API</li>
+                <li>Cliquez sur "Générer une Nouvelle Clé"</li>
+                <li>Copiez et stockez votre clé en sécurité</li>
+                <li>Ne partagez jamais votre clé API publiquement</li>
               </ol>
             </div>
           </div>
