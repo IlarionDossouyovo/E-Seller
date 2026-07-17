@@ -19,8 +19,11 @@ import {
   User,
   Mail,
   Phone,
-  RefreshCw
+  RefreshCw,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
+import Link from 'next/link'
 
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
@@ -421,6 +424,18 @@ export default function OrdersPage() {
           onSubmit={handleCreateOrder} 
         />
       )}
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/customers" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Clients
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }

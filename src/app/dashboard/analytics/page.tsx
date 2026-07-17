@@ -15,8 +15,11 @@ import {
   ArrowDownRight,
   Calendar,
   Download,
-  RefreshCw
+  RefreshCw,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
+import Link from 'next/link'
 
 const mockStats = [
   { 
@@ -320,6 +323,18 @@ export default function AnalyticsPage() {
           {notification}
         </div>
       )}
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard/customers" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Clients
+        </Link>
+        <Link href="/dashboard/products" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Produits
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }

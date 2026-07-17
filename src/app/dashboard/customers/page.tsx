@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useI18n } from '@/app/i18n'
-import { Users, Search, Filter, Plus, UserPlus, Mail, MoreVertical, UserCheck, UserX, ShoppingCart } from 'lucide-react'
+import { Users, Search, Filter, Plus, UserPlus, Mail, MoreVertical, UserCheck, UserX, ShoppingCart, ArrowLeft, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const customers = [
   { id: 'C1', name: 'John Smith', email: 'john@example.com', orders: 12, spent: 1250.00, status: 'active', lastOrder: '2024-04-10', avatar: '👨' },
@@ -166,6 +167,18 @@ export default function CustomersPage() {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard/orders" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Commandes
+        </Link>
+        <Link href="/dashboard/analytics" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Analytics
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   )
