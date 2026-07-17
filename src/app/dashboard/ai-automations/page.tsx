@@ -78,29 +78,26 @@ export default function AIAutomations() {
     setError(null)
     setResults(null)
 
-    try {
-      const response = await fetch('/api/ai-automation', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'run',
-          automationId: chainId,
-          input: input
-        })
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
-        setResults(data)
-      } else {
-        setError(data.error || 'Erreur lors du traitement')
-      }
-    } catch (err: any) {
-      setError(err.message || 'Erreur réseau')
-    } finally {
-      setLoading(false)
-    }
+    // Simulate API call for demo
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    const chain = automationChains.find(c => c.id === chainId)
+    
+    // Demo results
+    setResults({
+      success: true,
+      automation: chain?.name || chainId,
+      input: input,
+      results: chain?.modules.map((mod, i) => ({
+        module: mod,
+        result: {
+          status: 'success',
+          data: `Résultat de l'étape ${i + 1} pour: ${input || 'Assistant IA'}`
+        }
+      }))
+    })
+    
+    setLoading(false)
   }
 
   const reset = () => {
