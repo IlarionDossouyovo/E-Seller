@@ -36,18 +36,18 @@ export const aiConfig = {
 // Check which AI providers are available
 export function getAvailableAIProviders() {
   const providers = []
+  // Ollama is PRIMARY - always available when local server is running
+  providers.push('ollama')
   if (aiConfig.openAIKey && aiConfig.openAIKey !== 'sk-demo-key') providers.push('openai')
   if (aiConfig.anthropicKey) providers.push('anthropic')
   if (aiConfig.ai360Key) providers.push('ai360')
-  // Ollama is always available via local server
-  providers.push('ollama')
   return providers
 }
 
-// Ollama (local AI)
+// Ollama (local AI) - PRIMARY AI PROVIDER ✅
 export const ollamaConfig = {
   host: process.env.OLLAMA_HOST || 'http://localhost:11434',
-  model: process.env.OLLAMA_MODEL || 'tinyllama',
+  model: process.env.OLLAMA_MODEL || 'llama3.2', // Using llama3.2 as default
 }
 
 // Cloudinary
