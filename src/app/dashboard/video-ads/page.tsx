@@ -49,13 +49,13 @@ export default function VideoAdsPage() {
         '1. Analysez les métriques',
         '2. Identifiez les points faibles',
         '3. Modifiez le hook initial',
-        '4. Testez différentes voces',
+        '4. Testez différentes voix',
         '5. Mesurez les résultats'
       ]
     },
     {
       id: 'demo3',
-      title: 'Multi-plateforme',
+      title: 'Multiplateforme',
       description: 'Adaptez vos vidéos pour TikTok, Instagram, YouTube',
       thumbnail: '🌐',
       duration: '2:45',
