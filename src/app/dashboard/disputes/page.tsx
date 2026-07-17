@@ -150,18 +150,18 @@ export default function DisputesPage() {
                 placeholder="Rechercher des litiges..." 
                 value={search} 
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm w-full"
+                className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1.5 text-sm w-full text-white placeholder-gray-400"
               />
             </div>
             <select 
               value={filter} 
               onChange={(e) => setFilter(e.target.value)}
-              className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm w-full"
+              className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1.5 text-sm w-full text-white"
             >
-              <option value="all">Tous les statuts</option>
-              <option value="open">Ouvert</option>
-              <option value="pending">En attente</option>
-              <option value="resolved">Résolu</option>
+              <option value="all" className="bg-gray-800">Tous les statuts</option>
+              <option value="open" className="bg-gray-800">Ouvert</option>
+              <option value="pending" className="bg-gray-800">En attente</option>
+              <option value="resolved" className="bg-gray-800">Résolu</option>
             </select>
           </div>
           <div className="divide-y divide-white/5 max-h-[600px] overflow-y-auto">
