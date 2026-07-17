@@ -38,4 +38,13 @@ Write-Host "========================================" -ForegroundColor Green
 Write-Host "  MISE A JOUR TERMINEE!" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Green
 Write-Host ""
+
+# Verifier si .env.local existe
+if (-not (Test-Path ".env.local")) {
+    Write-Host "[INFO] Creation de .env.local depuis .env.production..." -ForegroundColor Yellow
+    Copy-Item ".env.production" ".env.local"
+    Write-Host "[OK] Fichier .env.local cree!" -ForegroundColor Green
+}
+
+Write-Host ""
 Write-Host "Lancer le serveur: npm run dev" -ForegroundColor Cyan
