@@ -31,7 +31,16 @@ export default function CommissionsPage() {
   }
 
   const handleExport = () => {
-    alert('Exportation du rapport de commission...')
+    const csvContent = [
+      ['Niveau', 'Vendeurs', 'Chiffre d\'affaires', 'Commission (%)', 'Ventes Min', 'Ventes Max'],
+      ...commissions.map(c => [c.tierFr, c.vendors, c.revenue + ' €', c.commission + '%', c.salesMin + ' €', c.salesMax + ' €'])
+    ].map(row => row.join(',')).join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'commissions_rapport.csv';
+    link.click();
   }
 
   return (
@@ -47,7 +56,7 @@ export default function CommissionsPage() {
               <p className="text-gray-400">Gérer les niveaux et les commissions des fournisseurs</p>
             </div>
           </div>
-          <button onClick={handleExport} className="px-4 py-2 bg-white/5 rounded-xl flex items-center gap-2">
+          <button onClick={handleExport} className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-xl flex items-center gap-2 text-white font-medium transition-colors">
             <Download className="w-4 h-4" /> Exporter le Rapport
           </button>
         </div>
