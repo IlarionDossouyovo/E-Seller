@@ -68,18 +68,41 @@ const getCountryName = (country: string): string => {
 }
 
 const paymentMethods = [
-  { id: 'bank', name: 'Virement Bancaire', icon: '🏦' },
-  { id: 'orange', name: 'Orange Money', icon: '🟠' },
-  { id: 'mtn', name: 'MTN Mobile Money', icon: '🟡' },
-  { id: 'moov', name: 'Moov Money', icon: '🔵' },
-  { id: 'airtel', name: 'Airtel Money', icon: '🔴' },
-  { id: 'mpesa', name: 'M-Pesa', icon: '🟢' },
-  { id: 'wave', name: 'Wave', icon: '🌊' },
-  { id: 'paypal', name: 'PayPal', icon: '🔵' },
-  { id: 'stripe', name: 'Stripe', icon: '💳' },
-  { id: 'crypto', name: 'Cryptomonnaie (USDT)', icon: '₿' },
-  { id: 'western', name: 'Western Union', icon: '🌍' },
-  { id: 'moneygram', name: 'MoneyGram', icon: '💸' },
+  // 🏦 Banques Internationales
+  { id: 'bank', name: 'Virement Bancaire International', icon: '🏦', region: 'global' },
+  { id: 'wise', name: 'Wise (TransferWise)', icon: '🌍', region: 'global' },
+  { id: 'paypal', name: 'PayPal', icon: '🔵', region: 'global' },
+  { id: 'stripe', name: 'Stripe', icon: '💳', region: 'global' },
+  
+  // 🌍 Afrique - Afrique de l'Ouest
+  { id: 'orange', name: 'Orange Money', icon: '🟠', region: 'africa', countries: ['Sénégal', 'Côte d\'Ivoire', 'Mali', 'Burkina Faso', 'Niger', 'Guinée', 'Libéria'] },
+  { id: 'mtn', name: 'MTN Mobile Money', icon: '🟡', region: 'africa', countries: ['Ghana', 'Nigeria', 'Côte d\'Ivoire', 'Cameroun', 'Ouganda', 'Rwanda', 'Soudan du Sud'] },
+  { id: 'moov', name: 'Moov Money', icon: '🔵', region: 'africa', countries: ['Bénin', 'Togo', 'Niger', 'Gabon', 'Congo'] },
+  { id: 'airtel', name: 'Airtel Money', icon: '🔴', region: 'africa', countries: ['Kenya', 'Tanzanie', 'Ouganda', 'Rwanda', 'Zambie', 'Nigéria'] },
+  { id: 'wave', name: 'Wave', icon: '🌊', region: 'africa', countries: ['Sénégal', 'Mali'] },
+  { id: 'free', name: 'Free Money', icon: '⚫', region: 'africa', countries: ['Sénégal'] },
+  
+  // 🌍 Afrique - Afrique de l'Est & Australe
+  { id: 'mpesa', name: 'M-Pesa', icon: '🟢', region: 'africa', countries: ['Kenya', 'Tanzanie', 'Ghana', 'Éthiopie'] },
+  { id: 'equitel', name: 'Equitel', icon: '📱', region: 'africa', countries: ['Kenya'] },
+  { id: 'tkash', name: 'T-Kash', icon: '💚', region: 'africa', countries: ['Kenya'] },
+  
+  // 🌍 Afrique - Afrique Centrale & Nord
+  { id: 'ecobank', name: 'Ecobank Mobile', icon: '🏛️', region: 'africa', countries: ['Cameroun', 'Congo', 'Gabon', 'Sénégal', 'Togo', 'Bénin'] },
+  { id: 'uba', name: 'UBA Mobile', icon: '🔷', region: 'africa', countries: ['Nigéria', 'Cameroun', 'Côte d\'Ivoire', 'Ghana'] },
+  { id: 'afrikpay', name: 'AfrikPay', icon: '🌍', region: 'africa', countries: ['_MULTI'] },
+  
+  // 💱 Crypto & Transfert
+  { id: 'crypto', name: 'Cryptomonnaie (USDT/ BTC)', icon: '₿', region: 'global' },
+  { id: 'western', name: 'Western Union', icon: '🌍', region: 'global' },
+  { id: 'moneygram', name: 'MoneyGram', icon: '💸', region: 'global' },
+  { id: 'riyal', name: 'Riyal Pay', icon: '🕌', region: 'middleeast' },
+  
+  // 🌍'Asie & Autres
+  { id: 'alipay', name: 'Alipay', icon: '🔴', region: 'asia', countries: ['Chine'] },
+  { id: 'wechat', name: 'WeChat Pay', icon: '🟢', region: 'asia', countries: ['Chine'] },
+  { id: 'paytm', name: 'Paytm', icon: '🔵', region: 'asia', countries: ['Inde'] },
+  { id: 'gcash', name: 'GCash', icon: '🔵', region: 'asia', countries: ['Philippines'] },
 ]
 
 export default function VendorRegistrationPage() {
@@ -158,8 +181,8 @@ export default function VendorRegistrationPage() {
             <Store className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">{t.vendorRegistration?.title || 'Become a Vendor'}</h1>
-            <p className="text-gray-400">{t.vendorRegistration?.subtitle || 'Join the E-Seller marketplace'}</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Devenir Vendeur</h1>
+            <p className="text-gray-400">Rejoignez le marketplace E-Seller et développez votre business</p>
           </div>
         </div>
       </div>
@@ -168,10 +191,10 @@ export default function VendorRegistrationPage() {
       <div className="glass-card p-4">
         <div className="flex items-center justify-between">
           {[
-            { num: 1, label: t.vendorRegistration?.storeInfo || 'Store Info' },
-            { num: 2, label: t.vendorRegistration?.location || 'Location' },
-            { num: 3, label: t.vendorRegistration?.verification || 'Verification' },
-            { num: 4, label: t.vendorRegistration?.payment || 'Payment' },
+            { num: 1, label: 'Info Boutique' },
+            { num: 2, label: 'Emplacement' },
+            { num: 3, label: 'Vérification' },
+            { num: 4, label: 'Paiement' },
           ].map((s, i) => (
             <div key={s.num} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${step >= s.num ? 'bg-blue-500 text-white' : 'bg-white/10 text-gray-400'}`}>
@@ -187,7 +210,7 @@ export default function VendorRegistrationPage() {
       <div className="glass-card p-6">
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">{t.vendorRegistration?.storeInfo || 'Store Information'}</h2>
+            <h2 className="text-xl font-semibold mb-4">Informations de la Boutique</h2>
             
             <div>
               <label className="block text-sm text-gray-400 mb-1">{t.vendorRegistration?.storeName || 'Store Name'} *</label>
@@ -299,10 +322,10 @@ export default function VendorRegistrationPage() {
 
             <div className="flex gap-3">
               <button onClick={() => setStep(1)} className="flex-1 py-3 bg-white/5 rounded-xl font-semibold cursor-pointer">
-                {t.vendorRegistration?.back || 'Back'}
+                Retour
               </button>
               <button onClick={handleNext} className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-semibold cursor-pointer">
-                {t.vendorRegistration?.continue || 'Continue'}
+                Suivant
               </button>
             </div>
           </motion.div>
@@ -310,10 +333,10 @@ export default function VendorRegistrationPage() {
 
         {step === 3 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">Verification</h2>
+            <h2 className="text-xl font-semibold mb-4">Vérification</h2>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Tax ID / VAT Number *</label>
+              <label className="block text-sm text-gray-400 mb-1">Numéro de TVA / Tax ID *</label>
               <input
                 type="text"
                 value={formData.taxId}
@@ -324,11 +347,11 @@ export default function VendorRegistrationPage() {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Business License</label>
+              <label className="block text-sm text-gray-400 mb-1">Licence commerciale</label>
               <div className="border-2 border-dashed border-white/10 rounded-xl p-6 text-center">
                 <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                <p className="text-gray-400">Upload business license or registration</p>
-                <p className="text-xs text-gray-500 mt-1">PDF, JPG, PNG - Max 10MB</p>
+                <p className="text-gray-400">Télécharger la licence commerciale ou l'enregistrement</p>
+                <p className="text-xs text-gray-500 mt-1">PDF, JPG, PNG - Max 10Mo</p>
               </div>
             </div>
 
@@ -336,8 +359,8 @@ export default function VendorRegistrationPage() {
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium text-white">Verification Required</p>
-                  <p className="text-sm text-gray-400">We will verify your business within 24-48 hours. You can start adding products while verification is pending.</p>
+                  <p className="font-medium text-white">Vérification Requise</p>
+                  <p className="text-sm text-gray-400">Nous vérifierons votre entreprise sous 24-48 heures. Vous pouvez commencer à ajouter des produits en attente de vérification.</p>
                 </div>
               </div>
             </div>
@@ -355,68 +378,120 @@ export default function VendorRegistrationPage() {
 
         {step === 4 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">Payment Settings</h2>
+            <h2 className="text-xl font-semibold mb-4">Paramètres de Paiement</h2>
 
-            <div>
-              <label className="block text-sm text-gray-400 mb-1">Bank Name</label>
-              <input
-                type="text"
-                value={formData.bankName}
-                onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
-                placeholder="Bank of America"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-gray-400 mb-1">Account Number</label>
-                <input
-                  type="text"
-                  value={formData.accountNumber}
-                  onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
-                  placeholder="XXXX XXXX XXXX"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-400 mb-1">Routing Number</label>
-                <input
-                  type="text"
-                  value={formData.routingNumber}
-                  onChange={(e) => setFormData({ ...formData, routingNumber: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
-                  placeholder="XXXXXXX"
-                />
+            {/* Payment Methods Selection */}
+            <div className="mb-6">
+              <label className="block text-sm text-gray-400 mb-2">Mode de Paiement</label>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {paymentMethods.map((method) => (
+                  <button
+                    key={method.id}
+                    onClick={() => setSelectedPayment(method.id)}
+                    className={`p-3 rounded-xl border text-left transition-all ${
+                      selectedPayment === method.id 
+                        ? 'border-green-500 bg-green-500/20' 
+                        : 'border-white/10 bg-white/5 hover:border-white/30'
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">{method.icon}</div>
+                    <div className="text-xs font-medium">{method.name}</div>
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="text-center text-gray-400 py-2">- OR -</div>
+            {selectedPayment === 'bank' && (
+              <>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">Nom de la Banque</label>
+                  <input
+                    type="text"
+                    value={formData.bankName}
+                    onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
+                    placeholder="Bank of America"
+                  />
+                </div>
 
-            <div>
-              <label className="block text-sm text-gray-400 mb-1">PayPal Email</label>
-              <input
-                type="email"
-                value={formData.paypalEmail}
-                onChange={(e) => setFormData({ ...formData, paypalEmail: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
-                placeholder="paypal@vendor.com"
-              />
-            </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">Numéro de Compte</label>
+                    <input
+                      type="text"
+                      value={formData.accountNumber}
+                      onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
+                      placeholder="XXXX XXXX XXXX"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-1">Code SWIFT/BIC</label>
+                    <input
+                      type="text"
+                      value={formData.routingNumber}
+                      onChange={(e) => setFormData({ ...formData, routingNumber: e.target.value })}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
+                      placeholder="XXXXXXX"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {(selectedPayment === 'orange' || selectedPayment === 'mtn' || selectedPayment === 'moov' || selectedPayment === 'airtel' || selectedPayment === 'mpesa' || selectedPayment === 'wave' || selectedPayment === 'free') && (
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">Numéro de Téléphone Mobile Money</label>
+                <input
+                  type="tel"
+                  value={formData.mobileNumber}
+                  onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
+                  placeholder="+229 00 00 00 00"
+                />
+                <p className="text-xs text-gray-500 mt-1">Numéro lié à votre compte {paymentMethods.find(p => p.id === selectedPayment)?.name}</p>
+              </div>
+            )}
+
+            {selectedPayment === 'paypal' && (
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">Email PayPal</label>
+                <input
+                  type="email"
+                  value={formData.paypalEmail}
+                  onChange={(e) => setFormData({ ...formData, paypalEmail: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white"
+                  placeholder="paypal@vendor.com"
+                />
+              </div>
+            )}
+
+            {selectedPayment === 'crypto' && (
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">Adresse Portefeuille USDT (TRC20)</label>
+                <input
+                  type="text"
+                  value={formData.cryptoWallet}
+                  onChange={(e) => setFormData({ ...formData, cryptoWallet: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white font-mono text-sm"
+                  placeholder="TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+                />
+              </div>
+            )}
 
             <div className="bg-green-500/20 border border-green-500/30 rounded-xl p-4">
               <div className="flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-green-400" />
-                <p className="text-white">Commission: <span className="font-bold">10%</span> on each sale</p>
+                <p className="text-white">Commission: <span className="font-bold">10%</span> sur chaque vente</p>
               </div>
             </div>
 
             <div className="flex gap-3">
               <button onClick={() => setStep(3)} className="flex-1 py-3 bg-white/5 rounded-xl font-semibold">
-                Back
+                Retour
               </button>
               <button onClick={handleSubmit} className="flex-1 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-semibold">
-                Submit Application
+                Soumettre la Demande
               </button>
             </div>
           </motion.div>
@@ -427,18 +502,18 @@ export default function VendorRegistrationPage() {
       <div className="grid md:grid-cols-3 gap-4">
         <div className="glass-card p-4">
           <Store className="w-8 h-8 text-blue-400 mb-2" />
-          <h3 className="font-semibold">Free to Join</h3>
-          <p className="text-sm text-gray-400">No upfront fees. Only pay 10% commission on sales.</p>
+          <h3 className="font-semibold">Gratuit</h3>
+          <p className="text-sm text-gray-400">Pas de frais upfront. Seulement 10% de commission sur les ventes.</p>
         </div>
         <div className="glass-card p-4">
           <Globe className="w-8 h-8 text-green-400 mb-2" />
-          <h3 className="font-semibold">Global Reach</h3>
-          <p className="text-sm text-gray-400">Sell to customers in 190+ countries with localized checkout.</p>
+          <h3 className="font-semibold">Portée Mondiale</h3>
+          <p className="text-sm text-gray-400">Vendez à des clients dans plus de 190 pays avec paiement local.</p>
         </div>
         <div className="glass-card p-4">
           <DollarSign className="w-8 h-8 text-yellow-400 mb-2" />
-          <h3 className="font-semibold">Fast Payouts</h3>
-          <p className="text-sm text-gray-400">Get paid weekly via bank transfer or PayPal.</p>
+          <h3 className="font-semibold">Paiements Rapides</h3>
+          <p className="text-sm text-gray-400">Recevez vos paiements chaque semaine par virement ou mobile money.</p>
         </div>
       </div>
     </div>
