@@ -9,7 +9,7 @@ const vendors = [
     id: 'V1', 
     name: 'TechGear Pro', 
     slug: 'techgear-pro',
-    category: 'Electronics',
+    category: 'Électronique',
     rating: 4.8, 
     reviews: 234, 
     stars: { 5: 189, 4: 32, 3: 8, 2: 3, 1: 2 },
@@ -17,16 +17,16 @@ const vendors = [
     shipsOnTime: 96,
     customerService: 4.9,
     recentReviews: [
-      { rating: 5, comment: 'Great product, fast shipping!', customer: 'John D.', date: '2024-04-12' },
-      { rating: 5, comment: 'Excellent seller, highly recommended!', customer: 'Marie L.', date: '2024-04-11' },
-      { rating: 4, comment: 'Good product, slightly delayed.', customer: 'Hans M.', date: '2024-04-10' },
+      { rating: 5, comment: 'Excellent produit, livraison rapide !', customer: 'Jean D.', date: '12/04/2024' },
+      { rating: 5, comment: 'Excellent vendeur, je le recommande fortement !', customer: 'Marie L.', date: '11/04/2024' },
+      { rating: 4, comment: 'Bon produit, légèrement retardé.', customer: 'Hans M.', date: '10/04/2024' },
     ]
   },
   { 
     id: 'V2', 
-    name: 'Fashion Hub', 
-    slug: 'fashion-hub',
-    category: 'Fashion',
+    name: 'Centre de la Mode', 
+    slug: 'centre-de-la-mode',
+    category: 'Mode',
     rating: 4.5, 
     reviews: 156, 
     stars: { 5: 98, 4: 35, 3: 15, 2: 5, 1: 3 },
@@ -34,15 +34,15 @@ const vendors = [
     shipsOnTime: 88,
     customerService: 4.6,
     recentReviews: [
-      { rating: 5, comment: 'Love the quality!', customer: 'Sarah J.', date: '2024-04-12' },
-      { rating: 4, comment: 'Good quality, size runs small.', customer: 'Mike C.', date: '2024-04-11' },
+      { rating: 5, comment: 'J\'adore la qualité !', customer: 'Sarah J.', date: '12/04/2024' },
+      { rating: 4, comment: 'Bonne qualité, mais taille petite.', customer: 'Mike C.', date: '11/04/2024' },
     ]
   },
   { 
     id: 'V3', 
-    name: 'Home Essentials', 
-    slug: 'home-essentials',
-    category: 'Home & Garden',
+    name: 'Articles Essentiels pour la Maison', 
+    slug: 'articles-essentiels-maison',
+    category: 'Maison et Jardin',
     rating: 4.2, 
     reviews: 89, 
     stars: { 5: 45, 4: 22, 3: 12, 2: 6, 1: 4 },
@@ -50,16 +50,16 @@ const vendors = [
     shipsOnTime: 82,
     customerService: 4.3,
     recentReviews: [
-      { rating: 4, comment: 'Decent product for the price.', customer: 'Lisa W.', date: '2024-04-10' },
+      { rating: 4, comment: 'Bon produit pour le prix.', customer: 'Lisa W.', date: '10/04/2024' },
     ]
   },
 ]
 
-const categories = ['All', 'Electronics', 'Fashion', 'Home & Garden', 'Beauty', 'Sports']
+const categories = ['Tous', 'Électronique', 'Mode', 'Maison & Jardin', 'Beauté', 'Sports']
 
 export default function VendorRatingsPage() {
   const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState('Tous')
   const [sortBy, setSortBy] = useState('rating')
 
   const stats = {
@@ -89,8 +89,8 @@ export default function VendorRatingsPage() {
             <Star className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Vendor Ratings</h1>
-            <p className="text-gray-400">Monitor and compare vendor performance</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Notes des Fournisseurs</h1>
+            <p className="text-gray-400">Surveiller et comparer les performances des fournisseurs</p>
           </div>
         </div>
       </div>
@@ -99,19 +99,19 @@ export default function VendorRatingsPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{vendors.length}</p>
-          <p className="text-sm text-gray-400">Total Vendors</p>
+          <p className="text-sm text-gray-400">Nombre total de fournisseurs</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.avgRating}</p>
-          <p className="text-sm text-gray-400">Avg Rating</p>
+          <p className="text-sm text-gray-400">Note moyenne</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.totalReviews}</p>
-          <p className="text-sm text-gray-400">Total Reviews</p>
+          <p className="text-sm text-gray-400">Avis totaux</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.topRated}</p>
-          <p className="text-sm text-gray-400">Top Rated</p>
+          <p className="text-sm text-gray-400">Les mieux notés</p>
         </motion.div>
       </div>
 
@@ -120,19 +120,19 @@ export default function VendorRatingsPage() {
         <div className="flex gap-4 items-center flex-1 flex-wrap">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="Search vendors..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2" />
+            <input type="text" placeholder="Rechercher des fournisseurs..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-800 border border-gray-600 rounded-lg pl-9 pr-4 py-2 text-white placeholder-gray-400" />
           </div>
-          <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg">
-            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white">
+            {categories.map(c => <option key={c} value={c} className="bg-gray-800">{c}</option>)}
           </select>
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg">
-            <option value="rating">Highest Rated</option>
-            <option value="reviews">Most Reviews</option>
-            <option value="response">Best Response</option>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white">
+            <option value="rating" className="bg-gray-800">Meilleure note</option>
+            <option value="reviews" className="bg-gray-800">Plus d'avis</option>
+            <option value="response" className="bg-gray-800">Meilleure réponse</option>
           </select>
         </div>
         <button className="px-4 py-2 bg-white/5 rounded-lg flex items-center gap-2">
-          <Download className="w-4 h-4" /> Export
+          <Download className="w-4 h-4" /> Exporter
         </button>
       </div>
 
@@ -156,19 +156,19 @@ export default function VendorRatingsPage() {
                     <span className="text-3xl font-bold">{vendor.rating}</span>
                     <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
                   </div>
-                  <p className="text-sm text-gray-400">{vendor.reviews} reviews</p>
+                  <p className="text-sm text-gray-400">{vendor.reviews} avis</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">{vendor.responseRate}%</p>
-                  <p className="text-sm text-gray-400">Response Rate</p>
+                  <p className="text-sm text-gray-400">Taux de réponse</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-blue-400">{vendor.shipsOnTime}%</p>
-                  <p className="text-sm text-gray-400">Ships On Time</p>
+                  <p className="text-sm text-gray-400">Expédition dans les délais</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-purple-400">{vendor.customerService}</p>
-                  <p className="text-sm text-gray-400">Customer Service</p>
+                  <p className="text-sm text-gray-400">Service client</p>
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function VendorRatingsPage() {
             {/* Rating Distribution */}
             <div className="mt-6 grid md:grid-cols-2 gap-6">
               <div>
-                <p className="text-sm text-gray-400 mb-2">Rating Distribution</p>
+                <p className="text-sm text-gray-400 mb-2">Répartition des notes</p>
                 <div className="space-y-1">
                   {[5, 4, 3, 2, 1].map((star) => (
                     <div key={star} className="flex items-center gap-2">
@@ -196,7 +196,7 @@ export default function VendorRatingsPage() {
 
               {/* Recent Reviews */}
               <div>
-                <p className="text-sm text-gray-400 mb-2">Recent Reviews</p>
+                <p className="text-sm text-gray-400 mb-2">Avis récents</p>
                 <div className="space-y-2">
                   {vendor.recentReviews.map((review, idx) => (
                     <div key={idx} className="p-3 bg-white/5 rounded-lg">
