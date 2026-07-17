@@ -84,12 +84,12 @@ export default function VideoAdsPage() {
               <Video className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Video Ads Generator</h1>
-              <p className="text-gray-400">Create video ads with AI</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Générateur de Publicités Vidéo IA</h1>
+              <p className="text-gray-400">Créer des publicités vidéo avec l'IA</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center gap-2">
-            <Wand2 className="w-4 h-4" /> New Video
+          <button onClick={() => alert('Créer une nouvelle vidéo!')} className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 rounded-xl flex items-center gap-2 text-white transition-all">
+            <Wand2 className="w-4 h-4" /> Nouvelle Vidéo
           </button>
         </div>
       </div>
@@ -98,27 +98,33 @@ export default function VideoAdsPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.totalVideos}</p>
-          <p className="text-sm text-gray-400">Total Videos</p>
+          <p className="text-sm text-gray-400">Total Vidéos</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-purple-400">{(stats.totalViews / 1000).toFixed(0)}K</p>
-          <p className="text-sm text-gray-400">Total Views</p>
+          <p className="text-sm text-gray-400">Vues Totales</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.avgCtr}</p>
-          <p className="text-sm text-gray-400">Avg CTR</p>
+          <p className="text-sm text-gray-400">CTR Moyen</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-pink-400">{stats.campaigns}</p>
-          <p className="text-sm text-gray-400">Campaigns</p>
+          <p className="text-sm text-gray-400">Campagnes</p>
         </motion.div>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-2 flex-wrap">
-        {['create', 'videos', 'templates', 'demo', 'settings'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl ${activeTab === tab ? 'bg-purple-500' : 'bg-white/5'}`}>
-            {tab === 'demo' ? '🎬 Demo' : tab.charAt(0).toUpperCase() + tab.slice(1)}
+        {[
+          { key: 'create', label: 'Créer' },
+          { key: 'videos', label: 'Vidéos' },
+          { key: 'templates', label: 'Modèles' },
+          { key: 'demo', label: '🎬 Démo' },
+          { key: 'settings', label: 'Paramètres' }
+        ].map(tab => (
+          <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-4 py-2 rounded-xl ${activeTab === tab.key ? 'bg-purple-500 text-white' : 'bg-gray-700 text-gray-300'} transition-colors`}>
+            {tab.label}
           </button>
         ))}
       </div>
@@ -127,13 +133,13 @@ export default function VideoAdsPage() {
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Creation Steps */}
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Create New Video Ad</h3>
+            <h3 className="font-semibold mb-4">Créer une Nouvelle Publicité Vidéo</h3>
             
             {/* Step 1: Product */}
             <div className={`p-4 rounded-xl mb-3 ${generationStep >= 0 ? 'bg-purple-500/20 border border-purple-500/30' : 'bg-white/5'}`}>
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">1</span>
-                <span className="font-medium">Select Product</span>
+                <span className="font-medium">Sélectionner un Produit</span>
               </div>
               <select className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white">
                 <option>Wireless Earbuds Pro</option>
@@ -146,7 +152,7 @@ export default function VideoAdsPage() {
             <div className={`p-4 rounded-xl mb-3 ${generationStep >= 1 ? 'bg-purple-500/20 border border-purple-500/30' : 'bg-white/5'}`}>
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">2</span>
-                <span className="font-medium">Choose Template</span>
+                <span className="font-medium">Choisir un Modèle</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {templates.map(t => (
@@ -163,54 +169,54 @@ export default function VideoAdsPage() {
             <div className={`p-4 rounded-xl mb-3 ${generationStep >= 2 ? 'bg-purple-500/20 border border-purple-500/30' : 'bg-white/5'}`}>
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">3</span>
-                <span className="font-medium">Customize</span>
+                <span className="font-medium">Personnaliser</span>
               </div>
               <div className="grid grid-cols-4 gap-2 mb-2">
-                <button className="p-2 bg-white/5 rounded-lg flex flex-col items-center">
-                  <Type className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Text</span>
+                <button onClick={() => alert('Personnaliser le texte')} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg flex flex-col items-center transition-colors">
+                  <Type className="w-5 h-5 mb-1 text-white" />
+                  <span className="text-xs text-gray-300">Texte</span>
                 </button>
-                <button className="p-2 bg-white/5 rounded-lg flex flex-col items-center">
-                  <Image className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Image</span>
+                <button onClick={() => alert('Personnaliser l\'image')} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg flex flex-col items-center transition-colors">
+                  <Image className="w-5 h-5 mb-1 text-white" />
+                  <span className="text-xs text-gray-300">Image</span>
                 </button>
-                <button className="p-2 bg-white/5 rounded-lg flex flex-col items-center">
-                  <Mic className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Voice</span>
+                <button onClick={() => alert('Personnaliser la voix')} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg flex flex-col items-center transition-colors">
+                  <Mic className="w-5 h-5 mb-1 text-white" />
+                  <span className="text-xs text-gray-300">Voix</span>
                 </button>
-                <button className="p-2 bg-white/5 rounded-lg flex flex-col items-center">
-                  <Music className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Music</span>
+                <button onClick={() => alert('Personnaliser la musique')} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg flex flex-col items-center transition-colors">
+                  <Music className="w-5 h-5 mb-1 text-white" />
+                  <span className="text-xs text-gray-300">Musique</span>
                 </button>
               </div>
-              <textarea className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white" rows={2} placeholder="Enter ad script or description..." />
+              <textarea className="w-full bg-gray-800 border border-gray-600 rounded-lg p-2 text-white" rows={2} placeholder="Entrez le script ou la description de la publicité..." />
             </div>
 
             {/* Step 4: Generate */}
             <div className={`p-4 rounded-xl ${generationStep >= 3 ? 'bg-purple-500/20 border border-purple-500/30' : 'bg-white/5'}`}>
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-sm">4</span>
-                <span className="font-medium">Generate</span>
+                <span className="font-medium">Générer</span>
               </div>
-              <button className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-semibold flex items-center justify-center gap-2">
-                <Sparkles className="w-5 h-5" /> Generate Video with AI
+              <button onClick={() => alert('Générer la vidéo avec l\'IA!')} className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 rounded-xl font-semibold flex items-center justify-center gap-2 text-white transition-all">
+                <Sparkles className="w-5 h-5" /> Générer la Vidéo avec l'IA
               </button>
             </div>
           </div>
 
           {/* Preview */}
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Preview</h3>
+            <h3 className="font-semibold mb-4">Aperçu</h3>
             <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl flex items-center justify-center mb-4">
               <Play className="w-16 h-16 text-white/50" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Duration</span>
-                <span>30 seconds</span>
+                <span className="text-gray-400">Durée</span>
+                <span>30 secondes</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Platform</span>
+                <span className="text-gray-400">Plateforme</span>
                 <div className="flex gap-1">
                   <Instagram className="w-4 h-4" />
                   <Youtube className="w-4 h-4" />
@@ -218,20 +224,20 @@ export default function VideoAdsPage() {
                 </div>
               </div>
               <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                <span className="text-gray-400">AI Voice</span>
-                <span>English (US)</span>
+                <span className="text-gray-400">Voix IA</span>
+                <span>Anglais (US)</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                <span className="text-gray-400">Music</span>
-                <span>Upbeat Corporate</span>
+                <span className="text-gray-400">Musique</span>
+                <span>Corporate Dynamique</span>
               </div>
             </div>
             <div className="flex gap-2 mt-4">
-              <button className="flex-1 py-2 bg-white/5 rounded-xl flex items-center justify-center gap-2">
-                <Download className="w-4 h-4" /> Export
+              <button onClick={() => alert('Exporter la vidéo!')} className="flex-1 py-2 bg-purple-600 hover:bg-purple-700 rounded-xl flex items-center justify-center gap-2 text-white transition-colors">
+                <Download className="w-4 h-4" /> Exporter
               </button>
-              <button className="flex-1 py-2 bg-white/5 rounded-xl flex items-center justify-center gap-2">
-                <Share2 className="w-4 h-4" /> Share
+              <button onClick={() => alert('Partager la vidéo!')} className="flex-1 py-2 bg-pink-600 hover:bg-pink-700 rounded-xl flex items-center justify-center gap-2 text-white transition-colors">
+                <Share2 className="w-4 h-4" /> Partager
               </button>
             </div>
           </div>
@@ -258,13 +264,13 @@ export default function VideoAdsPage() {
               </div>
               {video.views && (
                 <div className="flex items-center justify-between mt-3 text-sm">
-                  <span>{video.views.toLocaleString()} views</span>
+                  <span>{video.views.toLocaleString()} vues</span>
                   <span className="text-green-400">{video.ctr} CTR</span>
                 </div>
               )}
               <div className="flex gap-2 mt-3">
-                <button className="flex-1 py-1.5 bg-white/5 rounded-lg text-sm">Edit</button>
-                <button className="flex-1 py-1.5 bg-white/5 rounded-lg text-sm">Duplicate</button>
+                <button onClick={() => alert('Modifier la vidéo')} className="flex-1 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-sm text-white transition-colors">Modifier</button>
+                <button onClick={() => alert('Dupliquer la vidéo')} className="flex-1 py-1.5 bg-pink-600 hover:bg-pink-700 rounded-lg text-sm text-white transition-colors">Dupliquer</button>
               </div>
             </motion.div>
           ))}
@@ -284,7 +290,7 @@ export default function VideoAdsPage() {
                   <span key={p} className="px-2 py-0.5 bg-white/5 rounded text-xs">{p}</span>
                 ))}
               </div>
-              <button className="w-full py-2 bg-purple-500 rounded-lg">Use Template</button>
+              <button onClick={() => alert('Utiliser ce modèle!')} className="w-full py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white transition-colors">Utiliser</button>
             </motion.div>
           ))}
         </div>
@@ -365,35 +371,35 @@ export default function VideoAdsPage() {
 
       {activeTab === 'settings' && (
         <div className="glass-card p-6 max-w-2xl">
-          <h3 className="font-semibold mb-4">Video Settings</h3>
+          <h3 className="font-semibold mb-4">Paramètres Vidéo</h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">AI Voice Default</p>
-                <p className="text-sm text-gray-400">Default voice for new videos</p>
+                <p className="font-medium">Voix IA par Défaut</p>
+                <p className="text-sm text-gray-400">Voix par défaut pour les nouvelles vidéos</p>
               </div>
               <select className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1 text-white">
-                <option>English (US) - Male</option>
-                <option>English (US) - Female</option>
-                <option>French</option>
-                <option>Spanish</option>
+                <option>Anglais (US) - Homme</option>
+                <option>Anglais (US) - Femme</option>
+                <option>Français</option>
+                <option>Espagnol</option>
               </select>
             </div>
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">Auto-subtitles</p>
-                <p className="text-sm text-gray-400">Generate subtitles automatically</p>
+                <p className="font-medium">Sous-titres Auto</p>
+                <p className="text-sm text-gray-400">Générer les sous-titres automatiquement</p>
               </div>
-              <button className="w-12 h-6 bg-purple-500 rounded-full relative">
+              <button onClick={() => alert('Paramètres des sous-titres')} className="w-12 h-6 bg-purple-500 rounded-full relative cursor-pointer">
                 <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-1" />
               </button>
             </div>
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
               <div>
-                <p className="font-medium">Watermark</p>
-                <p className="text-sm text-gray-400">Add your logo to videos</p>
+                <p className="font-medium">Filigrane</p>
+                <p className="text-sm text-gray-400">Ajouter votre logo aux vidéos</p>
               </div>
-              <button className="w-12 h-6 bg-white/10 rounded-full relative">
+              <button onClick={() => alert('Paramètres du filigrane')} className="w-12 h-6 bg-white/10 rounded-full relative cursor-pointer">
                 <div className="w-4 h-4 bg-white rounded-full absolute left-1 top-1" />
               </button>
             </div>
