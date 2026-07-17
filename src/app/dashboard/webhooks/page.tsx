@@ -66,7 +66,7 @@ export default function WebhooksPage() {
             </div>
             <div>
               <h1 className="text-2xl font-bold font-[var(--font-sora)] text-white">Webhooks</h1>
-              <p className="text-gray-300">Configurez les callbacks HTTP en temps reel</p>
+              <p className="text-gray-300">Configurez les callbacks HTTP en temps réel</p>
             </div>
           </div>
           <button onClick={() => { setNotification('Ajout webhook...'); setTimeout(() => { setNotification('Formulaire ouvert!'); setTimeout(() => setNotification(null), 2000) }, 1000) }} className="px-6 py-3 rounded-xl bg-gradient-to-r from-electron-blue to-electron-purple hover:opacity-90 transition-opacity flex items-center gap-2 font-medium">
@@ -80,9 +80,9 @@ export default function WebhooksPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: 'Webhooks Actifs', value: '4', icon: Webhook },
-          { label: 'Total Requetes', value: '12 450', icon: Bell },
-          { label: 'Taux Reussite', value: '98.5%', icon: CheckCircle },
-          { label: 'Reponse Moy.', value: '245ms', icon: Clock },
+          { label: 'Total Requêtes', value: '12 450', icon: Bell },
+          { label: 'Taux Réussite', value: '98.5%', icon: CheckCircle },
+          { label: 'Réponse Moy.', value: '245ms', icon: Clock },
         ].map((stat, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="glass-card p-4">
             <stat.icon className="w-5 h-5 text-amber-400 mb-2" />
@@ -94,7 +94,7 @@ export default function WebhooksPage() {
 
       {/* Webhooks List */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4 text-white">Webhooks Configures</h3>
+        <h3 className="text-lg font-semibold mb-4 text-white">Webhooks Configurés</h3>
         <div className="space-y-4">
           {webhooks.map((webhook, i) => (
             <motion.div key={webhook.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="p-4 rounded-xl bg-white/5 border border-white/10">
@@ -124,7 +124,7 @@ export default function WebhooksPage() {
                 <div className="flex items-center gap-4">
                   <span>Dernier: {webhook.lastTriggered}</span>
                   <span className={`${webhook.successRate >= 99 ? 'text-green-400' : 'text-yellow-400'}`}>
-                    {webhook.successRate}% succes
+                    {webhook.successRate}% succès
                   </span>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function WebhooksPage() {
 
       {/* Available Events */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4 text-white">Evenements Disponibles</h3>
+        <h3 className="text-lg font-semibold mb-4 text-white">Événements Disponibles</h3>
         <div className="grid md:grid-cols-2 gap-4">
           {availableEvents.map((cat, i) => (
             <motion.div key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="p-4 rounded-xl bg-white/5">
@@ -158,7 +158,7 @@ export default function WebhooksPage() {
 
       {/* Recent Deliveries */}
       <div className="glass-card p-6">
-        <h3 className="text-lg font-semibold mb-4 text-white">Livraisons Recentes</h3>
+        <h3 className="text-lg font-semibold mb-4 text-white">Livraisons Récentes</h3>
         <div className="space-y-2">
           {recentDeliveries.map((delivery, i) => (
             <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-white/5">
