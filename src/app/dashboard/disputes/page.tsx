@@ -9,12 +9,12 @@ const disputes = [
     id: 'D001', 
     order: 'ORD-V001', 
     vendor: 'TechGear Pro', 
-    customer: 'John Smith', 
-    reason: 'Item not received', 
+    customer: 'Jean Dupont', 
+    reason: 'Article non reçu', 
     amount: 79.99, 
     status: 'open', 
     priority: 'high',
-    created: '2024-04-10',
+    created: '10/04/2024',
     messages: 3
   },
   { 
@@ -22,11 +22,11 @@ const disputes = [
     order: 'ORD-V005', 
     vendor: 'Fashion Hub', 
     customer: 'Marie Dubois', 
-    reason: 'Defective product', 
+    reason: 'Produit défectueux', 
     amount: 149.99, 
     status: 'pending', 
     priority: 'medium',
-    created: '2024-04-09',
+    created: '09/04/2024',
     messages: 5
   },
   { 
@@ -34,23 +34,23 @@ const disputes = [
     order: 'ORD-V008', 
     vendor: 'Home Essentials', 
     customer: 'Hans Mueller', 
-    reason: 'Wrong item sent', 
+    reason: 'Mauvais article envoyé', 
     amount: 59.99, 
     status: 'resolved', 
     priority: 'low',
-    created: '2024-04-05',
+    created: '05/04/2024',
     messages: 8
   },
   { 
     id: 'D004', 
     order: 'ORD-V012', 
     vendor: 'Beauty Box', 
-    customer: 'Sarah Johnson', 
-    reason: 'Refund request', 
+    customer: 'Sophie Martin', 
+    reason: 'Demande de remboursement', 
     amount: 89.99, 
     status: 'open', 
     priority: 'medium',
-    created: '2024-04-11',
+    created: '11/04/2024',
     messages: 1
   },
 ]
@@ -68,6 +68,19 @@ const priorityColors: Record<string, string> = {
   low: 'bg-green-500/20 text-green-400',
 }
 
+const priorityLabels: Record<string, string> = {
+  high: 'Haute',
+  medium: 'Moyenne',
+  low: 'Basse',
+}
+
+const statusLabels: Record<string, string> = {
+  open: 'Ouvert',
+  pending: 'En attente',
+  resolved: 'Résolu',
+  closed: 'Fermé',
+}
+
 export default function DisputesPage() {
   const [activeDispute, setActiveDispute] = useState(disputes[0])
   const [search, setSearch] = useState('')
@@ -83,13 +96,13 @@ export default function DisputesPage() {
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
-      alert(`Message sent: ${newMessage}`)
+      alert(`Message envoyé: ${newMessage}`)
       setNewMessage('')
     }
   }
 
   const handleResolve = () => {
-    alert('Dispute marked as resolved')
+    alert('Litige marqué comme résolu')
   }
 
   return (
@@ -100,8 +113,8 @@ export default function DisputesPage() {
             <AlertTriangle className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Dispute Resolution</h1>
-            <p className="text-gray-400">Manage vendor-customer disputes</p>
+            <h1 className="text-2xl font-bold font-[var(--font-sora)]">Résolution des Litiges</h1>
+            <p className="text-gray-400">Gérer les litiges fournisseurs-clients</p>
           </div>
         </div>
       </div>
@@ -110,19 +123,19 @@ export default function DisputesPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.total}</p>
-          <p className="text-sm text-gray-400">Total Disputes</p>
+          <p className="text-sm text-gray-400">Total Litiges</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.open}</p>
-          <p className="text-sm text-gray-400">Open</p>
+          <p className="text-sm text-gray-400">Ouverts</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-blue-400">{stats.pending}</p>
-          <p className="text-sm text-gray-400">Pending</p>
+          <p className="text-sm text-gray-400">En attente</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.resolved}</p>
-          <p className="text-sm text-gray-400">Resolved</p>
+          <p className="text-sm text-gray-400">Résolus</p>
         </motion.div>
       </div>
 
@@ -134,7 +147,7 @@ export default function DisputesPage() {
               <Search className="w-4 h-4 text-gray-400" />
               <input 
                 type="text" 
-                placeholder="Search disputes..." 
+                placeholder="Rechercher des litiges..." 
                 value={search} 
                 onChange={(e) => setSearch(e.target.value)}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm w-full"
@@ -145,10 +158,10 @@ export default function DisputesPage() {
               onChange={(e) => setFilter(e.target.value)}
               className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm w-full"
             >
-              <option value="all">All Status</option>
-              <option value="open">Open</option>
-              <option value="pending">Pending</option>
-              <option value="resolved">Resolved</option>
+              <option value="all">Tous les statuts</option>
+              <option value="open">Ouvert</option>
+              <option value="pending">En attente</option>
+              <option value="resolved">Résolu</option>
             </select>
           </div>
           <div className="divide-y divide-white/5 max-h-[600px] overflow-y-auto">
@@ -162,14 +175,14 @@ export default function DisputesPage() {
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-mono text-sm">{dispute.id}</span>
                   <span className={`px-2 py-0.5 rounded-full text-xs ${priorityColors[dispute.priority]}`}>
-                    {dispute.priority}
+                    {priorityLabels[dispute.priority]}
                   </span>
                 </div>
                 <p className="font-medium text-sm truncate">{dispute.reason}</p>
                 <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
                   <span>{dispute.vendor}</span>
                   <span className={`px-1.5 py-0.5 rounded ${statusColors[dispute.status]}`}>
-                    {dispute.status}
+                    {statusLabels[dispute.status]}
                   </span>
                 </div>
               </motion.button>
@@ -182,40 +195,40 @@ export default function DisputesPage() {
           <div className="glass-card p-4">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-xl font-semibold">Dispute #{activeDispute.id}</h3>
-                <p className="text-gray-400">Created {activeDispute.created}</p>
+                <h3 className="text-xl font-semibold">Litige #{activeDispute.id}</h3>
+                <p className="text-gray-400">Créé le {activeDispute.created}</p>
               </div>
               <div className="flex gap-2">
                 <button onClick={handleResolve} className="px-4 py-2 bg-green-500/20 text-green-400 rounded-xl flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" /> Resolve
+                  <CheckCircle className="w-4 h-4" /> Résoudre
                 </button>
                 <button className="px-4 py-2 bg-red-500/20 text-red-400 rounded-xl flex items-center gap-2">
-                  <XCircle className="w-4 h-4" /> Reject
+                  <XCircle className="w-4 h-4" /> Rejeter
                 </button>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div className="p-3 bg-white/5 rounded-lg">
-                <p className="text-sm text-gray-400">Order</p>
+                <p className="text-sm text-gray-400">Commande</p>
                 <p className="font-mono">{activeDispute.order}</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg">
-                <p className="text-sm text-gray-400">Amount</p>
-                <p className="font-semibold">${activeDispute.amount}</p>
+                <p className="text-sm text-gray-400">Montant</p>
+                <p className="font-semibold">{activeDispute.amount} €</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg">
-                <p className="text-sm text-gray-400">Vendor</p>
+                <p className="text-sm text-gray-400">Fournisseur</p>
                 <p className="flex items-center gap-2"><Store className="w-4 h-4" /> {activeDispute.vendor}</p>
               </div>
               <div className="p-3 bg-white/5 rounded-lg">
-                <p className="text-sm text-gray-400">Customer</p>
+                <p className="text-sm text-gray-400">Client</p>
                 <p className="flex items-center gap-2"><User className="w-4 h-4" /> {activeDispute.customer}</p>
               </div>
             </div>
 
             <div className="p-4 bg-white/5 rounded-lg mb-4">
-              <p className="text-sm text-gray-400 mb-2">Reason</p>
+              <p className="text-sm text-gray-400 mb-2">Motif</p>
               <p className="font-medium">{activeDispute.reason}</p>
             </div>
 
@@ -244,10 +257,10 @@ export default function DisputesPage() {
               <div className="flex gap-2">
                 <input 
                   type="text" 
-                  placeholder="Type a message..." 
+                  placeholder="Tapez un message..." 
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2"
+                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white"
                 />
                 <button onClick={handleSendMessage} className="px-4 py-2 bg-blue-500 rounded-xl">
                   <Send className="w-4 h-4" />
