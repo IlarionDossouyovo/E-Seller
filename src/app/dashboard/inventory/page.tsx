@@ -19,8 +19,11 @@ import {
   XCircle,
   RefreshCw,
   Tag,
-  DollarSign
+  DollarSign,
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react'
+import Link from 'next/link'
 
 type Product = {
   id: number
@@ -254,6 +257,18 @@ export default function InventoryPage() {
           {notification}
         </div>
       )}
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard/suppliers" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Fournisseurs
+        </Link>
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Dashboard
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }

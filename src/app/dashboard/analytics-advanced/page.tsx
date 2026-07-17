@@ -5,8 +5,9 @@ import { motion } from 'framer-motion'
 import { 
   TrendingUp, TrendingDown, Users, DollarSign, ShoppingCart, 
   Eye, Globe, Clock, ArrowUp, ArrowDown, RefreshCw, Download,
-  BarChart3, PieChart, LineChart, Activity
+  BarChart3, PieChart, LineChart, Activity, ArrowLeft, ArrowRight
 } from 'lucide-react'
+import Link from 'next/link'
 
 const realTimeMetrics = [
   { label: 'Utilisateurs Actifs', value: '247', change: '+12%', up: true, icon: Users },
@@ -213,6 +214,19 @@ export default function AnalyticsAdvancedPage() {
           {notification}
         </div>
       )}
+    </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/analytics" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Analytics
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </div>
   )
 }
