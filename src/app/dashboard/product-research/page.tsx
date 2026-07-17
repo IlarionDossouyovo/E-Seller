@@ -13,13 +13,13 @@ const trendingProducts = [
   { id: 'T6', name: 'Yoga Mat Premium', platform: 'Instagram', views: '445K', growth: '+78%', score: 72, category: 'Sports', price: 34.99, competition: 'Low', supplier: 'Fujian' },
 ]
 
-const platforms = ['All', 'TikTok', 'Instagram', 'Youtube', 'Amazon', 'Shopify']
-const categories = ['All', 'Electronics', 'Fashion', 'Home', 'Beauty', 'Sports', 'Toys']
+const platforms = ['Tous', 'TikTok', 'Instagram', 'Youtube', 'Amazon', 'Shopify']
+const categories = ['Tous', 'Électronique', 'Mode', 'Maison', 'Beauté', 'Sports', 'Jouets']
 
 export default function ProductResearchPage() {
   const [search, setSearch] = useState('')
-  const [platform, setPlatform] = useState('All')
-  const [category, setCategory] = useState('All')
+  const [platform, setPlatform] = useState('Tous')
+  const [category, setCategory] = useState('Tous')
   const [timeRange, setTimeRange] = useState('7d')
 
   const stats = {
@@ -27,6 +27,19 @@ export default function ProductResearchPage() {
     totalViews: trendingProducts.reduce((sum, p) => sum + parseFloat(p.views), 0),
     avgGrowth: '+138%',
     avgScore: 87,
+  }
+
+  const handleExport = () => {
+    const csvContent = [
+      ['Produit', 'Plateforme', 'Catégorie', 'Vues', 'Croissance', 'Prix', 'Concurrence', 'Score'],
+      ...trendingProducts.map(p => [p.name, p.platform, p.category, p.views, p.growth, p.price + ' $', p.competition, p.score])
+    ].map(row => row.join(',')).join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'produits_tendance.csv';
+    link.click();
   }
 
   return (
@@ -38,12 +51,12 @@ export default function ProductResearchPage() {
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">AI Product Research</h1>
-              <p className="text-gray-400">Find trending products across platforms</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Recherche de Produits IA</h1>
+              <p className="text-gray-400">Trouver des produits tendance sur les plateformes</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl flex items-center gap-2">
-            <RefreshCw className="w-4 h-4" /> Refresh Data
+          <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl flex items-center gap-2 text-white">
+            <RefreshCw className="w-4 h-4" /> Actualiser
           </button>
         </div>
       </div>
@@ -52,19 +65,19 @@ export default function ProductResearchPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-white">{stats.totalTrending}</p>
-          <p className="text-sm text-gray-400">Trending Products</p>
+          <p className="text-sm text-gray-400">Produits Tendance</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-purple-400">{stats.totalViews}M</p>
-          <p className="text-sm text-gray-400">Total Views</p>
+          <p className="text-sm text-gray-400">Vues Totales</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-green-400">{stats.avgGrowth}</p>
-          <p className="text-sm text-gray-400">Avg Growth</p>
+          <p className="text-sm text-gray-400">Croissance Moy.</p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-4">
           <p className="text-2xl font-bold text-yellow-400">{stats.avgScore}</p>
-          <p className="text-sm text-gray-400">Avg Score</p>
+          <p className="text-sm text-gray-400">Score Moy.</p>
         </motion.div>
       </div>
 
@@ -82,14 +95,14 @@ export default function ProductResearchPage() {
             {categories.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
           <select value={timeRange} onChange={(e) => setTimeRange(e.target.value)} className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-xl text-white">
-            <option value="24h">Last 24 hours</option>
-            <option value="7d">Last 7 days</option>
-            <option value="30d">Last 30 days</option>
-            <option value="90d">Last 90 days</option>
+            <option value="24h">Dernières 24h</option>
+            <option value="7d">7 derniers jours</option>
+            <option value="30d">30 derniers jours</option>
+            <option value="90d">90 derniers jours</option>
           </select>
         </div>
-        <button className="px-4 py-2 bg-white/5 rounded-xl flex items-center gap-2">
-          <Download className="w-4 h-4" /> Export
+        <button onClick={handleExport} className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-xl flex items-center gap-2 text-white font-medium transition-colors">
+          <Download className="w-4 h-4" /> Exporter
         </button>
       </div>
 
@@ -99,13 +112,13 @@ export default function ProductResearchPage() {
           <thead className="bg-white/5">
             <tr className="text-left text-sm text-gray-400">
               <th className="p-4">#</th>
-              <th className="p-4">Product</th>
-              <th className="p-4">Platform</th>
-              <th className="p-4">Category</th>
-              <th className="p-4">Views</th>
-              <th className="p-4">Growth</th>
-              <th className="p-4">Est. Price</th>
-              <th className="p-4">Competition</th>
+              <th className="p-4">Produit</th>
+              <th className="p-4">Plateforme</th>
+              <th className="p-4">Catégorie</th>
+              <th className="p-4">Vues</th>
+              <th className="p-4">Croissance</th>
+              <th className="p-4">Prix Est.</th>
+              <th className="p-4">Concurrence</th>
               <th className="p-4">Score</th>
               <th className="p-4">Actions</th>
             </tr>
@@ -164,7 +177,7 @@ export default function ProductResearchPage() {
                   </div>
                 </td>
                 <td className="p-4">
-                  <button className="px-3 py-1 bg-blue-500 rounded-lg text-sm">Analyze</button>
+                  <button className="px-3 py-1 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm text-white transition-colors">Analyser</button>
                 </td>
               </motion.tr>
             ))}
@@ -186,7 +199,7 @@ export default function ProductResearchPage() {
               <h3 className="font-semibold">{platform.name}</h3>
             </div>
             <p className="text-2xl font-bold">{platform.count}</p>
-            <p className="text-sm text-green-400">{platform.growth} this week</p>
+            <p className="text-sm text-green-400">{platform.growth} cette semaine</p>
           </motion.div>
         ))}
       </div>
