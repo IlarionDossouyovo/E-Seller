@@ -4,13 +4,13 @@ export const translation = {
     dashboard: 'Tableau de bord',
     products: 'Produits',
     branding: 'Image de marque',
-    ads: 'Publicites',
+    ads: 'Publicités',
     analytics: 'Analytique',
     assistant: 'Assistant',
     suppliers: 'Fournisseurs',
     orders: 'Commandes',
     payments: 'Paiements',
-    settings: 'Parametres',
+    settings: 'Paramètres',
     logout: 'Deconnexion',
     store: 'Boutique',
     customers: 'Clients',
@@ -71,7 +71,7 @@ export const translation = {
     inactive: 'Inactif',
     pending: 'En attente',
     error: 'Erreur',
-    success: 'Succes',
+    success: 'Succès',
     online: 'En ligne',
     offline: 'Hors ligne',
   },
@@ -97,7 +97,7 @@ export const translation = {
 
   // Settings
   settings: {
-    title: 'Parametres',
+    title: 'Paramètres',
     language: 'Langue',
     currency: 'Devise',
     timezone: 'Fuseau horaire',
@@ -109,7 +109,7 @@ export const translation = {
 
   // Settings Page
   settingsPage: {
-    title: 'Parametres',
+    title: 'Paramètres',
     subtitle: 'Configurez votre plateforme',
     general: 'General',
     store: 'Boutique',
@@ -145,7 +145,7 @@ export const translation = {
 
   // Payment Settings
   payments: {
-    title: 'Parametres de paiement',
+    title: 'Paramètres de paiement',
     currency: 'Devise',
     taxRate: 'Taux de taxe (%)',
     taxIncluded: 'Taxe incluse',
@@ -274,7 +274,7 @@ export const translation = {
     duplicate: 'Dupliquer',
     pause: 'Pause',
     activate: 'Activer',
-    settings: 'Parametres',
+    settings: 'Paramètres',
     save: 'Enregistrer',
     cancel: 'Annuler',
     createFunnel: 'Creer un Funnel',
@@ -316,7 +316,7 @@ export const translation = {
     quickActions: 'Actions Rapides',
     addTenant: 'Ajouter un Tenant',
     viewReports: 'Voir les Rapports',
-    systemSettings: 'Parametres Systeme',
+    systemSettings: 'Paramètres Systeme',
     viewAllLogs: 'Voir tous les Logs',
   },
 
@@ -564,7 +564,7 @@ export const translation = {
     maxFileSize: 'PDF, JPG, PNG - Max 10Mo',
     verificationRequired: 'Verification requise',
     verificationMessage: 'Nous verifierons votre entreprise dans les 24-48 heures. Vous pouvez commencer a ajouter des produits en attendant la verification.',
-    paymentSettings: 'Parametres de paiement',
+    paymentSettings: 'Paramètres de paiement',
     bankName: 'Nom de la banque',
     accountNumber: 'Numero de compte',
     routingNumber: 'Numero de routage',

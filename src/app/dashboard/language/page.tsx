@@ -24,20 +24,20 @@ type Language = {
 
 const mockLanguages: Language[] = [
   { code: 'en', name: 'Anglais', nativeName: 'English', flag: '🇺🇸', status: 'active', translationProgress: 100 },
-  { code: 'fr', name: 'Francais', nativeName: 'Francais', flag: '🇫🇷', status: 'active', translationProgress: 100 },
-  { code: 'es', name: 'Espagnol', nativeName: 'Espanol', flag: '🇪🇸', status: 'active', translationProgress: 85 },
+  { code: 'fr', name: 'Français', nativeName: 'Français', flag: '🇫🇷', status: 'active', translationProgress: 100 },
+  { code: 'es', name: 'Espagnol', nativeName: 'Español', flag: '🇪🇸', status: 'active', translationProgress: 85 },
   { code: 'de', name: 'Allemand', nativeName: 'Deutsch', flag: '🇩🇪', status: 'active', translationProgress: 72 },
-  { code: 'it', name: 'Italien', nativeName: 'Italiano', flag: '🇮🇹', status: 'draft', translationProgress: 45 },
-  { code: 'pt', name: 'Portugais', nativeName: 'Portugues', flag: '🇵🇹', status: 'draft', translationProgress: 30 },
-  { code: 'zh', name: 'Chinois', nativeName: '中文', flag: '🇨🇳', status: 'draft', translationProgress: 20 },
-  { code: 'ja', name: 'Japonais', nativeName: '日本語', flag: '🇯🇵', status: 'draft', translationProgress: 15 },
+  { code: 'it', name: 'Italien', nativeName: 'Italiano', flag: '🇮🇹', status: 'active', translationProgress: 65 },
+  { code: 'pt', name: 'Portugais', nativeName: 'Português', flag: '🇵🇹', status: 'active', translationProgress: 55 },
+  { code: 'zh', name: 'Chinois', nativeName: '中文', flag: '🇨🇳', status: 'draft', translationProgress: 40 },
+  { code: 'ja', name: 'Japonais', nativeName: '日本語', flag: '🇯🇵', status: 'draft', translationProgress: 35 },
 ]
 
 const stats = [
-  { label: 'Langues Actives', value: '4', icon: Globe },
+  { label: 'Langues Actives', value: '6', icon: Globe },
   { label: 'Total Langues', value: '8', icon: Globe },
-  { label: 'Trad. Moyenne', value: '59%', icon: Check },
-  { label: 'En Attente', value: '125', icon: Clock },
+  { label: 'Trad. Moyenne', value: '69%', icon: Check },
+  { label: 'En Attente', value: '85', icon: Clock },
 ]
 
 export default function LanguagePage() {
@@ -157,11 +157,11 @@ export default function LanguagePage() {
         <h3 className="text-lg font-semibold mb-4 text-white">Statut des Traductions par Section</h3>
         <div className="space-y-3">
           {[
-            { section: 'General', en: 100, fr: 100, es: 85, de: 70 },
-            { section: 'Produits', en: 100, fr: 95, es: 80, de: 65 },
+            { section: 'General', en: 100, fr: 100, es: 85, de: 72 },
+            { section: 'Produits', en: 100, fr: 100, es: 80, de: 65 },
             { section: 'Paiement', en: 100, fr: 100, es: 90, de: 75 },
-            { section: 'Dashboard', en: 100, fr: 90, es: 70, de: 60 },
-            { section: 'Emails', en: 100, fr: 85, es: 60, de: 50 },
+            { section: 'Dashboard', en: 100, fr: 100, es: 70, de: 60 },
+            { section: 'Emails', en: 100, fr: 100, es: 60, de: 50 },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -192,9 +192,9 @@ export default function LanguagePage() {
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {[
-            { lang: 'Espagnol', missing: 145, progress: '85%' },
-            { lang: 'Allemand', missing: 280, progress: '72%' },
-            { lang: 'Italien', missing: 550, progress: '45%' },
+            { lang: 'Espagnol', missing: 120, progress: '85%' },
+            { lang: 'Allemand', missing: 224, progress: '72%' },
+            { lang: 'Italien', missing: 280, progress: '65%' },
           ].map((item, i) => (
             <div key={i} className="p-4 rounded-xl bg-white/5">
               <div className="flex items-center justify-between mb-2">
