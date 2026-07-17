@@ -7,12 +7,14 @@ import {
   Pause, 
   Settings, 
   ArrowRight, 
+  ArrowLeft,
   CheckCircle,
   Loader2,
   Zap,
   GitBranch,
   RotateCcw
 } from 'lucide-react'
+import Link from 'next/link'
 
 // Predefined automation chains
 const automationChains = [
@@ -245,6 +247,18 @@ export default function AIAutomations() {
             )}
           </motion.div>
         )}
+      </div>
+
+      {/* Navigation */}
+      <div className="mt-8 flex justify-between items-center">
+        <Link href="/dashboard" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Retour Dashboard
+        </Link>
+        <Link href="/dashboard/seller-stack-workflows" className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">
+          Workflows
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   )
