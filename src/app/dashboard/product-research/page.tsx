@@ -21,6 +21,14 @@ export default function ProductResearchPage() {
   const [platform, setPlatform] = useState('Tous')
   const [category, setCategory] = useState('Tous')
   const [timeRange, setTimeRange] = useState('7d')
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const handleRefresh = () => {
+    setIsRefreshing(true)
+    setTimeout(() => {
+      setIsRefreshing(false)
+    }, 1500)
+  }
 
   const stats = {
     totalTrending: trendingProducts.length,
@@ -55,8 +63,8 @@ export default function ProductResearchPage() {
               <p className="text-gray-400">Trouver des produits tendance sur les plateformes</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl flex items-center gap-2 text-white">
-            <RefreshCw className="w-4 h-4" /> Actualiser
+          <button onClick={handleRefresh} disabled={isRefreshing} className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl flex items-center gap-2 text-white disabled:opacity-50 transition-all">
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} /> {isRefreshing ? 'Actualisation...' : 'Actualiser'}
           </button>
         </div>
       </div>
