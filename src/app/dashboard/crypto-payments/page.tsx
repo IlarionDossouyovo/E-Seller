@@ -30,12 +30,12 @@ export default function CryptoPaymentsPage() {
               <Wallet className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Crypto Payments</h1>
-              <p className="text-gray-400">Accept cryptocurrency</p>
+              <h1 className="text-2xl font-bold font-[var(--font-sora)]">Paiements Crypto</h1>
+              <p className="text-gray-400">Accepter les cryptomonnaies</p>
             </div>
           </div>
           <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-xl flex items-center gap-2">
-            <Plus className="w-4 h-4" /> Add Currency
+            <Plus className="w-4 h-4" /> Ajouter une devise
           </button>
         </div>
       </div>
@@ -58,9 +58,14 @@ export default function CryptoPaymentsPage() {
 
       {/* Tabs */}
       <div className="flex gap-2">
-        {['overview', 'receive', 'send', 'settings'].map(tab => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-xl ${activeTab === tab ? 'bg-orange-500' : 'bg-white/5'}`}>
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+        {[
+          { key: 'overview', label: 'Aperçu' },
+          { key: 'receive', label: 'Recevoir' },
+          { key: 'send', label: 'Envoyer' },
+          { key: 'settings', label: 'Paramètres' }
+        ].map(tab => (
+          <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-4 py-2 rounded-xl ${activeTab === tab.key ? 'bg-orange-500' : 'bg-white/5'}`}>
+            {tab.label}
           </button>
         ))}
       </div>
@@ -68,9 +73,9 @@ export default function CryptoPaymentsPage() {
       {activeTab === 'overview' && (
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Crypto Wallet</h3>
+            <h3 className="font-semibold mb-4">Portefeuille Crypto</h3>
             <div className="p-4 bg-orange-500/20 rounded-xl mb-4">
-              <p className="text-sm text-gray-400 mb-1">Total Balance</p>
+              <p className="text-sm text-gray-400 mb-1">Solde Total</p>
               <p className="text-3xl font-bold">$2,747.00</p>
             </div>
             <div className="space-y-3">
@@ -92,7 +97,7 @@ export default function CryptoPaymentsPage() {
           </div>
 
           <div className="glass-card p-6">
-            <h3 className="font-semibold mb-4">Payment Methods</h3>
+            <h3 className="font-semibold mb-4">Moyens de paiement</h3>
             <div className="space-y-3">
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                 <div className="flex items-center gap-3">
@@ -102,7 +107,7 @@ export default function CryptoPaymentsPage() {
                     <p className="text-sm text-gray-400">On-chain & Lightning</p>
                   </div>
                 </div>
-                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Enabled</span>
+                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Activé</span>
               </div>
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                 <div className="flex items-center gap-3">
@@ -112,7 +117,7 @@ export default function CryptoPaymentsPage() {
                     <p className="text-sm text-gray-400">ERC-20</p>
                   </div>
                 </div>
-                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Enabled</span>
+                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Activé</span>
               </div>
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                 <div className="flex items-center gap-3">
@@ -122,7 +127,7 @@ export default function CryptoPaymentsPage() {
                     <p className="text-sm text-gray-400">Multi-chain</p>
                   </div>
                 </div>
-                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Enabled</span>
+                <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Activé</span>
               </div>
             </div>
           </div>
