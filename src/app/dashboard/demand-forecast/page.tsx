@@ -119,11 +119,11 @@ export default function DemandForecastPage() {
             <div className="flex justify-center gap-4 mt-4">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-blue-500" />
-                <span className="text-sm text-gray-400">Réel/span>
+                <span className="text-sm text-gray-400">Réel</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-purple-500" />
-                <span className="text-sm text-gray-400">Prévision/span>
+                <span className="text-sm text-gray-400">Prévision</span>
               </div>
             </div>
           </div>
